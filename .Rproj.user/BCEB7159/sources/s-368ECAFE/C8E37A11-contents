@@ -1,0 +1,6 @@
+blogdown::new_site(theme = 'yoshiharuyamashita/blackburn', #theme information
+                   format = 'toml') #specify toml instead of yaml
+
+blogdown::serve_site()
+
+
