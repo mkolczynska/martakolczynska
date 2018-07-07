@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Marta Kołczyńska</title>
-    <link>/post/</link>
-    <description>Recent content in Posts on Marta Kołczyńska</description>
+    <title>R on Marta Kołczyńska</title>
+    <link>/tags/r/</link>
+    <description>Recent content in R on Marta Kołczyńska</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
     <lastBuildDate>Sat, 07 Jul 2018 19:19:28 +0000</lastBuildDate>
     
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -21,17 +21,6 @@
       <description>Step 1. Install R Probably the most useful thing I learned in grad school is that there is an R package for everything, including cocktails, getting colors from Dutch paintings, and - obviously - blogging.
 Step 2. Find a tutorial My favorite quote from blogdown: Creating Websites with R Markdown by Yihui Xie, Amber Thomas, Alison Presmanes Hill:
  If you do not understand HTML, CSS, or JavaScript, and have no experience with Hugo themes or templates, it may take you about 10 minutes to get started with your new website &amp;hellip; if you do have the knowledge and experience (and desire to highly customize your site), it may take you several days to get started.</description>
-    </item>
-    
-    <item>
-      <title>Hello R Markdown</title>
-      <link>/post/first-rmarkdown-post/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      
-      <guid>/post/first-rmarkdown-post/</guid>
-      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
     </item>
     
   </channel>
