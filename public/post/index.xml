@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Sat, 07 Jul 2018 20:13:14 -0500</lastBuildDate>
+    <lastBuildDate>Sat, 07 Jul 2018 13:13:14 -0500</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>First R Markdown post</title>
       <link>/post/first-rmarkdown-post/</link>
-      <pubDate>Sat, 07 Jul 2018 20:13:14 -0500</pubDate>
+      <pubDate>Sat, 07 Jul 2018 13:13:14 -0500</pubDate>
       
       <guid>/post/first-rmarkdown-post/</guid>
       <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
