@@ -1,5 +1,5 @@
 +++
-title = "Getting Started with Hugo"
+title = "Getting Started"
 description = ""
 tags = [
     "go",
@@ -7,7 +7,7 @@ tags = [
     "hugo",
     "development",
 ]
-date = "2014-04-02"
+date = "2018-07-07"
 categories = [
     "Development",
     "golang",
