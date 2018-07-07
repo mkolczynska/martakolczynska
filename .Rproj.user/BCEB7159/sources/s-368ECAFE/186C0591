@@ -5,13 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "4279641884",
+    "hash" : "0",
     "id" : "186C0591",
-    "lastKnownWriteTime" : 1530987004,
-    "last_content_update" : 1530987004,
+    "lastKnownWriteTime" : 1530988030,
+    "last_content_update" : 1530988030423,
     "path" : "C:/Users/mkolc/Google Drive/Academia/Blog/martakolczynska/content/post/first-rmarkdown-post.Rmd",
     "project_path" : "content/post/first-rmarkdown-post.Rmd",
     "properties" : {
+        "cursorPosition" : "1,29",
+        "scrollLine" : "0"
     },
     "relative_order" : 5,
     "source_on_save" : false,
