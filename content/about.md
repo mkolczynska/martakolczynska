@@ -13,11 +13,11 @@ I am a post-doctoral researcher at the [Institute of Philosophy and Sociology, P
 [*My full CV*](cv.pdf)
 
 
-#### Interests
+#### Research interests
 
 <i class='fa fa-puzzle-piece fa-fw'></i> Political attitudes and behavior
 
-<i class='fa fa-puzzle-piece fa-fw'></i> Survey methods
+<i class='fa fa-puzzle-piece fa-fw'></i> Quantitative methods for comparative and cross-national research
 
 <i class='fa fa-puzzle-piece fa-fw'></i> Survey data harmonization and comparability
 
