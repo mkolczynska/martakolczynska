@@ -7,20 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Sat, 07 Jul 2018 13:13:14 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 08 Jul 2018 13:13:14 -0500</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>First R Markdown post</title>
-      <link>/post/first-rmarkdown-post/</link>
-      <pubDate>Sat, 07 Jul 2018 13:13:14 -0500</pubDate>
+      <title>Measuring education: surveys vs. administrative records</title>
+      <link>/post/education-sdr-wdi/</link>
+      <pubDate>Sun, 08 Jul 2018 13:13:14 -0500</pubDate>
       
-      <guid>/post/first-rmarkdown-post/</guid>
-      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+      <guid>/post/education-sdr-wdi/</guid>
+      <description>ProblemSocial surveys commonly ask about respondents’ educational attainment, either about the highest completed level of education, or about the number of completed years of schooling, and sometimes both. Survey measurements of individual education can be aggregated to indicate the overall level of education in the society. Information about the country’s level of education can also be obtained from administrative data, such as the World Bank or UNESCO.</description>
     </item>
     
     <item>
@@ -68,7 +66,8 @@ kolczynska.1(at)osu.edu</description>
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/research/</guid>
-      <description>Political Inequality I&amp;rsquo;m a post-doctoral resesarcher in the project Political Voice and Economic Inequality across Nations and Time led by dr. Joshua K. Dubrow. In this project I use my knowledge of cross-national surveys and methodology to investigate how economic and educational inequality translates into political marginalization – a topic of renewed relevance in the current turbulent times. I develop country-level measures of political inequality using data from various sources: survey data, administrative records, event data, and others.</description>
+      <description>I am a post-doctoral researcher at the Institute of Philosophy and Sociology of the Polish Academy of Sciences, and a recent Ph.D. graduate from the Department of Sociology, The Ohio State University. My research interests include comparative analyses of political attitudes and behavior across nations and over time, as well as the methodology of comparative research, in particular cross-national surveys.
+Political Inequality I&amp;rsquo;m a post-doctoral resesarcher in the project Political Voice and Economic Inequality across Nations and Time led by dr.</description>
     </item>
     
   </channel>

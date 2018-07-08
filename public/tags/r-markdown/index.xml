@@ -7,20 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Sat, 07 Jul 2018 13:13:14 -0500</lastBuildDate>
+    <lastBuildDate>Sun, 08 Jul 2018 13:13:14 -0500</lastBuildDate>
     
 	<atom:link href="/tags/r-markdown/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>First R Markdown post</title>
+      <title>Measuring education: surveys vs. administrative records</title>
       <link>/post/first-rmarkdown-post/</link>
-      <pubDate>Sat, 07 Jul 2018 13:13:14 -0500</pubDate>
+      <pubDate>Sun, 08 Jul 2018 13:13:14 -0500</pubDate>
       
       <guid>/post/first-rmarkdown-post/</guid>
-      <description>R MarkdownThis is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.</description>
+      <description>ProblemSocial surveys commonly ask about respondents’ educational attainment, either about the highest completed level of education, or about the number of completed years of schooling, and sometimes both. Survey measurements of individual education can be aggregated to indicate the overall level of education in the society. Information about the country’s level of education can also be obtained from administrative data, such as the World Bank or UNESCO.</description>
     </item>
     
   </channel>

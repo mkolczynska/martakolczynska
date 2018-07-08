@@ -5,6 +5,7 @@ sidemenu = "true"
 description = "Projects and interests"
 +++
 
+I am a post-doctoral researcher at the Institute of Philosophy and Sociology of the Polish Academy of Sciences, and a recent Ph.D. graduate from the Department of Sociology, The Ohio State University. My research interests include comparative analyses of political attitudes and behavior across nations and over time, as well as the methodology of comparative research, in particular cross-national surveys.
 
 #### Political Inequality
 

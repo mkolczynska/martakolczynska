@@ -3,8 +3,8 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/post/first-rmarkdown-post/</loc>
-    <lastmod>2018-07-07T13:13:14-05:00</lastmod>
+    <loc>/post/education-sdr-wdi/</loc>
+    <lastmod>2018-07-08T13:13:14-05:00</lastmod>
   </url>
   
   <url>
@@ -28,49 +28,61 @@
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2018-07-07T13:13:14-05:00</lastmod>
+    <loc>/tags/education/</loc>
+    <lastmod>2018-07-08T13:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/plot/</loc>
-    <lastmod>2018-07-07T13:13:14-05:00</lastmod>
+    <loc>/tags/ggplot/</loc>
+    <lastmod>2018-07-08T13:13:14-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2018-07-08T13:13:14-05:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/plotly/</loc>
+    <lastmod>2018-07-08T13:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2018-07-07T13:13:14-05:00</lastmod>
+    <lastmod>2018-07-08T13:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2018-07-07T13:19:58+00:00</lastmod>
+    <lastmod>2018-07-08T13:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/r-markdown/</loc>
-    <lastmod>2018-07-07T13:13:14-05:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/regression/</loc>
-    <lastmod>2018-07-07T13:13:14-05:00</lastmod>
+    <loc>/tags/surveys/</loc>
+    <lastmod>2018-07-08T13:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2018-07-07T13:13:14-05:00</lastmod>
+    <lastmod>2018-07-08T13:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/topics/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/wdi/</loc>
+    <lastmod>2018-07-08T13:13:14-05:00</lastmod>
     <priority>0</priority>
   </url>
   

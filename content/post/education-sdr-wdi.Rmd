@@ -1,0 +1,120 @@
+---
+title: "Measuring education: surveys vs. administrative records"
+author: "Marta Kołczyńska"
+date: 2018-07-08T13:13:14-05:00
+categories: ["R"]
+tags: ["surveys", "WDI", "education", "R", "ggplot", "plotly"]
+
+---
+
+### Problem
+
+Social surveys commonly ask about respondents' educational attainment, either about the highest completed level of education, or about the number of completed years of schooling, and sometimes both. Survey measurements of individual education can be aggregated to indicate the overall level of education in the society.
+Information about the country's level of education can also be obtained from administrative data, such as the World Bank or UNESCO.
+Theoretically, survey aggregates of education measures should closely track data from WDI. In this note I try to find out if this is really the case.
+
+### Data
+
+To obtain country-level aggregates from survey data, I use the Survey Data Recycling database (SDR) available from [Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q). Thanks to the `dataverse` package, these data can be loaded directly to R.
+
+[World Bank's World Development Indicators (WDI)](http://databank.worldbank.org/data/reports.aspx?source=world-development-indicators) provide school enrolment data by country and year. WDI make it easy to search and extract the data with their `WDI` package.
+
+
+```{r packages, warning=FALSE, message=FALSE}
+library(WDI)
+library(dataverse)
+library(tidyverse)
+
+library(ggplot2)
+library(plotly)
+```
+
+#### WDI
+
+Let's start with WDI. The function `WDIsearch` searches for keywords in the WDI variable names or descriptions using `grep`. I can look for variables that have "enrolment", "upper" and "secondary" in their names (i.e. labels), look at the variables to find the ones that I like, select the one to use: 
+
+name: Net enrolment rate, upper secondary, both sexes (%)
+
+indicator: UIS.NER.3
+
+and download this variable for the selected countries (all) and time range (1989-2014).
+
+```{r WDI, warning=FALSE, message=FALSE}
+enrol <- WDIsearch(string = "enrolment.*upper.*secondary", 
+                   field = "name", short = TRUE, cache = NULL)
+
+educ <- WDI(country="all", indicator=c("UIS.NER.3"),
+    start=1989, end=2014, extra=TRUE, cache=NULL)
+```
+#### Survey data (SDR)
+
+Knowing the DOI, it is easy to get a list of all files in a given repository, including data files and documentation, with the `get_dataset' function. The SDR Master File contains harmonized survey variables. 
+The stata version has the `id = 3006244`, which is a parameter in the `get_file` function to download the data file to R (see [documentation](https://github.com/IQSS/dataverse-client-r) for details). The data file is pretty large, so it takes a while to download.
+
+```{r SDR, results = 'hide'}
+get_dataset("doi:10.7910/DVN/VWGF5Q")
+
+master.raw <- get_file(3006244)
+tmp <- tempfile(fileext = ".dta")
+writeBin(as.vector(master.raw), tmp)
+master <- haven::read_dta(tmp)
+
+```
+#### Cleaning and merging WDI and SDR
+
+Thanks to tidyverse, it is possible to do all this in one command:
+
+1. create a binary indicator of high school (upper secondary education) completion,
+2. calculate, by national survey, the proportion of high school graduates and the mean number of schooling years, weighted by appropriate case weights provided in the SDR dataset,
+3. create a country ISO2 code from two first characters of the SDR `t_country_l1u` variable,
+4. merge the aggregated survey data with the WDI dataset by country and year.
+
+
+```{r aggregate and merge, warning=FALSE, message=FALSE}
+merge <- master %>% mutate(hs = (t_edu == 30 & c_edu_incomplete == 0)|(t_edu > 30) ) %>%
+  group_by(t_survey_name, t_survey_edition, t_country_l1u, t_country_set) %>%
+  summarise(mean_hs = 100 * weighted.mean(hs, t_weight_l1u_2, na.rm = TRUE),
+            year = mean(t_country_year)) %>%
+  filter(!is.na(mean_hs)) %>%
+  mutate(iso2c = substr(t_country_l1u, 1, 2)) %>%
+  inner_join(educ, by = c("iso2c", "year"))
+
+```
+First it would be good to take a look at how the variables are distributed.
+
+```{r hist, warning=FALSE, message=FALSE}
+hist_edu <- ggplot(merge, aes(x = mean_hs)) + geom_histogram(breaks=seq(0, 100, by =10)) + 
+  ggtitle("SDR: Survey proportion of completed upper secondary education") + xlab("")
+
+hist_enr <- ggplot(merge, aes(x = UIS.NER.3)) + geom_histogram(breaks=seq(0, 100, by =10)) + 
+  ggtitle("WB: Adjusted net enrolment, upper secondary education") + xlab("")
+
+cowplot::plot_grid(hist_edu, hist_enr, ncol=1)
+
+```
+
+Now let's explore the data with a scatter plot of the proportion of high school graduates from survey data and the WDI measure of upper secondary enrollment.
+
+```{r scatter, warning=FALSE, message=FALSE}
+ggplot(merge, aes(x=UIS.NER.3, y=mean_hs)) + geom_point() + 
+  ggtitle("Education from surveys and World Bank data") + 
+  xlab("WDI: Net enrolment rate, upper secondary, both sexes (%)") +
+  ylab("Survey proportion of completed upper secondary education")
+
+```
+The association is clearly positive, as could be expected. It would be nice to be able to hover over a point to see what country and year it comes from. Let's use `plotly` to make an interactive graph with case descriptions on hover.
+
+```{r plotly, warning=FALSE, message=FALSE}
+plot_ly(data = merge, x = ~UIS.NER.3, y = ~mean_hs, color = ~region,
+        marker = list(size = 8),
+        hoverinfo = 'text', 
+        text = ~paste('country:', country,
+                      '<br>year:', year,
+                      '<br>project wave:', t_survey_name, t_survey_edition)) %>%
+  layout(title = "Education from surveys and World Bank data",
+         xaxis = list(title = "WDI: Net enrolment rate, upper secondary, both sexes (%)", 
+                      range = c(0,100)),
+         yaxis = list(title = "SDR: Survey % of completed upper secondary education", 
+                      range = c(0,100)),
+         margin = list(t = 100, b = 100))
+```
