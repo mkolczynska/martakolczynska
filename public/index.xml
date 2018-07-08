@@ -41,11 +41,14 @@ Because I can, because I want to, and someone asked (cf. the three reasons for w
       
       <guid>/about/</guid>
       <description>I am a post-doctoral researcher at the Institute of Philosophy and Sociology, Polish Academy of Sciences.
-Interests: • Political attitudes and behavior • Survey methods • Survey data harmonization and comparability • Statistics and R
-Education Ph.D. in Sociology, 2017 The Ohio State University
-M.A. in Sociology, 2014 The Ohio State University
-M.A. in Cultural Studies of Central Eastern Europe, 2009 University of Warsaw
-M.A. in Economics, 2007 Warsaw School of Economics</description>
+My full CV
+Interests  Political attitudes and behavior
+ Survey methods
+ Survey data harmonization and comparability
+ Statistics and R
+Education  Ph.D. in Sociology, The Ohio State University, 2017
+ M.A. in Sociology, The Ohio State University, 2014
+ M.A. in Cultural Studies of Central Eastern Europe, University of Warsaw, 2009</description>
     </item>
     
     <item>
@@ -66,16 +69,6 @@ kolczynska.1(at)osu.edu</description>
       
       <guid>/research/</guid>
       <description>Research Interests Democratization, Education, Economic Inequality, Survey data harmonization, Quantitative methods for comparative and cross-national survey research; Data visualization and database management.</description>
-    </item>
-    
-    <item>
-      <title>(Hu)go Template Primer</title>
-      <link>/post/goisforlovers/</link>
-      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
-      
-      <guid>/post/goisforlovers/</guid>
-      <description>Hugo uses the excellent go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in go templates.
-This document is a brief primer on using go templates.</description>
     </item>
     
   </channel>

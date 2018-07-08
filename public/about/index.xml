@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Abouts on Marta Kołczyńska</title>
+    <link>/about/</link>
+    <description>Recent content in Abouts on Marta Kołczyńska</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
+    <lastBuildDate>Sat, 07 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/about/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About</title>
+      <link>/about/about/</link>
+      <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/about/about/</guid>
+      <description>I am a post-doctoral researcher at the Institute of Philosophy and Sociology, Polish Academy of Sciences.
+#A
+My full CV
+Model View Controller
+Interests  Political attitudes and behavior
+ Survey methods
+ Survey data harmonization and comparability
+ Statistics and R
+Education  Ph.D. in Sociology, The Ohio State University, 2017
+ M.A. in Sociology, The Ohio State University, 2014
+ M.A. in Cultural Studies of Central Eastern Europe, University of Warsaw, 2009</description>
+    </item>
+    
+  </channel>
+</rss>

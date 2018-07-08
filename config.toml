@@ -21,6 +21,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   # CSS name for highlight.js
   highlightjs = "androidstudio"
   dateFormat = "02 Jan 2006, 15:04"
+  custom_css = ["css/circle.css"]
 
 [menu]
   # Shown in the side menu.
@@ -54,7 +55,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
   [[menu.main]]
     name = "Contact"
-    pre = "<i class='fa fa-phone fa-fw'></i>"
+    pre = "<i class='fa fa-envelope fa-fw'></i>"
     weight = 5
     url = "/contact/"
 
