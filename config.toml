@@ -6,6 +6,7 @@ author = "Marta Kołczyńska"
 copyright = "&copy; 2018. Marta Kołczyńska"
 canonifyurls = true
 paginate = 10
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [indexes]
   tag = "tags"
@@ -39,7 +40,7 @@ paginate = 10
     
   [[menu.main]]
     name = "Research"
-    pre = "<i class='fa fa-user fa-fw'></i>"
+    pre = "<i class='fa fa-bar-chart fa-fw'></i>"
     weight = 3
     identifier = "research"
     url = "/research/"

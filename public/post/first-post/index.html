@@ -88,7 +88,7 @@
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="/research/"><i class='fa fa-user fa-fw'></i>Research</a>
+          <a class="pure-menu-link" href="/research/"><i class='fa fa-bar-chart fa-fw'></i>Research</a>
       
         </li>
       
@@ -245,13 +245,19 @@
 
   
 
-<h2 id="step-1-install-r">Step 1. Install R</h2>
+<p>The capacity for generating ideas is greater than the capacity of developing ideas into papers (or even paper drafts). Ideas can dissapear if they are not written down or otherwise recorded.</p>
 
-<p>Probably the most useful thing I learned in grad school is that there is an R package for everything, including <a href="https://github.com/shabbychef/cocktailApp">cocktails</a>, getting <a href="https://github.com/vankesteren/rijkspalette">colors from Dutch paintings</a>, and - obviously - <a href="https://github.com/rstudio/blogdown">blogging</a>.</p>
+<p><em>So why write a blog and not keep a diary or a plain text file sitting safely on your hard drive, <a href="https://pl.wiktionary.org/wiki/kochanie">kochanie</a>?</em></p>
 
-<h2 id="step-2-find-a-tutorial">Step 2. Find a tutorial</h2>
+<p>Because I can, because I want to, and someone asked (cf. the three reasons for why people don&rsquo;t participate in politics by <a href="https://www.cambridge.org/core/journals/american-political-science-review/article/beyond-ses-a-resource-model-of-political-participation/CE74BA78807755F0A09E589D631EB03E">Brady, Verba, and Scholzman 1995: 271</a>).</p>
 
-<p>My favorite quote from <a href="https://bookdown.org/yihui/blogdown/"><em>blogdown: Creating Websites with R Markdown</em></a> by Yihui Xie, Amber Thomas, Alison Presmanes Hill:</p>
+<h3 id="step-1-r">Step 1. R</h3>
+
+<p>Probably the most useful thing I learned in grad school is that there is an R package for everything, from making interactive <a href="https://plot.ly/r/">graphs</a> and <a href="https://shiny.rstudio.com/">web apps</a>, to dealing with <a href="https://github.com/larmarange/labelled">labelled data</a>, to exploring <a href="https://github.com/shabbychef/cocktailApp">cocktails</a>, getting <a href="https://github.com/vankesteren/rijkspalette">colors from Dutch paintings</a>, playing <a href="https://github.com/RLesur/Rcade">Pac-Man</a> and - of course - <a href="https://github.com/rstudio/blogdown">blogging</a>.</p>
+
+<h3 id="step-2-on-line-resources">Step 2. On-line resources</h3>
+
+<p><a href="https://github.com/rstudio/blogdown">Blogdown</a> and <a href="https://gohugo.io/">Hugo</a> have become so popular that there are countless resources to support newbies, including advice for using particular themes (especially Academic, but also others). Almost all of them refer at one point to <a href="https://bookdown.org/yihui/blogdown/"><em>blogdown: Creating Websites with R Markdown</em></a> by Yihui Xie, Amber Thomas, Alison Presmanes Hill, which is where one of my favorite <a href="https://bookdown.org/yihui/blogdown/other-themes.html">quotes</a> comes from:</p>
 
 <blockquote>
 <p>If you do not understand HTML, CSS, or JavaScript, and have no experience with Hugo themes or templates, it may take you about 10 minutes to get started with your new website &hellip; if you do have the knowledge and experience (and desire to highly customize your site), it may take you several days to get started. Hugo is really powerful. Be cautious with power.</p>
@@ -259,21 +265,29 @@
 
 <p>What am I going to do with all this saved time?</p>
 
-<h2 id="step-3-find-people-who-have-been-there-before">Step 3. Find people who have been there before</h2>
+<p>Another trick is to look up GitHub repositories linked to blogs to see how the authors dealt with a particular issue. For example, <a href="https://simplystatistics.org/">Simply Statistics</a> has an image as brand logo instead of a string. How did they do this if I keep getting errors? It turns out they changed one of the theme files, <code>themes/blackburn/layouts/partials/brand.html</code>, replacing  <code>safeHTML</code>  with  <code>markdownify</code>.</p>
 
-<p>Blogdown and Hugo have become so popular that there are countless resources to support newbies, including advice for using particular templates (especially Academic, but also others).</p>
+<h3 id="step-3-done-is-better-than-perfect">Step 3. Done is better than perfect</h3>
 
-<h2 id="step-4-have-fun">Step 4. Have fun</h2>
+<p>The great thing about Blogdown and Hugo is that it is very easy to make something that works, and then tweak it forever as time allows.</p>
 
-<p>The great thing about blogdown and hugo is that it is very easy to make something that works, and then tweak it forever as time allows.</p>
+<h2 id="references">References</h2>
+
+<p><a href="https://www.cambridge.org/core/journals/american-political-science-review/article/beyond-ses-a-resource-model-of-political-participation/CE74BA78807755F0A09E589D631EB03E">Brady, H., Verba, S., &amp; Schlozman, K. (1995). Beyond SES: A Resource Model of Political Participation. American Political Science Review, 89(2), 271-294.</a></p>
 
 
   
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
+    <a href="/post/goisforlovers/"><i class="fa fa-chevron-left"></i></a>
+    
   </div>
   <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="/post/goisforlovers/">(Hu)go Template Primer</a>
+    </nav>
     
   </div>
   <div class="pure-u-2-24">

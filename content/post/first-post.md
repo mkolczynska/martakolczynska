@@ -6,23 +6,31 @@ date = "2018-07-07 13:19:58"
 categories = ["R"]
 +++
 
-## Step 1. Install R
+The capacity for generating ideas is greater than the capacity of developing ideas into papers (or even paper drafts). Ideas can dissapear if they are not written down or otherwise recorded.
 
-Probably the most useful thing I learned in grad school is that there is an R package for everything, including [cocktails](https://github.com/shabbychef/cocktailApp), getting [colors from Dutch paintings](https://github.com/vankesteren/rijkspalette), and - obviously - [blogging](https://github.com/rstudio/blogdown).
+*So why write a blog and not keep a diary or a plain text file sitting safely on your hard drive, [kochanie](https://pl.wiktionary.org/wiki/kochanie)?*
+
+Because I can, because I want to, and someone asked (cf. the three reasons for why people don't participate in politics by [Brady, Verba, and Scholzman 1995: 271](https://www.cambridge.org/core/journals/american-political-science-review/article/beyond-ses-a-resource-model-of-political-participation/CE74BA78807755F0A09E589D631EB03E)).
 
 
-## Step 2. Find a tutorial
+### Step 1. R
 
-My favorite quote from [*blogdown: Creating Websites with R Markdown*](https://bookdown.org/yihui/blogdown/) by Yihui Xie, Amber Thomas, Alison Presmanes Hill:
+Probably the most useful thing I learned in grad school is that there is an R package for everything, from making interactive [graphs](https://plot.ly/r/) and [web apps](https://shiny.rstudio.com/), to dealing with [labelled data](https://github.com/larmarange/labelled), to exploring [cocktails](https://github.com/shabbychef/cocktailApp), getting [colors from Dutch paintings](https://github.com/vankesteren/rijkspalette), playing [Pac-Man](https://github.com/RLesur/Rcade) and - of course - [blogging](https://github.com/rstudio/blogdown).
+
+
+### Step 2. On-line resources
+
+[Blogdown](https://github.com/rstudio/blogdown) and [Hugo](https://gohugo.io/) have become so popular that there are countless resources to support newbies, including advice for using particular themes (especially Academic, but also others). Almost all of them refer at one point to [*blogdown: Creating Websites with R Markdown*](https://bookdown.org/yihui/blogdown/) by Yihui Xie, Amber Thomas, Alison Presmanes Hill, which is where one of my favorite [quotes](https://bookdown.org/yihui/blogdown/other-themes.html) comes from:
 
 > If you do not understand HTML, CSS, or JavaScript, and have no experience with Hugo themes or templates, it may take you about 10 minutes to get started with your new website ... if you do have the knowledge and experience (and desire to highly customize your site), it may take you several days to get started. Hugo is really powerful. Be cautious with power.
 
 What am I going to do with all this saved time?
 
-## Step 3. Find people who have been there before
+Another trick is to look up GitHub repositories linked to blogs to see how the authors dealt with a particular issue. For example, [Simply Statistics](https://simplystatistics.org/) has an image as brand logo instead of a string. How did they do this if I keep getting errors? It turns out they changed one of the theme files, `themes/blackburn/layouts/partials/brand.html`, replacing  `safeHTML`  with  `markdownify`.
 
-Blogdown and Hugo have become so popular that there are countless resources to support newbies, including advice for using particular templates (especially Academic, but also others).
+### Step 3. Done is better than perfect
 
-## Step 4. Have fun
+The great thing about Blogdown and Hugo is that it is very easy to make something that works, and then tweak it forever as time allows.
 
-The great thing about blogdown and hugo is that it is very easy to make something that works, and then tweak it forever as time allows.
+## References
+[Brady, H., Verba, S., & Schlozman, K. (1995). Beyond SES: A Resource Model of Political Participation. American Political Science Review, 89(2), 271-294.](https://www.cambridge.org/core/journals/american-political-science-review/article/beyond-ses-a-resource-model-of-political-participation/CE74BA78807755F0A09E589D631EB03E)

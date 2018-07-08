@@ -29,9 +29,9 @@ summary(cars)## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
       <pubDate>Sat, 07 Jul 2018 13:19:58 +0000</pubDate>
       
       <guid>/post/first-post/</guid>
-      <description>Step 1. Install R Probably the most useful thing I learned in grad school is that there is an R package for everything, including cocktails, getting colors from Dutch paintings, and - obviously - blogging.
-Step 2. Find a tutorial My favorite quote from blogdown: Creating Websites with R Markdown by Yihui Xie, Amber Thomas, Alison Presmanes Hill:
- If you do not understand HTML, CSS, or JavaScript, and have no experience with Hugo themes or templates, it may take you about 10 minutes to get started with your new website &amp;hellip; if you do have the knowledge and experience (and desire to highly customize your site), it may take you several days to get started.</description>
+      <description>The capacity for generating ideas is greater than the capacity of developing ideas into papers (or even paper drafts). Ideas can dissapear if they are not written down or otherwise recorded.
+So why write a blog and not keep a diary or a plain text file sitting safely on your hard drive, kochanie?
+Because I can, because I want to, and someone asked (cf. the three reasons for why people don&amp;rsquo;t participate in politics by Brady, Verba, and Scholzman 1995: 271).</description>
     </item>
     
     <item>
@@ -41,7 +41,11 @@ Step 2. Find a tutorial My favorite quote from blogdown: Creating Websites with 
       
       <guid>/about/</guid>
       <description>I am a post-doctoral researcher at the Institute of Philosophy and Sociology, Polish Academy of Sciences.
-Full CV</description>
+Interests: • Political attitudes and behavior • Survey methods • Survey data harmonization and comparability • Statistics and R
+Education Ph.D. in Sociology, 2017 The Ohio State University
+M.A. in Sociology, 2014 The Ohio State University
+M.A. in Cultural Studies of Central Eastern Europe, 2009 University of Warsaw
+M.A. in Economics, 2007 Warsaw School of Economics</description>
     </item>
     
     <item>
@@ -62,6 +66,16 @@ kolczynska.1(at)osu.edu</description>
       
       <guid>/research/</guid>
       <description>Research Interests Democratization, Education, Economic Inequality, Survey data harmonization, Quantitative methods for comparative and cross-national survey research; Data visualization and database management.</description>
+    </item>
+    
+    <item>
+      <title>(Hu)go Template Primer</title>
+      <link>/post/goisforlovers/</link>
+      <pubDate>Wed, 02 Apr 2014 00:00:00 +0000</pubDate>
+      
+      <guid>/post/goisforlovers/</guid>
+      <description>Hugo uses the excellent go html/template library for its template engine. It is an extremely lightweight engine that provides a very small amount of logic. In our experience that it is just the right amount of logic to be able to create a good static website. If you have used other template systems from different languages or frameworks you will find a lot of similarities in go templates.
+This document is a brief primer on using go templates.</description>
     </item>
     
   </channel>
