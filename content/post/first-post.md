@@ -6,11 +6,11 @@ date = "2018-07-07 13:19:58"
 categories = ["R"]
 +++
 
-The capacity for generating ideas is greater than the capacity of developing ideas into papers (or even paper drafts). Ideas can dissapear if they are not written down or otherwise recorded.
+Human capacity for generating ideas is greater than the capacity of developing ideas into papers.
 
 *So why write a blog and not keep a diary or a plain text file sitting safely on your hard drive, [kochanie](https://pl.wiktionary.org/wiki/kochanie)?*
 
-Because I can, because I want to, and someone asked (cf. the three reasons for why people don't participate in politics by [Brady, Verba, and Scholzman 1995: 271](https://www.cambridge.org/core/journals/american-political-science-review/article/beyond-ses-a-resource-model-of-political-participation/CE74BA78807755F0A09E589D631EB03E)).
+Because I can, because I want to, and I was encouraged by a colleague (cf. the three reasons for why people don't participate in politics by [Brady, Verba, and Scholzman 1995: 271](https://www.cambridge.org/core/journals/american-political-science-review/article/beyond-ses-a-resource-model-of-political-participation/CE74BA78807755F0A09E589D631EB03E)).
 
 
 ### Step 1. R

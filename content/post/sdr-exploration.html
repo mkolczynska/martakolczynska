@@ -1,0 +1,275 @@
+---
+title: "Exploring the dataset of survey datasets: Survey Data Recycling version 1.0"
+author: "Marta Kołczyńska"
+date: 2018-07-14T13:53:00
+categories: ["R"]
+tags: ["surveys", "SDR", "R", "cross-national research"]
+
+---
+
+
+
+<div id="introduction" class="section level3">
+<h3>Introduction</h3>
+<p>Cross-national survey projects are the standard data source for cross-national quantitative research in sociology. Such projects typically have similar questionnaires in all national surveys and - to a greater or lesser extent - standardized methodologies as well as documentation and reporting. Due to logistical challenges and interests of project leaders, cross-national survey projects remain limited in country and time coverage, which restricts opportunties for analalyses on a truly global scale. One solution to this problem is ex-post survey harmonization, i.e. combining existing data from cross-national surveys and transforming their variables to make them comparable.</p>
+<p>The Survey Data Harmonization project and its successor, the Survey Data Recycling (SDR) project, took on the challenge of ex-post harmonization of data from 22 international survey projects (see Appendix for the list of projects). The resulting dataset (Master file) contains 2,289,060 records (corresponding to individual respondents) from 142 countries/territories between 1966 and 2013. Harmonized variables include: trust in state institutions (parliament, political parties, justice system, government), political engagement (participation in demonstrations, signing petitions, interest in politics), social trust, and sociodemographics: age, gender, education, rural and metropolitcal residence.</p>
+<p>For more information about the SDR project, including funding sources, the project’s scope and purpose, the source data, a description of the SDR idea, publications and conference presentations, see the project website <a href="dataharmonization.org" class="uri">dataharmonization.org</a>. Detailed descriptions of the harmonization process of each target variable are available in the Masterfile Documentation (SDHT 2017).</p>
+<p>The clear advantage of SDR data is its increased coverage, both geographically and over time. The cost of this is increased complexity of handling the SDR data. In this post I show how to download the SDR data and how to explore the individual-level dataset (Master file).</p>
+</div>
+<div id="downloading-the-sdr-data" class="section level3">
+<h3>Downloading the SDR data</h3>
+<p>The SDR data bundle version 1.0 is available from <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q">Dataverse</a>. Thanks to the <code>dataverse</code> package, these data can be loaded directly to R.</p>
+<pre class="r"><code>library(dataverse) # package to access data from Dataverse
+library(tidyverse) # package to clean and reshape the data
+library(rijkspalette) # package to provide pretty colors for the graphs</code></pre>
+<p>Knowing the DOI, it is easy to get a list of all files in a given repository, including data files and documentation, with the <code>get_dataset</code> function. The SDR Master File contains harmonized survey variables. The stata version has the <code>id = 3006244</code>, which is a parameter in the <code>get_file</code> function to download the data file to R (see <a href="https://github.com/IQSS/dataverse-client-r">documentation</a> for details). The data file is pretty large, so it takes a while to download.</p>
+<pre class="r"><code>get_dataset(&quot;doi:10.7910/DVN/VWGF5Q&quot;) # lists the files from a Dataverse by its DOI
+
+master.raw &lt;- get_file(3006244) # downloading the dataset by its identifier
+tmp &lt;- tempfile(fileext = &quot;.dta&quot;)
+writeBin(as.vector(master.raw), tmp)
+master &lt;- haven::read_dta(tmp) # creating a data frame from the temp file</code></pre>
+</div>
+<div id="exploring-sdr-availability-of-variables-by-project" class="section level3">
+<h3>Exploring SDR: availability of variables by project</h3>
+<p>The SDR dataset contains data from 22 projects (identified by the variable <code>t_survey_name</code>). The first step is to check how many projects have the variables of interest. In this case I’m interested in: participation in demonstrations, trust in parliament, education (either completed levels or years of schooling), rural/urban residence, age, and gender. This information can be obtained by transforming the Masterfile into a project-level file with the availability of the selected variables in separate columns.</p>
+<p>Here are the steps:</p>
+<ol style="list-style-type: decimal">
+<li><p>list all variable names and store your selection as a vector <code>selected_vars</code>,</p></li>
+<li><p>select a subset of <code>master</code> with only the selected variables,</p></li>
+<li><p>split <code>master</code> into groups - national surveys (identified as <code>t_survey_name</code>, <code>t_survey_edition</code>, <code>t_country_l1u</code>, and <code>t_country_set</code>),</p></li>
+<li><p>calculate means of all numeric variables by group,</p></li>
+<li><p>for numeric variables, construct a group-level logical variable, which is <code>TRUE</code> when the mean of the given variable is not missing, and <code>FALSE</code> otherwise,</p></li>
+<li><p>group by project (<code>t_survey_name</code>),</p></li>
+<li><p>for each project, calculate the proportion of surveys that contain a given variable,</p></li>
+<li><p>drop unnecessary variables,</p></li>
+<li><p>change the order of variables.</p></li>
+</ol>
+<pre class="r"><code>names(master)
+selected_vars &lt;- c(&quot;t_survey_name&quot;, &quot;t_survey_edition&quot;, &quot;t_country_l1u&quot;, 
+                   &quot;t_country_set&quot;, &quot;t_gender&quot;, &quot;t_age&quot;, &quot;t_edu&quot;, &quot;t_school_yrs&quot;, 
+                   &quot;t_ruralurb&quot;, &quot;t_tr_parli_11&quot;, &quot;t_tr_personal&quot;, 
+                   &quot;t_pr_demonst_fact&quot;, &quot;t_int_polit_5&quot;)
+
+master_vars_survey &lt;- master %&gt;% 
+  select(selected_vars) %&gt;%
+  mutate(educ = ifelse(is.na(t_edu) &amp; is.na(t_school_yrs), NA, 1)) %&gt;% 
+  group_by(t_survey_name, t_survey_edition, t_country_l1u, t_country_set) %&gt;%
+  summarise_all(funs(if(is.numeric(.)) mean(., na.rm = TRUE) else first(.))) %&gt;%
+  mutate_all(funs(if(is.numeric(.)) as.numeric(!is.na(.)) else .)) %&gt;%
+  group_by(t_survey_name) %&gt;%
+  summarise_all(funs(if(is.numeric(.)) mean(., na.rm = TRUE) else first(.))) %&gt;%
+  select(-c(&quot;t_survey_edition&quot;, &quot;t_country_l1u&quot;, &quot;t_country_set&quot;, 
+            &quot;t_school_yrs&quot;, &quot;t_edu&quot;)) %&gt;%
+  select(1,2,3,9,4,5,6,7,8)</code></pre>
+<p>The product of these operations is a data frame with 22 rows (corresponding to 22 survey projects in SDR v.1.0). The first column contains project names, and the next 8 columns contain values ranging from 0 to 1, corresponding to the proportion of national surveys in the given project that contain a given variable.</p>
+<p>Before plotting these data, it’s necessary to do a few more things: 1. convert the table to a data frame to avoid future problems, 2. use project names are row names, 3. drop the <code>t_survey_name</code> column, 4. assign column names, 5. convert to matrix and transpose.</p>
+<pre class="r"><code>master_vars_survey &lt;- as.data.frame(master_vars_survey)
+row.names(master_vars_survey) &lt;- master_vars_survey$t_survey_name
+master_vars_survey &lt;- master_vars_survey[,2:ncol(master_vars_survey)]
+
+names(master_vars_survey) &lt;- c(&quot;Gender&quot;, &quot;Age&quot;, &quot;Education&quot;, &quot;Rural&quot;, 
+                               &quot;Trust in parliament&quot;, &quot;Social trust&quot;, 
+                               &quot;Participation in demonstrations&quot;, 
+                               &quot;Interest in politics&quot;)
+
+master_matrix &lt;- data.matrix(master_vars_survey)
+master_matrix &lt;- t(master_matrix)</code></pre>
+<p>Now the <code>master_matrix</code> matrix is ready for plotting. First, I’ll create a color palette from white (no surveys in a project have the variable of interest) to sea green (taken from Karel Appel’s <em>Square man</em> via the <code>rijksPalette</code> package).</p>
+<p>Next, I set parameters, and draw the heatmap (a colored table, really).</p>
+<pre class="r"><code>appel &lt;- rijksPalette(&quot;Karel Appel&quot;)
+colfunc &lt;- colorRampPalette(c(&quot;white&quot;, appel$palette(10)[7]))
+
+x = 1:ncol(master_matrix)
+y = 1:nrow(master_matrix)
+centers &lt;- expand.grid(y,x)
+
+par(mar = c(3,15,4,2))
+
+image(x, y, t(master_matrix),
+      xaxt = &#39;n&#39;, 
+      yaxt = &#39;n&#39;, 
+      xlab = &#39;&#39;, 
+      ylab = &#39;&#39;,
+      ylim = c(max(y) + 0.5, min(y) - 0.5),
+      col = colfunc(10))
+
+mtext(attributes(master_matrix)$dimnames[[2]], 
+      at=1:ncol(master_matrix), 
+      adj = 0, padj = 0, las=2)
+mtext(attributes(master_matrix)$dimnames[[1]], 
+      at=1:nrow(master_matrix), side = 2, las = 1, adj = 1.02)</code></pre>
+<p><img src="/post/sdr-exploration_files/figure-html/sdr%20heatmap-1.png" width="672" /></p>
+<p>The chart shows that gender, age, and education (measured either with completed levels of schooling years) are available across projects, with only few exceptions - too few to be visible on the heatmap. The rural residence indicator is present in at least some surveys in all projects.</p>
+<p>The availability of other variables is more mixed. Trust in parliament is missing in ISJP (International Social Justice Project, selected waves), PA2 (Political Action II), PA8NS (Political Action, an Eight Nation Study), and PPE7N (Political Participation and Equality in Seven Nations). Social trust is additionallyy unavailable in ASES (Asia-Europe Survey), CDCEE (Consolidation of Democracy in Central Eastern Europe), CNEP (Comparative National Elections Project), and EB (Eurobarometer, selected waves). The question about participation in demonstrations is asked in at least some surveys in all project except for CB (Caucasus Barometer), CDCEE, and NBB (New Baltics Barometer).</p>
+<p>As the next section shows, this table conceals some important heterogeneity with regard to the participation in demonstration questions.</p>
+</div>
+<div id="exploring-sdr-availability-of-variables-with-different-formulations" class="section level3">
+<h3>Exploring SDR: availability of variables with different formulations</h3>
+<p>The SDR project records various characteristics of original questionnaire items, the responses to which are the original (source) variables that are then harmonized. In the SDR data these item characteristic are called “harmonization controls” and accompany the harmonized target variables in the Master file.</p>
+<p>These harmonization controls capture properties of source items that might have an effect on respondents’ answers, and were selected following a review of the relevant methodological literature and of the original questionnaires of the harmonized surveys. These include, for example, the length of the original response scales in questions about trust in state institutions, or whether the information about rural/urban residence was provided by the respondent or coded by the interviewer.</p>
+<p>Some of the properties captured with harmonization controls influence the distribution of responses more than others. One of the properties with a direct effect on response is the time-frame in the question about protest participation, for example participation in demonstrations. Some surveys ask about participation “last year” or “in the last 12 months”, others about the last 2, 3, 4, 5, 8 or 10 years, and some do not specify a time frame, i.e., ask about participation “ever”. Logically, the proportion of individuals who participated in a demonstration “ever” is higer than of those who participated “last year”. Combining surveys with different question formulations might lead to unreliable results.</p>
+<p>When analyzing, for example, determinants of participation in demonstrations, it could be a good idea to decide a priori which type of questions to focus on. Again, the first step would be to see how frequently these different formulations occur in survey projects.</p>
+<p>Doing this requires a few modifications of the data preparation code used in the previous example.</p>
+<pre class="r"><code>selected_vars_2 &lt;- c(&quot;t_survey_name&quot;, &quot;t_survey_edition&quot;, &quot;t_country_l1u&quot;, &quot;t_country_set&quot;, 
+                   &quot;t_gender&quot;, &quot;t_age&quot;, &quot;t_edu&quot;, &quot;t_school_yrs&quot;, &quot;t_ruralurb&quot;, 
+                   &quot;t_tr_parli_11&quot;, &quot;t_pr_demonst_fact&quot;, &quot;c_pr_demonst_years&quot;)
+
+master_vars_survey_2 &lt;- master %&gt;% 
+  select(t_case_id, selected_vars_2) %&gt;%
+  mutate(educ = ifelse(is.na(t_edu) &amp; is.na(t_school_yrs), NA, 1)) %&gt;%
+  spread(c_pr_demonst_years, t_pr_demonst_fact) %&gt;%
+  group_by(t_survey_name, t_survey_edition, t_country_l1u, t_country_set) %&gt;%
+  summarise_all(funs(if(is.numeric(.)) mean(., na.rm = TRUE) else first(.))) %&gt;%
+  mutate_all(funs(if(is.numeric(.)) as.numeric(!is.na(.)) else .)) %&gt;%
+  group_by(t_survey_name) %&gt;%
+  summarise_all(funs(if(is.numeric(.)) mean(., na.rm = TRUE) else first(.))) %&gt;%
+  select(-c(&quot;t_survey_edition&quot;, &quot;t_case_id&quot;, &quot;t_country_l1u&quot;, &quot;t_country_set&quot;, 
+            &quot;t_school_yrs&quot;, &quot;t_edu&quot;), -ncol(.)) %&gt;%
+  select(1,2,3,6,4,5,7,8,9,10,11,12,13,14)</code></pre>
+<p>After the data are prepared, the remaining steps are the same.</p>
+<pre class="r"><code>master_vars_survey_2 &lt;- as.data.frame(master_vars_survey_2)
+row.names(master_vars_survey_2) &lt;- master_vars_survey_2$t_survey_name
+master_vars_survey_2 &lt;- master_vars_survey_2[,2:ncol(master_vars_survey_2)]
+
+
+names(master_vars_survey_2) &lt;- c(&quot;Gender&quot;, &quot;Age&quot;, &quot;Education&quot;, &quot;Rural&quot;, &quot;Trust in parliament&quot;, 
+                               &quot;Demonstrations (1 year)&quot;, &quot;Demonstrations (2 years)&quot;, 
+                               &quot;Demonstrations (3 years)&quot;, &quot;Demonstrations (4 years)&quot;,
+                               &quot;Demonstrations (5 years)&quot;, &quot;Demonstrations (8 years)&quot;, 
+                               &quot;Demonstrations (10 years)&quot;, &quot;Demonstrations (ever)&quot;)
+
+master_matrix_2 &lt;- data.matrix(master_vars_survey_2)
+master_matrix_2 &lt;- t(master_matrix_2)
+
+x = 1:ncol(master_matrix_2)
+y = 1:nrow(master_matrix_2)
+centers &lt;- expand.grid(y,x)
+
+par(mar = c(3,13,5,2))
+
+colfunc &lt;- colorRampPalette(c(&quot;white&quot;, appel$palette(1)[1]))
+
+image(x, y, t(master_matrix_2),
+      xaxt = &#39;n&#39;, 
+      yaxt = &#39;n&#39;, 
+      xlab = &#39;&#39;, 
+      ylab = &#39;&#39;,
+      ylim = c(max(y) + 0.5, min(y) - 0.5),
+      col =  colfunc(10))
+
+mtext(attributes(master_matrix_2)$dimnames[[2]], 
+      at=1:ncol(master_matrix_2), 
+      adj = 0, padj = 0, las=2, cex = 1.2)
+mtext(attributes(master_matrix_2)$dimnames[[1]], 
+      at=1:nrow(master_matrix_2), side = 2, las = 1, adj = 1.02, cex = 1.2)</code></pre>
+<p><img src="/post/sdr-exploration_files/figure-html/sdr%20vars%20survey%202-1.png" width="672" /></p>
+<p>This second heatmap reveals considerable variation in the design of the “participation in demonstrations” questions across survey projects. Although almost all projects contain some variant of this question, in most projects it’s either the “last year” or “ever” variant. Other versions are rare and available in a single project or in only few projects.</p>
+</div>
+<div id="references" class="section level3">
+<h3>References</h3>
+<p>SDHT (Survey Data Harmonization Team). 2017. “Masterfile documentation.” SDR Master Box Version 1. <a href="doi:10.7910/DVN/VWGF5Q" class="uri">doi:10.7910/DVN/VWGF5Q</a>. (<a href="https://dataverse.harvard.edu/file.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q/EL0ROI&amp;version=1.0" class="uri">https://dataverse.harvard.edu/file.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q/EL0ROI&amp;version=1.0</a>)</p>
+</div>
+<div id="sec:appendix" class="section level3">
+<h3>Appendix</h3>
+<p>List of projects included in SDR v.1.0 (SDHT 2017: 7):</p>
+<table>
+<thead>
+<tr class="header">
+<th>Abbr.</th>
+<th>Project name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AFB</td>
+<td>Afrobarometer</td>
+</tr>
+<tr class="even">
+<td>ABS</td>
+<td>Asian Barometer</td>
+</tr>
+<tr class="odd">
+<td>AMB</td>
+<td>Americas Barometer</td>
+</tr>
+<tr class="even">
+<td>ARB</td>
+<td>Arab Barometer</td>
+</tr>
+<tr class="odd">
+<td>ASES</td>
+<td>Asia Europe Survey</td>
+</tr>
+<tr class="even">
+<td>CB</td>
+<td>Caucasus Barometer</td>
+</tr>
+<tr class="odd">
+<td>CDCEE</td>
+<td>Consolidation of Democracy in CEE</td>
+</tr>
+<tr class="even">
+<td>CNEP</td>
+<td>Comparative National Elections Project*</td>
+</tr>
+<tr class="odd">
+<td>EB</td>
+<td>Eurobarometer*</td>
+</tr>
+<tr class="even">
+<td>EQLS</td>
+<td>European Quality of Life Survey</td>
+</tr>
+<tr class="odd">
+<td>ESS</td>
+<td>European Social Survey</td>
+</tr>
+<tr class="even">
+<td>EVS</td>
+<td>European Values Study</td>
+</tr>
+<tr class="odd">
+<td>ISJP</td>
+<td>International Social Justice Project*</td>
+</tr>
+<tr class="even">
+<td>ISSP</td>
+<td>International Social Survey Programme*</td>
+</tr>
+<tr class="odd">
+<td>LB</td>
+<td>Latinobarometro</td>
+</tr>
+<tr class="even">
+<td>LITS</td>
+<td>Life in Transition Survey</td>
+</tr>
+<tr class="odd">
+<td>NBB</td>
+<td>New Baltic Barometer</td>
+</tr>
+<tr class="even">
+<td>PA2</td>
+<td>Political Action II</td>
+</tr>
+<tr class="odd">
+<td>PA8NS</td>
+<td>Political Action - An 8 Nation Study</td>
+</tr>
+<tr class="even">
+<td>PPE7N</td>
+<td>Political Participation and Equality in 7 Nations</td>
+</tr>
+<tr class="odd">
+<td>VPCPCE</td>
+<td>Values and Political Change in Postcommunist Europe</td>
+</tr>
+<tr class="even">
+<td>WVS</td>
+<td>World Values Survey</td>
+</tr>
+</tbody>
+</table>
+<p>^* Selected waves or samples.</p>
+</div>

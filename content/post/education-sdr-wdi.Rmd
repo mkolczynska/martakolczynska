@@ -1,9 +1,13 @@
 ---
 title: "Measuring education: surveys vs. administrative records"
 author: "Marta Kołczyńska"
-date: 2018-07-08T13:13:14-05:00
+date: 2018-07-18T13:13:14
 categories: ["R"]
-tags: ["surveys", "WDI", "education", "R", "ggplot", "plotly"]
+tags: ["surveys", "SDR", "WDI", "education", "R", "ggplot", "plotly"]
+
+output: 
+  html_document:
+    code_folding: show
 
 ---
 
@@ -48,7 +52,7 @@ educ <- WDI(country="all", indicator=c("UIS.NER.3"),
 ```
 #### Survey data (SDR)
 
-Knowing the DOI, it is easy to get a list of all files in a given repository, including data files and documentation, with the `get_dataset' function. The SDR Master File contains harmonized survey variables. 
+Knowing the DOI, it is easy to get a list of all files in a given repository, including data files and documentation, with the `get_dataset` function. The SDR Master File contains harmonized survey variables. 
 The stata version has the `id = 3006244`, which is a parameter in the `get_file` function to download the data file to R (see [documentation](https://github.com/IQSS/dataverse-client-r) for details). The data file is pretty large, so it takes a while to download.
 
 ```{r SDR, results = 'hide'}
@@ -102,6 +106,7 @@ ggplot(merge, aes(x=UIS.NER.3, y=mean_hs)) + geom_point() +
   ylab("Survey proportion of completed upper secondary education")
 
 ```
+
 The association is clearly positive, as could be expected. It would be nice to be able to hover over a point to see what country and year it comes from. Let's use `plotly` to make an interactive graph with case descriptions on hover.
 
 ```{r plotly, warning=FALSE, message=FALSE}

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Marta Kołczyńska</title>
-    <link>/post/</link>
-    <description>Recent content in Posts on Marta Kołczyńska</description>
+    <title>Sdr on Marta Kołczyńska</title>
+    <link>/tags/sdr/</link>
+    <description>Recent content in Sdr on Marta Kołczyńska</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
     <lastBuildDate>Wed, 18 Jul 2018 13:13:14 +0000</lastBuildDate>
     
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/sdr/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -38,17 +38,6 @@ The SDR project will develop a website for browsing, subsetting, downloading, an
       
       <guid>/post/sdr-exploration/</guid>
       <description>IntroductionCross-national survey projects are the standard data source for cross-national quantitative research in sociology. Such projects typically have similar questionnaires in all national surveys and - to a greater or lesser extent - standardized methodologies as well as documentation and reporting. Due to logistical challenges and interests of project leaders, cross-national survey projects remain limited in country and time coverage, which restricts opportunties for analalyses on a truly global scale.</description>
-    </item>
-    
-    <item>
-      <title>Getting Started</title>
-      <link>/post/first-post/</link>
-      <pubDate>Sat, 07 Jul 2018 13:19:58 +0000</pubDate>
-      
-      <guid>/post/first-post/</guid>
-      <description>Human capacity for generating ideas is greater than the capacity of developing ideas into papers.
-So why write a blog and not keep a diary or a plain text file sitting safely on your hard drive, kochanie?
-Because I can, because I want to, and I was encouraged by a colleague (cf. the three reasons for why people don&amp;rsquo;t participate in politics by Brady, Verba, and Scholzman 1995: 271).</description>
     </item>
     
   </channel>

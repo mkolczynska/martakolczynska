@@ -1,0 +1,12 @@
+---
+title: "Shiny App for exploring harmonized survey data (Survey Data Recycling v.1.0)"
+author: "Marta Kołczyńska"
+date: 2018-07-15T13:32:00
+categories: ["R"]
+tags: ["surveys", "SDR","WDI", "education", "R", "shiny", "plotly"]
+
+---
+
+My [previous post](/post/sdr-exploration/) was about downloading and exploring the [Survey Data Recycling (SDR), version 1.0 dataset](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q), which consists of selected harmonized variables from 22 survey projects, 1966-2013.
+
+The [SDR project](dataharmonization.org) will develop a website for browsing, subsetting, downloading, and visualizing data from the SDR project. This website is currently under construction. Meanwhile, basic functionalities of the future on-line browsing and subsetting tool are available here: https://mkolczynska.shinyapps.io/sdr_data_browser/
