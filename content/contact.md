@@ -7,6 +7,6 @@ description = "How to contact me"
 
 e-mail: 
 
-mkolczynska(at)gmail.com
+mkolczynska(at)ifispan.waw.pl
 
 kolczynska.1(at)osu.edu

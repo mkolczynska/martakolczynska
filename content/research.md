@@ -5,11 +5,10 @@ sidemenu = "true"
 description = "Projects and interests"
 +++
 
-I am a post-doctoral researcher at the Institute of Philosophy and Sociology of the Polish Academy of Sciences, and a recent Ph.D. graduate from the Department of Sociology, The Ohio State University. My research interests include comparative analyses of political attitudes and behavior across nations and over time, as well as the methodology of comparative research, in particular cross-national surveys.
 
 #### Political Inequality
 
-I'm a post-doctoral resesarcher in the project [*Political Voice and Economic Inequality across Nations and Time*](https://politicalinequality.org/2017/09/21/new-project-political-voice-and-economic-inequality-across-nations-and-time/) led by dr. Joshua K. Dubrow. In this project I use my knowledge of cross-national surveys and methodology to investigate how economic and educational inequality translates into political marginalization – a topic of renewed relevance in the current turbulent times. I develop country-level measures of political inequality using data from various sources: survey data, administrative records, event data, and others. 
+I'm currently working as a post-doc in the project [*Political Voice and Economic Inequality across Nations and Time*](https://politicalinequality.org/2017/09/21/new-project-political-voice-and-economic-inequality-across-nations-and-time/) led by dr. Joshua K. Dubrow. In this project I use my knowledge of cross-national surveys and methodology to investigate how economic and educational inequality translates into political marginalization – a topic of renewed relevance in the current turbulent times. I develop country-level measures of political inequality using data from various sources: survey data, administrative records, event data, and others. 
 
 #### Survey Data Harmonization
 
@@ -19,7 +18,7 @@ Beyond the opportunities that the SDR dataset creates for substantive research, 
 
 The comparability of survey aggregates, i.e. the extent to which difference in sample aggregates reflect real differences or changes, or whether they are the effect of the variation in methodology and quality among compared surveys, has received relatively little scholarly attention. Variation in methodology and quality is present both between survey projects and between national surveys in the same project, and includes - among others - differences in sampling and in the measurement of the individual-level variable(s) in question. Meanwhile sample estimates such as means and proportions, as well as more complex measures of association, variability, and heterogeneity, are commonly used in social science research as country characteristics to describe and explain differences between countries and over time, often without establishing whether such sample estimates can be at all compared. Comparisons of sample estimates between countries and over time are also of interest to policy makers.
 
-#### Dissertation in Sociology (2017)
+#### Ph.D. Dissertation in Sociology (2017)
 
 My dissertation analyzes the links between democratic values, political trust, and protest participation, and the consequences of educational stratification of values, attitudes, and participation for democratization. I highlight in particular the concept of stratified modernity, which refers to the differences in the adoption of modern values across social strata. Modernity is stratified because of the differential exposure to education systems, which are a medium of spreading modern values and orientations, as well as expectations regarding legitimate political rule, across the globe. By emphasizing the role of education in shaping within-country distributions of values, and pointing to the consequences of the social stratification of protest participation, this dissertation provides new insight into the mechanisms through which modernization improves chances for democratization.
 

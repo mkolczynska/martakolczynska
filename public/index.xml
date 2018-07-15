@@ -46,9 +46,9 @@ The SDR project will develop a website for browsing, subsetting, downloading, an
       <pubDate>Sat, 07 Jul 2018 13:19:58 +0000</pubDate>
       
       <guid>/post/first-post/</guid>
-      <description>Human capacity for generating ideas is greater than the capacity of developing ideas into papers.
-So why write a blog and not keep a diary or a plain text file sitting safely on your hard drive, kochanie?
-Because I can, because I want to, and I was encouraged by a colleague (cf. the three reasons for why people don&amp;rsquo;t participate in politics by Brady, Verba, and Scholzman 1995: 271).</description>
+      <description>This blog is going to be mostly about my adventures with R, primarily using survey data, and usually somewhat related to my social science interests; to share code and hopefully get feedback.
+How it all started Human capacity for generating ideas is greater than the capacity of developing ideas into papers.
+So why write a blog and not keep a diary or a plain text file sitting safely on your hard drive, kochanie?</description>
     </item>
     
     <item>
@@ -57,15 +57,10 @@ Because I can, because I want to, and I was encouraged by a colleague (cf. the t
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/about/</guid>
-      <description>I am a post-doctoral researcher at the Institute of Philosophy and Sociology, Polish Academy of Sciences.
+      <description>I am a post-doctoral researcher at the Institute of Philosophy and Sociology, Polish Academy of Sciences, and a recent Ph.D. graduate from the Department of Sociology, The Ohio State University. My research interests include comparative analyses of political attitudes and behavior across nations and over time, as well as the methodology of comparative research, in particular cross-national surveys.
 My full CV
 Research interests  Political attitudes and behavior
- Quantitative methods for comparative and cross-national research
- Survey data harmonization and comparability
- Statistics and R
-Education  Ph.D. in Sociology, The Ohio State University, 2017
- M.A. in Sociology, The Ohio State University, 2014
- M.A. in Cultural Studies of Central Eastern Europe, University of Warsaw, 2009</description>
+ Quantitative methods for comparative and cross-national research</description>
     </item>
     
     <item>
@@ -75,7 +70,7 @@ Education  Ph.D. in Sociology, The Ohio State University, 2017
       
       <guid>/contact/</guid>
       <description>e-mail:
-mkolczynska(at)gmail.com
+mkolczynska(at)ifispan.waw.pl
 kolczynska.1(at)osu.edu</description>
     </item>
     
@@ -85,8 +80,7 @@ kolczynska.1(at)osu.edu</description>
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/research/</guid>
-      <description>I am a post-doctoral researcher at the Institute of Philosophy and Sociology of the Polish Academy of Sciences, and a recent Ph.D. graduate from the Department of Sociology, The Ohio State University. My research interests include comparative analyses of political attitudes and behavior across nations and over time, as well as the methodology of comparative research, in particular cross-national surveys.
-Political Inequality I&amp;rsquo;m a post-doctoral resesarcher in the project Political Voice and Economic Inequality across Nations and Time led by dr.</description>
+      <description>Political Inequality I&amp;rsquo;m currently working as a post-doc in the project Political Voice and Economic Inequality across Nations and Time led by dr. Joshua K. Dubrow. In this project I use my knowledge of cross-national surveys and methodology to investigate how economic and educational inequality translates into political marginalization – a topic of renewed relevance in the current turbulent times. I develop country-level measures of political inequality using data from various sources: survey data, administrative records, event data, and others.</description>
     </item>
     
   </channel>

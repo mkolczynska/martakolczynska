@@ -6,11 +6,15 @@ date = "2018-07-07 13:19:58"
 categories = ["R"]
 +++
 
+This blog is going to be mostly about my adventures with R, primarily using survey data, and usually somewhat related to my social science interests; to share code and hopefully get feedback.
+
+### How it all started
+
 Human capacity for generating ideas is greater than the capacity of developing ideas into papers.
 
 *So why write a blog and not keep a diary or a plain text file sitting safely on your hard drive, [kochanie](https://pl.wiktionary.org/wiki/kochanie)?*
 
-Because I can, because I want to, and I was encouraged by a colleague (cf. the three reasons for why people don't participate in politics by [Brady, Verba, and Scholzman 1995: 271](https://www.cambridge.org/core/journals/american-political-science-review/article/beyond-ses-a-resource-model-of-political-participation/CE74BA78807755F0A09E589D631EB03E)).
+Why people don't participate in politics? Because they can't, because they don't want to, and because no one asked ([Brady, Verba, and Scholzman 1995: 271](https://www.cambridge.org/core/journals/american-political-science-review/article/beyond-ses-a-resource-model-of-political-participation/CE74BA78807755F0A09E589D631EB03E)).
 
 
 ### Step 1. R
@@ -30,7 +34,7 @@ Another trick is to look up GitHub repositories linked to blogs to see how the a
 
 ### Step 3. Done is better than perfect
 
-The great thing about Blogdown and Hugo is that it is very easy to make something that works, and then tweak it forever as time allows.
+The great thing about Blogdown and Hugo is that it is very easy to make something that works, and then tweak forever.
 
 ## References
 [Brady, H., Verba, S., & Schlozman, K. (1995). Beyond SES: A Resource Model of Political Participation. American Political Science Review, 89(2), 271-294.](https://www.cambridge.org/core/journals/american-political-science-review/article/beyond-ses-a-resource-model-of-political-participation/CE74BA78807755F0A09E589D631EB03E)
