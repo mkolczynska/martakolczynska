@@ -5,10 +5,6 @@ date: 2018-08-01T13:13:14
 categories: ["R"]
 tags: ["surveys", "SDR", "WDI", "education", "R", "ggplot", "plotly"]
 
-output: 
-  html_document:
-    code_folding: show
-
 ---
 
 ### Problem

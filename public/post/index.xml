@@ -33,6 +33,15 @@ Quality of survey data in cross-national projectsCross-national survey projects
     </item>
     
     <item>
+      <title>Measuring education: surveys vs. administrative records</title>
+      <link>/post/education-sdr-wdi/</link>
+      <pubDate>Wed, 01 Aug 2018 13:13:14 +0000</pubDate>
+      
+      <guid>/post/education-sdr-wdi/</guid>
+      <description>ProblemSocial surveys commonly ask about respondents’ educational attainment, either about the highest completed level of education, or about the number of completed years of schooling, and sometimes both. Survey measurements of individual education can be aggregated to indicate the overall level of education in the society. Information about the country’s level of education can also be obtained from administrative data, such as the World Bank or UNESCO.</description>
+    </item>
+    
+    <item>
       <title>Inequality of political participation, European Social Survey 8</title>
       <link>/post/participation-inequality-ess/</link>
       <pubDate>Mon, 30 Jul 2018 03:41:00 +0000</pubDate>
@@ -69,15 +78,6 @@ The SDR project will develop a website for browsing, subsetting, downloading, an
       <description>This blog is going to be mostly about my adventures with R, primarily using survey data, and usually somewhat related to my social science interests; for the fun of it, to share code and hopefully get feedback.
 How it all started Human capacity for generating ideas is greater than the capacity of developing ideas into papers.
 So why write a blog and not keep a diary or a plain text file sitting safely on your hard drive, kochanie?</description>
-    </item>
-    
-    <item>
-      <title>Measuring education: surveys vs. administrative records</title>
-      <link>/post/education-sdr-wdi/</link>
-      <pubDate>Wed, 18 Jul 2018 13:13:14 +0000</pubDate>
-      
-      <guid>/post/education-sdr-wdi/</guid>
-      <description>ProblemSocial surveys commonly ask about respondents’ educational attainment, either about the highest completed level of education, or about the number of completed years of schooling, and sometimes both. Survey measurements of individual education can be aggregated to indicate the overall level of education in the society. Information about the country’s level of education can also be obtained from administrative data, such as the World Bank or UNESCO.</description>
     </item>
     
   </channel>
