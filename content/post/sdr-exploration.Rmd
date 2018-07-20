@@ -7,13 +7,14 @@ tags: ["surveys", "SDR", "R", "cross-national research"]
 
 ---
 
-### Introduction
-Cross-national survey projects are the standard data source for cross-national quantitative research in sociology. Such projects typically have similar questionnaires in all national surveys and - to a greater or lesser extent - standardized methodologies as well as documentation and reporting. Due to logistical challenges and interests of project leaders, cross-national survey projects remain limited in country and time coverage, which restricts opportunties for analalyses on a truly global scale.
+*tl;dr: Combining data from different survey projects creates new opportunities for research, but the comes at a cost of increased complexity of the data.*
+
+Cross-national survey projects are the standard data source for cross-national quantitative research in sociology. Such projects typically have similar questionnaires in all national surveys and - to a greater or lesser extent - standardized methodologies as well as documentation and reporting. Due to logistical challenges and interests of project leaders, cross-national survey projects remain limited in country and time coverage, which restricts prevents analalyses on a global scale.
 One solution to this problem is ex-post survey harmonization, i.e. combining existing data from cross-national surveys and transforming their variables to make them comparable. 
 
 The Survey Data Harmonization project and its successor, the Survey Data Recycling (SDR) project, took on the challenge of ex-post harmonization of data from 22 international survey projects (see Appendix for the list of projects). The resulting dataset (Master file) contains 2,289,060 records (corresponding to individual respondents) from 142 countries/territories between 1966 and 2013. Harmonized variables include: trust in state institutions (parliament, political parties, justice system, government), political engagement (participation in demonstrations, signing petitions, interest in politics), social trust, and sociodemographics: age, gender, education, rural and metropolitcal residence.
 
-For more information about the SDR project, including funding sources, the project's scope and purpose, the source data, a description of the SDR idea, publications and conference presentations, see the project website [dataharmonization.org](dataharmonization.org). Detailed descriptions of the harmonization process of each target variable are available in the Masterfile Documentation (SDHT 2017).
+For more information about the SDR project, including funding sources, the project's scope and purpose, the source data, a description of the SDR idea, publications and conference presentations, see the project website [dataharmonization.org](dataharmonization.org). Detailed descriptions of the harmonization process of each target variable are available in the [Masterfile Documentation available on Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q)(SDHT 2017).
 
 The clear advantage of SDR data is its increased coverage, both geographically and over time. The cost of this is increased complexity of handling the SDR data. In this post I show how to download the SDR data and how to explore the individual-level dataset (Master file).
 
@@ -28,8 +29,8 @@ library(tidyverse) # package to clean and reshape the data
 library(rijkspalette) # package to provide pretty colors for the graphs
 
 ```
-Knowing the DOI, it is easy to get a list of all files in a given repository, including data files and documentation, with the `get_dataset` function. The SDR Master File contains harmonized survey variables. 
-The stata version has the `id = 3006244`, which is a parameter in the `get_file` function to download the data file to R (see [documentation](https://github.com/IQSS/dataverse-client-r) for details). The data file is pretty large, so it takes a while to download.
+Knowing the DOI, it's easy to get a list of all files in a given repository, including data files and documentation, with the `get_dataset` function. The SDR Master File contains harmonized survey variables. 
+The stata version of the SDR Master file has the id `3006244`, which is a parameter in the `get_file` function to download the data file to R (see [documentation](https://github.com/IQSS/dataverse-client-r) for details). The data file is pretty large, so it takes a while to download.
 
 ```{r SDR, results = 'hide'}
 get_dataset("doi:10.7910/DVN/VWGF5Q") # lists the files from a Dataverse by its DOI
@@ -41,7 +42,7 @@ master <- haven::read_dta(tmp) # creating a data frame from the temp file
 
 ```
 ### Exploring SDR: availability of variables by project
-The SDR dataset contains data from 22 projects (identified by the variable `t_survey_name`). The first step is to check how many projects have the variables of interest. In this case I'm interested in: participation in demonstrations, trust in parliament, education (either completed levels or years of schooling), rural/urban residence, age, and gender. This information can be obtained by transforming the Masterfile into a project-level file with the availability of the selected variables in separate columns.
+The SDR dataset contains data from 22 projects identified by the variable `t_survey_name`. The first step of working with the SDR data is to check how many projects have the variables necessary for a given analysis. Let's say I'm interested in analyzing the effect of trust in the national parliament and education on participation in demonstrations. I then need: participation in demonstrations, trust in parliament, education (either completed levels or years of schooling), rural/urban residence, age, and gender. This information can be obtained by transforming the Master file into a project-level file with the availability of the selected variables in separate columns.
 
 Here are the steps:
 
@@ -59,9 +60,7 @@ Here are the steps:
 
 7. for each project, calculate the proportion of surveys that contain a given variable,
 
-8. drop unnecessary variables,
-
-9. change the order of variables.
+8. drop unnecessary variables.
 
 ```{r sdr wrangling, warning=FALSE, message=FALSE, results="hide"}
 names(master)
@@ -79,9 +78,7 @@ master_vars_survey <- master %>%
   group_by(t_survey_name) %>%
   summarise_all(funs(if(is.numeric(.)) mean(., na.rm = TRUE) else first(.))) %>%
   select(-c("t_survey_edition", "t_country_l1u", "t_country_set", 
-            "t_school_yrs", "t_edu")) %>%
-  select(1,2,3,9,4,5,6,7,8)
-
+            "t_school_yrs", "t_edu"))
 ```
 The product of these operations is a data frame with 22 rows (corresponding to 22 survey projects in SDR v.1.0). The first column contains project names, and the next 8 columns contain values ranging from 0 to 1, corresponding to the proportion of national surveys in the given project that contain a given variable.
 
@@ -93,6 +90,8 @@ Before plotting these data, it's necessary to do a few more things:
 5. convert to matrix and transpose.
 
 ```{r sdr vars project, warning=FALSE, message=FALSE}
+master_vars_survey <- master_vars_survey[, c(1,2,3,9,4,5,6,7,8)] # change the order of variables
+
 master_vars_survey <- as.data.frame(master_vars_survey)
 row.names(master_vars_survey) <- master_vars_survey$t_survey_name
 master_vars_survey <- master_vars_survey[,2:ncol(master_vars_survey)]

@@ -253,20 +253,18 @@
 
 </div>
 
-  <div id="introduction" class="section level3">
-<h3>Introduction</h3>
-<p>Cross-national survey projects are the standard data source for cross-national quantitative research in sociology. Such projects typically have similar questionnaires in all national surveys and - to a greater or lesser extent - standardized methodologies as well as documentation and reporting. Due to logistical challenges and interests of project leaders, cross-national survey projects remain limited in country and time coverage, which restricts opportunties for analalyses on a truly global scale. One solution to this problem is ex-post survey harmonization, i.e. combining existing data from cross-national surveys and transforming their variables to make them comparable.</p>
+  <p><em>tl;dr: Combining data from different survey projects creates new opportunities for research, but the comes at a cost of increased complexity of the data.</em></p>
+<p>Cross-national survey projects are the standard data source for cross-national quantitative research in sociology. Such projects typically have similar questionnaires in all national surveys and - to a greater or lesser extent - standardized methodologies as well as documentation and reporting. Due to logistical challenges and interests of project leaders, cross-national survey projects remain limited in country and time coverage, which restricts prevents analalyses on a global scale. One solution to this problem is ex-post survey harmonization, i.e. combining existing data from cross-national surveys and transforming their variables to make them comparable.</p>
 <p>The Survey Data Harmonization project and its successor, the Survey Data Recycling (SDR) project, took on the challenge of ex-post harmonization of data from 22 international survey projects (see Appendix for the list of projects). The resulting dataset (Master file) contains 2,289,060 records (corresponding to individual respondents) from 142 countries/territories between 1966 and 2013. Harmonized variables include: trust in state institutions (parliament, political parties, justice system, government), political engagement (participation in demonstrations, signing petitions, interest in politics), social trust, and sociodemographics: age, gender, education, rural and metropolitcal residence.</p>
-<p>For more information about the SDR project, including funding sources, the project’s scope and purpose, the source data, a description of the SDR idea, publications and conference presentations, see the project website <a href="dataharmonization.org" class="uri">dataharmonization.org</a>. Detailed descriptions of the harmonization process of each target variable are available in the Masterfile Documentation (SDHT 2017).</p>
+<p>For more information about the SDR project, including funding sources, the project’s scope and purpose, the source data, a description of the SDR idea, publications and conference presentations, see the project website <a href="dataharmonization.org" class="uri">dataharmonization.org</a>. Detailed descriptions of the harmonization process of each target variable are available in the <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q">Masterfile Documentation available on Dataverse</a>(SDHT 2017).</p>
 <p>The clear advantage of SDR data is its increased coverage, both geographically and over time. The cost of this is increased complexity of handling the SDR data. In this post I show how to download the SDR data and how to explore the individual-level dataset (Master file).</p>
-</div>
 <div id="downloading-the-sdr-data" class="section level3">
 <h3>Downloading the SDR data</h3>
 <p>The SDR data bundle version 1.0 is available from <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q">Dataverse</a>. Thanks to the <code>dataverse</code> package, these data can be loaded directly to R.</p>
 <pre class="r"><code>library(dataverse) # package to access data from Dataverse
 library(tidyverse) # package to clean and reshape the data
 library(rijkspalette) # package to provide pretty colors for the graphs</code></pre>
-<p>Knowing the DOI, it is easy to get a list of all files in a given repository, including data files and documentation, with the <code>get_dataset</code> function. The SDR Master File contains harmonized survey variables. The stata version has the <code>id = 3006244</code>, which is a parameter in the <code>get_file</code> function to download the data file to R (see <a href="https://github.com/IQSS/dataverse-client-r">documentation</a> for details). The data file is pretty large, so it takes a while to download.</p>
+<p>Knowing the DOI, it’s easy to get a list of all files in a given repository, including data files and documentation, with the <code>get_dataset</code> function. The SDR Master File contains harmonized survey variables. The stata version of the SDR Master file has the id <code>3006244</code>, which is a parameter in the <code>get_file</code> function to download the data file to R (see <a href="https://github.com/IQSS/dataverse-client-r">documentation</a> for details). The data file is pretty large, so it takes a while to download.</p>
 <pre class="r"><code>get_dataset(&quot;doi:10.7910/DVN/VWGF5Q&quot;) # lists the files from a Dataverse by its DOI
 
 master.raw &lt;- get_file(3006244) # downloading the dataset by its identifier
@@ -276,7 +274,7 @@ master &lt;- haven::read_dta(tmp) # creating a data frame from the temp file</co
 </div>
 <div id="exploring-sdr-availability-of-variables-by-project" class="section level3">
 <h3>Exploring SDR: availability of variables by project</h3>
-<p>The SDR dataset contains data from 22 projects (identified by the variable <code>t_survey_name</code>). The first step is to check how many projects have the variables of interest. In this case I’m interested in: participation in demonstrations, trust in parliament, education (either completed levels or years of schooling), rural/urban residence, age, and gender. This information can be obtained by transforming the Masterfile into a project-level file with the availability of the selected variables in separate columns.</p>
+<p>The SDR dataset contains data from 22 projects identified by the variable <code>t_survey_name</code>. The first step of working with the SDR data is to check how many projects have the variables necessary for a given analysis. Let’s say I’m interested in analyzing the effect of trust in the national parliament and education on participation in demonstrations. I then need: participation in demonstrations, trust in parliament, education (either completed levels or years of schooling), rural/urban residence, age, and gender. This information can be obtained by transforming the Master file into a project-level file with the availability of the selected variables in separate columns.</p>
 <p>Here are the steps:</p>
 <ol style="list-style-type: decimal">
 <li><p>list all variable names and store your selection as a vector <code>selected_vars</code>,</p></li>
@@ -286,8 +284,7 @@ master &lt;- haven::read_dta(tmp) # creating a data frame from the temp file</co
 <li><p>for numeric variables, construct a group-level logical variable, which is <code>TRUE</code> when the mean of the given variable is not missing, and <code>FALSE</code> otherwise,</p></li>
 <li><p>group by project (<code>t_survey_name</code>),</p></li>
 <li><p>for each project, calculate the proportion of surveys that contain a given variable,</p></li>
-<li><p>drop unnecessary variables,</p></li>
-<li><p>change the order of variables.</p></li>
+<li><p>drop unnecessary variables.</p></li>
 </ol>
 <pre class="r"><code>names(master)
 selected_vars &lt;- c(&quot;t_survey_name&quot;, &quot;t_survey_edition&quot;, &quot;t_country_l1u&quot;, 
@@ -304,11 +301,12 @@ master_vars_survey &lt;- master %&gt;%
   group_by(t_survey_name) %&gt;%
   summarise_all(funs(if(is.numeric(.)) mean(., na.rm = TRUE) else first(.))) %&gt;%
   select(-c(&quot;t_survey_edition&quot;, &quot;t_country_l1u&quot;, &quot;t_country_set&quot;, 
-            &quot;t_school_yrs&quot;, &quot;t_edu&quot;)) %&gt;%
-  select(1,2,3,9,4,5,6,7,8)</code></pre>
+            &quot;t_school_yrs&quot;, &quot;t_edu&quot;))</code></pre>
 <p>The product of these operations is a data frame with 22 rows (corresponding to 22 survey projects in SDR v.1.0). The first column contains project names, and the next 8 columns contain values ranging from 0 to 1, corresponding to the proportion of national surveys in the given project that contain a given variable.</p>
 <p>Before plotting these data, it’s necessary to do a few more things: 1. convert the table to a data frame to avoid future problems, 2. use project names are row names, 3. drop the <code>t_survey_name</code> column, 4. assign column names, 5. convert to matrix and transpose.</p>
-<pre class="r"><code>master_vars_survey &lt;- as.data.frame(master_vars_survey)
+<pre class="r"><code>master_vars_survey &lt;- master_vars_survey[, c(1,2,3,9,4,5,6,7,8)] # change the order of variables
+
+master_vars_survey &lt;- as.data.frame(master_vars_survey)
 row.names(master_vars_survey) &lt;- master_vars_survey$t_survey_name
 master_vars_survey &lt;- master_vars_survey[,2:ncol(master_vars_survey)]
 
@@ -563,7 +561,7 @@ mtext(attributes(master_matrix_2)$dimnames[[1]],
         return;
 
     var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-    var disqus_shortname = 'disqus_2TF7ZOqLaF';
+    var disqus_shortname = 'https-martakolczynska-netlify-com';
     dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
     (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 })();

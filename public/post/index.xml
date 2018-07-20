@@ -7,48 +7,10 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Wed, 15 Aug 2018 15:34:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 28 Jul 2018 13:32:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>First steps in text analysis: Applause and laughter in TED talks</title>
-      <link>/post/ted-talks/</link>
-      <pubDate>Wed, 15 Aug 2018 15:34:00 +0000</pubDate>
-      
-      <guid>/post/ted-talks/</guid>
-      <description>This year I spent two weeks of the summer attending the Summer Institute for Computational Social Science Parter Site (SICSS) in Tvärminne and Helsinki, Finland. The program covered various topics that combine computational and data skills and social science topics. One of the methods discussed was text analysis.
-Text analysisI downloaded and unzipped the plots.zip file from the link on the GitHub repository. We then read the files into R, and combined them using dplyr.</description>
-    </item>
-    
-    <item>
-      <title>Survey quality in 3D</title>
-      <link>/post/survey-quality-3d/</link>
-      <pubDate>Fri, 10 Aug 2018 23:19:00 +0000</pubDate>
-      
-      <guid>/post/survey-quality-3d/</guid>
-      <description>Good surveys are all alike; every bad survey is bad in its own way.
-Quality of survey data in cross-national projectsCross-national survey projects differ in many ways. This is evident to anyone who has used data from cross-national surveys: different projects vary with regard to: available questions, country and year coverage, formulations of questions on the same topic, response scales, amounts of item non-response, or the level of detail of the survey documentation.</description>
-    </item>
-    
-    <item>
-      <title>Measuring education: surveys vs. administrative records</title>
-      <link>/post/education-sdr-wdi/</link>
-      <pubDate>Wed, 01 Aug 2018 13:13:14 +0000</pubDate>
-      
-      <guid>/post/education-sdr-wdi/</guid>
-      <description>ProblemSocial surveys commonly ask about respondents’ educational attainment, either about the highest completed level of education, or about the number of completed years of schooling, and sometimes both. Survey measurements of individual education can be aggregated to indicate the overall level of education in the society. Information about the country’s level of education can also be obtained from administrative data, such as the World Bank or UNESCO.</description>
-    </item>
-    
-    <item>
-      <title>Inequality of political participation, European Social Survey 8</title>
-      <link>/post/participation-inequality-ess/</link>
-      <pubDate>Mon, 30 Jul 2018 03:41:00 +0000</pubDate>
-      
-      <guid>/post/participation-inequality-ess/</guid>
-      <description>Inequality of political participationlibrary(ess)library(democracyData) # devtools::install_github(&amp;quot;xmarquez/democracyData&amp;quot;)library(vdem) # devtools::install_github(&amp;quot;xmarquez/vdem&amp;quot;)library(tidyverse) # manipulating the datalibrary(labelled) # dealing with data labelslibrary(plyr) # mapvalueslibrary(countrycode) # converting country codeslibrary(reldist) # gini indexlibrary(DescTools) # Atkinson indexlibrary(entropy) # entropylibrary(plotly) # interactive plotslibrary(corrplot) # colored correlation matrixlibrary(rijkspalette) # pretty colors for the graphsESS dataess8 &amp;lt;- ess_rounds(c(8), &amp;quot;mkolczynska@gmail.com&amp;quot;)ess &amp;lt;- recode_missings(ess8) %&amp;gt;% select(idno, cntry, nwspol, vote, contplt, wrkprty, wrkorg, badge, sgnptit, pbldmn, bctprd, pstplonl, agea, gndr,pspwght)val_labels(ess) &amp;lt;- NULLess$news &amp;lt;- ifelse(ess$nwspol &amp;lt; 30 | is.</description>
-    </item>
     
     <item>
       <title>Shiny App for exploring harmonized survey data (Survey Data Recycling v.1.0)</title>
@@ -66,7 +28,8 @@ The SDR project will develop a website for browsing, subsetting, downloading, an
       <pubDate>Thu, 26 Jul 2018 13:53:00 +0000</pubDate>
       
       <guid>/post/sdr-exploration/</guid>
-      <description>IntroductionCross-national survey projects are the standard data source for cross-national quantitative research in sociology. Such projects typically have similar questionnaires in all national surveys and - to a greater or lesser extent - standardized methodologies as well as documentation and reporting. Due to logistical challenges and interests of project leaders, cross-national survey projects remain limited in country and time coverage, which restricts opportunties for analalyses on a truly global scale.</description>
+      <description>tl;dr: Combining data from different survey projects creates new opportunities for research, but the comes at a cost of increased complexity of the data.
+Cross-national survey projects are the standard data source for cross-national quantitative research in sociology. Such projects typically have similar questionnaires in all national surveys and - to a greater or lesser extent - standardized methodologies as well as documentation and reporting. Due to logistical challenges and interests of project leaders, cross-national survey projects remain limited in country and time coverage, which restricts prevents analalyses on a global scale.</description>
     </item>
     
     <item>

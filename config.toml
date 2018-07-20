@@ -17,7 +17,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   subtitle = "Sociology • Social Science Data & Methods"
   brand = "![logo](/images/puzzleblacksmall.png)"
 #  googleAnalytics = "Your Google Analytics tracking ID"
-  disqus = "disqus_2TF7ZOqLaF"
+  disqus = "https-martakolczynska-netlify-com"
   # CSS name for highlight.js
   highlightjs = "default"
   dateFormat = "02 Jan 2006, 15:04"

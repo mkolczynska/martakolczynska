@@ -3,26 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/post/ted-talks/</loc>
-    <lastmod>2018-08-15T15:34:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/survey-quality-3d/</loc>
-    <lastmod>2018-08-10T23:19:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/education-sdr-wdi/</loc>
-    <lastmod>2018-08-01T13:13:14+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/participation-inequality-ess/</loc>
-    <lastmod>2018-07-30T03:41:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/post/sdr-exploration-shiny/</loc>
     <lastmod>2018-07-28T13:32:00+00:00</lastmod>
   </url>
@@ -60,67 +40,37 @@
   
   <url>
     <loc>/tags/education/</loc>
-    <lastmod>2018-08-01T13:13:14+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/ess/</loc>
-    <lastmod>2018-07-30T03:41:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/ggplot/</loc>
-    <lastmod>2018-08-01T13:13:14+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/harmonization/</loc>
-    <lastmod>2018-08-10T23:19:00+00:00</lastmod>
+    <lastmod>2018-07-28T13:32:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-08-15T15:34:00+00:00</lastmod>
+    <lastmod>2018-07-28T13:32:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/plotly/</loc>
-    <lastmod>2018-08-01T13:13:14+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/political-inequality/</loc>
-    <lastmod>2018-07-30T03:41:00+00:00</lastmod>
+    <lastmod>2018-07-28T13:32:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2018-08-15T15:34:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/quality/</loc>
-    <lastmod>2018-08-10T23:19:00+00:00</lastmod>
+    <lastmod>2018-07-28T13:32:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2018-08-15T15:34:00+00:00</lastmod>
+    <lastmod>2018-07-28T13:32:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/sdr/</loc>
-    <lastmod>2018-08-10T23:19:00+00:00</lastmod>
+    <lastmod>2018-07-28T13:32:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -131,14 +81,8 @@
   </url>
   
   <url>
-    <loc>/tags/sicss/</loc>
-    <lastmod>2018-08-15T15:34:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/surveys/</loc>
-    <lastmod>2018-08-10T23:19:00+00:00</lastmod>
+    <lastmod>2018-07-28T13:32:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -149,25 +93,13 @@
   </url>
   
   <url>
-    <loc>/tags/ted-talks/</loc>
-    <lastmod>2018-08-15T15:34:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/text-analysis/</loc>
-    <lastmod>2018-08-15T15:34:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/topics/</loc>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/wdi/</loc>
-    <lastmod>2018-08-01T13:13:14+00:00</lastmod>
+    <lastmod>2018-07-28T13:32:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
