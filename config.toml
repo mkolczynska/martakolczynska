@@ -1,4 +1,4 @@
-baseurl = "/"
+baseurl = "https://martakolczynska.netlify.com/"
 languageCode = "en-us"
 title = "Marta Kołczyńska"
 theme = "blackburn"
@@ -19,7 +19,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 #  googleAnalytics = "Your Google Analytics tracking ID"
   disqus = "disqus_2TF7ZOqLaF"
   # CSS name for highlight.js
-  highlightjs = "androidstudio"
+  highlightjs = "default"
   dateFormat = "02 Jan 2006, 15:04"
   custom_css = ["css/circle.css"]
 

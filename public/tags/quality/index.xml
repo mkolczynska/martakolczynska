@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Quality on Marta Kołczyńska</title>
+    <link>/tags/quality/</link>
+    <description>Recent content in Quality on Marta Kołczyńska</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
+    <lastBuildDate>Fri, 10 Aug 2018 23:19:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/quality/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Survey quality in 3D</title>
+      <link>/post/survey-quality-3d/</link>
+      <pubDate>Fri, 10 Aug 2018 23:19:00 +0000</pubDate>
+      
+      <guid>/post/survey-quality-3d/</guid>
+      <description>Good surveys are all alike; every bad survey is bad in its own way.
+Quality of survey data in cross-national projectsCross-national survey projects differ in many ways. This is evident to anyone who has used data from cross-national surveys: different projects vary with regard to: available questions, country and year coverage, formulations of questions on the same topic, response scales, amounts of item non-response, or the level of detail of the survey documentation.</description>
+    </item>
+    
+  </channel>
+</rss>

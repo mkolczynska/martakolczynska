@@ -1,0 +1,257 @@
+---
+title: "Inequality of political participation, European Social Survey 8"
+author: "Marta Kołczyńska"
+date: 2018-07-30T03:41:00
+categories: ["R"]
+tags: ["surveys", "ESS", "R", "political inequality"]
+
+---
+
+#### Inequality of political participation
+
+
+
+
+```{r packages, warning=FALSE, message=FALSE}
+library(ess)
+library(democracyData) # devtools::install_github("xmarquez/democracyData")
+library(vdem) # devtools::install_github("xmarquez/vdem")
+
+library(tidyverse) # manipulating the data
+library(labelled) # dealing with data labels
+library(plyr) # mapvalues
+library(countrycode) # converting country codes
+
+library(reldist) # gini index
+library(DescTools) # Atkinson index
+library(entropy) # entropy
+
+library(plotly) # interactive plots
+library(corrplot) # colored correlation matrix
+
+library(rijkspalette) # pretty colors for the graphs
+
+```
+#### ESS data
+
+
+```{r ESS, warning=FALSE, message=FALSE, results = "hide"}
+
+ess8 <- ess_rounds(c(8), "mkolczynska@gmail.com")
+ess <- recode_missings(ess8) %>% select(idno, cntry, nwspol, vote, contplt, 
+                                               wrkprty, wrkorg, badge, sgnptit, pbldmn, 
+                                               bctprd, pstplonl, agea, gndr,pspwght)
+val_labels(ess) <- NULL
+
+ess$news <- ifelse(ess$nwspol < 30 | is.na(ess$nwspol), 0, 1)
+ess$vote1 <- mapvalues(ess$vote, from = c(1,2,3, NA), to = c(1,0,0, NA))
+ess$contact <- mapvalues(ess$contplt, from = c(1,2,NA), to = c(1,0,NA))
+ess$workparty <- mapvalues(ess$wrkprty, from = c(1,2,NA), to = c(1,0,NA))
+ess$workorg <- mapvalues(ess$wrkorg, from = c(1,2,NA), to = c(1,0,NA))
+ess$petition <- mapvalues(ess$sgnptit, from = c(1,2,NA), to = c(1,0,NA))
+ess$demonstr <- mapvalues(ess$pbldmn, from = c(1,2,NA), to = c(1,0,NA))
+ess$postonline <- mapvalues(ess$pstplonl, from = c(1,2,NA), to = c(1,0,NA))
+ess$badge1 <- mapvalues(ess$badge, from = c(1,2,NA), to = c(1,0,NA))
+ess$boycott <- mapvalues(ess$bctprd, from = c(1,2,NA), to = c(1,0,NA))
+
+names <- c("news", "vote1", "contact", "workparty", "workorg", "petition", "demonstr", "postonline")
+
+data <- ess %>% filter(agea >= 18 & vote != 3) %>% 
+                select(names, idno, cntry, pspwght, vote1)
+
+data$country <- countrycode(sourcevar = data$cntry, "iso2c", "country.name")
+```
+
+#### Weighing different forms of participation
+
+
+```{r weights, warning=FALSE, message=FALSE}
+
+cntry <- data %>% group_by(cntry) %>% summarise_at(names, funs(weighted.mean(., pspwght)), na.rm = TRUE)
+
+weight_sq <- 1 / sqrt(cntry[names])
+newnames <- paste(colnames(weight_sq), "_weight_sq", sep="")
+colnames(weight_sq) <- newnames
+
+weight_all <- data %>% summarise_at(names, funs(weighted.mean(., pspwght)), na.rm = TRUE)
+weight_all <- 1 / weight_all
+newnames <- paste(colnames(weight_all), "_weight_all", sep="")
+colnames(weight_all) <- newnames
+
+newnames <- paste(colnames(cntry)[2:9], "_mean", sep="")
+colnames(cntry)[2:9] <- newnames
+
+weight <- cbind(cntry[,1], weight_sq, weight_all)
+
+data <- dplyr::left_join(data, weight, by = "cntry")
+
+data$polpart1 <- rowSums(mapply(`*`,data[,1:8],data[,13:20]))
+data$polpart1 <- round(data$polpart1,3)
+
+data$polpart2 <- rowSums(mapply(`*`,data[,1:8],data[,21:28]))
+data$polpart2 <- round(data$polpart2,3)
+
+data <- data[!is.na(data$polpart1), ]
+```
+
+#### Measures of inequality
+
+
+```{r inequality, warning=FALSE, message=FALSE}
+
+names <- c("news", "vote1", "contact", "workparty", "workorg", "petition", "demonstr", 
+          "postonline", "polpart1", "polpart2")
+
+cntrydata <- data %>%  group_by(cntry) %>% summarise_at(names, funs(weighted.mean(., pspwght)), na.rm = TRUE)
+
+cntrydata <- cbind(cntrydata, aggregate(polpart1 ~ cntry, data = data, FUN = "gini")[,-1])
+cntrydata <- cbind(cntrydata, aggregate(polpart1 ~ cntry, data = data, FUN = "entropy.empirical")[,-1])
+cntrydata <- cbind(cntrydata, aggregate(polpart1 ~ cntry, data = data, FUN = "Atkinson")[,-1])
+
+cntrydata <- cbind(cntrydata, aggregate(polpart2 ~ cntry, data = data, FUN = "gini")[,-1])
+cntrydata <- cbind(cntrydata, aggregate(polpart2 ~ cntry, data = data, FUN = "entropy.empirical")[,-1])
+cntrydata <- cbind(cntrydata, aggregate(polpart2 ~ cntry, data = data, FUN = "Atkinson")[,-1])
+
+colnames(cntrydata) <- c("cntry", "news", "vote", "contact", "work.party", "work.org", "petition", "demonstrate", "post.online", "pol.part1", "pol.part2", "gini1", "entropy1", "atkinson1", "gini2", "entropy2", "atkinson2")
+
+plot(Lc(data$polpart1[data$cntry == "DE"]),col="darkred",lwd=2)
+```
+
+
+### Democracy indicators
+
+
+
+```{r democracy indicators, warning=FALSE, message=FALSE}
+
+democracy <- generate_democracy_scores_dataset(output_format = "wide", verbose = FALSE)
+
+democracy$iso2 <- countrycode(sourcevar = democracy$extended_country_name, "country.name", "iso2c")
+democracy$continent <- countrycode(sourcevar = democracy$extended_country_name, "country.name", "continent")
+
+democracy$iso2[democracy$extended_country_name == "Kosovo"] <- "KS"
+democracy$continent[democracy$extended_country_name == "Kosovo"] <- "Europe"
+
+democracy <- filter(democracy, year == 2016, 
+                    !is.na(iso2), !is.na(extended_country_name),
+                    (continent == "Europe" | iso2 == "IL")) %>% 
+  select(continent, iso2, year, eiu, fh_total_reversed, polity2, wgi_democracy)
+
+
+
+
+```
+
+### V-Dem data
+
+
+```{r v-dem, warning=FALSE, message=FALSE}
+
+vdem.part <- extract_vdem(name_pattern = "v2x_partipdem", include_uncertainty = FALSE)
+
+vdem.part$continent <- countrycode(sourcevar = vdem.part$vdem_country_name, "country.name", "continent")
+
+vdem.part$continent[vdem.part$vdem_country_name == "Kosovo"] <- "Europe"
+vdem.part$iso2[vdem.part$vdem_country_name == "Kosovo"] <- "KS"
+vdem.part$iso2 <- countrycode(sourcevar = vdem.part$vdem_country_name, "country.name", "iso2c")
+
+vdem.part <- filter(vdem.part, year == 2016, continent == "Europe" | vdem_country_name == "Israel") %>% 
+  select(continent, iso2, year, v2x_partipdem, vdem_country_name)
+
+
+```
+### Joining V-Dem data and Democracy indicators
+
+
+```{r merge, warning=FALSE, message=FALSE}
+
+all.demo <- full_join(vdem.part, democracy, by = "iso2")
+all.demo <- select(all.demo, iso2, v2x_partipdem, eiu, fh_total_reversed, wgi_democracy, vdem_country_name)
+colnames(all.demo) <- c("cntry", "vdem.partidem", "eiu", "fh.total.reversed", "wgi.democracy", "country")
+all.demo <- all.demo[,c(6,2,3,4,5,1)]
+
+cntrydata <- left_join(cntrydata, all.demo, by = "cntry")
+
+```
+
+
+#### Correlation matrix
+
+```{r correlation, warning=FALSE, message=FALSE}
+  
+cntrydata_cor <- cntrydata[,c(10,12,13,14,11,15,16,17,19,20,21,22)]
+    
+M<- cor(cntrydata_cor)
+corrplot(M, method = "number", number.cex = 0.9)
+
+```
+
+
+#### Country histogram
+
+
+
+```{r cntry hist, warning=FALSE, message=FALSE}
+
+plot_ly(data[which(data$cntry == "PL"),], 
+      x = ~polpart1, type = "histogram", histnorm = "probability",
+            name = 'Sample distribution of the political participation index') %>%
+      layout(title = "Distribution of the political participation index",
+             xaxis = list(title = "Political participation index"),
+             yaxis = list(title = "", range = c(0,1)),
+             margin = list(t = 100, b = 100))
+```
+
+#### Country Lorenz curve
+
+```{r lorenz curve, warning=FALSE, message=FALSE}
+
+plot(Lc(data$polpart1[which(data$cntry == "PL")]),col="darkred",lwd=2)
+```  
+    
+#### Bar plot
+
+
+```{r country barchart, warning=FALSE, message=FALSE}
+
+
+plot_ly(data = cntrydata, x = ~factor(cntry), y = ~pol.part1, 
+        name = "Level of PPI", type = "bar", marker = list(color = 'rgb(49,130,189)'), 
+        hoverinfo = 'text', text = ~paste(cntry, '<br>Mean:', pol.part1))  %>%
+  add_trace(y = ~gini1, name = 'Gini index of PPI', 
+            marker = list(color = 'rgb(204,204,204)'),
+            hoverinfo = 'text', text = ~paste(cntry, '<br>Gini index:', gini1)) %>%
+  layout(title = "Levels and inequality of the political participation index by country",
+         xaxis = list(title = "", tickangle = -45),
+         yaxis = list(title = "", range = c(0,6)),
+         margin = list(t = 100, b = 100),
+         barmode = 'group')
+```
+
+
+#### Scatter plot
+
+```{r country scatterplot, warning=FALSE, message=FALSE}
+```
+appel <- rijksPalette("Karel Appel")
+colfunc <- colorRampPalette(c("white", appel$palette(23)[7]))
+
+
+
+plot_ly(data = cntrydata, type = "scatter", x = ~gini1, y = ~pol.part1, color = ~cntry,
+        colors = "Set1", marker = list(size = 10),
+        hoverinfo = 'text', 
+        text = ~paste('country', cntry, 
+                      '<br>Pol.part.mean:', round(pol.part1,3),
+                      '<br>Pol.part.gini:', round(gini1,3))) %>%
+  layout(title = "Levels and inequality of the political participation index by country",
+         xaxis = list(title = "Gini index of PPI", range = c(0,0.6)),
+         yaxis = list(title = "Level of PPI", range = c(0,6)),
+         margin = list(t = 100, b = 100),
+         showlegend = FALSE)
+
+```
+
+
+  
+

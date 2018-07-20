@@ -1,12 +1,12 @@
 +++
-title = "Getting Started"
-description = "Getting Started"
+title = "Late start"
+description = ""
 tags = ["R"]
-date = "2018-07-07 13:19:58"
+date = "2018-07-23 13:19:58"
 categories = ["R"]
 +++
 
-This blog is going to be mostly about my adventures with R, primarily using survey data, and usually somewhat related to my social science interests; to share code and hopefully get feedback.
+This blog is going to be mostly about my adventures with R, primarily using survey data, and usually somewhat related to my social science interests; for the fun of it, to share code and hopefully get feedback.
 
 ### How it all started
 

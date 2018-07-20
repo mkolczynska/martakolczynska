@@ -1,0 +1,95 @@
+---
+title: "First steps in text analysis: Applause and laughter in TED talks"
+author: "Marta Kołczyńska"
+date: 2018-08-15T15:34:00
+categories: ["text"]
+tags: ["text analysis", "TED talks", "R", "SICSS"]
+
+---
+
+This year I spent two weeks of the summer attending the [Summer Institute for Computational Social Science Parter Site (SICSS)](https://compsocialscience.github.io/summer-institute/2018/helsinki/) in Tvärminne and Helsinki, Finland. The program covered various topics that combine computational and data skills and social science topics. One of the methods discussed was text analysis.
+
+
+#### Text analysis
+
+I downloaded and unzipped the plots.zip file from the link on the GitHub repository. We then read the files into R, and combined them using dplyr.
+
+The TED talk data come from Kaggle: `https://www.kaggle.com/rounakbanik/ted-talks`
+
+
+```{r packages, warning=FALSE, message=FALSE}
+library(stringr)
+library(dplyr)
+library(tidyr)
+library(tidyverse)
+library(tidytext) # tokenize
+
+```
+
+
+
+```{r getting TED data, warning=FALSE, message=FALSE}
+
+tedmain <- read.csv('ted_main.csv',
+                    stringsAsFactors=FALSE)
+
+tedscripts <- read.csv('transcripts.csv', 
+                       stringsAsFactors=FALSE)
+
+ted <- inner_join(tedmain, tedscripts, by = "url")
+
+ted$date <- as.POSIXct(ted$film_date,  origin="1970-01-01")
+
+ted <- ted %>% filter(date > as.Date("2010-01-01"))
+
+```
+
+I use the `unnest_tokens` function from the `tidytext` to split the text (transcript) into separate words. This creates a tidy format data frame with one word per row, which means that instead of 2467 rows (TED talks) in the original file we now have 3,589,978 rows. This enables various analyses of the text, including identifying the position and relative positions of individual words in texts.
+
+
+```{r tokenize, warning=FALSE, message=FALSE}
+ted_words <- ted %>%
+  unnest_tokens(word, transcript) %>%
+  select(url, word)
+```
+
+
+```{r laughter, warning=FALSE, message=FALSE}
+
+ted_words %>%
+  group_by(url) %>%
+  mutate(word_pos = row_number() / n()) %>%
+  filter(str_detect(str_to_lower(word), "laughter")) %>%
+  ggplot(., aes(word_pos)) + 
+    geom_histogram(breaks=seq(0, 1, by = 0.1), col="darkgreen", fill="green", alpha = .2) + 
+    labs(title="Relative position of laughter", x="Position", y="Count")
+```
+
+
+```{r applause, warning=FALSE, message=FALSE}
+ted_words %>%
+  group_by(url) %>%
+  mutate(word_pos = row_number() / n()) %>%
+  filter(str_detect(str_to_lower(word), "applause")) %>% 
+  ggplot(., aes(word_pos)) + 
+    geom_histogram(breaks=seq(0, 1, by = 0.1), col="darkblue", fill="blue", alpha = .2) + 
+    labs(title="Relative position of applause", x="Position", y="Count")
+```
+
+
+```{r times laughter, warning=FALSE, message=FALSE}
+
+ted_words %>%
+  group_by(url) %>%
+  mutate(laugh = str_detect(str_to_lower(word), "laughter")) %>%
+  summarise(nlaugh = sum(laugh), date = mean(date), n = n(), sharelaugh = nlaugh / n) %>%
+  ggplot(., aes(nlaugh)) + 
+    geom_histogram(breaks=seq(0, 1, by = 0.1), col="darkblue", fill="blue", alpha = .2) + 
+    labs(title="Relative position of applause", x="Position", y="Count")
+
+
+
+
+```
+
+

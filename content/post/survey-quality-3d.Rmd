@@ -1,0 +1,217 @@
+---
+title: "Survey quality in 3D"
+author: "Marta Kołczyńska"
+date: 2018-08-10T23:19:00
+categories: ["SDR"]
+tags: ["surveys", "harmonization", "R", "quality", "SDR"]
+
+---
+*Good surveys are all alike; every bad survey is bad in its own way.*
+
+### Quality of survey data in cross-national projects
+
+Cross-national survey projects differ in many ways. This is evident to anyone who has used data from cross-national surveys: different projects vary with regard to: available questions, country and year coverage, formulations of questions on the same topic, response scales, amounts of item non-response, or the level of detail of the survey documentation. More in-depth analyses reveal further problems: the presence of non-unique records (duplicates), errors in weights, and unrealistic values of some variables. Some of the mentioned differences are not purely descriptive, but refer to a general notion of survey quality. Quality is a multidimensional concept that can be understood intuitively, but needs to be quantified to be compared.
+
+One way of evaluating survey quality inended for the assessment of existing surveys via the secondary analysis of their data and documentation was developed by in the [Survey Data Recycling project](dataharmonization.org). A short overview of the idea for evaluating data quality is available [here](https://dataharmonization.files.wordpress.com/2017/07/harmonization-newsletter-v3n1-summer-2017-final.pdf).
+
+The SDR project proposes to evaluate survey quality in three dimensions:
+
+1. Quality of documentation:
+  + Description of the sampling procedure is sufficient
+  + Response rate is available
+  + Evidence of a systematic translation method is available
+  + Evidence of pre-testing
+  + Evidence of fieldwork control
+2. Quality of the data:
+  + No non-unique records (duplicates)
+  + No errors in weights
+  + Proportion of missing values for gender and age below 5%
+  + Survey cases (respondents) have unique IDs
+3. Consistency between the data and documentation:
+  + Variable values are within the legitimate range
+  + Variable labels and value labels are the same in the codebook and in the data file
+  + Various types of missing values are explained
+
+The SDR project provides information necessary for the constructing of these quality indicators in the SDR data published on [Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q).
+
+In this post I show how to construct the quality indicators using SDR data, and show how quality varies across projects, countries, and over time.
+
+
+### SDR data
+
+Without going into much detail, the SDR project gathered data from 22 international survey projects, including the European Social Survey, the World Values Survey and European Values Study, selected waves of the International Social Survey Programme, the Eurobarometer and regional Barometers, and others (see [this post](/post/sdr-exploration/) for more information and the files on [Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q) for the full documentation). The individual-level file (master file) contains 2,289,060 records (corresponding to individual respondents) in 1721 national surveys from 142 countries/territories between 1966 and 2013.
+
+
+```{r packages, warning=FALSE, message=FALSE}
+library(dataverse) # download data from Dataverse
+library(haven) # read Stata (.dta) files
+library(tidyverse) # manipulate data
+library(knitr) # knit tables
+library(plotly) # interactive charts
+library(zoo) # moving averages
+library(grid) # for aligned graphs
+```
+
+```{r getting SDR, warning=FALSE, message=FALSE}
+
+master.raw <- get_file(3006244)
+tmp <- tempfile(fileext = ".dta")
+writeBin(as.vector(master.raw), tmp)
+master <- haven::read_dta(tmp)
+
+cntry.year.raw <- get_file(3006248)
+writeBin(as.vector(cntry.year.raw), tmp)
+cntry.year <- haven::read_dta(tmp)
+
+cntry.raw <- get_file(3006246)
+writeBin(as.vector(cntry.raw), tmp)
+cntry <- haven::read_dta(tmp)
+
+survey.raw <- get_file(3006250)
+writeBin(as.vector(survey.raw), tmp)
+survey <- haven::read_dta(tmp)
+
+wave.raw <- get_file(3006252)
+writeBin(as.vector(wave.raw), tmp)
+wave <- haven::read_dta(tmp)
+
+```
+
+
+### 3D quality
+
+Variables necessary for constructing survey quality measures are measured at different levels and hence stored in different files:
+
+1. The master file has individual-level measures of age and gender (to calculate item non-response) and flags for non-unqiue case IDs, missing case IDs, and non-unique records.
+
+2. The plug-survey file has indicators for the quality of documentation and the quality of weights, which are measured at the level of the national survey.
+
+3. The plug-wave file has information about the inconsistencies between the data and the documentation, which were coded for each project wave.
+
+```{r quality, warning=FALSE, message=FALSE}
+
+master.vars <- c("t_country_l1u", "t_survey_name", "t_survey_edition", "t_country_set", 
+                "t_country_year", "t_gender", "t_age", 
+                 "qr_case_id_nonunique", "qr_case_id_missing", "qr_duplicate")
+
+
+quality <- master %>% select(master.vars) %>% 
+  group_by(t_country_l1u, t_survey_name, t_survey_edition, t_country_set) %>%
+  summarise(q_dupl = as.numeric(mean(qr_duplicate)==0), 
+            q_caseid = as.numeric(mean(qr_case_id_nonunique)==0 & mean(qr_case_id_missing) == 0), 
+            q_age_gender = as.numeric(mean(is.na(t_gender)) < 0.05 | mean(is.na(t_age)) < 0.05),
+            year = mean(t_country_year)) %>%
+  left_join(.,survey, by = c("t_country_l1u", "t_survey_name", "t_survey_edition", "t_country_set")) %>%
+  left_join(.,wave, by = c("t_survey_name", "t_survey_edition")) %>%
+  mutate(qs_sampling = as.numeric((qss_multi_un == 0 & qss_no_sinfo == 0 & qss_no_info == 0)), 
+         qdocu = (qs_sampling + qs_rsp_rate + qs_transl + qs_pretest + qs_fieldw_ctrl) / 5,
+         q_weight = as.numeric((wght_nexists == 0 & wght_error == 0)),
+         qdata = (q_weight + q_dupl + q_caseid + q_age_gender) / 4,
+         qdatadocu = as.numeric(qw_pq_index == 0),
+         project = t_survey_name,
+         wave = t_survey_edition,
+         country = t_country_l1u,
+         set = t_country_set,
+         survey = paste(t_country_l1u, t_survey_name, t_survey_edition, t_country_set, sep = "")) %>%
+  ungroup() %>%
+  select(project, wave, country, set, survey, year,
+         qdata, qdatadocu, qdocu, q_dupl, q_caseid, q_age_gender, q_weight,
+         qs_sampling, qs_rsp_rate, qs_transl, qs_pretest, qs_fieldw_ctrl)
+
+
+```
+
+### Quality by project
+
+With the variables constructed, it's easy to see how quality varies across survey projects, countries, and over time.
+
+
+```{r by project, warning=FALSE, message=FALSE}
+
+quality %>% group_by(project) %>% 
+  summarise(qdata = round(mean(qdata),3),
+            qdocu = round(mean(qdocu),3),
+            qdatadocu = round(mean(qdatadocu),3)) %>%
+  kable(., caption = "Survey quality by project")
+```
+
+### Quality over time
+
+Line graphs with by-year means of the three dimensions of quality can help identify potential time trends.
+
+```{r by year chart, warning=FALSE, message=FALSE}
+
+quality %>% group_by(year) %>% 
+  summarise(qdata = round(mean(qdata),3),
+            qdocu = round(mean(qdocu),3),
+            qdatadocu = round(mean(qdatadocu),3)) %>%
+  gather(qdim, value, 2:4) %>%
+  ggplot(., aes(x = year, y = value, color = qdim)) + 
+    geom_line(size= 1.5) + 
+  ylab("Quality dimension") + 
+  xlab("Year") + 
+  xlim(1966, 2013) +
+  labs(title = "Data from SDR v.1.0") + 
+  ggtitle("Quality across time, 5-year moving averages") +
+  scale_color_manual(name="Quality dimension", 
+                     labels = c("data", 
+                                "data-documentation", 
+                                "documentation"), 
+                     values = c("qdata"="gold2", 
+                                "qdatadocu"="deeppink3", 
+                                "qdocu"="turquoise4"))
+```      
+
+This graphs needs some smoothing. Let's try 5-year moving averages. A distribution of projects by year will help to interpret the changes in quality.
+
+```{r by year smooth chart, warning=FALSE, message=FALSE}
+
+
+p1 <- quality %>% group_by(year) %>% 
+  summarise(qdata = round(mean(qdata),3),
+            qdocu = round(mean(qdocu),3),
+            qdatadocu = round(mean(qdatadocu),3)) %>%
+  mutate(qdata = rollmean(qdata, k = 5, fill = NA),
+         qdocu = rollmean(qdocu, k = 5, fill = NA),
+         qdatadocu = rollmean(qdatadocu, k = 5, fill = NA)) %>%
+  filter(!is.na(qdata)) %>%
+  gather(qdim, value, 2:4) %>%
+  ggplot(., aes(x = year, y = value, color = qdim)) + 
+    geom_line(size= 1.5) + 
+  ylab("Quality dimension") + 
+  xlab("Year") + 
+  xlim(1966, 2013) +
+  labs(title = "Data from SDR v.1.0") + 
+  ggtitle("Quality across time, 5-year moving averages") +
+  scale_color_manual(name="Quality dimension", 
+                     labels = c("data", 
+                                "data-documentation", 
+                                "documentation"), 
+                     values = c("qdata"="gold2", 
+                                "qdatadocu"="deeppink3", 
+                                "qdocu"="turquoise4"))
+      
+
+p2 <- quality %>% group_by(year, project) %>% count() %>%
+  ggplot(., aes(x=year, y=n)) + 
+  geom_bar(stat="identity", aes(fill = project)) +
+  xlim(1966, 2013)
+  
+grid.draw(rbind(ggplotGrob(p1), ggplotGrob(p2), size = "last"))
+
+
+
+```
+
+
+### References
+
+Kołczyńska, Marta and Matthew Schoene. Forthcoming. “Survey Data Harmonization and the Quality of Data Documentation in Cross-National Surveys.” In Advances in Comparative Survey Methodology, ed. by T. P. Johnson, B-E. Pennell, I. A. L. Stoop, and B. Dorer. Wiley.
+
+Slomczynski, Kazimierz M., Przemek Powalko, and Tadeusz Krauze. 2017. “Non-unique Records in International Survey Projects: The Need for Extending Data Quality Control.” Survey Research Methods 11(1): 1-16.
+
+Tomescu-Dubrow, Irina, Kazimierz M. Slomczynski, and Marta Kołczyńska. 2017. „Quality Controls and Their Application to Substantive Analyses of Data from International Survey Projects.” Harmonization: Newsletter on Survey Data Harmonization in the Social Sciences 3(1): 9-13.
+
+Wysmułek, Ilona, Olena Oleksiyenko, and Anastas Vangeli. Forthcoming. “Identification of Processing Errors in Cross-national Surveys.” In Advances in Comparative Survey Methodology, ed. by T. P. Johnson, B-E. Pennell, I. A. L. Stoop, and B. Dorer. Wiley.
+
+Zieliński, Marcin W., Przemek Powałko, and Marta Kołczyńska. Forthcoming. “The Past, Present, and Future of Statistical Weights in International Survey Projects: Implications for Survey Data Harmonization.” In Advances in Comparative Survey Methodology, ed. by T. P. Johnson, B-E. Pennell, I. A. L. Stoop, and B. Dorer. Wiley.

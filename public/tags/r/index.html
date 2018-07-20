@@ -44,7 +44,7 @@
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/androidstudio.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
@@ -230,13 +230,63 @@
   
     <article>
   <header>
-    <h2><a href="/post/education-sdr-wdi/">Measuring education: surveys vs. administrative records</a></h2>
+    <h2><a href="/post/ted-talks/">First steps in text analysis: Applause and laughter in TED talks</a></h2>
 
     <div class="post-meta">
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>18 Jul 2018, 13:13</time>
+    <time>15 Aug 2018, 15:34</time>
+  </div>
+
+  
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="/tags/text-analysis">text analysis</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/ted-talks">TED talks</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/r">R</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/sicss">SICSS</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  </header>
+
+  <p>
+  This year I spent two weeks of the summer attending the Summer Institute for Computational Social Science Parter Site (SICSS) in Tvärminne and Helsinki, Finland. The program covered various topics that combine computational and data skills and social science topics. One of the methods discussed was text analysis.
+Text analysisI downloaded and unzipped the plots.zip file from the link on the GitHub repository. We then read the files into R, and combined them using dplyr.
+  </p>
+
+  
+  <footer>
+    <a href="/post/ted-talks/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
+    <h2><a href="/post/survey-quality-3d/">Survey quality in 3D</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>10 Aug 2018, 23:19</time>
   </div>
 
   
@@ -251,17 +301,13 @@
     
       <a class="post-taxonomy-tag" href="/tags/surveys">surveys</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/sdr">SDR</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="/tags/wdi">WDI</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="/tags/education">education</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="/tags/harmonization">harmonization</a>&nbsp;&#47;
     
       <a class="post-taxonomy-tag" href="/tags/r">R</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/ggplot">ggplot</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="/tags/quality">quality</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/plotly">plotly</a>
+      <a class="post-taxonomy-tag" href="/tags/sdr">SDR</a>
     
   </div>
   
@@ -272,12 +318,62 @@
   </header>
 
   <p>
-  ProblemSocial surveys commonly ask about respondents’ educational attainment, either about the highest completed level of education, or about the number of completed years of schooling, and sometimes both. Survey measurements of individual education can be aggregated to indicate the overall level of education in the society. Information about the country’s level of education can also be obtained from administrative data, such as the World Bank or UNESCO.
+  Good surveys are all alike; every bad survey is bad in its own way.
+Quality of survey data in cross-national projectsCross-national survey projects differ in many ways. This is evident to anyone who has used data from cross-national surveys: different projects vary with regard to: available questions, country and year coverage, formulations of questions on the same topic, response scales, amounts of item non-response, or the level of detail of the survey documentation.
   </p>
 
   
   <footer>
-    <a href="/post/education-sdr-wdi/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+    <a href="/post/survey-quality-3d/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
+    <h2><a href="/post/participation-inequality-ess/">Inequality of political participation, European Social Survey 8</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>30 Jul 2018, 03:41</time>
+  </div>
+
+  
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="/tags/surveys">surveys</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/ess">ESS</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/r">R</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/political-inequality">political inequality</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  </header>
+
+  <p>
+  Inequality of political participationlibrary(ess)library(democracyData) # devtools::install_github(&quot;xmarquez/democracyData&quot;)library(vdem) # devtools::install_github(&quot;xmarquez/vdem&quot;)library(tidyverse) # manipulating the datalibrary(labelled) # dealing with data labelslibrary(plyr) # mapvalueslibrary(countrycode) # converting country codeslibrary(reldist) # gini indexlibrary(DescTools) # Atkinson indexlibrary(entropy) # entropylibrary(plotly) # interactive plotslibrary(corrplot) # colored correlation matrixlibrary(rijkspalette) # pretty colors for the graphsESS dataess8 &lt;- ess_rounds(c(8), &quot;mkolczynska@gmail.com&quot;)ess &lt;- recode_missings(ess8) %&gt;% select(idno, cntry, nwspol, vote, contplt, wrkprty, wrkorg, badge, sgnptit, pbldmn, bctprd, pstplonl, agea, gndr,pspwght)val_labels(ess) &lt;- NULLess$news &lt;- ifelse(ess$nwspol &lt; 30 | is.
+  </p>
+
+  
+  <footer>
+    <a href="/post/participation-inequality-ess/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
   </footer>
   
 </article>
@@ -291,7 +387,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>15 Jul 2018, 13:32</time>
+    <time>28 Jul 2018, 13:32</time>
   </div>
 
   
@@ -343,7 +439,7 @@ The SDR project will develop a website for browsing, subsetting, downloading, an
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>14 Jul 2018, 13:53</time>
+    <time>26 Jul 2018, 13:53</time>
   </div>
 
   
@@ -386,13 +482,13 @@ The SDR project will develop a website for browsing, subsetting, downloading, an
   
     <article>
   <header>
-    <h2><a href="/post/first-post/">Getting Started</a></h2>
+    <h2><a href="/post/first-post/">Late start</a></h2>
 
     <div class="post-meta">
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>07 Jul 2018, 13:19</time>
+    <time>23 Jul 2018, 13:19</time>
   </div>
 
   
@@ -416,7 +512,7 @@ The SDR project will develop a website for browsing, subsetting, downloading, an
   </header>
 
   <p>
-  This blog is going to be mostly about my adventures with R, primarily using survey data, and usually somewhat related to my social science interests; to share code and hopefully get feedback.
+  This blog is going to be mostly about my adventures with R, primarily using survey data, and usually somewhat related to my social science interests; for the fun of it, to share code and hopefully get feedback.
 How it all started Human capacity for generating ideas is greater than the capacity of developing ideas into papers.
 So why write a blog and not keep a diary or a plain text file sitting safely on your hard drive, kochanie?
   </p>
@@ -424,6 +520,61 @@ So why write a blog and not keep a diary or a plain text file sitting safely on 
   
   <footer>
     <a href="/post/first-post/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+  </footer>
+  
+</article>
+
+  
+    <article>
+  <header>
+    <h2><a href="/post/education-sdr-wdi/">Measuring education: surveys vs. administrative records</a></h2>
+
+    <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>18 Jul 2018, 13:13</time>
+  </div>
+
+  
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="/tags/surveys">surveys</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/sdr">SDR</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/wdi">WDI</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/education">education</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/r">R</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/ggplot">ggplot</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/plotly">plotly</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  </header>
+
+  <p>
+  ProblemSocial surveys commonly ask about respondents’ educational attainment, either about the highest completed level of education, or about the number of completed years of schooling, and sometimes both. Survey measurements of individual education can be aggregated to indicate the overall level of education in the society. Information about the country’s level of education can also be obtained from administrative data, such as the World Bank or UNESCO.
+  </p>
+
+  
+  <footer>
+    <a href="/post/education-sdr-wdi/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
   </footer>
   
 </article>

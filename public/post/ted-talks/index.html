@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.42.2" />
+
+  <title>First steps in text analysis: Applause and laughter in TED talks &middot; Marta Kołczyńska</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="/css/circle.css">
+    
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="/"><img src="/images/puzzleblacksmall.png" alt="logo" /></a>
+
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/research/"><i class='fa fa-bar-chart fa-fw'></i>Research</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/contact/"><i class='fa fa-envelope fa-fw'></i>Contact</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/MartaKolcz" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/mkolczynska" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2018. Marta Kołczyńska</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>First steps in text analysis: Applause and laughter in TED talks</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>15 Aug 2018, 15:34</time>
+  </div>
+
+  
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="/tags/text-analysis">text analysis</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/ted-talks">TED talks</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/r">R</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/sicss">SICSS</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  <p>This year I spent two weeks of the summer attending the <a href="https://compsocialscience.github.io/summer-institute/2018/helsinki/">Summer Institute for Computational Social Science Parter Site (SICSS)</a> in Tvärminne and Helsinki, Finland. The program covered various topics that combine computational and data skills and social science topics. One of the methods discussed was text analysis.</p>
+<div id="text-analysis" class="section level4">
+<h4>Text analysis</h4>
+<p>I downloaded and unzipped the plots.zip file from the link on the GitHub repository. We then read the files into R, and combined them using dplyr.</p>
+<p>The TED talk data come from Kaggle: <code>https://www.kaggle.com/rounakbanik/ted-talks</code></p>
+<pre class="r"><code>library(stringr)
+library(dplyr)
+library(tidyr)
+library(tidyverse)
+library(tidytext) # tokenize</code></pre>
+<pre class="r"><code>tedmain &lt;- read.csv(&#39;ted_main.csv&#39;,
+                    stringsAsFactors=FALSE)
+
+tedscripts &lt;- read.csv(&#39;transcripts.csv&#39;, 
+                       stringsAsFactors=FALSE)
+
+ted &lt;- inner_join(tedmain, tedscripts, by = &quot;url&quot;)
+
+ted$date &lt;- as.POSIXct(ted$film_date,  origin=&quot;1970-01-01&quot;)
+
+ted &lt;- ted %&gt;% filter(date &gt; as.Date(&quot;2010-01-01&quot;))</code></pre>
+<p>I use the <code>unnest_tokens</code> function from the <code>tidytext</code> to split the text (transcript) into separate words. This creates a tidy format data frame with one word per row, which means that instead of 2467 rows (TED talks) in the original file we now have 3,589,978 rows. This enables various analyses of the text, including identifying the position and relative positions of individual words in texts.</p>
+<pre class="r"><code>ted_words &lt;- ted %&gt;%
+  unnest_tokens(word, transcript) %&gt;%
+  select(url, word)</code></pre>
+<pre class="r"><code>ted_words %&gt;%
+  group_by(url) %&gt;%
+  mutate(word_pos = row_number() / n()) %&gt;%
+  filter(str_detect(str_to_lower(word), &quot;laughter&quot;)) %&gt;%
+  ggplot(., aes(word_pos)) + 
+    geom_histogram(breaks=seq(0, 1, by = 0.1), col=&quot;darkgreen&quot;, fill=&quot;green&quot;, alpha = .2) + 
+    labs(title=&quot;Relative position of laughter&quot;, x=&quot;Position&quot;, y=&quot;Count&quot;)</code></pre>
+<p><img src="/post/ted-talks_files/figure-html/laughter-1.png" width="672" /></p>
+<pre class="r"><code>ted_words %&gt;%
+  group_by(url) %&gt;%
+  mutate(word_pos = row_number() / n()) %&gt;%
+  filter(str_detect(str_to_lower(word), &quot;applause&quot;)) %&gt;% 
+  ggplot(., aes(word_pos)) + 
+    geom_histogram(breaks=seq(0, 1, by = 0.1), col=&quot;darkblue&quot;, fill=&quot;blue&quot;, alpha = .2) + 
+    labs(title=&quot;Relative position of applause&quot;, x=&quot;Position&quot;, y=&quot;Count&quot;)</code></pre>
+<p><img src="/post/ted-talks_files/figure-html/applause-1.png" width="672" /></p>
+<pre class="r"><code>ted_words %&gt;%
+  group_by(url) %&gt;%
+  mutate(laugh = str_detect(str_to_lower(word), &quot;laughter&quot;)) %&gt;%
+  summarise(nlaugh = sum(laugh), date = mean(date), n = n(), sharelaugh = nlaugh / n) %&gt;%
+  ggplot(., aes(nlaugh)) + 
+    geom_histogram(breaks=seq(0, 1, by = 0.1), col=&quot;darkblue&quot;, fill=&quot;blue&quot;, alpha = .2) + 
+    labs(title=&quot;Relative position of applause&quot;, x=&quot;Position&quot;, y=&quot;Count&quot;)</code></pre>
+<p><img src="/post/ted-talks_files/figure-html/times%20laughter-1.png" width="672" /></p>
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="/post/survey-quality-3d/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="/post/survey-quality-3d/">Survey quality in 3D</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'disqus_2TF7ZOqLaF';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+</div>
+</div>
+<script src="/js/ui.js"></script>
+
+
+
+
+
+
+</body>
+</html>
+
