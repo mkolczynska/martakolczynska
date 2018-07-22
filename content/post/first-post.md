@@ -10,7 +10,7 @@ This blog is going to be mostly about my adventures with R, primarily using surv
 
 ### How it all started
 
-Human capacity for generating ideas is greater than the capacity of developing ideas into papers.
+General law of academia: The capacity for generating ideas is greater than the capacity of developing ideas into papers.
 
 *So why write a blog and not keep a diary or a plain text file sitting safely on your hard drive, [kochanie](https://pl.wiktionary.org/wiki/kochanie)?*
 
