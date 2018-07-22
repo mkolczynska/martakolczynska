@@ -7,14 +7,43 @@ tags: ["surveys", "SDR", "R", "cross-national research"]
 
 ---
 
-*tl;dr: Combining data from different survey projects creates new opportunities for research, but the comes at a cost of increased complexity of the data.*
+*tl;dr: Combining data from different survey projects creates new opportunities for research, alas, at the cost of increased volume (obviously) and complexity of the data. The [Survey Data Recycling project](dataharmonization.org) created a dataset with data from 22 international survey projects. This post describes how to access and navigate this dataset.*
 
-Cross-national survey projects are the standard data source for cross-national quantitative research in sociology. Such projects typically have similar questionnaires in all national surveys and - to a greater or lesser extent - standardized methodologies as well as documentation and reporting. Due to logistical challenges and interests of project leaders, cross-national survey projects remain limited in country and time coverage, which restricts prevents analalyses on a global scale.
+Cross-national survey projects are the standard data source for cross-national quantitative research in sociology. Such projects typically have similar questionnaires in all national surveys and - to a greater or lesser extent - standardized methodologies as well as documentation and reporting. Due to logistical challenges and interests of project leaders, cross-national survey projects remain limited in country and time coverage, which restricts prevents analalyses on a global scale.  
 One solution to this problem is ex-post survey harmonization, i.e. combining existing data from cross-national surveys and transforming their variables to make them comparable. 
 
-The Survey Data Harmonization project and its successor, the Survey Data Recycling (SDR) project, took on the challenge of ex-post harmonization of data from 22 international survey projects (see Appendix for the list of projects). The resulting dataset (Master file) contains 2,289,060 records (corresponding to individual respondents) from 142 countries/territories between 1966 and 2013. Harmonized variables include: trust in state institutions (parliament, political parties, justice system, government), political engagement (participation in demonstrations, signing petitions, interest in politics), social trust, and sociodemographics: age, gender, education, rural and metropolitcal residence.
+The Survey Data Harmonization project and its successor, the Survey Data Recycling (SDR) project, took on the challenge of ex-post harmonization of data from 22 international survey projects, listed below: 
 
-For more information about the SDR project, including funding sources, the project's scope and purpose, the source data, a description of the SDR idea, publications and conference presentations, see the project website [dataharmonization.org](dataharmonization.org). Detailed descriptions of the harmonization process of each target variable are available in the [Masterfile Documentation available on Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q)(SDHT 2017).
+Abbr.     | Project name      
+----------|----------------------------------------------------
+AFB       | Afrobarometer                                       
+ABS       | Asian Barometer                                     
+AMB       | Americas Barometer                                  
+ARB       | Arab Barometer                                      
+ASES      | Asia Europe Survey                                  
+CB        | Caucasus Barometer                                  
+CDCEE     | Consolidation of Democracy in CEE                   
+CNEP      | Comparative National Elections Project*             
+EB        | Eurobarometer*                                      
+EQLS      | European Quality of Life Survey                     
+ESS       | European Social Survey                              
+EVS       | European Values Study                               
+ISJP      | International Social Justice Project*	             
+ISSP      | International Social Survey Programme*              
+LB        | Latinobarometro                                     
+LITS      | Life in Transition Survey                           
+NBB       | New Baltic Barometer                                
+PA2       | Political Action II                                 
+PA8NS     | Political Action - An 8 Nation Study 	             
+PPE7N     | Political Participation and Equality in 7 Nations	 
+VPCPCE    | Values and Political Change in Postcommunist Europe 
+WVS       | World Values Survey                                 
+          | *Selected waves or samples.                          
+
+
+The resulting dataset (Master file) contains 2,289,060 records (corresponding to individual respondents) from 142 countries/territories between 1966 and 2013. Harmonized variables include: trust in state institutions (parliament, political parties, justice system, government), political engagement (participation in demonstrations, signing petitions, interest in politics), social trust, and sociodemographics: age, gender, education, rural and metropolitcal residence.
+
+For more information about the SDR project, including funding sources, the project's scope and purpose, the source data, a description of the SDR idea, publications and conference presentations, see the project website [dataharmonization.org](dataharmonization.org). Detailed descriptions of the harmonization process of each target variable are available in the [Masterfile Documentation available on Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q) [^1].
 
 The clear advantage of SDR data is its increased coverage, both geographically and over time. The cost of this is increased complexity of handling the SDR data. In this post I show how to download the SDR data and how to explore the individual-level dataset (Master file).
 
@@ -219,34 +248,5 @@ This second heatmap reveals considerable variation in the design of the "partici
 
 
 ### References
-SDHT (Survey Data Harmonization Team). 2017. “Masterfile documentation.” SDR Master Box Version 1. doi:10.7910/DVN/VWGF5Q. (https://dataverse.harvard.edu/file.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q/EL0ROI&version=1.0)
+[^1]: SDHT (Survey Data Harmonization Team). 2017. “Masterfile documentation.” SDR Master Box Version 1. doi:10.7910/DVN/VWGF5Q. (https://dataverse.harvard.edu/file.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q/EL0ROI&version=1.0)
 
-### Appendix {#sec:appendix}
-
-List of projects included in SDR v.1.0 (SDHT 2017: 7):
-
-Abbr.    | Project name      
----------|----------------------------------------------------
-AFB      | Afrobarometer                                       
-ABS      | Asian Barometer                                     
-AMB      | Americas Barometer                                  
-ARB      | Arab Barometer                                      
-ASES     | Asia Europe Survey                                  
-CB       | Caucasus Barometer                                  
-CDCEE    | Consolidation of Democracy in CEE                   
-CNEP     | Comparative National Elections Project*             
-EB       | Eurobarometer*                                      
-EQLS     | European Quality of Life Survey                     
-ESS      | European Social Survey                              
-EVS      | European Values Study                               
-ISJP     | International Social Justice Project*	             
-ISSP     | International Social Survey Programme*              
-LB       | Latinobarometro                                     
-LITS     | Life in Transition Survey                           
-NBB      | New Baltic Barometer                                
-PA2      | Political Action II                                 
-PA8NS    | Political Action - An 8 Nation Study 	             
-PPE7N    | Political Participation and Equality in 7 Nations	 
-VPCPCE   | Values and Political Change in Postcommunist Europe 
-WVS      | World Values Survey                                 
-^* Selected waves or samples.                          
