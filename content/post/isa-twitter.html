@@ -11,8 +11,8 @@ tags: ["R", "twitter", "text analysis", "ISA", "SICSS"]
 
 <p>The <a href="https://www.isa-sociology.org/en/conferences/world-congress/toronto-2018/">International Sociological Association 19th World Congress of Sociology in Toronto (15-21 July)</a> has received quite some Twitter coverage. Waiting to board the flight back to Warsaw, I wanted to take a look at these Twitter data and apply the newly acquired skills in text analysis (thanks to the <a href="https://compsocialscience.github.io/summer-institute/2018/helsinki/">Summer Institute for Computational Social Science, SICSS, Partner Site</a> in Tvärminne and Helsinki, Finland).</p>
 <p>A few years ago my colleagues from the Polish Academy of Sciences and I wrote a paper about the inequality in national representation at ISA events (congresses and fora) <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>. Analyses in this post reveals a different type of inequality at ISA conferences.</p>
-<div id="getting-data-from-twitter" class="section level4">
-<h4>Getting data from Twitter</h4>
+<div id="getting-data-from-twitter" class="section level3">
+<h3>Getting data from Twitter</h3>
 <p>Tweets are an increasingly popular source of data for social scientists, not least because they can be quickly and conveniently obtained through the Twitter API. There are many excellent tutorials about how to connect to Twitter to download tweets, e.g. on the SICSS <a href="https://compsocialscience.github.io/summer-institute/2018/materials/day2-digital-trace-data/apis/rmarkdown/SICSS_APIs_markdown.html">website</a>.</p>
 <p>First, the necessary packages:</p>
 <pre class="r"><code>#devtools::install_github(&quot;mkearney/rtweet&quot;) # newest version of rtweet from GitHub
@@ -58,8 +58,8 @@ isa$created_at &lt;-  with_tz(isa$created_at, &#39;America/New_York&#39;) # set 
 ## [5] &quot;Brilliant performance by the Red Urban Project  to help close #isa2018wcs https://t.co/hFpuiJqwsM&quot;                                                                                                                                                                                                                
 ## [6] &quot;#Selfie time as #isa2018wcs comes to an end in #Toronto @isarc24 #YYZ @DrAmandaSlevin @HaluzaDeLay @StewartDLockie https://t.co/DswifxJt37&quot;</code></pre>
 </div>
-<div id="tweets-over-time" class="section level4">
-<h4>Tweets over time</h4>
+<div id="tweets-over-time" class="section level3">
+<h3>Tweets over time</h3>
 <p>I want to see the volume of ISA 2018 WCS tweets changed over time: first for the whole period covered by the data extract and on the busiest day - July 18th.</p>
 <pre class="r"><code>ts_plot(isa, &quot;1 hour&quot;) +
   labs(x = NULL, y = NULL,
@@ -76,8 +76,8 @@ isa$created_at &lt;-  with_tz(isa$created_at, &#39;America/New_York&#39;) # set 
 <p><img src="/post/isa-twitter_files/figure-html/time%20plots-2.png" width="672" /></p>
 <p>Overall it looks like the presentations around noon (11.30am - 1.20pm) and in the afternoon (3.30-5.20pm) were most tweet-provoking. Time stamps include hours, minutes and seconds, so it’s possible to link tweets to concrete sessions, if one is interested.</p>
 </div>
-<div id="text-analysis" class="section level4">
-<h4>Text analysis</h4>
+<div id="text-analysis" class="section level3">
+<h3>Text analysis</h3>
 <p>Before the tweets can be analyzed, they need to be tokenized (each word needs to become a separate record = row), and cleaned (stop words and other unnecessary strings need to be eliminated).</p>
 <pre class="r"><code>data(&quot;stop_words&quot;)
 
@@ -107,8 +107,8 @@ isa_words &lt;- isa %&gt;%
 ## 10 africa      366
 ## # ... with 11,268 more rows</code></pre>
 </div>
-<div id="resesarch-committees" class="section level4">
-<h4>Resesarch committees</h4>
+<div id="resesarch-committees" class="section level3">
+<h3>Resesarch committees</h3>
 <p><a href="https://www.isa-sociology.org/en/research-networks/research-committees/">Research committees (RC)</a> are the core organizational unit in ISA. Research Committees bring together scholars interested in the same topic, e.g. political sociology or sociology of education. As of now, there are 57 RCs.</p>
 <p>I noticed that many tweets have RC hashtags, so I wanted to see which RC got the most tweets and how equal or unequal the distribution of tweets was.</p>
 <pre class="r"><code>isa_rc &lt;- isa_words %&gt;% filter(str_detect(tolower(word), &quot;rc[0-9]{2}&quot;))

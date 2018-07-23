@@ -11,7 +11,7 @@ The [International Sociological Association 19th World Congress of Sociology in 
 
 A few years ago my colleagues from the Polish Academy of Sciences and I wrote a paper about the inequality in national representation at ISA events (congresses and fora) [^1]. Analyses in this post reveals a different type of inequality at ISA conferences.
 
-#### Getting data from Twitter
+### Getting data from Twitter
 
 Tweets are an increasingly popular source of data for social scientists, not least because they can be quickly and conveniently obtained through the Twitter API. There are many excellent tutorials about how to connect to Twitter to download tweets, e.g. on the SICSS [website](https://compsocialscience.github.io/summer-institute/2018/materials/day2-digital-trace-data/apis/rmarkdown/SICSS_APIs_markdown.html).
 
@@ -62,7 +62,7 @@ And here are the texts of a few sample tweets:
 head(isa$text)
 ```
 
-#### Tweets over time
+### Tweets over time
 
 I want to see the volume of ISA 2018 WCS tweets changed over time: first for the whole period covered by the data extract and on the busiest day - July 18th.
 
@@ -83,7 +83,7 @@ isa %>% filter(as.Date(created_at) >= "2018-07-18" & as.Date(created_at) < "2018
 
 Overall it looks like the presentations around noon (11.30am - 1.20pm) and in the afternoon (3.30-5.20pm) were most tweet-provoking. Time stamps include hours, minutes and seconds, so it's possible to link tweets to concrete sessions, if one is interested.
 
-#### Text analysis
+### Text analysis
 
 Before the tweets can be analyzed, they need to be tokenized (each word needs to become a separate record = row), and cleaned (stop words and other unnecessary strings need to be eliminated).
 
@@ -107,7 +107,7 @@ isa_words %>%
   arrange(desc(n))  # sort by word frequency in a descending order
 ```
 
-#### Resesarch committees
+### Resesarch committees
 
 [Research committees (RC)](https://www.isa-sociology.org/en/research-networks/research-committees/) are the core organizational unit in ISA. Research Committees bring together scholars interested in the same topic, e.g. political sociology or sociology of education. As of now, there are 57 RCs.
 
@@ -146,5 +146,3 @@ ggplot(isa_rc, aes(rc, col = rc)) + geom_bar() +
 The bar plot confirms this result: RC34 is mentioned in the highest number of tweets and there is quite some variation in the number of tweets across RCs. If there is variation, maybe it can be explained. Some candidates: number of members, age of members, something about the leadership, area of specialization, quality of sessions, number of electrical outlets in the room?
 
 [^1]: [Joshua K. Dubrow, Marta Kołczyńska, Irina Tomescu-Dubrow, and Kazimierz M. Slomczynski. 2018. "Sociologists everywhere: Country representation in conferences hosted by the International Sociological Association, 1990–2012". *Current Sociology* 66(3): 466-489.](https://www.academia.edu/14504525/Sociologists_everywhere_Country_representation_in_conferences_hosted_by_the_International_Sociological_Association_1990_2012)
-
-
