@@ -7,29 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Sat, 28 Jul 2018 13:32:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Jul 2018 21:24:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Shiny App for exploring harmonized survey data (Survey Data Recycling v.1.0)</title>
-      <link>/post/sdr-exploration-shiny/</link>
-      <pubDate>Sat, 28 Jul 2018 13:32:00 +0000</pubDate>
+      <title>ISA World Congress 2018: Analysis of tweets</title>
+      <link>/post/isa-twitter/</link>
+      <pubDate>Mon, 23 Jul 2018 21:24:00 +0000</pubDate>
       
-      <guid>/post/sdr-exploration-shiny/</guid>
-      <description>My previous post was about downloading and exploring the Survey Data Recycling (SDR), version 1.0 dataset, which consists of selected harmonized variables from 22 survey projects, 1966-2013.
-The SDR project will develop a website for browsing, subsetting, downloading, and visualizing data from the SDR project. This website is currently under construction. Meanwhile, basic functionalities of the future on-line browsing and subsetting tool are available here: https://mkolczynska.shinyapps.io/sdr_data_browser/</description>
-    </item>
-    
-    <item>
-      <title>Exploring the dataset of survey datasets: Survey Data Recycling version 1.0</title>
-      <link>/post/sdr-exploration/</link>
-      <pubDate>Thu, 26 Jul 2018 13:53:00 +0000</pubDate>
-      
-      <guid>/post/sdr-exploration/</guid>
-      <description>tl;dr: Combining data from different survey projects creates new opportunities for research, but the comes at a cost of increased complexity of the data.
-Cross-national survey projects are the standard data source for cross-national quantitative research in sociology. Such projects typically have similar questionnaires in all national surveys and - to a greater or lesser extent - standardized methodologies as well as documentation and reporting. Due to logistical challenges and interests of project leaders, cross-national survey projects remain limited in country and time coverage, which restricts prevents analalyses on a global scale.</description>
+      <guid>/post/isa-twitter/</guid>
+      <description>The International Sociological Association World Congress 19th Congress of Sociology in Toronto has received quite some Twitter coverage. Waiting to board the flight back to Warsaw, I wanted to take a look at these Twitter data and apply the newly acquired skills in text analysis (thanks to the Summer Institute for Computational Social Science, SICSS, Partner Site in Tvärminne and Helsinki, Finland).
+A few years ago my colleagues from the Polish Academy of Sciences and I wrote a paper about the inequality in national representation at ISA events (congresses and fora) 1.</description>
     </item>
     
     <item>
@@ -39,7 +29,7 @@ Cross-national survey projects are the standard data source for cross-national q
       
       <guid>/post/first-post/</guid>
       <description>This blog is going to be mostly about my adventures with R, primarily using survey data, and usually somewhat related to my social science interests; for the fun of it, to share code and hopefully get feedback.
-How it all started Human capacity for generating ideas is greater than the capacity of developing ideas into papers.
+How it all started General law of academia: The capacity for generating ideas is greater than the capacity of developing ideas into papers.
 So why write a blog and not keep a diary or a plain text file sitting safely on your hard drive, kochanie?</description>
     </item>
     

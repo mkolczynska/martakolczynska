@@ -1,0 +1,149 @@
+---
+title: "ISA World Congress 2018: Analysis of tweets"
+author: "Marta Kołczyńska"
+date: 2018-07-23T21:24:00Z
+categories: ["text"]
+tags: ["R", "twitter", "text analysis", "ISA", "SICSS"]
+
+---
+
+
+
+<p>The <a href="https://www.isa-sociology.org/en/conferences/world-congress/toronto-2018/">International Sociological Association World Congress 19th Congress of Sociology in Toronto</a> has received quite some Twitter coverage. Waiting to board the flight back to Warsaw, I wanted to take a look at these Twitter data and apply the newly acquired skills in text analysis (thanks to the <a href="https://compsocialscience.github.io/summer-institute/2018/helsinki/">Summer Institute for Computational Social Science, SICSS, Partner Site</a> in Tvärminne and Helsinki, Finland).</p>
+<p>A few years ago my colleagues from the Polish Academy of Sciences and I wrote a paper about the inequality in national representation at ISA events (congresses and fora) <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>. Analyses in this post reveals a different type of inequality at ISA conferences.</p>
+<div id="getting-data-from-twitter" class="section level4">
+<h4>Getting data from Twitter</h4>
+<p>Tweets are an increasingly popular source of data for social scientists, not least because they can be quickly and conveniently obtained through the Twitter API. There are many excellent tutorials about how to connect to Twitter to download tweets, e.g. on the SICSS <a href="https://compsocialscience.github.io/summer-institute/2018/materials/day2-digital-trace-data/apis/rmarkdown/SICSS_APIs_markdown.html">website</a>.</p>
+<p>First, the necessary packages:</p>
+<pre class="r"><code>#devtools::install_github(&quot;mkearney/rtweet&quot;) # newest version of rtweet from GitHub
+library(rtweet) # for getting tweets from Twitter API
+library(tidyverse) # data manipulation and cleaning
+library(wordcloud) # for making world clouds
+library(ggplot2) # for plotting
+library(tidytext) # for tokenizing
+library(lubridate) # dealing with dates</code></pre>
+<p>I downloaded tweets that contained one of the conference hashtags: <code>#isa2018wcs</code> or <code>#isa18wcs</code> (the hashtag is just like any other string to filter tweets). Twitter downloads typically contain tweets from the last ~10 days, and the set of tweets can change from download to download. This is why I saved the downloaded tweets in a .csv file for future use. The code for downloading and saving tweets with the ISA 2018 World Congress of Sociology was as follows:</p>
+<p><code>isa &lt;- search_tweets(&quot;#isa2018wcs OR #isa18wcs&quot;, since = &quot;2018-06-01&quot;, n = 100000, type=&quot;recent&quot;, include_rts=TRUE)</code><br />
+<code>data.table::fwrite(isa, file = &quot;isa_tweets.csv&quot;)</code></p>
+<pre class="r"><code>isa &lt;- read.csv(&quot;isa_tweets.csv&quot;, stringsAsFactors = FALSE) # open Twitter extract
+isa$status_id &lt;- as.character(isa$status_id)
+isa$created_at &lt;- as.POSIXct(strptime(isa$created_at, format = &quot;%Y-%m-%dT%H:%M:%S&quot;)) # convert string to date and time
+isa$created_at &lt;-  with_tz(isa$created_at, &#39;America/New_York&#39;) # set time zone</code></pre>
+<p>I requested tweets starting with June 1, 2018, but this is unrealistic given Twitter’s restrictions, so I will check what’s the earliest tweet date. It’s July 12 morning.</p>
+<pre class="r"><code>min(isa$created_at)</code></pre>
+<pre><code>## [1] &quot;2018-07-12 07:43:02 EDT&quot;</code></pre>
+<p>In total the data contain 9401 tweets (including 6478 retweets), around 1500-1700 on Congress days, and much fewer before and after the conference.</p>
+<pre class="r"><code>isa %&gt;% group_by(day(created_at)) %&gt;% count() # count tweets separately for each day</code></pre>
+<pre><code>## # A tibble: 11 x 2
+## # Groups:   day(created_at) [11]
+##    `day(created_at)`     n
+##                &lt;int&gt; &lt;int&gt;
+##  1                12    36
+##  2                13   109
+##  3                14   129
+##  4                15   490
+##  5                16  1672
+##  6                17  1558
+##  7                18  1789
+##  8                19  1681
+##  9                20  1374
+## 10                21   510
+## 11                22    53</code></pre>
+<p>And here are the texts of a few sample tweets:</p>
+<pre class="r"><code>head(isa$text)</code></pre>
+<pre><code>## [1] &quot;We&#39;re proud to publish Shirley Anne Tate&#39;s #book series Critical Mixed Race Studies (first title in the series, Remi Joseph-Salisbury&#39;s \&quot;Black Mixed-Race Men\&quot; out next month). Learn more about the series here: https://t.co/VbuXyDHJg5 or at stand 40 at #isa2018wcs #RC05 @RemiJS90 https://t.co/iOBAivJB2W&quot;
+## [2] &quot;The fabulous @AlaSirriyeh with her wonderful new book â\200\230The Politics of Compassionâ\200\231 @policypress #booktour #isa18wcs https://t.co/Cto3bXF20Q&quot;                                                                                                                                                                  
+## [3] &quot;We&#39;re proud to publish Shirley Anne Tate&#39;s #book series Critical Mixed Race Studies (first title in the series, Remi Joseph-Salisbury&#39;s \&quot;Black Mixed-Race Men\&quot; out next month). Learn more about the series here: https://t.co/VbuXyDHJg5 or at stand 40 at #isa2018wcs #RC05 @RemiJS90 https://t.co/iOBAivJB2W&quot;
+## [4] &quot;Thanks David Tabara for convening  excellent conversation re. environmental solutions at #isa2018wcs . Thanks for invite to give a pop-up presentation on Sustainable Canada Dialogues  @DialogSustainab . Info on this solution-focused network: https://t.co/liWma5eJu5&quot;                                        
+## [5] &quot;Brilliant performance by the Red Urban Project  to help close #isa2018wcs https://t.co/hFpuiJqwsM&quot;                                                                                                                                                                                                                
+## [6] &quot;#Selfie time as #isa2018wcs comes to an end in #Toronto @isarc24 #YYZ @DrAmandaSlevin @HaluzaDeLay @StewartDLockie https://t.co/DswifxJt37&quot;</code></pre>
+</div>
+<div id="tweets-over-time" class="section level4">
+<h4>Tweets over time</h4>
+<p>I want to see the volume of ISA 2018 WCS tweets changed over time: first for the whole period covered by the data extract and on the busiest day - July 18th.</p>
+<pre class="r"><code>ts_plot(isa, &quot;1 hour&quot;) +
+  labs(x = NULL, y = NULL,
+    title = &quot;Frequency of #isa2018wcs OR #isa18wcs tweets since July 12, 2018&quot;,
+    subtitle = &quot;Twitter counts by hour&quot;,
+    caption = &quot;Source: Data collected from Twitter&#39;s API via rtweet&quot;)</code></pre>
+<p><img src="/post/isa-twitter_files/figure-html/time%20plots-1.png" width="672" /></p>
+<pre class="r"><code>isa %&gt;% filter(as.Date(created_at) &gt;= &quot;2018-07-18&quot; &amp; as.Date(created_at) &lt; &quot;2018-07-19&quot;) %&gt;%
+  ts_plot(., &quot;5 minutes&quot;) + 
+    labs(x = NULL, y = NULL,
+       title = &quot;Frequency of #isa2018wcs OR #isa18wcs tweets on July 18, 2018&quot;,
+       subtitle = &quot;Twitter counts by 5 minutes&quot;,
+       caption = &quot;Source: Data collected from Twitter&#39;s API via rtweet&quot;)</code></pre>
+<p><img src="/post/isa-twitter_files/figure-html/time%20plots-2.png" width="672" /></p>
+<p>Overall it looks like the presentations around noon (11.30am - 1.20pm) and in the afternoon (3.30-5.20pm) were most tweet-provoking. Time stamps include hours, minutes and seconds, so it’s possible to link tweets to concrete sessions, if one is interested.</p>
+</div>
+<div id="text-analysis" class="section level4">
+<h4>Text analysis</h4>
+<p>Before the tweets can be analyzed, they need to be tokenized (each word needs to become a separate record = row), and cleaned (stop words and other unnecessary strings need to be eliminated).</p>
+<pre class="r"><code>data(&quot;stop_words&quot;)
+
+isa_words &lt;- isa %&gt;%
+  unnest_tokens(word, text) %&gt;%  # tokenize
+  select(status_id, created_at, word) %&gt;%  # select variables
+  anti_join(stop_words) %&gt;% # eliminate stop words  # remove stop words
+  filter(!grepl(&quot;https|t.co|amp|rt|de|â|isa18wcs|isa2018wcs|isa_sociology|sociology|
+                isa|session|toronto|canada|congress|conference&quot;, 
+              word)) %&gt;% # remove unnecessary strings or obvious words
+  filter(!grepl(&quot;\\b\\d+\\b&quot;, word)) # remove numbers
+
+isa_words %&gt;%
+  count(word) %&gt;%  # count word frequencies
+  arrange(desc(n))  # sort by word frequency in a descending order</code></pre>
+<pre><code>## # A tibble: 11,360 x 2
+##    word          n
+##    &lt;chr&gt;     &lt;int&gt;
+##  1 social      936
+##  2 research    742
+##  3 violence    666
+##  4 isa         568
+##  5 world       506
+##  6 people      473
+##  7 religion    455
+##  8 australia   394
+##  9 japan       378
+## 10 paper       368
+## # ... with 11,350 more rows</code></pre>
+</div>
+<div id="resesarch-committees" class="section level4">
+<h4>Resesarch committees</h4>
+<p><a href="https://www.isa-sociology.org/en/research-networks/research-committees/">Research committees (RC)</a> are the core organizational unit in ISA. Research Committees bring together scholars interested in the same topic, e.g. political sociology or sociology of education. As of now, there are 57 RCs.</p>
+<p>I noticed that many tweets have RC hashtags, so I wanted to see which RC got the most tweets and how equal or unequal the distribution of tweets was.</p>
+<pre class="r"><code>isa_rc &lt;- isa_words %&gt;% filter(str_detect(tolower(word), &quot;rc[0-9]{2}&quot;))
+isa_rc$rc &lt;- str_extract(isa_rc$word, &quot;rc[0-9]{2}&quot;)
+head(isa_rc, 10)</code></pre>
+<pre><code>##              status_id          created_at    word   rc
+## 1  1021107934162554880 2018-07-22 13:01:17    rc05 rc05
+## 2  1021098172905672704 2018-07-22 12:22:30    rc05 rc05
+## 3  1021094000931979264 2018-07-22 12:05:55 isarc24 rc24
+## 4  1020402940501250048 2018-07-20 14:19:53 isarc24 rc24
+## 5  1020340578951794688 2018-07-20 10:12:05 isarc24 rc24
+## 6  1018991036654411776 2018-07-16 16:49:29    rc24 rc24
+## 7  1020433109563707392 2018-07-20 16:19:46 isarc24 rc24
+## 8  1018140220150173696 2018-07-14 08:28:39    rc28 rc28
+## 9  1019043287603335168 2018-07-16 20:17:07    rc28 rc28
+## 10 1020067306486059008 2018-07-19 16:06:12    rc22 rc22</code></pre>
+<p>Most tweets mention just one research committee, but some refer to two or more, particularly in the case of joint sessions. Some tweets also refer to the same RC with more than one hashtag, e.g. <code>#rc34youth</code> and <code>#rc34toronto</code>. These instances need to be collapsed to count as one.</p>
+<pre class="r"><code>isa_rc &lt;- isa_rc %&gt;% group_by(status_id, created_at, rc) %&gt;% summarise(count = n())</code></pre>
+<p>A simple word cloud reveals the unanimous winner in the RC tweet competition: RC34 Sociology of Youth.</p>
+<pre class="r"><code>par(mar=c(7,8,7,7))
+wordcloud(isa_rc$rc, min.freq=1, random.color = TRUE, colors= palette(rainbow(20)))</code></pre>
+<p><img src="/post/isa-twitter_files/figure-html/rc%203-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(isa_rc, aes(rc, col = rc)) + geom_bar() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 2, vjust = 0.5), legend.position=&quot;none&quot;) + 
+  ylab(&quot;Number of tweets by Research Committee&quot;) + 
+  xlab(&quot;&quot;) + 
+  ggtitle(&quot;Tweets by Research Committee&quot;) +
+  labs(caption = &quot;Source: Data collected from Twitter&#39;s API via rtweet&quot;)</code></pre>
+<p><img src="/post/isa-twitter_files/figure-html/rc%204-1.png" width="672" /></p>
+<p>The bar plot confirms this result: RC34 is mentioned in the highest number of tweets and there is quite some variation in the number of tweets across RCs. If there is variation, maybe it can be explained. Some candidates: number of members, age of members, something about the leadership, area of specialization, quality of sessions, number of electrical outlets in the room?</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><a href="https://www.academia.edu/14504525/Sociologists_everywhere_Country_representation_in_conferences_hosted_by_the_International_Sociological_Association_1990_2012">Joshua K. Dubrow, Marta Kołczyńska, Irina Tomescu-Dubrow, and Kazimierz M. Slomczynski. 2018. “Sociologists everywhere: Country representation in conferences hosted by the International Sociological Association, 1990–2012”. <em>Current Sociology</em> 66(3): 466-489.</a><a href="#fnref1">↩</a></p></li>
+</ol>
+</div>

@@ -3,13 +3,8 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/post/sdr-exploration-shiny/</loc>
-    <lastmod>2018-07-28T13:32:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/sdr-exploration/</loc>
-    <lastmod>2018-07-26T13:53:00+00:00</lastmod>
+    <loc>/post/isa-twitter/</loc>
+    <lastmod>2018-07-23T21:24:00+00:00</lastmod>
   </url>
   
   <url>
@@ -33,62 +28,44 @@
   </url>
   
   <url>
-    <loc>/tags/cross-national-research/</loc>
-    <lastmod>2018-07-26T13:53:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/education/</loc>
-    <lastmod>2018-07-28T13:32:00+00:00</lastmod>
+    <loc>/tags/isa/</loc>
+    <lastmod>2018-07-23T21:24:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-07-28T13:32:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/plotly/</loc>
-    <lastmod>2018-07-28T13:32:00+00:00</lastmod>
+    <lastmod>2018-07-23T21:24:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2018-07-28T13:32:00+00:00</lastmod>
+    <lastmod>2018-07-23T21:24:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2018-07-28T13:32:00+00:00</lastmod>
+    <lastmod>2018-07-23T21:24:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/sdr/</loc>
-    <lastmod>2018-07-28T13:32:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/shiny/</loc>
-    <lastmod>2018-07-28T13:32:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/surveys/</loc>
-    <lastmod>2018-07-28T13:32:00+00:00</lastmod>
+    <loc>/tags/sicss/</loc>
+    <lastmod>2018-07-23T21:24:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2018-07-26T13:53:00+00:00</lastmod>
+    <lastmod>2018-07-23T21:24:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/text-analysis/</loc>
+    <lastmod>2018-07-23T21:24:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -98,8 +75,8 @@
   </url>
   
   <url>
-    <loc>/tags/wdi/</loc>
-    <lastmod>2018-07-28T13:32:00+00:00</lastmod>
+    <loc>/tags/twitter/</loc>
+    <lastmod>2018-07-23T21:24:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

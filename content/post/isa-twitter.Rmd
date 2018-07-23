@@ -1,0 +1,147 @@
+---
+title: "ISA World Congress 2018: Analysis of tweets"
+author: "Marta Kołczyńska"
+date: 2018-07-23T21:24:00Z
+categories: ["text"]
+tags: ["R", "twitter", "text analysis", "ISA", "SICSS"]
+
+---
+
+The [International Sociological Association World Congress 19th Congress of Sociology in Toronto](https://www.isa-sociology.org/en/conferences/world-congress/toronto-2018/) has received quite some Twitter coverage. Waiting to board the flight back to Warsaw, I wanted to take a look at these Twitter data and apply the newly acquired skills in text analysis (thanks to the [Summer Institute for Computational Social Science, SICSS, Partner Site](https://compsocialscience.github.io/summer-institute/2018/helsinki/) in Tvärminne and Helsinki, Finland).
+
+A few years ago my colleagues from the Polish Academy of Sciences and I wrote a paper about the inequality in national representation at ISA events (congresses and fora) [^1]. Analyses in this post reveals a different type of inequality at ISA conferences.
+
+#### Getting data from Twitter
+
+Tweets are an increasingly popular source of data for social scientists, not least because they can be quickly and conveniently obtained through the Twitter API. There are many excellent tutorials about how to connect to Twitter to download tweets, e.g. on the SICSS [website](https://compsocialscience.github.io/summer-institute/2018/materials/day2-digital-trace-data/apis/rmarkdown/SICSS_APIs_markdown.html).
+
+First, the necessary packages:
+
+```{r packages, warning=FALSE, message=FALSE}
+#devtools::install_github("mkearney/rtweet") # newest version of rtweet from GitHub
+library(rtweet) # for getting tweets from Twitter API
+library(tidyverse) # data manipulation and cleaning
+library(wordcloud) # for making world clouds
+library(ggplot2) # for plotting
+library(tidytext) # for tokenizing
+library(lubridate) # dealing with dates
+
+```
+
+I downloaded tweets that contained one of the conference hashtags: `#isa2018wcs` or `#isa18wcs` (the hashtag is just like any other string to filter tweets). Twitter downloads typically contain tweets from the last ~10 days, and the set of tweets can change from download to download. This is why I saved the downloaded tweets in a .csv file for future use. The code for downloading and saving tweets with the ISA 2018 World Congress of Sociology was as follows:
+
+`isa <- search_tweets("#isa2018wcs OR #isa18wcs", since = "2018-06-01", n = 100000, type="recent", include_rts=TRUE)`  
+`data.table::fwrite(isa, file = "isa_tweets.csv")`
+
+```{r, echo = FALSE, results="hide"}
+setwd("C:/Users/mkolc/Google Drive/Academia/Blog/martakolczynska/drafts/")
+```
+
+```{r load, warning=FALSE, message=FALSE, results="hide"}
+isa <- read.csv("isa_tweets.csv", stringsAsFactors = FALSE) # open Twitter extract
+isa$status_id <- as.character(isa$status_id)
+isa$created_at <- as.POSIXct(strptime(isa$created_at, format = "%Y-%m-%dT%H:%M:%S")) # convert string to date and time
+isa$created_at <-  with_tz(isa$created_at, 'America/New_York') # set time zone
+```
+I requested tweets starting with June 1, 2018, but this is unrealistic given Twitter's restrictions, so I will check what's the earliest tweet date. It's July 12 morning.
+
+```{r min max date, warning = FALSE, message = FALSE}
+min(isa$created_at)
+```
+
+In total the data contain 9401 tweets (including 6478 retweets), around 1500-1700 on Congress days, and much fewer before and after the conference.
+
+```{r isa daily, , warning=FALSE, message=FALSE}
+isa %>% group_by(day(created_at)) %>% count() # count tweets separately for each day
+
+```
+
+And here are the texts of a few sample tweets:
+
+```{r head, warning = FALSE, message = FALSE}
+head(isa$text)
+```
+
+#### Tweets over time
+
+I want to see the volume of ISA 2018 WCS tweets changed over time: first for the whole period covered by the data extract and on the busiest day - July 18th.
+
+```{r time plots, warning=FALSE, message=FALSE}
+ts_plot(isa, "1 hour") +
+  labs(x = NULL, y = NULL,
+    title = "Frequency of #isa2018wcs OR #isa18wcs tweets since July 12, 2018",
+    subtitle = "Twitter counts by hour",
+    caption = "Source: Data collected from Twitter's API via rtweet")
+
+isa %>% filter(as.Date(created_at) >= "2018-07-18" & as.Date(created_at) < "2018-07-19") %>%
+  ts_plot(., "5 minutes") + 
+    labs(x = NULL, y = NULL,
+       title = "Frequency of #isa2018wcs OR #isa18wcs tweets on July 18, 2018",
+       subtitle = "Twitter counts by 5 minutes",
+       caption = "Source: Data collected from Twitter's API via rtweet")
+```
+
+Overall it looks like the presentations around noon (11.30am - 1.20pm) and in the afternoon (3.30-5.20pm) were most tweet-provoking. Time stamps include hours, minutes and seconds, so it's possible to link tweets to concrete sessions, if one is interested.
+
+#### Text analysis
+
+Before the tweets can be analyzed, they need to be tokenized (each word needs to become a separate record = row), and cleaned (stop words and other unnecessary strings need to be eliminated).
+
+```{r text analysis, warning=FALSE, message=FALSE}
+data("stop_words")
+
+isa_words <- isa %>%
+  unnest_tokens(word, text) %>%  # tokenize
+  select(status_id, created_at, word) %>%  # select variables
+  anti_join(stop_words) %>% # eliminate stop words  # remove stop words
+  filter(!grepl("https|t.co|amp|rt|de|â|isa18wcs|isa2018wcs|isa_sociology|sociology|
+                isa|session|toronto|canada|congress|conference", 
+              word)) %>% # remove unnecessary strings or obvious words
+  filter(!grepl("\\b\\d+\\b", word)) # remove numbers
+
+isa_words %>%
+  count(word) %>%  # count word frequencies
+  arrange(desc(n))  # sort by word frequency in a descending order
+```
+
+#### Resesarch committees
+
+[Research committees (RC)](https://www.isa-sociology.org/en/research-networks/research-committees/) are the core organizational unit in ISA. Research Committees bring together scholars interested in the same topic, e.g. political sociology or sociology of education. As of now, there are 57 RCs.
+
+I noticed that many tweets have RC hashtags, so I wanted to see which RC got the most tweets and how equal or unequal the distribution of tweets was.
+
+```{r rc, warning=FALSE, message=FALSE}
+
+isa_rc <- isa_words %>% filter(str_detect(tolower(word), "rc[0-9]{2}"))
+isa_rc$rc <- str_extract(isa_rc$word, "rc[0-9]{2}")
+head(isa_rc, 10)
+```
+
+Most tweets mention just one research committee, but some refer to two or more, particularly in the case of joint sessions. Some tweets also refer to the same RC with more than one hashtag, e.g. `#rc34youth` and `#rc34toronto`. These instances need to be collapsed to count as one.
+
+```{r rc 2, warning=FALSE, message=FALSE}
+isa_rc <- isa_rc %>% group_by(status_id, created_at, rc) %>% summarise(count = n())
+```
+
+A simple word cloud reveals the unanimous winner in the RC tweet competition: RC34 Sociology of Youth.
+
+```{r rc 3, warning=FALSE, message=FALSE}
+par(mar=c(7,8,7,7))
+wordcloud(isa_rc$rc, min.freq=1, random.color = TRUE, colors= palette(rainbow(20)))
+```
+
+```{r rc 4, warning=FALSE, message=FALSE}
+ggplot(isa_rc, aes(rc, col = rc)) + geom_bar() +
+  theme(axis.text.x = element_text(angle = 90, hjust = 2, vjust = 0.5), legend.position="none") + 
+  ylab("Number of tweets by Research Committee") + 
+  xlab("") + 
+  ggtitle("Tweets by Research Committee") +
+  labs(caption = "Source: Data collected from Twitter's API via rtweet")
+
+```
+
+The bar plot confirms this result: RC34 is mentioned in the highest number of tweets and there is quite some variation in the number of tweets across RCs. If there is variation, maybe it can be explained. Some candidates: number of members, age of members, something about the leadership, area of specialization, quality of sessions, number of electrical outlets in the room?
+
+[^1]: [Joshua K. Dubrow, Marta Kołczyńska, Irina Tomescu-Dubrow, and Kazimierz M. Slomczynski. 2018. "Sociologists everywhere: Country representation in conferences hosted by the International Sociological Association, 1990–2012". *Current Sociology* 66(3): 466-489.](https://www.academia.edu/14504525/Sociologists_everywhere_Country_representation_in_conferences_hosted_by_the_International_Sociological_Association_1990_2012)
+
+
