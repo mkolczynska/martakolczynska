@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Mon, 23 Jul 2018 21:24:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 23 Jul 2018 15:24:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/text-analysis/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>ISA World Congress 2018: Analysis of tweets</title>
       <link>/post/isa-twitter/</link>
-      <pubDate>Mon, 23 Jul 2018 21:24:00 +0000</pubDate>
+      <pubDate>Mon, 23 Jul 2018 15:24:00 +0000</pubDate>
       
       <guid>/post/isa-twitter/</guid>
       <description>The International Sociological Association World Congress 19th Congress of Sociology in Toronto has received quite some Twitter coverage. Waiting to board the flight back to Warsaw, I wanted to take a look at these Twitter data and apply the newly acquired skills in text analysis (thanks to the Summer Institute for Computational Social Science, SICSS, Partner Site in Tvärminne and Helsinki, Finland).
