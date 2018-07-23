@@ -128,8 +128,7 @@ head(isa_rc, 10)</code></pre>
 <p>Most tweets mention just one research committee, but some refer to two or more, particularly in the case of joint sessions. Some tweets also refer to the same RC with more than one hashtag, e.g. <code>#rc34youth</code> and <code>#rc34toronto</code>. These instances need to be collapsed to count as one.</p>
 <pre class="r"><code>isa_rc &lt;- isa_rc %&gt;% group_by(status_id, created_at, rc) %&gt;% summarise(count = n())</code></pre>
 <p>A simple word cloud reveals the unanimous winner in the RC tweet competition: RC34 Sociology of Youth.</p>
-<pre class="r"><code>par(mar=c(7,8,7,7))
-wordcloud(isa_rc$rc, min.freq=1, random.color = TRUE, colors= palette(rainbow(20)))</code></pre>
+<pre class="r"><code>wordcloud(isa_rc$rc, min.freq=1, random.color = TRUE, colors= palette(rainbow(20)))</code></pre>
 <p><img src="/post/isa-twitter_files/figure-html/rc%203-1.png" width="672" /></p>
 <pre class="r"><code>ggplot(isa_rc, aes(rc, col = rc)) + geom_bar() +
   theme(axis.text.x = element_text(angle = 90, hjust = 2, vjust = 0.5), legend.position=&quot;none&quot;) + 

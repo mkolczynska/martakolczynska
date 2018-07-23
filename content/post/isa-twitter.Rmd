@@ -129,7 +129,6 @@ isa_rc <- isa_rc %>% group_by(status_id, created_at, rc) %>% summarise(count = n
 A simple word cloud reveals the unanimous winner in the RC tweet competition: RC34 Sociology of Youth.
 
 ```{r rc 3, warning=FALSE, message=FALSE}
-par(mar=c(7,8,7,7))
 wordcloud(isa_rc$rc, min.freq=1, random.color = TRUE, colors= palette(rainbow(20)))
 ```
 
