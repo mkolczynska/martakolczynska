@@ -94,11 +94,14 @@ isa_words <- isa %>%
   unnest_tokens(word, text) %>%  # tokenize
   select(status_id, created_at, word) %>%  # select variables
   anti_join(stop_words) %>% # eliminate stop words  # remove stop words
-  filter(!grepl("https|t.co|amp|rt|de|â|isa18wcs|isa2018wcs|isa_sociology|sociology|
-                isa|session|toronto|canada|congress|conference", 
+  filter(!grepl("https|t.co|amp|rt|de|â|isa18wcs|isa2018wcs|isa_sociology|sociology|isa|session|toronto|canada|congress|conference", 
               word)) %>% # remove unnecessary strings or obvious words
   filter(!grepl("\\b\\d+\\b", word)) # remove numbers
+```
 
+Here is the list of 10 most popular words. Perhaps not very surprising.
+
+```{r word list, warning=FALSE, message=FALSE}
 isa_words %>%
   count(word) %>%  # count word frequencies
   arrange(desc(n))  # sort by word frequency in a descending order
