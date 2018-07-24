@@ -7,45 +7,46 @@ tags: ["surveys", "SDR", "R", "cross-national research"]
 
 ---
 
+This was supposed to be the inauguratory post, but then [#ISA2018wcs @Toronto](/post/isa-twitter/) changed my plans.
+
 *tl;dr: Combining data from different survey projects creates new opportunities for research, alas, at the cost of increased volume (obviously) and complexity of the data. The [Survey Data Recycling project](dataharmonization.org) created a dataset with data from 22 international survey projects. This post describes how to access and navigate this dataset.*
 
-Cross-national survey projects are the standard data source for cross-national quantitative research in sociology. Such projects typically have similar questionnaires in all national surveys and - to a greater or lesser extent - standardized methodologies as well as documentation and reporting. Due to logistical challenges and interests of project leaders, cross-national survey projects remain limited in country and time coverage, which restricts prevents analalyses on a global scale.  
-One solution to this problem is ex-post survey harmonization, i.e. combining existing data from cross-national surveys and transforming their variables to make them comparable. 
+Cross-national survey projects are the standard data source for cross-national quantitative research in sociology. Such projects typically have similar questionnaires in all national surveys and - to a greater or lesser extent - standardized methodologies as well as documentation and reporting. Due to logistical challenges and interests of project leaders, cross-national survey projects remain limited in country and time coverage, which prevents analalyses on a global scale.
 
-The Survey Data Harmonization project and its successor, the Survey Data Recycling (SDR) project, took on the challenge of ex-post harmonization of data from 22 international survey projects, listed below: 
+One solution to this problem is ex-post survey harmonization, i.e. combining existing data from cross-national surveys and transforming their variables to make them comparable. The Survey Data Harmonization project and its successor, the Survey Data Recycling (SDR) project, took on the challenge of ex-post harmonization of data from 22 international survey projects. The resulting dataset (Master file) contains 2,289,060 records (corresponding to individual respondents) from 142 countries/territories between 1966 and 2013. Harmonized variables include: trust in state institutions (parliament, political parties, justice system, government), political engagement (participation in demonstrations, signing petitions, interest in politics), social trust, and sociodemographics: age, gender, education, rural and metropolitcal residence.
+
+For more information about the SDR project, including funding sources, the project's scope and purpose, the source data, a description of the SDR idea, publications and conference presentations, see the project website [dataharmonization.org](dataharmonization.org). Detailed descriptions of the harmonization process of each target variable are available in the [documentation available on Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q) [^1].
+
+The clear advantage of SDR data is its increased coverage, both geographically and over time. The cost of this is increased volume and the complexity of handling the SDR data. In this post I show how to download the SDR data and how to explore the individual-level dataset (Master file).
+
+
+22 survey projects in SDR v.1.0: 
 
 Abbr.     | Project name      
 ----------|----------------------------------------------------
-AFB       | Afrobarometer                                       
-ABS       | Asian Barometer                                     
-AMB       | Americas Barometer                                  
-ARB       | Arab Barometer                                      
-ASES      | Asia Europe Survey                                  
-CB        | Caucasus Barometer                                  
-CDCEE     | Consolidation of Democracy in CEE                   
-CNEP      | Comparative National Elections Project*             
-EB        | Eurobarometer*                                      
-EQLS      | European Quality of Life Survey                     
-ESS       | European Social Survey                              
-EVS       | European Values Study                               
-ISJP      | International Social Justice Project*	             
-ISSP      | International Social Survey Programme*              
-LB        | Latinobarometro                                     
-LITS      | Life in Transition Survey                           
-NBB       | New Baltic Barometer                                
-PA2       | Political Action II                                 
-PA8NS     | Political Action - An 8 Nation Study 	             
-PPE7N     | Political Participation and Equality in 7 Nations	 
-VPCPCE    | Values and Political Change in Postcommunist Europe 
-WVS       | World Values Survey                                 
-          | *Selected waves or samples.                          
-
-
-The resulting dataset (Master file) contains 2,289,060 records (corresponding to individual respondents) from 142 countries/territories between 1966 and 2013. Harmonized variables include: trust in state institutions (parliament, political parties, justice system, government), political engagement (participation in demonstrations, signing petitions, interest in politics), social trust, and sociodemographics: age, gender, education, rural and metropolitcal residence.
-
-For more information about the SDR project, including funding sources, the project's scope and purpose, the source data, a description of the SDR idea, publications and conference presentations, see the project website [dataharmonization.org](dataharmonization.org). Detailed descriptions of the harmonization process of each target variable are available in the [Masterfile Documentation available on Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q) [^1].
-
-The clear advantage of SDR data is its increased coverage, both geographically and over time. The cost of this is increased complexity of handling the SDR data. In this post I show how to download the SDR data and how to explore the individual-level dataset (Master file).
+AFB       | [Afrobarometer](http://www.afrobarometer.org/)                                       
+ABS       | [Asian Barometer](http://www.asianbarometer.org/)                                     
+AMB       | [Americas Barometer](http://www.americasbarometer.org/)                               
+ARB       | [Arab Barometer(http://www.arabbarometer.org/)                              
+ASES      | [Asia Europe Survey](http://www.asiaeuropesurvey.org/)                          
+CB        | [Caucasus Barometer](http://caucasusbarometer.org/)
+CDCEE     | [Consolidation of Democracy in Central-Eastern Europe](https://dbk.gesis.org/dbksearch/sdesc2.asp?no=4054)      
+CNEP      | [Comparative National Elections Project*](https://u.osu.edu/cnep)         
+EB        | [Eurobarometer*](http://ec.europa.eu/public_opinion/index_en.htm)                  
+EQLS      | [European Quality of Life Survey](http://www.eurofound.europa.eu/surveys/eqls/index.htm)
+ESS       | [European Social Survey](http://www.europeansocialsurvey.org/)      
+EVS       | [European Values Study](http://www.europeanvaluesstudy.eu/)
+ISJP      | [International Social Justice Project*](https://www.sowi.hu-berlin.de/de/lehrbereiche/empisoz/forschung/archiv/isjp)
+ISSP      | [International Social Survey Programme*](http://www.issp.org/)
+LB        | [Latinobarometro](http://www.latinobarometro.org/)
+LITS      | [Life in Transition Survey](http://www.ebrd.com/what-we-do/economic-research-and-data/data/lits.html)
+NBB       | [New Baltic Barometer](http://www.cspp.strath.ac.uk/catalog2_0.html)
+PA2       | [Political Action II](http://www.icpsr.umich.edu/icpsrweb/ICPSR/studies/9581)    
+PA8NS     | [Political Action - An 8 Nation Study](http://www.icpsr.umich.edu/icpsrweb/ICPSR/studies/7777)
+PPE7N     | [Political Participation and Equality in 7 Nations](https://www.icpsr.umich.edu/icpsrweb/ICPSR/studies/07768)
+VPCPCE    | [Values and Political Change in Postcommunist Europe](https://discover.ukdataservice.ac.uk/catalogue/?sn=4129)
+WVS       | [World Values Survey](http://www.worldvaluessurvey.org/)
+          | *Selected waves or samples.
 
 
 ### Downloading the SDR data

@@ -109,9 +109,9 @@ isa_words %>%
 
 ### Resesarch committees
 
-[Research committees (RC)](https://www.isa-sociology.org/en/research-networks/research-committees/) are the core organizational unit in ISA. Research Committees bring together scholars interested in the same topic, e.g. political sociology or sociology of education. As of now, there are 57 RCs.
+[Research committees (RC)](https://www.isa-sociology.org/en/research-networks/research-committees/) are the core organizational unit in ISA. Research Committees bring together scholars interested in the same topic, e.g. political sociology or sociology of education. Right now there are 57 RCs.
 
-I noticed that many tweets have RC hashtags, so I wanted to see which RC got the most tweets and how equal or unequal the distribution of tweets was.
+I noticed that many tweets have RC hashtags, so I wanted to see which RC got the most tweets and how equal or unequal the distribution of tweets was. To do this, I count the number of times each RC is mentioned in the collected tweets. I'm assuming that all string patterns `rc[digit][digit]` refer to a research commitee (some RCs have single-digit numbers, but they are commonly referred to as "RC-O-[digit]"). I'm also assuming that RCs have no other hashtags than with the mentioned string pattern.
 
 ```{r rc, warning=FALSE, message=FALSE}
 
