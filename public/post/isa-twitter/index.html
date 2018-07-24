@@ -376,7 +376,7 @@ head(isa_rc, 10)</code></pre>
 <p>A simple word cloud reveals the unanimous winner in the RC tweet competition: RC34 Sociology of Youth.</p>
 <pre class="r"><code>wordcloud(isa_rc$rc, min.freq=1, random.color = TRUE, colors= palette(rainbow(20)))</code></pre>
 <p><img src="/post/isa-twitter_files/figure-html/rc%203-1.png" width="672" /></p>
-<pre class="r"><code>ggplot(isa_rc, aes(rc, col = rc)) + geom_bar() +
+<pre class="r"><code>ggplot(isa_rc, aes(rc, fill = rc)) + geom_bar() +
   theme(axis.text.x = element_text(angle = 90, hjust = 2, vjust = 0.5), legend.position=&quot;none&quot;) + 
   ylab(&quot;Number of tweets by Research Committee&quot;) + 
   xlab(&quot;&quot;) + 

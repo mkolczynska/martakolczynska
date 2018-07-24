@@ -133,7 +133,7 @@ wordcloud(isa_rc$rc, min.freq=1, random.color = TRUE, colors= palette(rainbow(20
 ```
 
 ```{r rc 4, warning=FALSE, message=FALSE}
-ggplot(isa_rc, aes(rc, col = rc)) + geom_bar() +
+ggplot(isa_rc, aes(rc, fill = rc)) + geom_bar() +
   theme(axis.text.x = element_text(angle = 90, hjust = 2, vjust = 0.5), legend.position="none") + 
   ylab("Number of tweets by Research Committee") + 
   xlab("") + 
