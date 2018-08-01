@@ -8,6 +8,9 @@ canonifyurls = true
 paginate = 10
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
+#[permalinks]
+#    post = "/:year/:month/:day/:slug/"
+
 [indexes]
   tag = "tags"
   topic = "topics"
@@ -16,7 +19,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   # Shown in the home page
   subtitle = "Sociology • Social Science Data & Methods"
   brand = "![logo](/images/puzzleblacksmall.png)"
-#  googleAnalytics = "Your Google Analytics tracking ID"
+  googleAnalytics = "UA-123060748-1"
   disqus = "https-martakolczynska-netlify-com"
   # CSS name for highlight.js
   highlightjs = "default"

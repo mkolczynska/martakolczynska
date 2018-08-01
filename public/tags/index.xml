@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Mon, 23 Jul 2018 15:24:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 01 Aug 2018 15:41:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Cross National Research</title>
+      <link>/tags/cross-national-research/</link>
+      <pubDate>Wed, 01 Aug 2018 15:41:00 +0000</pubDate>
+      
+      <guid>/tags/cross-national-research/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Isa</title>
@@ -24,9 +33,18 @@
     <item>
       <title>R</title>
       <link>/tags/r/</link>
-      <pubDate>Mon, 23 Jul 2018 15:24:00 +0000</pubDate>
+      <pubDate>Wed, 01 Aug 2018 15:41:00 +0000</pubDate>
       
       <guid>/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sdr</title>
+      <link>/tags/sdr/</link>
+      <pubDate>Wed, 01 Aug 2018 15:41:00 +0000</pubDate>
+      
+      <guid>/tags/sdr/</guid>
       <description></description>
     </item>
     
@@ -40,11 +58,29 @@
     </item>
     
     <item>
+      <title>Surveys</title>
+      <link>/tags/surveys/</link>
+      <pubDate>Wed, 01 Aug 2018 15:41:00 +0000</pubDate>
+      
+      <guid>/tags/surveys/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Text Analysis</title>
       <link>/tags/text-analysis/</link>
       <pubDate>Mon, 23 Jul 2018 15:24:00 +0000</pubDate>
       
       <guid>/tags/text-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tutorial</title>
+      <link>/tags/tutorial/</link>
+      <pubDate>Wed, 01 Aug 2018 15:41:00 +0000</pubDate>
+      
+      <guid>/tags/tutorial/</guid>
       <description></description>
     </item>
     

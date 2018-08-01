@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Thu, 26 Jul 2018 13:53:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 01 Aug 2018 15:41:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/cross-national-research/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,11 +15,11 @@
     <item>
       <title>Exploring the dataset of survey datasets: Survey Data Recycling version 1.0</title>
       <link>/post/sdr-exploration/</link>
-      <pubDate>Thu, 26 Jul 2018 13:53:00 +0000</pubDate>
+      <pubDate>Wed, 01 Aug 2018 15:41:00 +0000</pubDate>
       
       <guid>/post/sdr-exploration/</guid>
-      <description>tl;dr: Combining data from different survey projects creates new opportunities for research, but the comes at a cost of increased complexity of the data.
-Cross-national survey projects are the standard data source for cross-national quantitative research in sociology. Such projects typically have similar questionnaires in all national surveys and - to a greater or lesser extent - standardized methodologies as well as documentation and reporting. Due to logistical challenges and interests of project leaders, cross-national survey projects remain limited in country and time coverage, which restricts prevents analalyses on a global scale.</description>
+      <description>IntroductionDownloading the SDR dataExploring SDR: availability of variables by projectExploring SDR: availability of variables with different formulationsIdentifying surveys that contain selected variablesThis was supposed to be the inauguratory post, but then [#ISA2018wcs @Toronto](/post/isa-twitter/) changed my plans.
+tl;dr: Combining data from different survey projects creates new opportunities for research, alas, at the cost of increased volume (obviously) and complexity of the data. The Survey Data Recycling project created a dataset with data from 22 international survey projects.</description>
     </item>
     
   </channel>

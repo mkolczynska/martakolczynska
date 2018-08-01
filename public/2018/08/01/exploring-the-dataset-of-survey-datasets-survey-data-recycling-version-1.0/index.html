@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.42.2" />
+
+  <title>Exploring the dataset of survey datasets: Survey Data Recycling version 1.0 &middot; Marta Kołczyńska</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="/css/circle.css">
+    
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="/"><img src="/images/puzzleblacksmall.png" alt="logo" /></a>
+
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/research/"><i class='fa fa-bar-chart fa-fw'></i>Research</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/contact/"><i class='fa fa-envelope fa-fw'></i>Contact</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/MartaKolcz" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/mkolczynska" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2018. Marta Kołczyńska</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Exploring the dataset of survey datasets: Survey Data Recycling version 1.0</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>01 Aug 2018, 13:53</time>
+  </div>
+
+  
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="/tags/surveys">surveys</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/sdr">SDR</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/r">R</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/cross-national-research">cross-national research</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/tutorial">tutorial</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  <div id="TOC">
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#downloading-the-sdr-data">Downloading the SDR data</a></li>
+<li><a href="#exploring-sdr-availability-of-variables-by-project">Exploring SDR: availability of variables by project</a></li>
+<li><a href="#exploring-sdr-availability-of-variables-with-different-formulations">Exploring SDR: availability of variables with different formulations</a></li>
+<li><a href="#identifying-surveys-with-the-needed-variables">Identifying surveys with the needed variables</a></li>
+</ul>
+</div>
+
+<p>This was supposed to be the inauguratory post, but then <span class="citation">[#ISA2018wcs @Toronto]</span>(/post/isa-twitter/) changed my plans.</p>
+<p><em>tl;dr: Combining data from different survey projects creates new opportunities for research, alas, at the cost of increased volume (obviously) and complexity of the data. The <a href="dataharmonization.org">Survey Data Recycling project</a> created a dataset with data from 22 international survey projects. This post describes how to access and navigate this dataset.</em></p>
+<div id="introduction" class="section level3">
+<h3>Introduction</h3>
+<p>More and more cross-national survey projects collect new data using better methodologies, <em>ex ante</em> harmonization, following higher standards, and covering more and more diverse countries. The abundance of new survey data only increases the problem of backward and parallel compatibility, becuase new surveys cannot be easily combined with existing survey data or data from different survey projects, which prevents analyses on a global scale.</p>
+<p>One solution to this problem is <em>ex post</em> survey harmonization, i.e. combining existing data from cross-national surveys and transforming original (source) variables to a common coding scheme. The Survey Data Harmonization project and its successor, the <a href="dataharmonization.org">Survey Data Recycling (SDR) project</a>, took on the challenge of <em>ex post</em> harmonization of data from 22 international survey projects. The resulting dataset (Master File) contains 2,289,060 records (corresponding to individual respondents) from 142 countries/territories between 1966 and 2013. Harmonized variables include: trust in state institutions (parliament, political parties, justice system, government), political engagement (participation in demonstrations, signing petitions, interest in politics), social trust, and sociodemographics: age, gender, education, rural and metropolitan residence.</p>
+<p>For more information about the SDR project, including the project team, funding sources, the source data, a description of the SDR idea, publications and conference presentations, see the project website <a href="dataharmonization.org" class="uri">dataharmonization.org</a>. The harmonized SDR data and detailed descriptions of the harmonization process of each target variable are available in the <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q">documentation on Dataverse</a>.</p>
+<p>The clear advantage of SDR data is its increased coverage, both geographically and over time. The cost of this is increased volume and complexity. In this post I show how to download and explore the individual-level dataset (Master File).</p>
+<div id="survey-projects-in-sdr-v.1.0" class="section level4">
+<h4>22 survey projects in SDR v.1.0:</h4>
+<table>
+<thead>
+<tr class="header">
+<th>Abbr.</th>
+<th>Project name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>AFB</td>
+<td><a href="http://www.afrobarometer.org/">Afrobarometer</a></td>
+</tr>
+<tr class="even">
+<td>ABS</td>
+<td><a href="http://www.asianbarometer.org/">Asian Barometer</a></td>
+</tr>
+<tr class="odd">
+<td>AMB</td>
+<td><a href="http://www.americasbarometer.org/">Americas Barometer</a></td>
+</tr>
+<tr class="even">
+<td>ARB</td>
+<td><a href="http://www.arabbarometer.org/">Arab Barometer</a></td>
+</tr>
+<tr class="odd">
+<td>ASES</td>
+<td><a href="http://www.asiaeuropesurvey.org/">Asia Europe Survey</a></td>
+</tr>
+<tr class="even">
+<td>CB</td>
+<td><a href="http://caucasusbarometer.org/">Caucasus Barometer</a></td>
+</tr>
+<tr class="odd">
+<td>CDCEE</td>
+<td><a href="https://dbk.gesis.org/dbksearch/sdesc2.asp?no=4054">Consolidation of Democracy in Central-Eastern Europe</a></td>
+</tr>
+<tr class="even">
+<td>CNEP</td>
+<td><a href="https://u.osu.edu/cnep">Comparative National Elections Project</a>*</td>
+</tr>
+<tr class="odd">
+<td>EB</td>
+<td><a href="http://ec.europa.eu/public_opinion/index_en.htm">Eurobarometer</a>*</td>
+</tr>
+<tr class="even">
+<td>EQLS</td>
+<td><a href="http://www.eurofound.europa.eu/surveys/eqls/index.htm">European Quality of Life Survey</a></td>
+</tr>
+<tr class="odd">
+<td>ESS</td>
+<td><a href="http://www.europeansocialsurvey.org/">European Social Survey</a></td>
+</tr>
+<tr class="even">
+<td>EVS</td>
+<td><a href="http://www.europeanvaluesstudy.eu/">European Values Study</a></td>
+</tr>
+<tr class="odd">
+<td>ISJP</td>
+<td><a href="https://www.sowi.hu-berlin.de/de/lehrbereiche/empisoz/forschung/archiv/isjp">International Social Justice Project</a></td>
+</tr>
+<tr class="even">
+<td>ISSP</td>
+<td><a href="http://www.issp.org/">International Social Survey Programme</a>*</td>
+</tr>
+<tr class="odd">
+<td>LB</td>
+<td><a href="http://www.latinobarometro.org/">Latinobarometro</a></td>
+</tr>
+<tr class="even">
+<td>LITS</td>
+<td><a href="http://www.ebrd.com/what-we-do/economic-research-and-data/data/lits.html">Life in Transition Survey</a></td>
+</tr>
+<tr class="odd">
+<td>NBB</td>
+<td><a href="http://www.cspp.strath.ac.uk/catalog2_0.html">New Baltic Barometer</a></td>
+</tr>
+<tr class="even">
+<td>PA2</td>
+<td><a href="http://www.icpsr.umich.edu/icpsrweb/ICPSR/studies/9581">Political Action II</a></td>
+</tr>
+<tr class="odd">
+<td>PA8NS</td>
+<td><a href="http://www.icpsr.umich.edu/icpsrweb/ICPSR/studies/7777">Political Action - An 8 Nation Study</a></td>
+</tr>
+<tr class="even">
+<td>PPE7N</td>
+<td><a href="https://www.icpsr.umich.edu/icpsrweb/ICPSR/studies/07768">Political Participation and Equality in 7 Nations</a></td>
+</tr>
+<tr class="odd">
+<td>VPCPCE</td>
+<td><a href="https://discover.ukdataservice.ac.uk/catalogue/?sn=4129">Values and Political Change in Postcommunist Europe</a></td>
+</tr>
+<tr class="even">
+<td>WVS</td>
+<td><a href="http://www.worldvaluessurvey.org/">World Values Survey</a></td>
+</tr>
+<tr class="odd">
+<td>*Selected waves or samples.</td>
+</tr>
+<tr class="even">
+<td><em>Note: Data as of Q2 2014.</em></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="downloading-the-sdr-data" class="section level3">
+<h3>Downloading the SDR data</h3>
+<p>The SDR data bundle version 1.0 (Master Box v.1.0) is available from <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q">Dataverse</a>. Thanks to the <code>dataverse</code> package, these data can be loaded directly to R.</p>
+<p>Here are all the other necessary packages:</p>
+<pre class="r"><code>library(dataverse) # to access data from Dataverse
+library(tidyverse) # to clean and reshape the data
+library(rijkspalette) # to get pretty colors for the graphs
+library(knitr) # to create nice tables</code></pre>
+<p>Knowing the repository’s DOI, one can get a list of all data and documentation file with the <code>get_dataset</code> function <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
+<pre class="r"><code>get_dataset(&quot;doi:10.7910/DVN/VWGF5Q&quot;) # lists the files from a Dataverse by its DOI</code></pre>
+<pre><code>## Dataset (124637): 
+## Version: 1.0, RELEASED
+## Release Date: 2017-03-14T13:04:53Z
+## License: CC0
+## 20 Files:
+##                                                  label version      id
+## 1                     Merge_Files_to_Master_Box_1_0.do       4 3006242
+## 2                    Merge_Files_to_Master_Box_1_0.sps       4 3006243
+## 3                   SDR_Master_Box_Description_1_0.pdf       3 3006218
+## 4                            SDR_Master_File_1_0-1.tab       3 3006271
+## 5                              SDR_Master_File_1_0.tab       4 3006244
+## 6                SDR_Master_File_Documentation_1_0.pdf       3 3006219
+## 7                     SDR_Master_File_SQL_Code_1_0.txt       4 3006220
+## 8          SDR_Master_File_Variable_Report_AGE_1_0.tab       4 3006221
+## 9          SDR_Master_File_Variable_Report_EDU_1_0.tab       4 3006222
+...</code></pre>
+<p>Among the many files, the SDR Master Box contains the Master File with harmonized individual-level survey variables.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> I will use the Stata version of the SDR Master File, which has the id <code>3006244</code> (the Master File is also available in SPSS format, with the id <code>3006271</code>).</p>
+<p>The <code>get_file</code> function downloads the data file to R (see <a href="https://github.com/IQSS/dataverse-client-r">documentation</a> for details). The data file is pretty large, so this may take a while.</p>
+<pre class="r"><code>master.raw &lt;- get_file(3006244) # downloading the dataset by its identifier
+tmp &lt;- tempfile(fileext = &quot;.dta&quot;)
+writeBin(as.vector(master.raw), tmp)
+master &lt;- haven::read_dta(tmp) # creating a data frame from the temp file</code></pre>
+</div>
+<div id="exploring-sdr-availability-of-variables-by-project" class="section level3">
+<h3>Exploring SDR: availability of variables by project</h3>
+<p>The SDR dataset contains data from 22 projects identified by the variable <code>t_survey_name</code>. Each project has one or more waves (<code>t_survey_edition</code>), each with many national samples identified as a combination of <code>t_survey_name</code>, <code>t_survey_edition</code>, <code>t_country_l1u</code>, <code>t_country_set</code>, where <code>t_country_set</code> is used to distinguish national samples carried out in the same project wave (a very rare situation).</p>
+<p>The first step of working with the SDR data is to check how many projects have the variables necessary for a given analysis. Let’s say I’m interested in analyzing the effect of trust in parliament and education on participation in demonstrations. I need the following variables: participation in demonstrations, trust in parliament, education (either completed levels or years of schooling), rural/urban residence, age, and gender. This information can be obtained by transforming the Master File into a project-level file with the availability of the selected variables in separate columns.</p>
+<p>The below piece of code does the following:</p>
+<ol style="list-style-type: decimal">
+<li>list all variable names and store your selection as a vector (<code>selected_vars</code>),</li>
+<li>select a subset of <code>master</code> with only the chosen variables,</li>
+<li>split <code>master</code> into groups - national surveys (identified as <code>t_survey_name</code>, <code>t_survey_edition</code>, <code>t_country_l1u</code>, and <code>t_country_set</code>),</li>
+<li>calculate means of all numeric variables by group,</li>
+<li>for numeric variables, construct a group-level logical variable, which is <code>TRUE</code> when the mean of the given variable is not missing, and <code>FALSE</code> otherwise,</li>
+<li>group by project (<code>t_survey_name</code>),</li>
+<li>for each project, calculate the proportion of surveys that contain a given variable (proportion of <code>TRUE</code> values),</li>
+<li>drop unnecessary variables.</li>
+</ol>
+<pre class="r"><code>names(master)
+selected_vars &lt;- c(&quot;t_survey_name&quot;, &quot;t_survey_edition&quot;, &quot;t_country_l1u&quot;, 
+                   &quot;t_country_set&quot;, &quot;t_gender&quot;, &quot;t_age&quot;, &quot;t_edu&quot;, &quot;t_school_yrs&quot;, 
+                   &quot;t_ruralurb&quot;, &quot;t_tr_parli_11&quot;, &quot;t_tr_personal&quot;, 
+                   &quot;t_pr_demonst_fact&quot;, &quot;t_int_polit_5&quot;)
+
+master_vars_survey &lt;- master %&gt;% 
+  select(selected_vars) %&gt;%
+  mutate(educ = ifelse(is.na(t_edu) &amp; is.na(t_school_yrs), NA, 1)) %&gt;% 
+  group_by(t_survey_name, t_survey_edition, t_country_l1u, t_country_set) %&gt;%
+  summarise_all(funs(if(is.numeric(.)) mean(., na.rm = TRUE) else first(.))) %&gt;%
+  mutate_all(funs(if(is.numeric(.)) as.numeric(!is.na(.)) else .)) %&gt;%
+  group_by(t_survey_name) %&gt;%
+  summarise_all(funs(if(is.numeric(.)) mean(., na.rm = TRUE) else first(.))) %&gt;%
+  select(-c(&quot;t_survey_edition&quot;, &quot;t_country_l1u&quot;, &quot;t_country_set&quot;, 
+            &quot;t_school_yrs&quot;, &quot;t_edu&quot;))</code></pre>
+<p>The result of these operations is a data frame with 22 rows (corresponding to 22 survey projects in SDR v.1.0). The first column contains project names, and the next 8 columns contain values ranging from 0 to 1, corresponding to the proportion of national surveys in the given project that contain a given variable.</p>
+<pre class="r"><code>head(master_vars_survey)</code></pre>
+<pre><code>## # A tibble: 6 x 9
+##   t_survey_name t_gender t_age t_ruralurb t_tr_parli_11 t_tr_personal
+##   &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt;         &lt;dbl&gt;
+## 1 ABS                  1 1          1             1             1    
+## 2 AFB                  1 1          1             0.818         0.424
+## 3 AMB                  1 0.989      0.957         1             0.25 
+## 4 ARB                  1 1          0.625         0.812         1    
+## 5 ASES                 1 1          0.944         0.944         0    
+## 6 CB                   1 1          1             1             1    
+## # ... with 3 more variables: t_pr_demonst_fact &lt;dbl&gt;, t_int_polit_5 &lt;dbl&gt;,
+## #   educ &lt;dbl&gt;</code></pre>
+<p>Before plotting these data, it’s necessary to do a few more things:<br />
+1. convert the table to a data frame to avoid future problems,<br />
+2. use project names are row names,<br />
+3. drop the <code>t_survey_name</code> column,<br />
+4. assign column names,<br />
+5. convert to matrix and transpose.</p>
+<pre class="r"><code>master_vars_survey &lt;- master_vars_survey[, c(1,2,3,9,4,5,6,7,8)] # change the order of variables
+
+master_vars_survey &lt;- as.data.frame(master_vars_survey) # convert to data frame
+row.names(master_vars_survey) &lt;- master_vars_survey$t_survey_name # first variable as row names
+master_vars_survey &lt;- master_vars_survey[,2:ncol(master_vars_survey)] # drop the first variable
+
+names(master_vars_survey) &lt;- c(&quot;Gender&quot;, &quot;Age&quot;, &quot;Education&quot;, &quot;Rural&quot;, 
+                               &quot;Trust in parliament&quot;, &quot;Social trust&quot;, 
+                               &quot;Participation in demonstrations&quot;, 
+                               &quot;Interest in politics&quot;)
+
+master_matrix &lt;- data.matrix(master_vars_survey) # convert to matrix
+master_matrix &lt;- t(master_matrix) # transpose</code></pre>
+<p>Now the <code>master_matrix</code> matrix is ready for plotting. First, I’ll create a color palette from white (no surveys in a project have the variable of interest) to sea green (all surveys in the project have the variable of interest; the color is taken from Karel Appel’s <em>Square man</em> via the <code>rijksPalette</code> package).</p>
+<p>Next, I set the parameters and draw the heatmap (a colored table, really).</p>
+<pre class="r"><code>appel &lt;- rijksPalette(&quot;Karel Appel&quot;)
+colfunc &lt;- colorRampPalette(c(&quot;white&quot;, appel$palette(10)[7]))
+
+x = 1:ncol(master_matrix)
+y = 1:nrow(master_matrix)
+centers &lt;- expand.grid(y,x)
+
+par(mar = c(3,15,4,2))
+
+image(x, y, t(master_matrix),
+      xaxt = &#39;n&#39;, 
+      yaxt = &#39;n&#39;, 
+      xlab = &#39;&#39;, 
+      ylab = &#39;&#39;,
+      ylim = c(max(y) + 0.5, min(y) - 0.5),
+      col = colfunc(10))
+
+mtext(attributes(master_matrix)$dimnames[[2]], 
+      at=1:ncol(master_matrix), 
+      adj = 0, padj = 0, las=2)
+mtext(attributes(master_matrix)$dimnames[[1]], 
+      at=1:nrow(master_matrix), side = 2, las = 1, adj = 1.02)</code></pre>
+<p><img src="/post/sdr-exploration_files/figure-html/sdr%20heatmap-1.png" width="672" /></p>
+<p>The chart shows that gender, age, and education (measured either with completed levels or schooling years) are available across projects, with only few exceptions - too few to be visible on the heatmap. The rural residence indicator is present in at least some surveys in all projects.</p>
+<p>The availability of other variables is mixed. Trust in parliament is missing in ISJP (International Social Justice Project, selected waves), PA2 (Political Action II), PA8NS (Political Action, an Eight Nation Study), and PPE7N (Political Participation and Equality in Seven Nations). Social trust is additionally missing in ASES (Asia-Europe Survey), CDCEE (Consolidation of Democracy in Central Eastern Europe), CNEP (Comparative National Elections Project), and EB (Eurobarometer, selected waves). The question about participation in demonstrations is asked in at least some surveys in all project except for CB (Caucasus Barometer), CDCEE, and NBB (New Baltics Barometer).</p>
+<p>As the next section shows, this table conceals some important heterogeneity with regard to the participation in demonstration questions.</p>
+</div>
+<div id="exploring-sdr-availability-of-variables-with-different-formulations" class="section level3">
+<h3>Exploring SDR: availability of variables with different formulations</h3>
+<p>The SDR project records various characteristics of original questionnaire items, the responses to which are the original (source) variables that are then harmonized. In the SDR data these item characteristic are called “harmonization controls” and accompany the harmonized target variables in the Master File.</p>
+<p>These harmonization controls capture properties of source items that might have an effect on respondents’ answers, and were selected following a review of the relevant methodological literature and of the original questionnaires of the harmonized surveys. These include, for example, the length of the original response scales in questions about trust in state institutions, or whether the information about rural/urban residence was provided by the respondent or coded by the interviewer.</p>
+<p>Some of the properties captured with harmonization controls influence the distribution of responses more than others. One of the properties with a direct effect on response is the time-frame in the question about protest participation, for example participation in demonstrations. Some surveys ask about participation “last year” or “in the last 12 months”, others about the last 2, 3, 4, 5, 8 or 10 years, and some do not specify a time frame, i.e., ask about participation “ever”. Logically, the proportion of individuals who participated in a demonstration “ever” is higher than of those who participated “last year”. These two groups might also be different in other ways. Combining surveys with different question formulations might lead to misleading results, especially in analyses modeling the sample proportion of participation in demonstrations.</p>
+<p>When analyzing, for example, determinants of participation in demonstrations, it could be a good idea to decide a priori which type of questions to focus on. Again, the first step would be to see how frequently these different formulations occur in survey projects. In the SDR dataset the number of years in the original (source) question on participation in demonstrations is preserved in the control variable <code>c_pr_demonst_years</code>.</p>
+<p>Doing this requires a few modifications of the data preparation code used in the previous example.</p>
+<pre class="r"><code>selected_vars_2 &lt;- c(&quot;t_survey_name&quot;, &quot;t_survey_edition&quot;, &quot;t_country_l1u&quot;, &quot;t_country_set&quot;, 
+                   &quot;t_gender&quot;, &quot;t_age&quot;, &quot;t_edu&quot;, &quot;t_school_yrs&quot;, &quot;t_ruralurb&quot;, 
+                   &quot;t_tr_parli_11&quot;, &quot;t_pr_demonst_fact&quot;, &quot;c_pr_demonst_years&quot;)
+
+master_vars_survey_2 &lt;- master %&gt;% 
+  select(t_case_id, selected_vars_2) %&gt;%
+  mutate(educ = ifelse(is.na(t_edu) &amp; is.na(t_school_yrs), NA, 1)) %&gt;%
+  spread(c_pr_demonst_years, t_pr_demonst_fact) %&gt;%
+  group_by(t_survey_name, t_survey_edition, t_country_l1u, t_country_set) %&gt;%
+  summarise_all(funs(if(is.numeric(.)) mean(., na.rm = TRUE) else first(.))) %&gt;%
+  mutate_all(funs(if(is.numeric(.)) as.numeric(!is.na(.)) else .)) %&gt;%
+  group_by(t_survey_name) %&gt;%
+  summarise_all(funs(if(is.numeric(.)) mean(., na.rm = TRUE) else first(.))) %&gt;%
+  select(-c(&quot;t_survey_edition&quot;, &quot;t_case_id&quot;, &quot;t_country_l1u&quot;, &quot;t_country_set&quot;, 
+            &quot;t_school_yrs&quot;, &quot;t_edu&quot;), -ncol(.)) %&gt;%
+  select(1,2,3,6,4,5,7,8,9,10,11,12,13,14)</code></pre>
+<p>After the data are prepared, the remaining steps are the same.</p>
+<pre class="r"><code>master_vars_survey_2 &lt;- as.data.frame(master_vars_survey_2)
+row.names(master_vars_survey_2) &lt;- master_vars_survey_2$t_survey_name
+master_vars_survey_2 &lt;- master_vars_survey_2[,2:ncol(master_vars_survey_2)]
+
+
+names(master_vars_survey_2) &lt;- c(&quot;Gender&quot;, &quot;Age&quot;, &quot;Education&quot;, &quot;Rural&quot;, &quot;Trust in parliament&quot;, 
+                               &quot;Demonstrations (1 year)&quot;, &quot;Demonstrations (2 years)&quot;, 
+                               &quot;Demonstrations (3 years)&quot;, &quot;Demonstrations (4 years)&quot;,
+                               &quot;Demonstrations (5 years)&quot;, &quot;Demonstrations (8 years)&quot;, 
+                               &quot;Demonstrations (10 years)&quot;, &quot;Demonstrations (ever)&quot;)
+
+master_matrix_2 &lt;- data.matrix(master_vars_survey_2)
+master_matrix_2 &lt;- t(master_matrix_2)
+
+x = 1:ncol(master_matrix_2)
+y = 1:nrow(master_matrix_2)
+centers &lt;- expand.grid(y,x)
+
+par(mar = c(3,13,5,2))
+
+colfunc &lt;- colorRampPalette(c(&quot;white&quot;, appel$palette(1)[1]))
+
+image(x, y, t(master_matrix_2),
+      xaxt = &#39;n&#39;, 
+      yaxt = &#39;n&#39;, 
+      xlab = &#39;&#39;, 
+      ylab = &#39;&#39;,
+      ylim = c(max(y) + 0.5, min(y) - 0.5),
+      col =  colfunc(10))
+
+mtext(attributes(master_matrix_2)$dimnames[[2]], 
+      at=1:ncol(master_matrix_2), 
+      adj = 0, padj = 0, las=2, cex = 1.2)
+mtext(attributes(master_matrix_2)$dimnames[[1]], 
+      at=1:nrow(master_matrix_2), side = 2, las = 1, adj = 1.02, cex = 1.2)</code></pre>
+<p><img src="/post/sdr-exploration_files/figure-html/sdr%20vars%20survey%202-1.png" width="672" /></p>
+<p>This second heatmap reveals considerable variation in the design of the “participation in demonstrations” questions across survey projects. Although almost all projects contain some variant of this question, in most projects it’s either the “last year” or “ever” variant. Other versions are rare and available in a single project or in only few projects.</p>
+</div>
+<div id="identifying-surveys-with-the-needed-variables" class="section level3">
+<h3>Identifying surveys with the needed variables</h3>
+<p>Finally, in order to select the right subset of the SDR Master File, it’s necessary to know which surveys have all the variables of interest. Let’s assume I’m still interested in analyzing trust in parliament, education, and participation in demonstrations, but this time only the formulations without a time specification, i.e., “ever” (<code>c_pr_demonst_years == 11</code>).</p>
+<p>The result is a data frame with rows corresponding to national surveys, and four variables that uniquely identify a national survey: <code>t_survey_name</code>, <code>t_survey_edition</code>, <code>t_country_l1u</code>, <code>t_country_set</code>. The 557 selected national surveys come from 7 survey projects as listed below.</p>
+<pre class="r"><code>selected_vars_3 &lt;- c(&quot;t_survey_name&quot;, &quot;t_survey_edition&quot;, &quot;t_country_l1u&quot;, &quot;t_country_set&quot;, 
+                   &quot;t_gender&quot;, &quot;t_age&quot;, &quot;t_edu&quot;, &quot;t_school_yrs&quot;, &quot;t_ruralurb&quot;, 
+                   &quot;t_tr_parli_11&quot;, &quot;t_pr_demonst_fact&quot;, &quot;c_pr_demonst_years&quot;)
+
+surveys_with_vars &lt;- master %&gt;% 
+  select(t_case_id, selected_vars_2) %&gt;%
+  mutate(educ = ifelse(is.na(t_edu) &amp; is.na(t_school_yrs), NA, 1)) %&gt;%
+  spread(c_pr_demonst_years, t_pr_demonst_fact) %&gt;%
+  group_by(t_survey_name, t_survey_edition, t_country_l1u, t_country_set) %&gt;%
+  summarise_all(funs(if(is.numeric(.)) mean(., na.rm = TRUE) else first(.))) %&gt;%
+  select(t_survey_name, t_survey_edition, t_country_l1u, t_country_set, t_gender,
+         t_age, t_ruralurb, t_tr_parli_11, educ, demo11 = &quot;11&quot;) %&gt;%
+  filter_at(vars(t_gender, t_age, t_ruralurb, educ, t_tr_parli_11, demo11), 
+            all_vars(!is.na(.))) %&gt;%
+  select(t_survey_name, t_survey_edition, t_country_l1u, t_country_set)
+
+nrow(surveys_with_vars)</code></pre>
+<pre><code>## [1] 557</code></pre>
+<pre class="r"><code>surveys_with_vars %&gt;% group_by(t_survey_name) %&gt;% count() %&gt;% 
+  kable(., full_width = F, col.names = c(&quot;Project&quot;, &quot;N surveys&quot;)) </code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Project</th>
+<th align="right">N surveys</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">AMB</td>
+<td align="right">34</td>
+</tr>
+<tr class="even">
+<td align="left">ASES</td>
+<td align="right">16</td>
+</tr>
+<tr class="odd">
+<td align="left">EVS</td>
+<td align="right">121</td>
+</tr>
+<tr class="even">
+<td align="left">ISSP</td>
+<td align="right">37</td>
+</tr>
+<tr class="odd">
+<td align="left">LB</td>
+<td align="right">145</td>
+</tr>
+<tr class="even">
+<td align="left">LITS</td>
+<td align="right">62</td>
+</tr>
+<tr class="odd">
+<td align="left">WVS</td>
+<td align="right">142</td>
+</tr>
+<tr class="even">
+<td align="left"> </td>
+<td align="right"></td>
+</tr>
+<tr class="odd">
+<td align="left"> </td>
+<td align="right"></td>
+</tr>
+</tbody>
+</table>
+<div class="figure">
+<img src="tbc.png" />
+
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>To show only a snippet of the long output I used a custom output hook function with <code>knitr</code> found on <a href="https://stackoverflow.com/questions/23114654/knitr-output-hook-with-an-output-lines-option-that-works-like-echo-26/23147563">StackOverflow</a>.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>Other data file contain variables measured at different levels: <code>SDR_Plug_Country_Year_1_0</code> has country-year-level variables like GDP <em>per capita</em> or measures of democracy; <code>SDR_Plug_Survey_1_0</code> has quality indicators and methodological variables by national survey; <code>SDR_Plug_Wave_1_0</code> has quality indicators by project wave, and <code>SDR_Plug_Country_1_0</code> has country and continent codes.<a href="#fnref2">↩</a></p></li>
+</ol>
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="/2018/07/23/isa-world-congress-2018-analysis-of-tweets/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="/2018/07/23/isa-world-congress-2018-analysis-of-tweets/">ISA World Congress 2018: Analysis of tweets</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'https-martakolczynska-netlify-com';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+</div>
+</div>
+<script src="/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-123060748-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

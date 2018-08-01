@@ -4,6 +4,9 @@ author: "Marta Kołczyńska"
 date: 2018-07-23T15:24:00
 categories: ["text"]
 tags: ["R", "twitter", "text analysis", "ISA", "SICSS"]
+output: 
+  blogdown::html_page:
+    toc: true
 
 ---
 
@@ -32,10 +35,6 @@ I downloaded tweets that contained one of the conference hashtags: `#isa2018wcs`
 
 `isa <- search_tweets("#isa2018wcs OR #isa18wcs", since = "2018-06-01", n = 100000, type="recent", include_rts=TRUE)`  
 `data.table::fwrite(isa, file = "isa_tweets.csv")`
-
-```{r, echo = FALSE, results="hide"}
-setwd("C:/Users/mkolc/Google Drive/Academia/Blog/martakolczynska/drafts/")
-```
 
 ```{r load, warning=FALSE, message=FALSE, results="hide"}
 isa <- read.csv("isa_tweets.csv", stringsAsFactors = FALSE) # open Twitter extract
@@ -107,7 +106,7 @@ isa_words %>%
   arrange(desc(n))  # sort by word frequency in a descending order
 ```
 
-### Resesarch committees
+### Tweets by ISA Resesarch Committee
 
 [Research committees (RC)](https://www.isa-sociology.org/en/research-networks/research-committees/) are the core organizational unit in ISA. Research Committees bring together scholars interested in the same topic, e.g. political sociology or sociology of education. Right now there are 57 RCs.
 
