@@ -324,9 +324,7 @@ surveys_with_vars <- master %>%
 nrow(surveys_with_vars)
 ```
 
-
 The result is a data frame with rows corresponding to national surveys, and four variables that uniquely identify a national survey: `t_survey_name`, `t_survey_edition`, `t_country_l1u`, `t_country_set`. The first six rows look like this.
-
 
 ```{r surveys head, warning=FALSE, message=FALSE}
 kable(surveys_with_vars[1:6,], align=c("c", "c", "c", "c")) %>%
