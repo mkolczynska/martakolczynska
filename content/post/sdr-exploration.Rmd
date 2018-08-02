@@ -2,27 +2,25 @@
 title: "Exploring the dataset of survey datasets: Survey Data Recycling version 1.0"
 author: "Marta Kołczyńska"
 date: 2018-08-01T15:41:00
-categories: ["R"]
+topic: ["SDR"]
 tags: ["surveys", "SDR", "R", "cross-national research", "tutorial"]
 output: 
   blogdown::html_page:
     toc: true
 ---
 
-This was supposed to be the inauguratory post, but then [#ISA2018wcs @Toronto](/post/isa-twitter/) changed my plans.
-
-*tl;dr: Combining data from different survey projects creates new opportunities for research, alas, at the cost of increased volume (obviously) and complexity of the data. The [Survey Data Recycling project](dataharmonization.org) created a dataset with data from 22 international survey projects. This post describes how to access and navigate this dataset.*
+*tl;dr: Combining data from different survey projects creates new opportunities for research, alas, at the cost of increased volume (obviously) and complexity of the data. The [Survey Data Recycling project](https://dataharmonization.org/) created a dataset with data from 22 international survey projects. This post describes how to access and navigate this dataset.*
 
 
 ### Introduction
 
 More and more cross-national survey projects collect new data using better methodologies, *ex ante* harmonization, following higher standards, and covering more and more diverse countries. The abundance of new survey data only increases the problem of backward and parallel compatibility, becuase new surveys cannot be easily combined with existing survey data or data from different survey projects, which prevents analyses on a global scale.
 
-One solution to this problem is *ex post* survey harmonization, i.e. combining existing data from cross-national surveys and transforming original (source) variables to a common coding scheme. The Survey Data Harmonization project and its successor, the [Survey Data Recycling (SDR) project](dataharmonization.org), took on the challenge of *ex post* harmonization of data from 22 international survey projects. The resulting dataset (Master File) contains 2,289,060 records (corresponding to individual respondents) from 142 countries/territories between 1966 and 2013. Harmonized variables include: trust in state institutions (parliament, political parties, justice system, government), political engagement (participation in demonstrations, signing petitions, interest in politics), social trust, and sociodemographics: age, gender, education, rural and metropolitan residence.
+One solution to this problem is *ex post* survey harmonization, i.e. combining existing data from cross-national surveys and transforming original (source) variables to a common coding scheme. The Survey Data Harmonization project and its successor, the [Survey Data Recycling (SDR) project](https://dataharmonization.org/), took on the challenge of *ex post* harmonization of data from 22 international survey projects. The resulting dataset (Master File) contains 2,289,060 records (corresponding to individual respondents) from 142 countries/territories between 1966 and 2013. Harmonized variables include: trust in state institutions (parliament, political parties, justice system, government), political engagement (participation in demonstrations, signing petitions, interest in politics), social trust, and sociodemographics: age, gender, education, rural and metropolitan residence.
 
-For more information about the SDR project, including the project team, funding sources, the source data, a description of the SDR idea, publications and conference presentations, see the project website [dataharmonization.org](dataharmonization.org). The harmonized SDR data and detailed descriptions of the harmonization process of each target variable are available in the [documentation on Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q).
+The harmonized SDR data and documentation, including detailed descriptions of the harmonization process of each target variable and recode syntax, are available [on Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q). For more information about the SDR project, including the project team, funding sources, the source data, a description of the SDR idea, publications and conference presentations, see the project website [dataharmonization.org](https://dataharmonization.org/).
 
-The clear advantage of SDR data is its increased coverage, both geographically and over time. The cost of this is increased volume and complexity. In this post I show how to download and explore the individual-level dataset (Master File).
+The clear advantage of SDR data is its extended coverage, both geographically and over time. The cost of this is increased volume and complexity. In this post I show how to download and explore the individual-level dataset (Master File).
 
 #### 22 survey projects in SDR v.1.0: 
 
