@@ -19,6 +19,7 @@ output:
 <li><a href="#exploring-sdr-availability-of-variables-with-different-formulations">Exploring SDR: availability of variables with different formulations</a></li>
 <li><a href="#identifying-surveys-containing-selected-variables">Identifying surveys containing selected variables</a></li>
 <li><a href="#subsetting-the-master-file">Subsetting the Master File</a></li>
+<li><a href="#country-coverage-plot">Country coverage plot</a></li>
 </ul>
 </div>
 
@@ -145,7 +146,9 @@ output:
 library(tidyverse) # to clean and reshape the data
 library(rijkspalette) # to get pretty colors for the graphs
 library(knitr) # to create nice tables
-library(kableExtra) # to customize tables (kables)</code></pre>
+library(kableExtra) # to customize tables (kables)
+library(rworldmap) # to plot a world map
+library(countrycode) # switch between country codes</code></pre>
 <p>Knowing the repository’s DOI, one can get a list of all data and documentation file with the <code>get_dataset</code> function<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
 <pre class="r"><code>get_dataset(&quot;doi:10.7910/DVN/VWGF5Q&quot;) # lists the files from a Dataverse by its DOI</code></pre>
 <pre><code>## Dataset (124637): 
@@ -606,6 +609,35 @@ N individuals
 </tr>
 </tbody>
 </table>
+</div>
+<div id="country-coverage-plot" class="section level3">
+<h3>Country coverage plot</h3>
+<p>The last thing I will do is to plot the country coverage of the Master File subset on the world map. As a reminder, this is the subset that contains surveys with all of the following variables: gender, age, education (completed levels of schooling years), rural residence, trust in parliament, and participation in demonstrations “ever”.</p>
+<p>There are a few ways of doing this, one of which uses the <code>rworldmap</code> package. A small fix is necessary to deal with Kosovo, which has no ISO2 code assigned in the <code>rworldmap</code> data, but does have an ISO3 code (KOS). The SDR data use ISO2 codes, so it’s necessary to convert them to ISO3 (with just one line of code thanks to the <code>countrycode</code> package!).</p>
+<pre class="r"><code># data frame with unique country codes
+countries &lt;- data.frame(iso2 = unique(substr(master_select$t_country_l1u, 1, 2)), 
+                        stringsAsFactors = FALSE)
+
+# create an indicator of the presence of the country (variable to be mapped)
+countries$is &lt;- 1  
+# covert ISO2 codes to ISO3 codes and fix the code for Kosovo
+countries$iso3 &lt;- countrycode(countries$iso2, &#39;iso2c&#39;, &#39;iso3c&#39;)
+countries$iso3[countries$iso2 == &quot;KS&quot;] &lt;- &quot;KOS&quot;
+
+map &lt;- joinCountryData2Map(countries, nameJoinColumn=&quot;iso3&quot;, 
+                               joinCode=&quot;ISO3&quot; )</code></pre>
+<pre><code>## 104 codes from your data successfully matched countries in the map
+## 0 codes from your data failed to match with a country code in the map
+## 139 codes from the map weren&#39;t represented in your data</code></pre>
+<pre class="r"><code>par(mai=c(0,0,0.5,0),xaxs=&quot;i&quot;,yaxs=&quot;i&quot;)
+
+mapCountryData( map, catMethod = &quot;categorical&quot;,
+                nameColumnToPlot=&#39;is&#39;, addLegend = FALSE,
+                numCats=2,
+                colourPalette = c(&quot;forestgreen&quot;, &quot;white&quot;),
+                missingCountryCol = &quot;white&quot;,
+                mapTitle = &quot;Country coverage of the SDR Master File subset&quot;)  </code></pre>
+<p><img src="/post/sdr-exploration_files/figure-html/subset%20map-1.png" width="672" /></p>
 <p> <br />
  </p>
 <div class="figure">

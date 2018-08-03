@@ -63,6 +63,8 @@ library(tidyverse) # to clean and reshape the data
 library(rijkspalette) # to get pretty colors for the graphs
 library(knitr) # to create nice tables
 library(kableExtra) # to customize tables (kables)
+library(rworldmap) # to plot a world map
+library(countrycode) # switch between country codes
 
 ```
 
@@ -365,6 +367,38 @@ master_select %>%
         align=c("c","c","c","c","c","c")) %>%
   kable_styling(position = "left") %>%
   column_spec(1:6, width = "7em")
+
+```
+
+### Country coverage plot
+
+The last thing I will do is to plot the country coverage of the Master File subset on the world map. As a reminder, this is the subset that contains surveys with all of the following variables: gender, age, education (completed levels of schooling years), rural residence, trust in parliament, and participation in demonstrations "ever".
+
+There are a few ways of doing this, one of which uses the `rworldmap` package. A small fix is necessary to deal with Kosovo, which has no ISO2 code assigned in the `rworldmap` data, but does have an ISO3 code (KOS). The SDR data use ISO2 codes, so it's necessary to convert them to ISO3 (with just one line of code thanks to the `countrycode` package!).
+
+
+```{r subset map, warning=FALSE, message=FALSE}
+# data frame with unique country codes
+countries <- data.frame(iso2 = unique(substr(master_select$t_country_l1u, 1, 2)), 
+                        stringsAsFactors = FALSE)
+
+# create an indicator of the presence of the country (variable to be mapped)
+countries$is <- 1  
+# covert ISO2 codes to ISO3 codes and fix the code for Kosovo
+countries$iso3 <- countrycode(countries$iso2, 'iso2c', 'iso3c')
+countries$iso3[countries$iso2 == "KS"] <- "KOS"
+
+map <- joinCountryData2Map(countries, nameJoinColumn="iso3", 
+                               joinCode="ISO3" )
+
+par(mai=c(0,0,0.5,0),xaxs="i",yaxs="i")
+
+mapCountryData( map, catMethod = "categorical",
+                nameColumnToPlot='is', addLegend = FALSE,
+                numCats=2,
+                colourPalette = c("forestgreen", "white"),
+                missingCountryCol = "white",
+                mapTitle = "Country coverage of the SDR Master File subset")  
 
 ```
 
