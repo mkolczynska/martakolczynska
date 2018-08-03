@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Sat, 28 Jul 2018 13:32:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 05 Aug 2018 22:32:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/wdi/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,10 +15,10 @@
     <item>
       <title>Shiny App for exploring harmonized survey data (Survey Data Recycling v.1.0)</title>
       <link>/post/sdr-exploration-shiny/</link>
-      <pubDate>Sat, 28 Jul 2018 13:32:00 +0000</pubDate>
+      <pubDate>Sun, 05 Aug 2018 22:32:00 +0000</pubDate>
       
       <guid>/post/sdr-exploration-shiny/</guid>
-      <description>My previous post was about downloading and exploring the Survey Data Recycling (SDR), version 1.0 dataset, which consists of selected harmonized variables from 22 survey projects, 1966-2013.
+      <description>In the previous post I wrote about downloading and exploring the Survey Data Recycling (SDR), version 1.0 dataset, which consists of selected harmonized variables from 22 survey projects, 1966-2013.
 The SDR project will develop a website for browsing, subsetting, downloading, and visualizing data from the SDR project. This website is currently under construction. Meanwhile, basic functionalities of the future on-line browsing and subsetting tool are available here: https://mkolczynska.shinyapps.io/sdr_data_browser/</description>
     </item>
     

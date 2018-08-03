@@ -8,9 +8,8 @@ output:
   blogdown::html_page:
     toc: true
 ---
-&nbsp;  
 
-*tl;dr: Combining data from different survey projects creates new opportunities for research, alas, at the cost of increased volume (obviously) and complexity of the data. The [Survey Data Recycling project](https://dataharmonization.org/) created a dataset with data from 22 international survey projects. This post describes how to access and navigate this dataset.*
+*tl;dr: Combining data from different survey projects creates new opportunities for research, alas, at the cost of increased volume (obviously) and complexity of the data. The [Survey Data Recycling project](https://dataharmonization.org/) created a dataset with data from 22 international survey projects. This post shows how to access and explore this dataset, and how to select a subset for further analysis based on the availability of variables.*
 
 
 ### Introduction
@@ -344,6 +343,32 @@ surveys_with_vars %>% group_by(t_survey_name) %>% count() %>%
   column_spec(1:2, width = "10em")
 
 ```
+
+### Subsetting the Master File
+
+Knowing the key variables identifying national surveys with all the variables of interest (stored in `surveys_with_vars`), an `inner_join` will generate the appropriate subset of the Master File. The subset contains data from 557 national surveys from 7 survey projects, carried out in 111 countries/territories between 1981 and 2010, with a total of 702707 respondents. Further analyses can be performed on this subset only.
+
+```{r master subset, warning=FALSE, message=FALSE}
+master_select <- inner_join(master, surveys_with_vars, 
+                            by= c("t_survey_name", "t_survey_edition", 
+                                  "t_country_l1u", "t_country_set"))
+
+master_select %>% 
+  mutate(survey = paste(t_survey_name,t_survey_edition,t_country_l1u,t_country_set,sep = "")) %>%
+  summarise(min(t_country_year), max(t_country_year), 
+            length(unique(t_country_l1u)), 
+            length(unique(t_survey_name)),
+            length(unique(survey)),
+            n()) %>%
+  kable(., col.names = c("Min year","Max year","N countries","N projects",
+                         "N surveys","N individuals"), 
+        align=c("c","c","c","c","c","c")) %>%
+  kable_styling(position = "left") %>%
+  column_spec(1:6, width = "7em")
+
+```
+
+
 &nbsp;  
 &nbsp;  
   
