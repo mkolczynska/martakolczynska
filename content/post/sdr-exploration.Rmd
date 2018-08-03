@@ -372,7 +372,7 @@ master_select %>%
 
 ### Country coverage plot
 
-The last thing I will do is to plot the country coverage of the Master File subset on the world map. As a reminder, this is the subset that contains surveys with all of the following variables: gender, age, education (completed levels of schooling years), rural residence, trust in parliament, and participation in demonstrations "ever".
+The last thing I will do is to plot the country coverage of the Master File subset on the world map. As a reminder, this subset contains all surveys from the SDR Master File that have all of the following variables: gender, age, education (completed levels or schooling years), rural residence, trust in parliament, and participation in demonstrations "ever".
 
 There are a few ways of doing this, one of which uses the `rworldmap` package. A small fix is necessary to deal with Kosovo, which has no ISO2 code assigned in the `rworldmap` data, but does have an ISO3 code (KOS). The SDR data use ISO2 codes, so it's necessary to convert them to ISO3 (with just one line of code thanks to the `countrycode` package!).
 
@@ -388,17 +388,19 @@ countries$is <- 1
 countries$iso3 <- countrycode(countries$iso2, 'iso2c', 'iso3c')
 countries$iso3[countries$iso2 == "KS"] <- "KOS"
 
+# join the data to the map
 map <- joinCountryData2Map(countries, nameJoinColumn="iso3", 
                                joinCode="ISO3" )
 
-par(mai=c(0,0,0.5,0),xaxs="i",yaxs="i")
+par(mar = c(0,0,1,0))
 
+# plot the map
 mapCountryData( map, catMethod = "categorical",
                 nameColumnToPlot='is', addLegend = FALSE,
                 numCats=2,
                 colourPalette = c("forestgreen", "white"),
                 missingCountryCol = "white",
-                mapTitle = "Country coverage of the SDR Master File subset")  
+                mapTitle = 'Country coverage: trust in parliament and demonstrating "ever"')          
 
 ```
 

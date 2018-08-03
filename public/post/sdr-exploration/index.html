@@ -858,7 +858,7 @@ N individuals
 </div>
 <div id="country-coverage-plot" class="section level3">
 <h3>Country coverage plot</h3>
-<p>The last thing I will do is to plot the country coverage of the Master File subset on the world map. As a reminder, this is the subset that contains surveys with all of the following variables: gender, age, education (completed levels of schooling years), rural residence, trust in parliament, and participation in demonstrations “ever”.</p>
+<p>The last thing I will do is to plot the country coverage of the Master File subset on the world map. As a reminder, this subset contains all surveys from the SDR Master File that have all of the following variables: gender, age, education (completed levels or schooling years), rural residence, trust in parliament, and participation in demonstrations “ever”.</p>
 <p>There are a few ways of doing this, one of which uses the <code>rworldmap</code> package. A small fix is necessary to deal with Kosovo, which has no ISO2 code assigned in the <code>rworldmap</code> data, but does have an ISO3 code (KOS). The SDR data use ISO2 codes, so it’s necessary to convert them to ISO3 (with just one line of code thanks to the <code>countrycode</code> package!).</p>
 <pre class="r"><code># data frame with unique country codes
 countries &lt;- data.frame(iso2 = unique(substr(master_select$t_country_l1u, 1, 2)), 
@@ -870,19 +870,21 @@ countries$is &lt;- 1
 countries$iso3 &lt;- countrycode(countries$iso2, &#39;iso2c&#39;, &#39;iso3c&#39;)
 countries$iso3[countries$iso2 == &quot;KS&quot;] &lt;- &quot;KOS&quot;
 
+# join the data to the map
 map &lt;- joinCountryData2Map(countries, nameJoinColumn=&quot;iso3&quot;, 
                                joinCode=&quot;ISO3&quot; )</code></pre>
 <pre><code>## 104 codes from your data successfully matched countries in the map
 ## 0 codes from your data failed to match with a country code in the map
 ## 139 codes from the map weren&#39;t represented in your data</code></pre>
-<pre class="r"><code>par(mai=c(0,0,0.5,0),xaxs=&quot;i&quot;,yaxs=&quot;i&quot;)
+<pre class="r"><code>par(mar = c(0,0,1,0))
 
+# plot the map
 mapCountryData( map, catMethod = &quot;categorical&quot;,
                 nameColumnToPlot=&#39;is&#39;, addLegend = FALSE,
                 numCats=2,
                 colourPalette = c(&quot;forestgreen&quot;, &quot;white&quot;),
                 missingCountryCol = &quot;white&quot;,
-                mapTitle = &quot;Country coverage of the SDR Master File subset&quot;)  </code></pre>
+                mapTitle = &#39;Country coverage: trust in parliament and demonstrating &quot;ever&quot;&#39;)          </code></pre>
 <p><img src="/post/sdr-exploration_files/figure-html/subset%20map-1.png" width="672" /></p>
 <p> <br />
  </p>
