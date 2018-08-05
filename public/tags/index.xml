@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Thu, 02 Aug 2018 15:41:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 05 Aug 2018 22:32:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Cross National Research</title>
       <link>/tags/cross-national-research/</link>
-      <pubDate>Thu, 02 Aug 2018 15:41:00 +0000</pubDate>
+      <pubDate>Sun, 05 Aug 2018 22:32:00 +0000</pubDate>
       
       <guid>/tags/cross-national-research/</guid>
       <description></description>
@@ -31,9 +31,18 @@
     </item>
     
     <item>
+      <title>Plotly</title>
+      <link>/tags/plotly/</link>
+      <pubDate>Sun, 05 Aug 2018 22:32:00 +0000</pubDate>
+      
+      <guid>/tags/plotly/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>R</title>
       <link>/tags/r/</link>
-      <pubDate>Thu, 02 Aug 2018 15:41:00 +0000</pubDate>
+      <pubDate>Sun, 05 Aug 2018 22:32:00 +0000</pubDate>
       
       <guid>/tags/r/</guid>
       <description></description>
@@ -42,9 +51,18 @@
     <item>
       <title>Sdr</title>
       <link>/tags/sdr/</link>
-      <pubDate>Thu, 02 Aug 2018 15:41:00 +0000</pubDate>
+      <pubDate>Sun, 05 Aug 2018 22:32:00 +0000</pubDate>
       
       <guid>/tags/sdr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Shiny</title>
+      <link>/tags/shiny/</link>
+      <pubDate>Sun, 05 Aug 2018 22:32:00 +0000</pubDate>
+      
+      <guid>/tags/shiny/</guid>
       <description></description>
     </item>
     
@@ -60,7 +78,7 @@
     <item>
       <title>Surveys</title>
       <link>/tags/surveys/</link>
-      <pubDate>Thu, 02 Aug 2018 15:41:00 +0000</pubDate>
+      <pubDate>Sun, 05 Aug 2018 22:32:00 +0000</pubDate>
       
       <guid>/tags/surveys/</guid>
       <description></description>
@@ -78,7 +96,7 @@
     <item>
       <title>Tutorial</title>
       <link>/tags/tutorial/</link>
-      <pubDate>Thu, 02 Aug 2018 15:41:00 +0000</pubDate>
+      <pubDate>Sun, 05 Aug 2018 22:32:00 +0000</pubDate>
       
       <guid>/tags/tutorial/</guid>
       <description></description>

@@ -1,0 +1,45 @@
+---
+title: "Shiny App for exploring harmonized survey data (Survey Data Recycling v.1.0)"
+author: "Marta Kołczyńska"
+date: 2018-08-05T22:32:00
+categories: ["SDR"]
+tags: ["surveys", "SDR", "R", "cross-national research", "shiny", "plotly", "tutorial"]
+output: 
+  blogdown::html_page:
+    toc: true
+
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#instructions">Instructions</a></li>
+<li><a href="#references">References</a></li>
+</ul>
+</div>
+
+<p> </p>
+<p>In the <a href="https://martakolczynska.netlify.com/post/sdr-exploration/">previous post</a> I wrote about downloading and exploring the <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q">Survey Data Recycling (SDR), version 1.0 dataset</a>, which consists of selected harmonized variables from 22 survey projects, 1966-2013.</p>
+<p>The <a href="dataharmonization.org">SDR project</a> will develop a website for browsing, subsetting, downloading, and visualizing data from the SDR project. This website is currently under construction. Meanwhile, I made a Shiny app with basic functionalities of the future on-line browsing and subsetting tool (also serves as its mock-up): <a href="https://mkolczynska.shinyapps.io/sdr_data_browser/" class="uri">https://mkolczynska.shinyapps.io/sdr_data_browser/</a>.</p>
+<p><em>Please note that this Shiny app is not a final product, so it might still have some issues. This applies most likely to the design though; the accuracy of the information displayed has been checked and no errors were found.</em></p>
+<p><em>Any recommendations regarding the functionalities or design of the SDR selection tool are very welcome!</em></p>
+<div id="instructions" class="section level3">
+<h3>Instructions</h3>
+<p>To select a subset of the SDR masterfile, choose the variables that you would be interested in using, countries/world regions, survey projects, and the year range of interest.</p>
+<p>If you select one of the variables in the “political engagement” group (participation in demonstrations or signing petitions), you will additionally have an option to choose the number of years the question asked about, e.g. “Have you participated in a demonstrations in the last year?” versus “Have you participated in the last 3 years?”. “Ever” means that the the original survey question did not mention any time restriction.</p>
+<p><strong>Tabs:</strong></p>
+<p><strong>Info page</strong>: Instructions and references.</p>
+<p><strong>Coverage table</strong>: Availability of surveys meeting selected criteria (variables, countries, years, and projects) by country and year.</p>
+<p><strong>Coverage map</strong>: Availability of surveys meeting selected criteria (variables, countries, years, and projects) plotted on a world map.</p>
+<p><strong>Project contributions table</strong>: ‘Coverage table’ showing unique contributions of survey projects - to dostinguish the projects that contribute a lot of country-years from those that contribute a few (and possibly redundant ones).</p>
+<p><strong>Survey list</strong>: List of national surveys that meet the user’s criteria with selected characteristics (e.g., sample size, quality indicators).</p>
+<p> </p>
+</div>
+<div id="references" class="section level3">
+<h3>References</h3>
+<p><em>SDR Data and documentation:</em></p>
+<p>Slomczynski, Kazimierz M., J. Craig Jenkins, Irina Tomescu-Dubrow, Marta Kolczynska, Ilona Wysmulek, Olena Oleksiyenko, Przemek Powalko, Marcin W. Zielinski. 2017. “SDR Master Box.” <a href="https://doi.org/10.7910/DVN/VWGF5Q" class="uri">https://doi.org/10.7910/DVN/VWGF5Q</a>, Harvard Dataverse, V1, UNF:6:HIWud4wueVRsU8wTN+lySg==</p>
+<p><em>Software:</em></p>
+<p>R Core Team. 2018. R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</p>
+<p>R packages: <code>shiny plotly readstata13 Hmisc labelled plyr dplyr shinyTree janitor DT Rcpp digest</code></p>
+</div>
