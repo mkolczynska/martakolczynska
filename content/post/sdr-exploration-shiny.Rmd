@@ -15,7 +15,7 @@ In the [previous post](https://martakolczynska.netlify.com/post/sdr-exploration/
 
 The [SDR project](dataharmonization.org) will develop a website for browsing, subsetting, downloading, and visualizing data from the SDR project. This website is currently under construction. Meanwhile, I made a Shiny app with basic functionalities of the future on-line browsing and subsetting tool (also serves as its mock-up): https://mkolczynska.shinyapps.io/sdr_data_browser/. 
 
-*Please note that this Shiny app is not a final product, so it might still have some issues. This applies most likely to the design though; the accuracy of the information displayed has been checked and no errors were found.*
+*Please note that this Shiny app is not a final product, so it might still have some issues. This applies most likely to the design though; the accuracy of the information displayed has been thoroughly checked.*
 
 *Any recommendations regarding the functionalities or design of the SDR selection tool are very welcome!*
 
