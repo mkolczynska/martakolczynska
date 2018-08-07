@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/dot-plot-voting-ess/</loc>
+    <lastmod>2018-08-07T23:46:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/sdr-exploration-shiny/</loc>
     <lastmod>2018-08-05T07:32:00+00:00</lastmod>
   </url>
@@ -38,8 +43,32 @@
   </url>
   
   <url>
+    <loc>/tags/#swdchallenge/</loc>
+    <lastmod>2018-08-07T23:46:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/cross-national-research/</loc>
     <lastmod>2018-08-05T07:32:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/data-visualization/</loc>
+    <lastmod>2018-08-07T23:46:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/dot-plot/</loc>
+    <lastmod>2018-08-07T23:46:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/european-social-survey/</loc>
+    <lastmod>2018-08-07T23:46:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -51,7 +80,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-08-05T07:32:00+00:00</lastmod>
+    <lastmod>2018-08-07T23:46:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -62,8 +91,14 @@
   </url>
   
   <url>
+    <loc>/tags/political-inequality/</loc>
+    <lastmod>2018-08-07T23:46:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/post/</loc>
-    <lastmod>2018-08-05T07:32:00+00:00</lastmod>
+    <lastmod>2018-08-07T23:46:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -99,7 +134,7 @@
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2018-08-05T07:32:00+00:00</lastmod>
+    <lastmod>2018-08-07T23:46:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

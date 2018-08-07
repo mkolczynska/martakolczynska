@@ -1,0 +1,106 @@
+---
+title: "Dot plot challenge: Gender gap in voting in general elections in Europe"
+author: "Marta Kołczyńska"
+date: 2018-08-07T23:46:00
+topic: ["dataviz"]
+tags: ["data visualization", "#SWDchallenge", "dot plot", "European Social Survey", "political inequality"]
+output: 
+  blogdown::html_page:
+    toc: true
+---
+
+Responding to the Storytelling with Data challenge [#SWDchallenge](http://www.storytellingwithdata.com/swdchallenge/), whose August edition stars the dot plot, here is a simple plot of the gender gap in voting in national elections using the most recent 8th Round of the [European Social Survey, ESS](http://www.europeansocialsurvey.org/).
+
+### Getting and reshaping the data
+
+
+```{r setup, warning=FALSE, message=FALSE}
+library(essurvey) # getting European Social Survey data
+library(tidyverse) # data cleaning and reshaping
+library(countrycode) # switching between country codes
+library(ggplot2) # plots
+```
+
+With the `essurvey` package the ESS data can be downloaded directly to R, while thanks to the `tidyverse` data manipulation boils down to a single block of code.
+
+```{r eval=FALSE}
+set_email("your@email.here") # login email to the ESS data
+```
+```{r ess, warning=FALSE, message=FALSE, results='hide'}
+ess8 <- import_rounds(8) # imports Round 8 of ESS
+ess <- recode_missings(ess8) %>% # recodes missing values to NAs
+  select(idno, cntry, gndr, vote, pspwght) # selects the necessary variables
+
+# recoding "not eligible" to missing
+ess$vote1 <- plyr::mapvalues(ess$vote, from = c(1,2,3,NA), to = c(1,0,0,NA)) 
+```
+
+Custom theme to make the dot plot more clear:
+
+```{r theme, warning=FALSE, message=FALSE}
+theme_dotplot <- theme_bw(14) +
+  theme(axis.text.y = element_text(size = rel(1.1)),
+        axis.ticks.y = element_blank(),
+        axis.text.x = element_text(size = rel(1.1)),
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.5),
+        panel.grid.minor.x = element_blank())
+```
+
+The gender gap in voting is a ratio of two proportions: (1) the (weighted) proportion of positive answers to the question about voting in the last general election among women divided by (2) the (weighted) proportion of positive answers to the question about voting in the last election among men.
+
+```{r plot code, eval=FALSE}
+ess %>% filter(!is.na(gndr)) %>% group_by(cntry, gndr) %>%
+  summarise(vote = weighted.mean(vote1, pspwght, na.rm = TRUE)) %>%
+  spread(gndr, vote) %>%
+  mutate(ratio = `2` / `1`,
+         country_name = countrycode(cntry, 'iso2c', 'country.name')) %>%
+  ggplot(., aes(x = ratio, y = reorder(country_name, ratio))) +  # sort country name by ratio
+  theme_dotplot +                                                # adding custom theme
+  geom_point(col = "chartreuse3", size = 2.5) +                  # formatting the dots
+  scale_x_continuous(limits = c(0.85,1.2),
+                     breaks = seq(0.85,1.2,0.05)) +
+  geom_vline(xintercept = 1, color = "chocolate1") +    # adding the vertical line at 1
+  xlab("") + ylab("") +
+  ggtitle("Women-to-men election turnout ratio") + 
+  labs(caption="Source: European Social Survey Round 8") + 
+  annotate("text", x = 0.927, y = 22.8,                 # adding custom text
+           label = "women's turnout < men's turnout", 
+           col = "chocolate1", size = 3.1) + 
+  annotate("text", x = 1.073, y = 22.8, 
+           label = "women's turnout > men's turnout", 
+           col = "chocolate1", size = 3.1)
+```
+
+### The Dot Plot
+
+In the plot below, countries are sorted according to the descending order of the turnout ratio.
+Values above 1 indicate that more women went to vote than men. This is the case in Russia, where declared turnout among women is 16% higher than among men. In Czechia turnout was about 10% higher among men than among women. 
+
+Overall women are more likely to vote than men in more than half of the surveyed countries, while in about 1/3 of countries men tend to vote more often. There is a mix of western and eastern European countries in both groups. Who will explain this pattern?
+
+```{r plot, echo=FALSE}
+ess %>% filter(!is.na(gndr)) %>% group_by(cntry, gndr) %>%
+  summarise(vote = weighted.mean(vote1, pspwght, na.rm = TRUE)) %>%
+  spread(gndr, vote) %>%
+  mutate(ratio = `2` / `1`,
+         country_name = countrycode(cntry, 'iso2c', 'country.name')) %>%
+  ggplot(., aes(x = ratio, y = reorder(country_name, ratio))) +  # sort country name by ratio
+  theme_dotplot +                                                # adding custom theme
+  geom_point(col = "chartreuse3", size = 2.5) +                  # formatting the dots
+  scale_x_continuous(limits = c(0.85,1.2),
+                     breaks = seq(0.85,1.2,0.05)) +
+  geom_vline(xintercept = 1, color = "chocolate1") +    # adding the vertical line at 1
+  xlab("") + ylab("") +
+  ggtitle("Women-to-men election turnout ratio") + 
+  labs(caption="Source: European Social Survey Round 8") + 
+  annotate("text", x = 0.927, y = 22.8,                 # adding custom text
+           label = "women's turnout < men's turnout", 
+           col = "chocolate1", size = 3.1) + 
+  annotate("text", x = 1.073, y = 22.8, 
+           label = "women's turnout > men's turnout", 
+           col = "chocolate1", size = 3.1)
+```
+
+[^1]: The original question (B13) read: `Some people don’t vote nowadays for one reason or another. Did you vote in the last [country] national14 election in [month/year]?` with three response categories: `yes`, `no`, and `not eligible`. Those who responded with `not eligible` were excluded from the calculation.
+

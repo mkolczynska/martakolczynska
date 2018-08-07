@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="generator" content="Hugo 0.42.2" />
 
-  <title>Shiny app for exploring harmonized cross-national survey data (SDR v.1.0) &middot; Marta Kołczyńska</title>
+  <title>Dot plot challenge: Gender gap in voting in general elections in Europe &middot; Marta Kołczyńska</title>
 
   
   
@@ -217,7 +217,7 @@
 
 
 <div class="header">
-  <h1>Shiny app for exploring harmonized cross-national survey data (SDR v.1.0)</h1>
+  <h1>Dot plot challenge: Gender gap in voting in general elections in Europe</h1>
   <h2></h2>
 </div>
 <div class="content">
@@ -226,7 +226,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>05 Aug 2018, 07:32</time>
+    <time>07 Aug 2018, 23:46</time>
   </div>
 
   
@@ -239,19 +239,15 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="/tags/surveys">surveys</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="/tags/data-visualization">data visualization</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/sdr">SDR</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="/tags/#swdchallenge">#SWDchallenge</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/r">R</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="/tags/dot-plot">dot plot</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/cross-national-research">cross-national research</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="/tags/european-social-survey">European Social Survey</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/shiny">shiny</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="/tags/plotly">plotly</a>&nbsp;&#47;
-    
-      <a class="post-taxonomy-tag" href="/tags/tutorial">tutorial</a>
+      <a class="post-taxonomy-tag" href="/tags/political-inequality">political inequality</a>
     
   </div>
   
@@ -261,35 +257,61 @@
 
   <div id="TOC">
 <ul>
-<li><a href="#instructions">Instructions</a></li>
-<li><a href="#references">References</a></li>
+<li><a href="#getting-and-reshaping-the-data">Getting and reshaping the data</a></li>
+<li><a href="#the-dot-plot">The Dot Plot</a></li>
 </ul>
 </div>
 
-<p> </p>
-<p>In the <a href="https://martakolczynska.netlify.com/post/sdr-exploration/">previous post</a> I wrote about downloading and exploring the <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q">Survey Data Recycling (SDR), version 1.0 dataset</a>, which consists of selected harmonized variables from 22 survey projects, 1966-2013.</p>
-<p>The <a href="dataharmonization.org">SDR project</a> will develop a website for browsing, subsetting, downloading, and visualizing data from the SDR project. This website is currently under construction. Meanwhile, I made a Shiny app with basic functionalities of the future on-line browsing and subsetting tool (also serves as its mock-up): <a href="https://mkolczynska.shinyapps.io/sdr_data_browser/" class="uri">https://mkolczynska.shinyapps.io/sdr_data_browser/</a>.</p>
-<p><em>Please note that this Shiny app is not a final product, so it might still have some issues. This applies most likely to the design though; the accuracy of the information displayed has been thoroughly checked.</em></p>
-<p><em>Any recommendations regarding the functionalities or design of the SDR selection tool are very welcome!</em></p>
-<div id="instructions" class="section level3">
-<h3>Instructions</h3>
-<p>To select a subset of the SDR masterfile, choose the variables that you would be interested in using, countries/world regions, survey projects, and the year range of interest.</p>
-<p>If you select one of the variables in the “political engagement” group (participation in demonstrations or signing petitions), you will additionally have an option to choose the number of years the question asked about, e.g. “Have you participated in a demonstrations in the last year?” versus “Have you participated in the last 3 years?”. “Ever” means that the the original survey question did not mention any time restriction.</p>
-<p><strong>Tabs:</strong></p>
-<p><strong>Info page</strong>: Instructions and references.</p>
-<p><strong>Coverage table</strong>: Availability of surveys meeting selected criteria (variables, countries, years, and projects) by country and year.</p>
-<p><strong>Coverage map</strong>: Availability of surveys meeting selected criteria (variables, countries, years, and projects) plotted on a world map.</p>
-<p><strong>Project contributions table</strong>: ‘Coverage table’ showing unique contributions of survey projects - to dostinguish the projects that contribute a lot of country-years from those that contribute a few (and possibly redundant ones).</p>
-<p><strong>Survey list</strong>: List of national surveys that meet the user’s criteria with selected characteristics (e.g., sample size, quality indicators).</p>
-<p> </p>
+<p>Responding to the Storytelling with Data challenge <a href="http://www.storytellingwithdata.com/swdchallenge/">#SWDchallenge</a>, whose August edition stars the dot plot, here is a simple plot of the gender gap in voting in national elections using the most recent 8th Round of the <a href="http://www.europeansocialsurvey.org/">European Social Survey, ESS</a>.</p>
+<div id="getting-and-reshaping-the-data" class="section level3">
+<h3>Getting and reshaping the data</h3>
+<pre class="r"><code>library(essurvey) # getting European Social Survey data
+library(tidyverse) # data cleaning and reshaping
+library(countrycode) # switching between country codes
+library(ggplot2) # plots</code></pre>
+<p>With the <code>essurvey</code> package the ESS data can be downloaded directly to R, while thanks to the <code>tidyverse</code> data manipulation boils down to a single block of code.</p>
+<pre class="r"><code>set_email(&quot;your@email.here&quot;) # login email to the ESS data</code></pre>
+<pre class="r"><code>ess8 &lt;- import_rounds(8) # imports Round 8 of ESS
+ess &lt;- recode_missings(ess8) %&gt;% # recodes missing values to NAs
+  select(idno, cntry, gndr, vote, pspwght) # selects the necessary variables
+
+# recoding &quot;not eligible&quot; to missing
+ess$vote1 &lt;- plyr::mapvalues(ess$vote, from = c(1,2,3,NA), to = c(1,0,0,NA)) </code></pre>
+<p>Custom theme to make the dot plot more clear:</p>
+<pre class="r"><code>theme_dotplot &lt;- theme_bw(14) +
+  theme(axis.text.y = element_text(size = rel(1.1)),
+        axis.ticks.y = element_blank(),
+        axis.text.x = element_text(size = rel(1.1)),
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.5),
+        panel.grid.minor.x = element_blank())</code></pre>
+<p>The gender gap in voting is a ratio of two proportions: (1) the (weighted) proportion of positive answers to the question about voting in the last general election among women divided by (2) the (weighted) proportion of positive answers to the question about voting in the last election among men.</p>
+<pre class="r"><code>ess %&gt;% filter(!is.na(gndr)) %&gt;% group_by(cntry, gndr) %&gt;%
+  summarise(vote = weighted.mean(vote1, pspwght, na.rm = TRUE)) %&gt;%
+  spread(gndr, vote) %&gt;%
+  mutate(ratio = `2` / `1`,
+         country_name = countrycode(cntry, &#39;iso2c&#39;, &#39;country.name&#39;)) %&gt;%
+  ggplot(., aes(x = ratio, y = reorder(country_name, ratio))) +  # sort country name by ratio
+  theme_dotplot +                                                # adding custom theme
+  geom_point(col = &quot;chartreuse3&quot;, size = 2.5) +                  # formatting the dots
+  scale_x_continuous(limits = c(0.85,1.2),
+                     breaks = seq(0.85,1.2,0.05)) +
+  geom_vline(xintercept = 1, color = &quot;chocolate1&quot;) +    # adding the vertical line at 1
+  xlab(&quot;&quot;) + ylab(&quot;&quot;) +
+  ggtitle(&quot;Women-to-men election turnout ratio&quot;) + 
+  labs(caption=&quot;Source: European Social Survey Round 8&quot;) + 
+  annotate(&quot;text&quot;, x = 0.927, y = 22.8,                 # adding custom text
+           label = &quot;women&#39;s turnout &lt; men&#39;s turnout&quot;, 
+           col = &quot;chocolate1&quot;, size = 3.1) + 
+  annotate(&quot;text&quot;, x = 1.073, y = 22.8, 
+           label = &quot;women&#39;s turnout &gt; men&#39;s turnout&quot;, 
+           col = &quot;chocolate1&quot;, size = 3.1)</code></pre>
 </div>
-<div id="references" class="section level3">
-<h3>References</h3>
-<p><em>SDR Data and documentation:</em></p>
-<p>Slomczynski, Kazimierz M., J. Craig Jenkins, Irina Tomescu-Dubrow, Marta Kolczynska, Ilona Wysmulek, Olena Oleksiyenko, Przemek Powalko, Marcin W. Zielinski. 2017. “SDR Master Box.” <a href="https://doi.org/10.7910/DVN/VWGF5Q" class="uri">https://doi.org/10.7910/DVN/VWGF5Q</a>, Harvard Dataverse, V1, UNF:6:HIWud4wueVRsU8wTN+lySg==</p>
-<p><em>Software:</em></p>
-<p>R Core Team. 2018. R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. <a href="https://www.R-project.org/" class="uri">https://www.R-project.org/</a>.</p>
-<p>R packages: <code>shiny plotly readstata13 Hmisc labelled plyr dplyr shinyTree janitor DT Rcpp digest</code></p>
+<div id="the-dot-plot" class="section level3">
+<h3>The Dot Plot</h3>
+<p>In the plot below, countries are sorted according to the descending order of the turnout ratio. Values above 1 indicate that more women went to vote than men. This is the case in Russia, where declared turnout among women is 16% higher than among men. In Czechia turnout was about 10% higher among men than among women.</p>
+<p>Overall women are more likely to vote than men in more than half of the surveyed countries, while in about 1/3 of countries men tend to vote more often. There is a mix of western and eastern European countries in both groups. Who will explain this pattern?</p>
+<p><img src="/post/dot-plot-voting-ess_files/figure-html/plot-1.png" width="672" /></p>
 </div>
 
 
@@ -297,13 +319,13 @@
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="/post/sdr-exploration/"><i class="fa fa-chevron-left"></i></a>
+    <a href="/post/sdr-exploration-shiny/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="/post/sdr-exploration/">Exploring the dataset of survey datasets: Survey Data Recycling version 1.0</a>
+      <a href="/post/sdr-exploration-shiny/">Shiny app for exploring harmonized cross-national survey data (SDR v.1.0)</a>
     </nav>
     
   </div>
@@ -312,14 +334,8 @@
   </div>
   <div class="pure-u-10-24">
     
-    <nav class="next">
-      <a href="/post/dot-plot-voting-ess/">Dot plot challenge: Gender gap in voting in general elections in Europe</a>
-    </nav>
-    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
-    
-    <a href="/post/dot-plot-voting-ess/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>

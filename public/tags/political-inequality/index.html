@@ -230,13 +230,13 @@
   
     <article>
   <header>
-    <h2><a href="/post/participation-inequality-ess/">Inequality of political participation, European Social Survey 8</a></h2>
+    <h2><a href="/post/dot-plot-voting-ess/">Dot plot challenge: Gender gap in voting in general elections in Europe</a></h2>
 
     <div class="post-meta">
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>30 Jul 2018, 03:41</time>
+    <time>07 Aug 2018, 23:46</time>
   </div>
 
   
@@ -249,11 +249,13 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="/tags/surveys">surveys</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="/tags/data-visualization">data visualization</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/ess">ESS</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="/tags/#swdchallenge">#SWDchallenge</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/r">R</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="/tags/dot-plot">dot plot</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/european-social-survey">European Social Survey</a>&nbsp;&#47;
     
       <a class="post-taxonomy-tag" href="/tags/political-inequality">political inequality</a>
     
@@ -266,12 +268,13 @@
   </header>
 
   <p>
-  Inequality of political participationlibrary(ess)library(democracyData) # devtools::install_github(&quot;xmarquez/democracyData&quot;)library(vdem) # devtools::install_github(&quot;xmarquez/vdem&quot;)library(tidyverse) # manipulating the datalibrary(labelled) # dealing with data labelslibrary(plyr) # mapvalueslibrary(countrycode) # converting country codeslibrary(reldist) # gini indexlibrary(DescTools) # Atkinson indexlibrary(entropy) # entropylibrary(plotly) # interactive plotslibrary(corrplot) # colored correlation matrixlibrary(rijkspalette) # pretty colors for the graphsESS dataess8 &lt;- ess_rounds(c(8), &quot;mkolczynska@gmail.com&quot;)ess &lt;- recode_missings(ess8) %&gt;% select(idno, cntry, nwspol, vote, contplt, wrkprty, wrkorg, badge, sgnptit, pbldmn, bctprd, pstplonl, agea, gndr,pspwght)val_labels(ess) &lt;- NULLess$news &lt;- ifelse(ess$nwspol &lt; 30 | is.
+  Getting and reshaping the dataThe Dot PlotResponding to the Storytelling with Data challenge #SWDchallenge, whose August edition stars the dot plot, here is a simple plot of the gender gap in voting in national elections using the most recent 8th Round of the European Social Survey, ESS.
+Getting and reshaping the datalibrary(essurvey) # getting European Social Survey datalibrary(tidyverse) # data cleaning and reshapinglibrary(countrycode) # switching between country codeslibrary(ggplot2) # plotsWith the essurvey package the ESS data can be downloaded directly to R, while thanks to the tidyverse data manipulation boils down to a single block of code.
   </p>
 
   
   <footer>
-    <a href="/post/participation-inequality-ess/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
+    <a href="/post/dot-plot-voting-ess/">Read more<i class="fa fa-angle-double-right fa-fw"></i></a>
   </footer>
   
 </article>
@@ -283,6 +286,17 @@
 </div>
 <script src="/js/ui.js"></script>
 
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-123060748-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 
 
 

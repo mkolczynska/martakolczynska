@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Sun, 05 Aug 2018 07:32:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 07 Aug 2018 23:46:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>#Swdchallenge</title>
+      <link>/tags/#swdchallenge/</link>
+      <pubDate>Tue, 07 Aug 2018 23:46:00 +0000</pubDate>
+      
+      <guid>/tags/#swdchallenge/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Cross National Research</title>
@@ -18,6 +27,33 @@
       <pubDate>Sun, 05 Aug 2018 07:32:00 +0000</pubDate>
       
       <guid>/tags/cross-national-research/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Visualization</title>
+      <link>/tags/data-visualization/</link>
+      <pubDate>Tue, 07 Aug 2018 23:46:00 +0000</pubDate>
+      
+      <guid>/tags/data-visualization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dot Plot</title>
+      <link>/tags/dot-plot/</link>
+      <pubDate>Tue, 07 Aug 2018 23:46:00 +0000</pubDate>
+      
+      <guid>/tags/dot-plot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>European Social Survey</title>
+      <link>/tags/european-social-survey/</link>
+      <pubDate>Tue, 07 Aug 2018 23:46:00 +0000</pubDate>
+      
+      <guid>/tags/european-social-survey/</guid>
       <description></description>
     </item>
     
@@ -36,6 +72,15 @@
       <pubDate>Sun, 05 Aug 2018 07:32:00 +0000</pubDate>
       
       <guid>/tags/plotly/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Political Inequality</title>
+      <link>/tags/political-inequality/</link>
+      <pubDate>Tue, 07 Aug 2018 23:46:00 +0000</pubDate>
+      
+      <guid>/tags/political-inequality/</guid>
       <description></description>
     </item>
     

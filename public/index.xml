@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Sun, 05 Aug 2018 07:32:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 07 Aug 2018 23:46:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Dot plot challenge: Gender gap in voting in general elections in Europe</title>
+      <link>/post/dot-plot-voting-ess/</link>
+      <pubDate>Tue, 07 Aug 2018 23:46:00 +0000</pubDate>
+      
+      <guid>/post/dot-plot-voting-ess/</guid>
+      <description>Getting and reshaping the dataThe Dot PlotResponding to the Storytelling with Data challenge #SWDchallenge, whose August edition stars the dot plot, here is a simple plot of the gender gap in voting in national elections using the most recent 8th Round of the European Social Survey, ESS.
+Getting and reshaping the datalibrary(essurvey) # getting European Social Survey datalibrary(tidyverse) # data cleaning and reshapinglibrary(countrycode) # switching between country codeslibrary(ggplot2) # plotsWith the essurvey package the ESS data can be downloaded directly to R, while thanks to the tidyverse data manipulation boils down to a single block of code.</description>
+    </item>
     
     <item>
       <title>Shiny app for exploring harmonized cross-national survey data (SDR v.1.0)</title>

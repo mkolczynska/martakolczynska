@@ -39,7 +39,7 @@ EQLS      | [European Quality of Life Survey](http://www.eurofound.europa.eu/sur
 ESS       | [European Social Survey](http://www.europeansocialsurvey.org/)      
 EVS       | [European Values Study](http://www.europeanvaluesstudy.eu/)
 ISJP      | [International Social Justice Project](https://www.sowi.hu-berlin.de/de/lehrbereiche/empisoz/forschung/archiv/isjp)
-ISSP      | [International Social Survey Programme](http://www.issp.org/)*
+ISSP      | [International Social Survey Programme](http://www.issp.org/)*z
 LB        | [Latinobarometro](http://www.latinobarometro.org/)
 LITS      | [Life in Transition Survey](http://www.ebrd.com/what-we-do/economic-research-and-data/data/lits.html)
 NBB       | [New Baltic Barometer](http://www.cspp.strath.ac.uk/catalog2_0.html)
