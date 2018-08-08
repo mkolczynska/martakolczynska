@@ -9,7 +9,7 @@ output:
     toc: true
 ---
 
-The August edition of the Storytelling with Data challenge [#SWDchallenge](http://www.storytellingwithdata.com/swdchallenge/) stars the dot plot. Here is a simple plot of the gender gap in voting in national elections using the most recent 8th Round of the [European Social Survey, ESS](http://www.europeansocialsurvey.org/).
+The August edition of the Storytelling with Data challenge [SWDchallenge](http://www.storytellingwithdata.com/swdchallenge/) stars the dot plot. Here is a simple plot of the gender gap in voting in national elections using the most recent 8th Round of the [European Social Survey, ESS](http://www.europeansocialsurvey.org/).
 
 ### Getting and reshaping the data
 
