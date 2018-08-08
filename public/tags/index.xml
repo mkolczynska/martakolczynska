@@ -7,19 +7,10 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Tue, 07 Aug 2018 12:46:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 05 Aug 2018 07:32:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>#Swdchallenge</title>
-      <link>/tags/#swdchallenge/</link>
-      <pubDate>Tue, 07 Aug 2018 12:46:00 +0000</pubDate>
-      
-      <guid>/tags/#swdchallenge/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>Cross National Research</title>
@@ -126,6 +117,15 @@
       <pubDate>Sun, 05 Aug 2018 07:32:00 +0000</pubDate>
       
       <guid>/tags/surveys/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Swdchallenge</title>
+      <link>/tags/swdchallenge/</link>
+      <pubDate>Tue, 07 Aug 2018 12:46:00 +0000</pubDate>
+      
+      <guid>/tags/swdchallenge/</guid>
       <description></description>
     </item>
     

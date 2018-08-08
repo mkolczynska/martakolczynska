@@ -3,13 +3,13 @@ title: "Dot plot challenge: Gender gap in voting in general elections in Europe"
 author: "Marta Kołczyńska"
 date: 2018-08-07T12:46:00
 topic: ["dataviz"]
-tags: ["data visualization", "#SWDchallenge", "dot plot", "European Social Survey", "political inequality"]
+tags: ["data visualization", "SWDchallenge", "dot plot", "European Social Survey", "political inequality"]
 output: 
   blogdown::html_page:
     toc: true
 ---
 
-Responding to the Storytelling with Data challenge [#SWDchallenge](http://www.storytellingwithdata.com/swdchallenge/), whose August edition stars the dot plot, here is a simple plot of the gender gap in voting in national elections using the most recent 8th Round of the [European Social Survey, ESS](http://www.europeansocialsurvey.org/).
+The August edition of the Storytelling with Data challenge [#SWDchallenge](http://www.storytellingwithdata.com/swdchallenge/) stars the dot plot. Here is a simple plot of the gender gap in voting in national elections using the most recent 8th Round of the [European Social Survey, ESS](http://www.europeansocialsurvey.org/).
 
 ### Getting and reshaping the data
 
