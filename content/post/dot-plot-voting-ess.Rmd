@@ -1,5 +1,5 @@
 ---
-title: "Dot plot challenge: Gender gap in voting in general elections in Europe"
+title: "Dot plot challenge: Voting gender gaps in Europe"
 author: "Marta Kołczyńska"
 date: 2018-08-07T12:46:00
 topic: ["dataviz"]
@@ -98,12 +98,12 @@ recode_missings(ess8) %>% # recodes missing values to NAs
   xlab("") + ylab("") +
   ggtitle("Women-to-men election turnout ratio") + 
   labs(caption="Source: European Social Survey Round 8") + 
-  annotate("text", x = 0.927, y = 22.8,  
+  annotate("text", x = 0.935, y = 22.8,  
            label = "women's turnout < men's turnout", 
-           col = "chocolate1", size = 3.1) + 
-  annotate("text", x = 1.06, y = 22.8, 
+           col = "chocolate1", size = 3) + 
+  annotate("text", x = 1.064, y = 22.8, 
            label = "women's turnout > men's turnout", 
-           col = "chocolate1", size = 3.1)
+           col = "chocolate1", size = 3)
 ```
 
 [^1]: The original question (B13) read: `Some people don’t vote nowadays for one reason or another. Did you vote in the last [country] national14 election in [month/year]?` with three response categories: `yes`, `no`, and `not eligible`. Those who responded with `not eligible` were excluded from the calculation.
