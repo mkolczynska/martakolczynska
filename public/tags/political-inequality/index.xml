@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Tue, 07 Aug 2018 23:46:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 07 Aug 2018 12:46:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/political-inequality/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Dot plot challenge: Gender gap in voting in general elections in Europe</title>
       <link>/post/dot-plot-voting-ess/</link>
-      <pubDate>Tue, 07 Aug 2018 23:46:00 +0000</pubDate>
+      <pubDate>Tue, 07 Aug 2018 12:46:00 +0000</pubDate>
       
       <guid>/post/dot-plot-voting-ess/</guid>
       <description>Getting and reshaping the dataThe Dot PlotResponding to the Storytelling with Data challenge #SWDchallenge, whose August edition stars the dot plot, here is a simple plot of the gender gap in voting in national elections using the most recent 8th Round of the European Social Survey, ESS.
