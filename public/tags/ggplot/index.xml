@@ -7,18 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Wed, 01 Aug 2018 13:13:14 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 10 Aug 2018 05:13:14 +0000</lastBuildDate>
     
 	<atom:link href="/tags/ggplot/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Measuring education: surveys vs. administrative records</title>
-      <link>/post/education-sdr-wdi/</link>
-      <pubDate>Wed, 01 Aug 2018 13:13:14 +0000</pubDate>
+      <title>Educational attainment: surveys vs. administrative records</title>
+      <link>/post/education-sdr-oecd/</link>
+      <pubDate>Fri, 10 Aug 2018 05:13:14 +0000</pubDate>
       
-      <guid>/post/education-sdr-wdi/</guid>
-      <description>ProblemSocial surveys commonly ask about respondents’ educational attainment, either about the highest completed level of education, or about the number of completed years of schooling, and sometimes both. Survey measurements of individual education can be aggregated to indicate the overall level of education in the society. Information about the country’s level of education can also be obtained from administrative data, such as the World Bank or UNESCO.</description>
+      <guid>/post/education-sdr-oecd/</guid>
+      <description>ProblemDataResults: Scatter plotsCloser look at ISSPBy-project and by-country plotswith Przemek Powałko
+tl;dr: General population surveys with representative samples should have a similar education structure as shown by data from administrative sources, especially if survey weights are used. In this post we compare cross-national survey data from the SUrvey Data Recycling project with educational attainment statistics from the OECD.</description>
     </item>
     
   </channel>

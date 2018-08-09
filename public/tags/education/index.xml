@@ -7,19 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Sun, 05 Aug 2018 22:32:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 10 Aug 2018 05:13:14 +0000</lastBuildDate>
     
 	<atom:link href="/tags/education/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Shiny App for exploring harmonized survey data (Survey Data Recycling v.1.0)</title>
-      <link>/post/sdr-exploration-shiny/</link>
-      <pubDate>Sun, 05 Aug 2018 22:32:00 +0000</pubDate>
+      <title>Educational attainment: surveys vs. administrative records</title>
+      <link>/post/education-sdr-oecd/</link>
+      <pubDate>Fri, 10 Aug 2018 05:13:14 +0000</pubDate>
       
-      <guid>/post/sdr-exploration-shiny/</guid>
-      <description>In the previous post I wrote about downloading and exploring the Survey Data Recycling (SDR), version 1.0 dataset, which consists of selected harmonized variables from 22 survey projects, 1966-2013.
-The SDR project will develop a website for browsing, subsetting, downloading, and visualizing data from the SDR project. This website is currently under construction. Meanwhile, basic functionalities of the future on-line browsing and subsetting tool are available here: https://mkolczynska.shinyapps.io/sdr_data_browser/</description>
+      <guid>/post/education-sdr-oecd/</guid>
+      <description>ProblemDataResults: Scatter plotsCloser look at ISSPBy-project and by-country plotswith Przemek Powałko
+tl;dr: General population surveys with representative samples should have a similar education structure as shown by data from administrative sources, especially if survey weights are used. In this post we compare cross-national survey data from the SUrvey Data Recycling project with educational attainment statistics from the OECD.</description>
     </item>
     
   </channel>
