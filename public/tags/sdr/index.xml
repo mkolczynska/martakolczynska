@@ -7,19 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Fri, 10 Aug 2018 05:13:14 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 13 Aug 2018 05:13:14 +0000</lastBuildDate>
     
 	<atom:link href="/tags/sdr/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Educational attainment: surveys vs. administrative records</title>
+      <title>Validating survey data: Educational attainment</title>
       <link>/post/education-sdr-oecd/</link>
-      <pubDate>Fri, 10 Aug 2018 05:13:14 +0000</pubDate>
+      <pubDate>Mon, 13 Aug 2018 05:13:14 +0000</pubDate>
       
       <guid>/post/education-sdr-oecd/</guid>
-      <description>ProblemDataResults: Scatter plotsCloser look at ISSPBy-project and by-country plotswith Przemek Powałko
-tl;dr: General population surveys with representative samples should have a similar education structure as shown by data from administrative sources, especially if survey weights are used. In this post we compare cross-national survey data from the SUrvey Data Recycling project with educational attainment statistics from the OECD.</description>
+      <description>Educational attainment dataOECD dataSDR dataCleaning and merging SDR and OECD dataResultsThe curious case of ISSP SwitzerlandConclusionAppendixwith Przemek Powałko
+tl;dr: General population surveys with representative samples should have a similar education structure as shown by data from administrative sources, especially if survey weights are used. In this post we compare sample aggregates from 15 cross-national survey projects (including the European Social Survey, the World Values Survey and the European Values Study, and others) from the Survey Data Recycling database with educational attainment statistics from the OECD.</description>
     </item>
     
     <item>
