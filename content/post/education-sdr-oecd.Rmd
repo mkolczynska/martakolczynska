@@ -38,9 +38,9 @@ where `t_edu` (the harmonized "education level" target variable) takes the follo
 `70 = master’s or equivalent level`  
 `80 = doctoral or equivalent level`  
 `90 = not elsewhere classified`  
-
+  
 and `c_edu_incomplete` is a flag indicating whether the given level of education has been completed (`c_edu_incomplete == 0`) or not (`c_edu_incomplete == 1`).  
-
+  
 After matching the SDR v.1.0 and OECD datasets (and losing some cases on both sides) I ended up with 542 cases (national samples) from 15 projects: Asian Barometer (ABS), Afrobarometer (AFB), Americas Barometer (AMB), Asia-Europe Survey (ASES), Consolidation and Democracy in Central Eastern Europe (CDCEE), Comparative National Elections Project (CNEP), European Quality of Life Survey (EQLS), European Social Survey (ESS,) European Values Study (EVS), International Social Justice Project (ISJP), International Social Survey Programme (ISSP), Latinobarometro (LB), Life in Transition Survey (LITS), New Baltic Barometer (NBB), and the World Values Survey (WVS), and for 38 countries (that the OECD dataset only has information for a limited number of countries).
 
 #### OECD data
@@ -53,7 +53,7 @@ The Educational attainment and labour-force status database has the code `NEAC_S
 After downloading the database I select the subset I'm interested in:  
 1. the indicator "Share of population by educational attainment" (`NEAC_SHARE_EA`),  
 2. the education level measured "At least upper secondary education" (`L3T8`),  
-3. year range excluding "Latest available year" (code `9999),  
+3. year range excluding "Latest available year" (code `9999`),  
 4. the type of the measure `VALUE` (as opposed to standard error, `SE`),  
 5. both sexes,  
 6. age range of 25-64 (`Y25T64`),  
@@ -187,7 +187,7 @@ Przemek and I checked the SDR v.1.0 documentation and the code used to harmonize
 | ![](issp-2007-ch-sdr.png){width=600px}  
 
 It seems that the problem lies in the recoding from `ch_degr` to `degree`, especially in the value labels “Lowest formal qualification”, which suggests primary school completion, as it was coded in SDR. Meanwhile the category “Lowest formal qualification” in `degree` includes both “Primary school” and “Secondary school” from `ch_degr`, which would be assigned different ISCED codes. As a consequence of the misclassification of “Lowest formal qualification”, “Above lowest qualification” was understood as levels above primary, i.e., lower secondary, but not necessarily completed upper secondary.  
-An alternative (hypothetical) mapping presented In Table 3 uses the country-specific `ch_degr` variable as the source and maps it to categories of SDR’s `t_edu`. In this scenario all the categories highlighted in blue would be assigned target codes corresponding to upper secondary education or more, resulting in the share of respondents with at least upper secondary education of 86%, i.e., matching the OECD value.
+An alternative (hypothetical) mapping presented in Table 3 uses the country-specific `ch_degr` variable as the source and maps it to categories of SDR’s `t_edu`. In this scenario all the categories highlighted in blue would be assigned target codes corresponding to upper secondary education or more, resulting in the share of respondents with at least upper secondary education of 86%, i.e., matching the OECD value.
 
 | Table 3: Hypothetical mapping scheme of ISSP/2007/Switzerland 
 | ![](issp-2007-ch-sdr-hypo.png){width=600px}  

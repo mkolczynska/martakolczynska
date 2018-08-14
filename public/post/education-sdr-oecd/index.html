@@ -302,7 +302,10 @@
 <p>After downloading the database I select the subset I’m interested in:<br />
 1. the indicator “Share of population by educational attainment” (<code>NEAC_SHARE_EA</code>),<br />
 2. the education level measured “At least upper secondary education” (<code>L3T8</code>),<br />
-3. year range excluding “Latest available year” (code <code>9999),   4. the type of the measure</code>VALUE<code>(as opposed to standard error,</code>SE<code>),   5. both sexes,   6. age range of 25-64 (</code>Y25T64`),<br />
+3. year range excluding “Latest available year” (code <code>9999</code>),<br />
+4. the type of the measure <code>VALUE</code> (as opposed to standard error, <code>SE</code>),<br />
+5. both sexes,<br />
+6. age range of 25-64 (<code>Y25T64</code>),<br />
 7. only individual countries, i.e. excluding country groups such as the G20 or the OECD average.</p>
 <p>But first, all the packages:</p>
 <pre class="r"><code>library(OECD) # getting OECD data
@@ -581,7 +584,7 @@ CH
 <div style="white-space: pre-line;">Table 2: Mapping scheme of ISSP/2007/Switzerland: <code>degree</code>, <code>ch_degr</code>, <code>t_edu</code>
 <img src="issp-2007-ch-sdr.png" width="600" /></div>
 <p>It seems that the problem lies in the recoding from <code>ch_degr</code> to <code>degree</code>, especially in the value labels “Lowest formal qualification”, which suggests primary school completion, as it was coded in SDR. Meanwhile the category “Lowest formal qualification” in <code>degree</code> includes both “Primary school” and “Secondary school” from <code>ch_degr</code>, which would be assigned different ISCED codes. As a consequence of the misclassification of “Lowest formal qualification”, “Above lowest qualification” was understood as levels above primary, i.e., lower secondary, but not necessarily completed upper secondary.<br />
-An alternative (hypothetical) mapping presented In Table 3 uses the country-specific <code>ch_degr</code> variable as the source and maps it to categories of SDR’s <code>t_edu</code>. In this scenario all the categories highlighted in blue would be assigned target codes corresponding to upper secondary education or more, resulting in the share of respondents with at least upper secondary education of 86%, i.e., matching the OECD value.</p>
+An alternative (hypothetical) mapping presented in Table 3 uses the country-specific <code>ch_degr</code> variable as the source and maps it to categories of SDR’s <code>t_edu</code>. In this scenario all the categories highlighted in blue would be assigned target codes corresponding to upper secondary education or more, resulting in the share of respondents with at least upper secondary education of 86%, i.e., matching the OECD value.</p>
 <div style="white-space: pre-line;">Table 3: Hypothetical mapping scheme of ISSP/2007/Switzerland
 <img src="issp-2007-ch-sdr-hypo.png" width="600" /></div>
 <p>Data dictionaries of the source variables for <code>t_edu</code> (i.e., the non-country-specific education variables) from other ISSP waves (see <a href="#appendix">Appendix</a>) show that the “Lowest formal qualification” category is present in all those ISSP waves (2004, 2006, 2007, 2008, 2009, 2010), where ca. 40% of the Swiss sample in SDR has at least upper secondary education. The earliest and latest wave of ISSP (1996, 2011) have different sets of response categories in the recoded education variable, which did not result in such errors when harmonizing them in SDR. The relevant variable in ISSP/1998 does not have the “Lowest formal qualification” or “Above lowest qualification” categories, and yet the share of respondents with at least upper secondary education based on the harmonized <code>t_edu</code> variable in SDR is less than 40. This requires further investigation.</p>
