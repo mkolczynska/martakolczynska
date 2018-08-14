@@ -12,7 +12,7 @@ output:
 
 **with Przemek Powałko**
 
-*tl;dr: General population surveys with representative samples should have a similar education structure as shown by data from administrative sources, especially if survey weights are used. In this post we compare sample aggregates from 15 cross-national survey projects (including the European Social Survey, the World Values Survey and the European Values Study, and others) from the Survey Data Recycling database with educational attainment statistics from the OECD. We find a strong positive correlation between both datasets, with some interesting deviations that we start to investigate.*
+*tl;dr: General population surveys with representative samples should have a similar education structure as shown by data from administrative sources, especially if survey weights are used. In this post we compare sample aggregates from 15 cross-national survey projects (including the European Social Survey, the World Values Survey and the European Values Study, and others) from the Survey Data Recycling database with educational attainment statistics from the OECD. We find a strong positive correlation between the two education variables, with some interesting deviations that we start to investigate.*
 
 &nbsp;  
 
