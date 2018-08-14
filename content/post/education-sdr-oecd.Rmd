@@ -38,7 +38,9 @@ where `t_edu` (the harmonized "education level" target variable) takes the follo
 `70 = master’s or equivalent level`  
 `80 = doctoral or equivalent level`  
 `90 = not elsewhere classified`  
+
 and `c_edu_incomplete` is a flag indicating whether the given level of education has been completed (`c_edu_incomplete == 0`) or not (`c_edu_incomplete == 1`).  
+
 After matching the SDR v.1.0 and OECD datasets (and losing some cases on both sides) I ended up with 542 cases (national samples) from 15 projects: Asian Barometer (ABS), Afrobarometer (AFB), Americas Barometer (AMB), Asia-Europe Survey (ASES), Consolidation and Democracy in Central Eastern Europe (CDCEE), Comparative National Elections Project (CNEP), European Quality of Life Survey (EQLS), European Social Survey (ESS,) European Values Study (EVS), International Social Justice Project (ISJP), International Social Survey Programme (ISSP), Latinobarometro (LB), Life in Transition Survey (LITS), New Baltic Barometer (NBB), and the World Values Survey (WVS), and for 38 countries (that the OECD dataset only has information for a limited number of countries).
 
 #### OECD data
@@ -46,7 +48,7 @@ After matching the SDR v.1.0 and OECD datasets (and losing some cases on both si
 Let's start with the OECD data. The function `get_datasets` from the [`oecd` package](https://github.com/expersso/OECD) gets the list of available datasets. `search_dataset` searches for keywords among the available datasets.
 The Educational attainment and labour-force status database has the code `NEAC_SHARE_EA`. With this code, the database can be downloaded with the `get_dataset` function.
 
-*Note: The entire database is huge and takes several minutes to download. According to the `oecd` package [instructions](https://github.com/expersso/OECD), it is possible to specify a filter in `get_dataset`. This would be great, since I only need a small subset of the data, but unfortunately I haven't been able to get the filetr to work.*
+*Note: The entire database is huge and takes several minutes to download. According to the `oecd` package [instructions](https://github.com/expersso/OECD), it is possible to specify a filter in `get_dataset`. This would be great, since I only need a small subset of the data, but unfortunately I haven't been able to get the filter to work.*
 
 After downloading the database I select the subset I'm interested in:  
 1. the indicator "Share of population by educational attainment" (`NEAC_SHARE_EA`),  
@@ -107,8 +109,8 @@ master <- haven::read_dta(tmp)
 4. calculate weighted proportions of the `hs` variable by national sample - `mean_hs`,
 5. calculate the proportion of missing values in the `t_edu` variable,
 6. filter surveys for which `mean_hs` is available and which cover whole country samples (as opposed to split-country samples, such as West and East Germany or Wallonia and Flanders),
-7. covert SDR country codes from ISO2 to ISO3,
-8. merge the SDR data with the OCD data on the country code and year,
+7. covert SDR country codes from ISO2 to ISO3 (to match with OECD data),
+8. merge the SDR data with the OECD data on the country code and year,
 9. Construct a flag for survey proportion less than half of the OECD proportion,
 10. filter out cases with missing values.
 
@@ -142,7 +144,7 @@ The correlation (Pearson’s *r*) between the SDR percentage of respondents with
 ```{r scatter1, warning=FALSE, message=FALSE}
 ggplot(merge, aes(x=obsValue, y=mean_hs, col = off)) + geom_point(show.legend=F) + 
   scale_color_manual(values=c("black", "red")) +
-  ggtitle("Figure 1: Educational attainment from SDR and OECD") + 
+  ggtitle("Figure 1: Educational attainment from SDR v.1.0 and OECD") + 
   xlab("OECD: % of population with at least upper secondary education") +
   ylab("SDR: % of population with at least upper secondary education") +
   xlim(0,100) + ylim(0,100) +
@@ -150,13 +152,13 @@ ggplot(merge, aes(x=obsValue, y=mean_hs, col = off)) + geom_point(show.legend=F)
 
 ```
 
-Figure 2 presents separate plots for each survey project, showing that most of the problematic surveys are in the [International Social Survey Programme (ISSP)](http://issp.org), but also in ASES, CDCEE, EVS, and WVS. The data used in the above graphs can be accessed here: https://mkolczynska.shinyapps.io/sdr_oecd_education/.
+Figure 2 presents separate plots for each survey project, showing that most of the problematic surveys are in the International Social Survey Programme (ISSP), but also in ASES, CDCEE, EVS, and WVS. This Shiny app enables filtering of the data to be plotted and provides the data: https://mkolczynska.shinyapps.io/sdr_oecd_education/.
 
 
 ```{r scatter.project, warning=FALSE, message=FALSE}
 ggplot(merge, aes(x=obsValue, y=mean_hs, col = off)) + geom_point(show.legend=F) + 
   scale_color_manual(values=c("black", "red")) +
-  ggtitle("Figure 2: Educational attainment from surveys and OECD by project") + 
+  ggtitle("Figure 2: Educational attainment from SDR v.1.0 and OECD by project") + 
   xlab("OECD: % of population with at least upper secondary education") +
   ylab("SDR: % of population with at least upper secondary education") +
   xlim(0,100) + ylim(0,100) +
@@ -166,30 +168,31 @@ ggplot(merge, aes(x=obsValue, y=mean_hs, col = off)) + geom_point(show.legend=F)
 
 ### The curious case of ISSP Switzerland
 
-ISSP surveys in Switzerland are a particularly interesting case. As shown in the table below, the time series starts with survey proportions of respondents with at least upper secondary education (column “SDR v.1.0 % HS+”) of around 90% in 1996, drops to around 40% in 1998, stays low until 2010, and then increases back to 85% in 2011. Note that only selected waves of ISSP are included in SDR v.1.0. Also note that survey proportions from 2006 and 2007, and from 2008 and 2009 are identical; this is because these two waves were carried out together onn the same sample.
+ISSP surveys in Switzerland are a particularly interesting case. As shown in Table 1 below, the time series starts with survey proportions of respondents with at least upper secondary education (column “SDR % HS+”) of around 90% in 1996, drops to around 40% in 1998, stays low until 2010, and then increases back to 85% in 2011. Note that only selected waves of ISSP are included in SDR v.1.0. Also note that survey proportions from 2006 and 2007, and from 2008 and 2009 are identical; this is because these two waves were carried out together on the same sample.
 
 ```{r, warning=FALSE, message=FALSE}
 merge %>% filter(t_survey_name == "ISSP" & t_country_l1u == "CH") %>%
   arrange(t_survey_edition) %>% select(1,2,3,5,10) %>%
   kable(digits = 3, align=c("c", "c", "c", "c"), 
-        caption = "Educational attainment data from ISSP Switzerland and the OECD") %>%
+        caption = "Educational attainment data from ISSP Switzerland and the OECD",
+        col.names = c("Project", "Wave", "Country", "SDR % HS+", "OECD % HS+")) %>%
   kable_styling(full_width = F, position = "left") %>%
   column_spec(1:5, width = "10em")
 ```
 
 Further investigation required digging into the original data and documentation, which benefitted from the help of Przemek. It turns out that some ISSP waves have two variables capturing respondent's education level: one is country-specific and the other is recoded to a common scheme across countries by ISSP. For example, in ISSP/2007, the country-specific variable for Switzerland (`ch_degr`) has 14 categories (including one for missing values). The `degree` variable is the recoded one and has 7 categories (also including one for missing values). The frequencies in both variables are nice enough to make a relatively safe bet as to how `ch_degr` was mapped onto `degree` by the ISSP team.
-Przemek and I checked the SDR v.1.0 documentation and the code used to harmonize education variables from ISSP. It turns out that the source variable used for harmonization if ISSP/2007/CH was the recoded degree variable. The scheme below shows how the three variables are related.
+Przemek and I checked the SDR v.1.0 documentation and the code used to harmonize education variables from ISSP. It turns out that the source variable used for harmonization if ISSP/2007/Switzerland was the recoded `degree` variable. The scheme in Table 2 shows how the three variables are related.
 
-| Figure 3: Mapping scheme of ISSP/2007/Switzerland: `degree`, `ch_degr`, `t_edu` 
-| ![](issp-2007-ch-sdr.png){width=700px}  
+| Table 2: Mapping scheme of ISSP/2007/Switzerland: `degree`, `ch_degr`, `t_edu` 
+| ![](issp-2007-ch-sdr.png){width=600px}  
 
 It seems that the problem lies in the recoding from `ch_degr` to `degree`, especially in the value labels “Lowest formal qualification”, which suggests primary school completion, as it was coded in SDR. Meanwhile the category “Lowest formal qualification” in `degree` includes both “Primary school” and “Secondary school” from `ch_degr`, which would be assigned different ISCED codes. As a consequence of the misclassification of “Lowest formal qualification”, “Above lowest qualification” was understood as levels above primary, i.e., lower secondary, but not necessarily completed upper secondary.  
-An alternative (hypothetical) mapping presented below uses the country-specific `ch_degr` variable as the source and maps it to categories of SDR’s `t_edu`. In this scenario all the categories highlighted in blue would be assigned target codes corresponding to upper secondary education or more, resulting in the share of respondents with at least upper secondary education of 86%, i.e., matching the OECD value.
+An alternative (hypothetical) mapping presented In Table 3 uses the country-specific `ch_degr` variable as the source and maps it to categories of SDR’s `t_edu`. In this scenario all the categories highlighted in blue would be assigned target codes corresponding to upper secondary education or more, resulting in the share of respondents with at least upper secondary education of 86%, i.e., matching the OECD value.
 
-| Figure 4: Hypothetical mapping scheme of ISSP/2007/Switzerland 
-| ![](issp-2007-ch-sdr-hypo.png){width=700px}  
+| Table 3: Hypothetical mapping scheme of ISSP/2007/Switzerland 
+| ![](issp-2007-ch-sdr-hypo.png){width=600px}  
 
-Data dictionaries of the source variables for `t_edu` (i.e., the non-country-specific education variables) from other ISSP waves (see [Appendix](#appendix) show that the “Lowest formal qualification” category is present in all those ISSP waves (2004, 2006, 2007, 2008, 2009, 2010), where ca. 40% of the Swiss sample in SDR has at least upper secondary education. The earliest and latest wave of ISSP (1996, 2011) have different sets of response categories in the recoded education variable, which did not result in such errors when harmonizing them in SDR. The relevant variable in ISSP/1998 does not have the “Lowest formal qualification” or “Above lowest qualification” categories, and yet the share of respondents with at least upper secondary education based on the harmonized `t_edu` variable in SDR is less than 40. This requires further investigation.
+Data dictionaries of the source variables for `t_edu` (i.e., the non-country-specific education variables) from other ISSP waves (see [Appendix](#appendix)) show that the “Lowest formal qualification” category is present in all those ISSP waves (2004, 2006, 2007, 2008, 2009, 2010), where ca. 40% of the Swiss sample in SDR has at least upper secondary education. The earliest and latest wave of ISSP (1996, 2011) have different sets of response categories in the recoded education variable, which did not result in such errors when harmonizing them in SDR. The relevant variable in ISSP/1998 does not have the “Lowest formal qualification” or “Above lowest qualification” categories, and yet the share of respondents with at least upper secondary education based on the harmonized `t_edu` variable in SDR is less than 40. This requires further investigation.
 
 
 ### Conclusion
