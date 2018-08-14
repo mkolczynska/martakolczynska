@@ -1,5 +1,5 @@
 ---
-title: "Validating survey data: Educational attainment"
+title: "Validating survey data: Educational attainment in SDR and the OECD"
 author: "Marta Kołczyńska"
 date: 2018-08-13T05:13:14
 categories: ["R"]
@@ -152,7 +152,7 @@ ggplot(merge, aes(x=obsValue, y=mean_hs, col = off)) + geom_point(show.legend=F)
 
 ```
 
-Figure 2 presents separate plots for each survey project, showing that most of the problematic surveys are in the International Social Survey Programme (ISSP), but also in ASES, CDCEE, EVS, and WVS. This Shiny app enables filtering of the data to be plotted and provides the data: https://mkolczynska.shinyapps.io/sdr_oecd_education/.
+Figure 2 presents separate plots for each survey project, showing that most of the problematic surveys are in the International Social Survey Programme (ISSP), but also in ASES, CDCEE, EVS, and WVS. This Shiny app enables protting the data by survey projects and makes available the data: https://mkolczynska.shinyapps.io/sdr_oecd_education/.
 
 
 ```{r scatter.project, warning=FALSE, message=FALSE}

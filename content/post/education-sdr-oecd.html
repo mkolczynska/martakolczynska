@@ -1,5 +1,5 @@
 ---
-title: "Validating survey data: Educational attainment"
+title: "Validating survey data: Educational attainment in SDR and the OECD"
 author: "Marta Kołczyńska"
 date: 2018-08-13T05:13:14
 categories: ["R"]
@@ -131,7 +131,7 @@ master &lt;- haven::read_dta(tmp)</code></pre>
   xlim(0,100) + ylim(0,100) +
   geom_abline(intercept = 0, slope = 1)</code></pre>
 <p><img src="/post/education-sdr-oecd_files/figure-html/scatter1-1.png" width="672" /></p>
-<p>Figure 2 presents separate plots for each survey project, showing that most of the problematic surveys are in the International Social Survey Programme (ISSP), but also in ASES, CDCEE, EVS, and WVS. This Shiny app enables filtering of the data to be plotted and provides the data: <a href="https://mkolczynska.shinyapps.io/sdr_oecd_education/" class="uri">https://mkolczynska.shinyapps.io/sdr_oecd_education/</a>.</p>
+<p>Figure 2 presents separate plots for each survey project, showing that most of the problematic surveys are in the International Social Survey Programme (ISSP), but also in ASES, CDCEE, EVS, and WVS. This Shiny app enables protting the data by survey projects and makes available the data: <a href="https://mkolczynska.shinyapps.io/sdr_oecd_education/" class="uri">https://mkolczynska.shinyapps.io/sdr_oecd_education/</a>.</p>
 <pre class="r"><code>ggplot(merge, aes(x=obsValue, y=mean_hs, col = off)) + geom_point(show.legend=F) + 
   scale_color_manual(values=c(&quot;black&quot;, &quot;red&quot;)) +
   ggtitle(&quot;Figure 2: Educational attainment from SDR v.1.0 and OECD by project&quot;) + 
