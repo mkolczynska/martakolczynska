@@ -19,7 +19,7 @@
       
       <guid>/post/education-sdr-oecd/</guid>
       <description>Educational attainment dataOECD dataSDR dataCleaning and merging SDR and OECD dataResultsThe curious case of ISSP SwitzerlandConclusionAppendixwith Przemek Powałko
-tl;dr: General population surveys with representative samples should have a similar education structure as shown by data from administrative sources, especially if survey weights are used. In this post we compare sample aggregates from 15 cross-national survey projects (including the European Social Survey, the World Values Survey and the European Values Study, and others) from the Survey Data Recycling database with educational attainment statistics from the OECD.</description>
+*General population surveys with representative samples should have a similar education structure as shown by data from administrative sources, especially if survey weights are used. In this post we compare sample aggregates from 15 cross-national survey projects (including the European Social Survey, the World Values Survey and the European Values Study, and others) from the Survey Data Recycling database with educational attainment statistics from the OECD.</description>
     </item>
     
     <item>
@@ -48,7 +48,7 @@ The SDR project will develop a website for browsing, subsetting, downloading, an
       <pubDate>Thu, 02 Aug 2018 15:41:00 +0000</pubDate>
       
       <guid>/post/sdr-exploration/</guid>
-      <description>IntroductionDownloading the SDR dataExploring SDR: availability of variables by projectExploring SDR: availability of variables with different formulationsIdentifying surveys containing selected variablesSubsetting the Master FileCountry coverage plottl;dr: Combining data from different survey projects creates new opportunities for research, alas, at the cost of increased volume (obviously) and complexity of the data. The Survey Data Recycling project created a dataset with data from 22 international survey projects.</description>
+      <description>IntroductionDownloading the SDR dataExploring SDR: availability of variables by projectExploring SDR: availability of variables with different formulationsIdentifying surveys containing selected variablesSubsetting the Master FileCountry coverage plotCombining data from different survey projects creates new opportunities for research, alas, at the cost of increased volume (obviously) and complexity of the data. The Survey Data Recycling project created a dataset with data from 22 international survey projects.</description>
     </item>
     
     <item>

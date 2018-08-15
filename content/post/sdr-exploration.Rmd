@@ -9,7 +9,7 @@ output:
     toc: true
 ---
 
-*tl;dr: Combining data from different survey projects creates new opportunities for research, alas, at the cost of increased volume (obviously) and complexity of the data. The [Survey Data Recycling project](https://dataharmonization.org/) created a dataset with data from 22 international survey projects. This post shows how to access and explore this dataset, and how to select a subset for further analysis based on the availability of variables.*
+*Combining data from different survey projects creates new opportunities for research, alas, at the cost of increased volume (obviously) and complexity of the data. The [Survey Data Recycling project](https://dataharmonization.org/) created a dataset with data from 22 international survey projects. This post shows how to access and explore this dataset, and how to select a subset for further analysis based on the availability of variables.*
 
 
 ### Introduction
