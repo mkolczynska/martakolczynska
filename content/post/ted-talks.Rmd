@@ -1,7 +1,7 @@
 ---
 title: "Applause and laughter in TED talks with tidytext"
 author: "Marta Kołczyńska"
-date: 2018-08-22T15:34:00
+date: 2018-08-22T09:34:00
 categories: ["text"]
 tags: ["text analysis", "TED talks", "R", "SICSS", "tidytext"]
 output: 

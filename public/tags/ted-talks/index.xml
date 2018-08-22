@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Wed, 22 Aug 2018 15:34:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 22 Aug 2018 09:34:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/ted-talks/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Applause and laughter in TED talks with tidytext</title>
       <link>/post/ted-talks/</link>
-      <pubDate>Wed, 22 Aug 2018 15:34:00 +0000</pubDate>
+      <pubDate>Wed, 22 Aug 2018 09:34:00 +0000</pubDate>
       
       <guid>/post/ted-talks/</guid>
       <description>Setuptidy TED talksApplause, LOLSentimentThis year I spent two weeks of the summer attending the Summer Institute for Computational Social Science Parter Site (SICSS) in Tvärminne and Helsinki, Finland, organized by Matti Nelimarkka from Aalto University and the University of Helsinki assisted by two TAs: Juho Pääkkönen and Pihla Toivanen from the University of Helsinki. The summer institute brought together 19 graduate students and postdoctoral researchers representing the social sciences and computer sciences.</description>
