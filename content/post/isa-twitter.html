@@ -3,7 +3,7 @@ title: "ISA World Congress 2018: Analysis of tweets"
 author: "Marta Kołczyńska"
 date: 2018-07-23T15:24:00
 categories: ["text"]
-tags: ["R", "twitter", "text analysis", "ISA", "SICSS"]
+tags: ["R", "twitter", "text analysis", "ISA", "SICSS", "tidytext"]
 output: 
   blogdown::html_page:
     toc: true
@@ -103,7 +103,7 @@ isa_words &lt;- isa %&gt;%
 <pre class="r"><code>isa_words %&gt;%
   count(word) %&gt;%  # count word frequencies
   arrange(desc(n))  # sort by word frequency in a descending order</code></pre>
-<pre><code>## # A tibble: 11,278 x 2
+<pre><code>## # A tibble: 11,264 x 2
 ##    word          n
 ##    &lt;chr&gt;     &lt;int&gt;
 ##  1 social      936
@@ -114,9 +114,9 @@ isa_words &lt;- isa %&gt;%
 ##  6 religion    455
 ##  7 australia   394
 ##  8 japan       378
-##  9 paper       368
-## 10 africa      366
-## # ... with 11,268 more rows</code></pre>
+##  9 africa      366
+## 10 paper       366
+## # ... with 11,254 more rows</code></pre>
 </div>
 <div id="tweets-by-isa-resesarch-committee" class="section level3">
 <h3>Tweets by ISA Resesarch Committee</h3>
@@ -125,17 +125,17 @@ isa_words &lt;- isa %&gt;%
 <pre class="r"><code>isa_rc &lt;- isa_words %&gt;% filter(str_detect(tolower(word), &quot;rc[0-9]{2}&quot;))
 isa_rc$rc &lt;- str_extract(isa_rc$word, &quot;rc[0-9]{2}&quot;)
 head(isa_rc, 10)</code></pre>
-<pre><code>##              status_id          created_at word   rc
-## 1  1021107934162554880 2018-07-22 13:01:17 rc05 rc05
-## 2  1021098172905672704 2018-07-22 12:22:30 rc05 rc05
-## 3  1018991036654411776 2018-07-16 16:49:29 rc24 rc24
-## 4  1018140220150173696 2018-07-14 08:28:39 rc28 rc28
-## 5  1019043287603335168 2018-07-16 20:17:07 rc28 rc28
-## 6  1020067306486059008 2018-07-19 16:06:12 rc22 rc22
-## 7  1019681785985282048 2018-07-18 14:34:17 rc32 rc32
-## 8  1019681785985282048 2018-07-18 14:34:17 rc25 rc25
-## 9  1020331238635327488 2018-07-20 09:34:58 rc22 rc22
-## 10 1020046794900811776 2018-07-19 14:44:42 rc22 rc22</code></pre>
+<pre><code>##      status_id          created_at word   rc
+## 1  1.02111e+18 2018-07-22 13:01:17 rc05 rc05
+## 2   1.0211e+18 2018-07-22 12:22:30 rc05 rc05
+## 3  1.01899e+18 2018-07-16 16:49:29 rc24 rc24
+## 4  1.01814e+18 2018-07-14 08:28:39 rc28 rc28
+## 5  1.01904e+18 2018-07-16 20:17:07 rc28 rc28
+## 6  1.02007e+18 2018-07-19 16:06:12 rc22 rc22
+## 7  1.01968e+18 2018-07-18 14:34:17 rc32 rc32
+## 8  1.01968e+18 2018-07-18 14:34:17 rc25 rc25
+## 9  1.02033e+18 2018-07-20 09:34:58 rc22 rc22
+## 10 1.02005e+18 2018-07-19 14:44:42 rc22 rc22</code></pre>
 <p>Most tweets mention just one research committee, but some refer to two or more, particularly in the case of joint sessions. Some tweets also refer to the same RC with more than one hashtag, e.g. <code>#rc34youth</code> and <code>#rc34toronto</code>. These instances need to be collapsed to count as one.</p>
 <pre class="r"><code>isa_rc &lt;- isa_rc %&gt;% group_by(status_id, created_at, rc) %&gt;% summarise(count = n())</code></pre>
 <p>A simple word cloud reveals the unanimous winner in the RC tweet competition: RC34 Sociology of Youth.</p>

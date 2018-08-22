@@ -105,7 +105,7 @@
     <item>
       <title>R</title>
       <link>/tags/r/</link>
-      <pubDate>Mon, 13 Aug 2018 05:13:14 +0000</pubDate>
+      <pubDate>Wed, 22 Aug 2018 15:34:00 +0000</pubDate>
       
       <guid>/tags/r/</guid>
       <description></description>
@@ -132,7 +132,7 @@
     <item>
       <title>Sicss</title>
       <link>/tags/sicss/</link>
-      <pubDate>Mon, 23 Jul 2018 15:24:00 +0000</pubDate>
+      <pubDate>Wed, 22 Aug 2018 15:34:00 +0000</pubDate>
       
       <guid>/tags/sicss/</guid>
       <description></description>
@@ -157,11 +157,29 @@
     </item>
     
     <item>
+      <title>Ted Talks</title>
+      <link>/tags/ted-talks/</link>
+      <pubDate>Wed, 22 Aug 2018 15:34:00 +0000</pubDate>
+      
+      <guid>/tags/ted-talks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Text Analysis</title>
       <link>/tags/text-analysis/</link>
-      <pubDate>Mon, 23 Jul 2018 15:24:00 +0000</pubDate>
+      <pubDate>Wed, 22 Aug 2018 15:34:00 +0000</pubDate>
       
       <guid>/tags/text-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tidytext</title>
+      <link>/tags/tidytext/</link>
+      <pubDate>Wed, 22 Aug 2018 15:34:00 +0000</pubDate>
+      
+      <guid>/tags/tidytext/</guid>
       <description></description>
     </item>
     

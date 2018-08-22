@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/ted-talks/</loc>
+    <lastmod>2018-08-22T15:34:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/education-sdr-oecd/</loc>
     <lastmod>2018-08-13T05:13:14+00:00</lastmod>
   </url>
@@ -91,7 +96,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-08-13T05:13:14+00:00</lastmod>
+    <lastmod>2018-08-22T15:34:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -115,13 +120,13 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2018-08-13T05:13:14+00:00</lastmod>
+    <lastmod>2018-08-22T15:34:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2018-08-13T05:13:14+00:00</lastmod>
+    <lastmod>2018-08-22T15:34:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -139,7 +144,7 @@
   
   <url>
     <loc>/tags/sicss/</loc>
-    <lastmod>2018-07-23T15:24:00+00:00</lastmod>
+    <lastmod>2018-08-22T15:34:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -162,8 +167,20 @@
   </url>
   
   <url>
+    <loc>/tags/ted-talks/</loc>
+    <lastmod>2018-08-22T15:34:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/text-analysis/</loc>
-    <lastmod>2018-07-23T15:24:00+00:00</lastmod>
+    <lastmod>2018-08-22T15:34:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/tidytext/</loc>
+    <lastmod>2018-08-22T15:34:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
