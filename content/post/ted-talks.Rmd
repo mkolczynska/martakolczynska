@@ -10,7 +10,8 @@ output:
     toc_depth: 4
 ---
 
-This year I spent two weeks of the summer attending the [Summer Institute for Computational Social Science Parter Site (SICSS)](https://compsocialscience.github.io/summer-institute/2018/helsinki/) in Tvärminne and Helsinki, Finland, organized by Matti Nelimarkka from Aalto University and the University of Helsinki, assisted by two TAs: Juho Pääkkönen and Pihla Toivanen from the University of Helsinki. The summer institute brought together 19 graduate students and postdoctoral researchers representing the social sciences and computer science. The program included a combination of computational and data skills and social science topics. One of the methods we practiced was text analysis using the [`tidytext` package](https://github.com/juliasilge/tidytext). For a group project we analyzed a collection of tweets. Below is another simple exercise in text analysis with TED talk transcripts inspired by [David Robinson's *Examining the arc of 100,000 stories: a tidy analysis* post](http://varianceexplained.org/r/tidytext-plots/).
+This year I spent two weeks of the summer attending the [Summer Institute for Computational Social Science Parter Site (SICSS)](https://compsocialscience.github.io/summer-institute/2018/helsinki/) in Tvärminne and Helsinki, Finland, organized by Matti Nelimarkka from Aalto University and the University of Helsinki, assisted by two TAs: Juho Pääkkönen and Pihla Toivanen from the University of Helsinki. I highly recommend it to anyone with background in the social sciences and interested in computer and data sciences, and *vice versa*!  
+The summer institute brought together 19 graduate students and postdoctoral researchers representing the social sciences and computer science. The program included a combination of computational and data skills and social science topics. One of the methods we practiced was text analysis using the [`tidytext` package](https://github.com/juliasilge/tidytext). For a group project we analyzed a collection of tweets. Below is another simple exercise in text analysis with TED talk transcripts inspired by [David Robinson's *Examining the arc of 100,000 stories: a tidy analysis* post](http://varianceexplained.org/r/tidytext-plots/).
 
 ### Setup
 
@@ -139,4 +140,4 @@ ted_words %>%
 
 ```
 
-The TED talk dataset on Kaggle includes more information that would be interesting to analyze, including tags (key words), ratings, the number of comments, that's material for another post, perhaps.
+The TED talk dataset on Kaggle contains more information that would be interesting to analyze, including tags (key words), ratings, the number of comments, that's material for another post, perhaps.
