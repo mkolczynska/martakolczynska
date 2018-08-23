@@ -140,4 +140,4 @@ ted_words %>%
 
 ```
 
-The TED talk dataset on Kaggle contains more information that would be interesting to analyze, including tags (key words), ratings, the number of comments, that's material for another post, perhaps.
+The TED talk dataset on Kaggle contains more information that would be interesting to analyze, including tags (key words), ratings, the number of comments, but that's material for another post, perhaps.
