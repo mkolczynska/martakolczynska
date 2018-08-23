@@ -20,21 +20,20 @@ output:
 </ul>
 </div>
 
-<p>This year I spent two weeks of the summer attending the <a href="https://compsocialscience.github.io/summer-institute/2018/helsinki/">Summer Institute for Computational Social Science Parter Site (SICSS)</a> in Tvärminne and Helsinki, Finland, organized by Matti Nelimarkka from Aalto University and the University of Helsinki assisted by two TAs: Juho Pääkkönen and Pihla Toivanen from the University of Helsinki. The summer institute brought together 19 graduate students and postdoctoral researchers representing the social sciences and computer sciences. The program included a combination of computational and data skills and social science topics. One of the methods we practiced was text analysis using the <a href="https://github.com/juliasilge/tidytext"><code>tidytext</code> package</a>. For a group project we analyzed a collection of tweets. Below is another simple exercise in text analysis with TED talk transcripts inspired by <a href="http://varianceexplained.org/r/tidytext-plots/">David Robinson’s <em>Examining the arc of 100,000 stories: a tidy analysis</em> post</a>.</p>
+<p>This year I spent two weeks of the summer attending the <a href="https://compsocialscience.github.io/summer-institute/2018/helsinki/">Summer Institute for Computational Social Science Parter Site (SICSS)</a> in Tvärminne and Helsinki, Finland, organized by Matti Nelimarkka from Aalto University and the University of Helsinki, assisted by two TAs: Juho Pääkkönen and Pihla Toivanen from the University of Helsinki. The summer institute brought together 19 graduate students and postdoctoral researchers representing the social sciences and computer science. The program included a combination of computational and data skills and social science topics. One of the methods we practiced was text analysis using the <a href="https://github.com/juliasilge/tidytext"><code>tidytext</code> package</a>. For a group project we analyzed a collection of tweets. Below is another simple exercise in text analysis with TED talk transcripts inspired by <a href="http://varianceexplained.org/r/tidytext-plots/">David Robinson’s <em>Examining the arc of 100,000 stories: a tidy analysis</em> post</a>.</p>
 <div id="setup" class="section level3">
 <h3>Setup</h3>
 <p>TED talks are short, engaging and often interactive presentations from expert speakers in various disciplies, including the sciences, social sciences, business, and technology. The recordings are available on-line on the <a href="https://www.ted.com">TED website</a> as videos with subtitles in over 100 languages. Here I analyze English language transcripts of the talks using data available from <a href="https://www.kaggle.com/rounakbanik/ted-talks">Kaggle</a>.</p>
 <p>I start by downloading and unzipping the <code>tedmain.csv</code> and <code>transcripts.csv</code> files from Kaggle and reading the files into R. After checking the distribution of TED talks over time, I can see that TED talks didn’t really take off until around 2009, so I will select a subset of talks delivered starting with in that year.</p>
 <pre class="r"><code>library(tidyverse) # combine and reshape data
 library(tidytext) # tokenize
-library(stringr) # work with strings
-library(lubridate) # work with dates
+library(stringr) # working with strings
+library(lubridate) # working with dates
 library(ggExtra) # ggplot extras
 
 tedmain &lt;- read.csv(&#39;ted_main.csv&#39;, stringsAsFactors=FALSE)
 tedscripts &lt;- read.csv(&#39;transcripts.csv&#39;, stringsAsFactors=FALSE)
 ted &lt;- inner_join(tedmain, tedscripts, by = &quot;url&quot;)
-
 ted$date &lt;- as.POSIXct(ted$film_date,  origin=&quot;1970-01-01&quot;)
 
 ggplot(ted, aes(year(date))) + geom_histogram(col=&quot;darkgoldenrod1&quot;, 
@@ -62,7 +61,7 @@ print(c(nrow(ted), nrow(ted_words)))</code></pre>
 ##    mean median   min   max
 ##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1 1958.  1936.     2  9135</code></pre>
-<p>A closer look reveals that the talk with the shortest transcript was a dance performance with music and applause.</p>
+<p>A closer look reveals that the talk with the shortest transcript was a dance performance with music and applause, and no words.</p>
 <pre class="r"><code>ted_words %&gt;% group_by(url) %&gt;% 
   summarise(nwords = n()) %&gt;%
   filter(nwords == 2) %&gt;%
@@ -72,7 +71,7 @@ print(c(nrow(ted), nrow(ted_words)))</code></pre>
 ##   nwords transcript       
 ##    &lt;int&gt; &lt;chr&gt;            
 ## 1      2 (Music)(Applause)</code></pre>
-<p>Merging the tokenized talks with the information in <code>tedmain</code> makes it possible to see how the number of words in the transcript is associated with the duration of the talk. The association is close to perfect, with a few exceptions, such as the already mentioned dance performance. <code>ggMarginal</code> from the <a href="https://cran.r-project.org/web/packages/ggExtra/index.html"><code>ggExtra</code> package</a> creates combined scatter plots with marginal histograms.</p>
+<p>Merging the tokenized talks with the information in <code>tedmain</code> makes it possible to see how the number of words in the transcript is related to the duration of the talk. The correlation is close to perfect, with a few exceptions, such as the already mentioned dance performance. <code>ggMarginal</code> from the <a href="https://cran.r-project.org/web/packages/ggExtra/index.html"><code>ggExtra</code> package</a> creates combined scatter plots with marginal histograms.</p>
 <pre class="r"><code>plot &lt;- ted_words %&gt;% group_by(url) %&gt;% 
   summarise(nwords = n()) %&gt;% 
   full_join(ted, by = &quot;url&quot;) %&gt;%
@@ -83,7 +82,7 @@ print(c(nrow(ted), nrow(ted_words)))</code></pre>
 ggMarginal(plot, type=&quot;histogram&quot;, fill = &quot;darkgoldenrod2&quot;,
            xparams = list(bins=50), yparams = list(bins=50))</code></pre>
 <p><img src="/post/ted-talks_files/figure-html/tokenize4-1.png" width="576" /></p>
-<p>To see what were the most frequently used words, it’s necessary to do some more cleaning otherwise the top 5 will consist of “the”, “and”, “to”, “of”, and “a”. After excluding stop words and all strings with digits, such as “100th”, the 20 most popular words are more meaningful. Interestingly, there are only nouns and verbs on this list.</p>
+<p>To see what were the most frequently used words, it’s necessary to do some more cleaning otherwise the top 5 will consist of “the”, “and”, “to”, “of”, and “a”. After excluding stop words and all strings with digits (like “100th”), the 20 most popular words are more meaningful. Interestingly, there are only nouns and verbs on this list.</p>
 <pre class="r"><code>ted_words %&gt;%
   anti_join(stop_words) %&gt;% # eliminate stop words  # remove stop words
   filter(!grepl(&quot;ˆà|â&quot;, word)) %&gt;% # remove unnecessary strings or obvious words
@@ -127,14 +126,14 @@ Laughter can happen any time, but is a little more likely at the beginning of th
   filter(str_to_lower(word) == &quot;applause&quot; | str_to_lower(word) == &quot;laughter&quot;) %&gt;%
   ggplot(., aes(word_pos, col = word)) + 
     scale_color_manual(values=c(&quot;darkcyan&quot;, &quot;darkgoldenrod2&quot;)) +
-    geom_freqpoly(size = 1.5) + 
+    geom_freqpoly(size = 1.5) + xlim(0, 1) +
     labs(title=&quot;Relative position of applause and laughter&quot;, 
-       x=&quot;Position&quot;, y=&quot;Count&quot;) +  xlim(0, 1)</code></pre>
+       x=&quot;Position&quot;, y=&quot;Count&quot;) </code></pre>
 <p><img src="/post/ted-talks_files/figure-html/applause-laughter-graph-1.png" width="672" /></p>
 </div>
 <div id="sentiment" class="section level3">
 <h3>Sentiment</h3>
-<p>The final thing I want to see is how the sentiment changes within talks, using <a href="http://tidytextmining.com/sentiment.html">sentiment analysis</a>. On average sentiment is positive throughout (except for a brief moment in the first quarter), in line with the general idea of TED talks as spreading ideas, optimism, and inspiration.</p>
+<p>The final thing I want to see is how the sentiment of the content changes within talks, using <a href="http://tidytextmining.com/sentiment.html">sentiment analysis</a>. On average sentiment is positive throughout and increases sharply towards the end, in line with the general idea of TED talks as spreading ideas, optimism, and inspiration.</p>
 <pre class="r"><code>ted_words %&gt;%
   group_by(url) %&gt;%
   mutate(word_pos = row_number() / n(),
@@ -150,5 +149,5 @@ Laughter can happen any time, but is a little more likely at the beginning of th
     labs(x = &quot;Position&quot;,
        y = &quot;Mean AFINN sentiment score&quot;)</code></pre>
 <p><img src="/post/ted-talks_files/figure-html/sentiment-1.png" width="576" /></p>
-<p>The TED talk dataset on Kaggle includes more information that would be interesting to analyze, including tags (key words), ratings, the number of comments, and others, but that’s material for another post, perhaps.</p>
+<p>The TED talk dataset on Kaggle includes more information that would be interesting to analyze, including tags (key words), ratings, the number of comments, that’s material for another post, perhaps.</p>
 </div>
