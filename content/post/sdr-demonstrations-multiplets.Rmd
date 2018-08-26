@@ -1,5 +1,5 @@
 ---
-title: "Reliability of survey measurement: Participation in demonstrations"
+title: "Reliability of survey estimates: Participation in demonstrations"
 author: "Marta Kołczyńska"
 date: 2018-08-25T07:32:00
 categories: ["SDR"]
@@ -144,8 +144,6 @@ I start with comparing proportions of positive answers to the "participation in 
 As the graph below shows, some differences are very small and a few are very large. For example, reported participation rates for Czechia (2004, ESS and EB) and Denmark (2011, ESS and EB) are almost identical.
 
 On the other hand, in Mozambique (2005, CNEP and AFB) and in Spain (2004, ESS and EB) the differences are over 20 percentage points and 15 percentage points, respectively. The median difference is around 1.8 percentage points.
-
-Various reasons for large differences are possible. Differences in sampling design or non-response bias might result in different proportions of more active individuals across samples. If surveys are carried out at different times of the year, and there is a protest wave in-between, the later survey will rightly show a higher proportion of demonstration participants.
 
 
 ```{r plot1, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 6}
@@ -350,3 +348,6 @@ demo_means_cat %>%
   )
 
 ```
+
+
+Various reasons for large differences are possible. Differences in sampling design or non-response bias might result in different proportions of more active individuals across samples. In this case estimates from the better sample would be closer to the population parameter. If surveys are carried out at different times of the year, and there is a protest wave in-between, the later survey will rightly show a higher proportion of demonstration participants - in this case both measurements would be accurate. More research is needed...
