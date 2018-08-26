@@ -22,6 +22,15 @@
     </item>
     
     <item>
+      <title>Data Quality</title>
+      <link>/tags/data-quality/</link>
+      <pubDate>Sat, 25 Aug 2018 07:32:00 +0000</pubDate>
+      
+      <guid>/tags/data-quality/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Data Visualization</title>
       <link>/tags/data-visualization/</link>
       <pubDate>Tue, 07 Aug 2018 12:46:00 +0000</pubDate>
@@ -87,7 +96,7 @@
     <item>
       <title>Plotly</title>
       <link>/tags/plotly/</link>
-      <pubDate>Sat, 25 Aug 2018 07:32:00 +0000</pubDate>
+      <pubDate>Sun, 05 Aug 2018 07:32:00 +0000</pubDate>
       
       <guid>/tags/plotly/</guid>
       <description></description>
@@ -99,6 +108,15 @@
       <pubDate>Tue, 07 Aug 2018 12:46:00 +0000</pubDate>
       
       <guid>/tags/political-inequality/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Political Participation</title>
+      <link>/tags/political-participation/</link>
+      <pubDate>Sat, 25 Aug 2018 07:32:00 +0000</pubDate>
+      
+      <guid>/tags/political-participation/</guid>
       <description></description>
     </item>
     
@@ -123,7 +141,7 @@
     <item>
       <title>Shiny</title>
       <link>/tags/shiny/</link>
-      <pubDate>Sat, 25 Aug 2018 07:32:00 +0000</pubDate>
+      <pubDate>Mon, 13 Aug 2018 05:13:14 +0000</pubDate>
       
       <guid>/tags/shiny/</guid>
       <description></description>
@@ -186,7 +204,7 @@
     <item>
       <title>Tutorial</title>
       <link>/tags/tutorial/</link>
-      <pubDate>Sat, 25 Aug 2018 07:32:00 +0000</pubDate>
+      <pubDate>Sun, 05 Aug 2018 07:32:00 +0000</pubDate>
       
       <guid>/tags/tutorial/</guid>
       <description></description>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data Quality on Marta Kołczyńska</title>
+    <link>/tags/data-quality/</link>
+    <description>Recent content in Data Quality on Marta Kołczyńska</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
+    <lastBuildDate>Sat, 25 Aug 2018 07:32:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/data-quality/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Reliability of survey estimates: Participation in demonstrations</title>
+      <link>/post/sdr-demonstrations-multiplets/</link>
+      <pubDate>Sat, 25 Aug 2018 07:32:00 +0000</pubDate>
+      
+      <guid>/post/sdr-demonstrations-multiplets/</guid>
+      <description>SDR dataDifferences within country-yearsDifferences by groupsGenderAgeUrban/rural residenceEducationSampling schemeThe growth in cross-national survey projects in the last decades leads to situations when two or more surveys are carried out in the same country and the same year, and contain overlapping sets of survey questions. Assuming that the surveys are based on representative samples - a claim that major cross-national survey projects typically make - it could be expected that estimates from surveys carried out in the same country and year are reasonably close.</description>
+    </item>
+    
+  </channel>
+</rss>
