@@ -16,7 +16,7 @@ In this post I analyze such survey multiplets with regard to the popualar survey
 
 I use data from the [Survey Data Recycling dataset (SDR) version 1.0](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q), which includes selected harmonized variables from 22 cross-national survey projects. SDR only includes surveys that (1) contain items on political attitudes or political participation, and that (2) are intended as representative for entire adult populations. For other selection criteria see [here](https://dataharmonization.org/about/data/surveys/); for information about how to download the SDR dataset from Dataverse to R see this [post](https://martakolczynska.com/post/sdr-exploration/)).
 
-The code for manipulating the data and for plotting is pretty long, so I don’t show it here to keep the post concise; the full code can be found here on GitHub.
+The code for manipulating the data and for plotting is pretty long, so I don’t show it here to keep the post concise; the full code can be found [here](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/sdr-demonstrations-multiplets.Rmd) on GitHub.
 
 ### SDR data
 
