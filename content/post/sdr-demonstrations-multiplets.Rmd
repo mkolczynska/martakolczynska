@@ -350,4 +350,4 @@ demo_means_cat %>%
 ```
 
 
-Various reasons for large differences are possible. Differences in sampling design or non-response bias might result in different proportions of more active individuals across samples. In this case estimates from the better sample would be closer to the population parameter. If surveys are carried out at different times of the year, and there is a protest wave in-between, the later survey will rightly show a higher proportion of demonstration participants - in this case both measurements would be accurate. More research is needed...
+Various reasons for large differences are possible. Differences in sampling design or non-response bias might result in different proportions of more active individuals across samples. In this case estimates from the unbiased (less biased) sample would be closer to the population parameter. If surveys are carried out at different times of the year, and there is a protest wave in-between, the later survey will rightly show a higher proportion of demonstration participants - in this case both measurements would be accurate. More research is needed.
