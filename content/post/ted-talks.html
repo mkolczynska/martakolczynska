@@ -1,5 +1,5 @@
 ---
-title: "Applause and laughter in TED talks with tidytext"
+title: "tidytext analysis of TED talks"
 author: "Marta Kołczyńska"
 date: 2018-08-22T09:34:00
 categories: ["text"]
@@ -20,8 +20,8 @@ output:
 </ul>
 </div>
 
-<p>This year I spent two weeks of the summer attending the <a href="https://compsocialscience.github.io/summer-institute/2018/helsinki/">Summer Institute for Computational Social Science Parter Site (SICSS)</a> in Tvärminne and Helsinki, Finland, organized by Matti Nelimarkka from Aalto University and the University of Helsinki, assisted by two TAs: Juho Pääkkönen and Pihla Toivanen from the University of Helsinki. I highly recommend it to anyone with background in the social sciences and interested in computer and data sciences, or the other way around!<br />
-The summer institute brought together 19 graduate students and postdoctoral researchers representing the social sciences and computer science. The program included a combination of computational and data skills and social science topics. One of the methods we practiced was text analysis using the <a href="https://github.com/juliasilge/tidytext"><code>tidytext</code> package</a>. For a group project we analyzed a collection of tweets. Below is another simple exercise in text analysis with TED talk transcripts inspired by <a href="http://varianceexplained.org/r/tidytext-plots/">David Robinson’s <em>Examining the arc of 100,000 stories: a tidy analysis</em> post</a>.</p>
+<p>This year I spent two weeks of the summer attending the <a href="https://compsocialscience.github.io/summer-institute/2018/helsinki/">Summer Institute for Computational Social Science Parter Site (SICSS)</a> in Tvärminne and Helsinki, Finland, organized by Matti Nelimarkka from Aalto University and the University of Helsinki, assisted by two TAs: Juho Pääkkönen and Pihla Toivanen from the University of Helsinki. I highly recommend it to anyone with background in the social sciences and interested in computer and data sciences, or the other way around!</p>
+<p>The summer institute brought together 19 graduate students and postdoctoral researchers representing the social sciences and computer science. The program included a combination of computational and data skills and social science topics. One of the methods we practiced was text analysis using the <a href="https://github.com/juliasilge/tidytext"><code>tidytext</code> package</a>. For a group project we analyzed a collection of tweets. Below is another simple exercise in text analysis with TED talk transcripts inspired by <a href="http://varianceexplained.org/r/tidytext-plots/">David Robinson’s <em>Examining the arc of 100,000 stories: a tidy analysis</em> post</a>.</p>
 <div id="setup" class="section level3">
 <h3>Setup</h3>
 <p>TED talks are short, engaging and often interactive presentations from expert speakers in various disciplies, including the sciences, social sciences, business, and technology. The recordings are available on-line on the <a href="https://www.ted.com">TED website</a> as videos with subtitles in over 100 languages. Here I analyze English language transcripts of the talks using data available from <a href="https://www.kaggle.com/rounakbanik/ted-talks">Kaggle</a>.</p>

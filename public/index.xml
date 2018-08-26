@@ -7,13 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Wed, 22 Aug 2018 09:34:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 25 Aug 2018 07:32:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Applause and laughter in TED talks with tidytext</title>
+      <title>Reliability of survey measurement: Participation in demonstrations</title>
+      <link>/post/sdr-demonstrations-multiplets/</link>
+      <pubDate>Sat, 25 Aug 2018 07:32:00 +0000</pubDate>
+      
+      <guid>/post/sdr-demonstrations-multiplets/</guid>
+      <description>SDR dataDifferences within country-yearsDifferences by groupsGenderAgeUrban/rural residenceEducationSampling schemeThe growth in cross-national survey projects in the last decades leads to situations when two or more surveys are carried out in the same country and the same year, and contain overlapping sets of survey questions. Assuming that the surveys are based on representative samples - a claim that major cross-national survey projects typically make - it could be expected that estimates from surveys carried out in the same country and year are reasonably close.</description>
+    </item>
+    
+    <item>
+      <title>tidytext analysis of TED talks</title>
       <link>/post/ted-talks/</link>
       <pubDate>Wed, 22 Aug 2018 09:34:00 +0000</pubDate>
       

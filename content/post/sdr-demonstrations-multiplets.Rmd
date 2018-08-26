@@ -1,0 +1,352 @@
+---
+title: "Reliability of survey measurement: Participation in demonstrations"
+author: "Marta Kołczyńska"
+date: 2018-08-25T07:32:00
+categories: ["SDR"]
+tags: ["surveys", "SDR", "R", "cross-national research", "shiny", "plotly", "tutorial"]
+output: 
+  blogdown::html_page:
+    toc: true
+    toc_depth: 4
+---
+
+The growth in cross-national survey projects in the last decades leads to situations when two or more surveys are carried out in the same country and the same year, and contain overlapping sets of survey questions. Assuming that the surveys are based on representative samples - a claim that major cross-national survey projects typically make - it could be expected that estimates from surveys carried out in the same country and year are reasonably close.  
+
+In this post I analyze such survey multiplets with regard to the popualar survey question about participation in a public demonstrations in the last year (or 12 months). 
+
+I use data from the [Survey Data Recycling dataset (SDR) version 1.0](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q), which includes selected harmonized variables from 22 cross-national survey projects. SDR only includes surveys that (1) contain items on political attitudes or political participation, and that (2) are intended as representative for entire adult populations. For other selection criteria see [here](https://dataharmonization.org/about/data/surveys/); for information about how to download the SDR dataset from Dataverse to R see this [post](https://martakolczynska.com/post/sdr-exploration/)).
+
+The code for manipulating the data and for plotting is pretty long, so I don’t show it here to keep the post concise; the full code can be found here on GitHub.
+
+### SDR data
+
+The SDR database contains data from 1721 national surveys (surveys carried out in a given country and year and in a given project). Of those, 1148 national surveys have some question about participation in demonstrations, 335 surveys have the question about participation in a demonstration in the last 12 months / one year. 
+
+There are 29 country-years that have more than one survey with the "demonstrations" variable of interest ("last year"). This includes 28 survey pairs and one survey triplet, for a total of 59 national surveys from five project listed below.
+
+Abbreviation     | Project name   
+-----------------|----------------------------------------------------
+AFB              | [Afrobarometer](http://www.afrobarometer.org/)                                       
+CNEP             | [Comparative National Elections Project](https://u.osu.edu/cnep)  
+EB               | [Eurobarometer](http://ec.europa.eu/public_opinion/index_en.htm)                  
+EQLS             | [European Quality of Life Survey](http://www.eurofound.europa.eu/surveys/eqls/index.htm)
+ESS              | [European Social Survey](http://www.europeansocialsurvey.org/)      
+
+
+```{r setup, warning=FALSE, message=FALSE, echo = FALSE}
+library(readstata13) # reading stata (.dta) files
+library(tidyverse) # manipulating data
+library(ggplot2) # pretty plots
+library(reshape2) # reshaping
+library(sjlabelled) # dealing with value and variable labels
+library(data.table)
+library(forcats) # relevelling factors
+library(countrycode) # converting country codes and names
+library(plotly) # interactive graphs
+library(RColorBrewer) # color palettes
+
+master <- read.dta13("master-20170306-cropped.dta",
+                     convert.factors = FALSE)
+
+survey <- read.dta13("plug-survey-20170220.dta",
+                     convert.factors = FALSE)
+
+# color scheme
+myPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+```
+
+```{r sampling, warning=FALSE, message=FALSE, echo = FALSE}
+sampling <- survey %>%
+  mutate(survey = paste(t_survey_name, t_survey_edition, t_country_l1u, t_country_set, sep = ""),
+         sampling = case_when(
+           qss_no_info == 1 ~ "no_info",
+           qss_no_sinfo == 1 | qss_multi_un == 1 ~ "no_suff_info",
+           qss_quota == 1 ~ "quota",
+           qss_rr == 1 ~ "random_route",
+           qss_multi_ar == 1 ~ "multi_add",
+           qss_multi_ir == 1 ~ "multi_ind",
+           qss_srs == 1 ~ "srs")) %>% 
+  mutate(sampling = fct_relevel(sampling,
+                                "no_info",
+                                "no_suff_info",
+                                "quota",
+                                "random_route",
+                                "multi_add",
+                                "multi_ind",
+                                "srs")) %>%
+  select(survey, t_survey_name, t_survey_edition, t_country_l1u, t_country_set, sampling)
+```
+
+
+```{r wrangling, warning=FALSE, message=FALSE, results='hide', echo = FALSE}
+demo_means_cat <- master %>% 
+  filter(!is.na(c_pr_demonst_years)) %>%
+  mutate(female = t_gender,
+         rural = t_ruralurb,
+         age_cat = case_when(
+           t_age < 18 ~ "<18", 
+           t_age >= 18 & t_age <= 29 ~ "18-29", 
+           t_age >= 30 & t_age <= 39 ~ "30-39", 
+           t_age >= 40 & t_age <= 49 ~ "40-49", 
+           t_age >= 50 & t_age <= 59 ~ "50-59", 
+           t_age >= 60 & t_age <= 69 ~ "60-69", 
+           t_age >= 70 ~ "70+"),
+         hs = case_when(
+           t_edu <= 20 | (t_school_yrs < 12 & is.na(t_edu)) ~ 0, 
+           (t_edu >= 30 & t_edu <= 80) |  (t_school_yrs >= 12 & is.na(t_edu)) ~ 1),
+         edu = case_when(
+           t_edu <= 20 | (t_school_yrs < 12 & is.na(t_edu)) ~ 0, 
+           (t_edu >= 30 & t_edu <= 50) | (t_school_yrs >= 12 & t_school_yrs < 15 & is.na(t_edu)) ~ 1,
+           (t_edu >= 60 & t_edu <= 80) | (t_school_yrs >= 16 & is.na(t_edu)) ~ 2)) %>%
+  group_by(t_survey_name, t_survey_edition, t_country_l1u, t_country_set) %>%
+  summarise(t_country_year = mean(t_country_year),
+            c_pr_demonst_years = mean(c_pr_demonst_years),
+            mean_demo = weighted.mean(t_pr_demonst_fact, t_weight_l1u_2, na.rm = TRUE),
+            mean_demo_f = weighted.mean(t_pr_demonst_fact[female == 1], t_weight_l1u_2[female == 1], na.rm = TRUE),
+            mean_demo_m = weighted.mean(t_pr_demonst_fact[female == 0], t_weight_l1u_2[female == 0], na.rm = TRUE),
+            mean_demo_r = weighted.mean(t_pr_demonst_fact[rural == 1], t_weight_l1u_2[rural == 1], na.rm = TRUE),
+            mean_demo_u = weighted.mean(t_pr_demonst_fact[rural == 0], t_weight_l1u_2[rural == 0], na.rm = TRUE),
+            mean_demo_17 = weighted.mean(t_pr_demonst_fact[age_cat == "<18"], t_weight_l1u_2[age_cat == "<18"], na.rm = TRUE),
+            mean_demo_1829 = weighted.mean(t_pr_demonst_fact[age_cat == "18-29"], t_weight_l1u_2[age_cat == "18-29"], na.rm = TRUE),
+            mean_demo_3039 = weighted.mean(t_pr_demonst_fact[age_cat == "30-39"], t_weight_l1u_2[age_cat == "30-39"], na.rm = TRUE),
+            mean_demo_4049 = weighted.mean(t_pr_demonst_fact[age_cat == "40-49"], t_weight_l1u_2[age_cat == "40-49"], na.rm = TRUE),
+            mean_demo_5059 = weighted.mean(t_pr_demonst_fact[age_cat == "50-59"], t_weight_l1u_2[age_cat == "50-59"], na.rm = TRUE),
+            mean_demo_6069 = weighted.mean(t_pr_demonst_fact[age_cat == "60-69"], t_weight_l1u_2[age_cat == "60-69"], na.rm = TRUE),
+            mean_demo_70 = weighted.mean(t_pr_demonst_fact[age_cat == "70+"], t_weight_l1u_2[age_cat == "70+"], na.rm = TRUE),
+            mean_demo_mhs = weighted.mean(t_pr_demonst_fact[hs == 1], t_weight_l1u_2[hs == 1], na.rm = TRUE),
+            mean_demo_lhs = weighted.mean(t_pr_demonst_fact[hs == 0], t_weight_l1u_2[hs == 0], na.rm = TRUE),
+            mean_demo_edu0 = weighted.mean(t_pr_demonst_fact[edu == 0], t_weight_l1u_2[edu == 0], na.rm = TRUE),
+            mean_demo_edu1 = weighted.mean(t_pr_demonst_fact[edu == 1], t_weight_l1u_2[edu == 1], na.rm = TRUE),
+            mean_demo_edu2 = weighted.mean(t_pr_demonst_fact[edu == 2], t_weight_l1u_2[edu == 2], na.rm = TRUE),
+            ncases = round(sum(t_weight_l1u_2))) %>%
+  group_by(t_country_l1u, t_country_year, c_pr_demonst_years) %>%
+  mutate(n = row_number()) %>%
+  ungroup() %>%
+  mutate(survey = paste(t_survey_name, t_survey_edition, t_country_l1u, t_country_set, sep = "")) %>%
+  sjlabelled::unlabel(.)
+
+```
+
+```{r theme, warning=FALSE, message=FALSE, echo = FALSE, echo = FALSE}
+theme_demo_plot <- theme_bw(12) +
+  theme(axis.text.y = element_text(size = rel(1)),
+        axis.ticks.y = element_blank(),
+        axis.text.x = element_text(size = rel(1)),
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.5),
+        panel.grid.minor.x = element_blank())
+```
+
+### Differences within country-years
+
+I start with comparing proportions of positive answers to the "participation in demonstations" for entire (weighted) samples.  
+As the graph below shows, some differences are very small and a few are very large. For example, reported participation rates for Czechia (2004, ESS and EB) and Denmark (2011, ESS and EB) are almost identical.
+
+On the other hand, in Mozambique (2005, CNEP and AFB) and in Spain (2004, ESS and EB) the differences are over 20 percentage points and 15 percentage points, respectively. The median difference is around 1.8 percentage points.
+
+Various reasons for large differences are possible. Differences in sampling design or non-response bias might result in different proportions of more active individuals across samples. If surveys are carried out at different times of the year, and there is a protest wave in-between, the later survey will rightly show a higher proportion of demonstration participants.
+
+
+```{r plot1, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 6}
+fmt_dcimals <- function(decimals=0){
+  function(x) as.character(round(x,decimals))
+}
+
+demo_means_cat %>%
+  filter(c_pr_demonst_years == 1) %>%
+  group_by(t_country_l1u, t_country_year) %>%
+  mutate(nobs = n()) %>%
+  filter(nobs > 1) %>%
+  select(t_country_l1u, t_country_year, t_survey_name, mean_demo) %>%
+  mutate(country = countrycode(t_country_l1u, 'iso2c', 'country.name'),
+         country_year = paste(country, t_country_year)) %>%
+  ggplot(., aes(x = mean_demo, y = fct_rev(factor(country_year)), col = t_survey_name)) + 
+  geom_point(size = 3, alpha = 0.8) +
+  theme_demo_plot +
+  scale_color_manual(name="Project", 
+                     labels = c("Afrobarometer",
+                                "Comp. Nat. Elect. Project",
+                                "Eurobarometer",
+                                "Eur. Qual. Life Survey",
+                                "European Social Survey"), 
+                     values = myPalette) +
+  xlab("Proportion participated in demonstrations in the last year") + 
+  ylab("") +
+  scale_x_continuous(labels = fmt_dcimals(1)) +
+  ggtitle("Participation in demonstrations") + 
+  labs(caption="Source: SDR v.1.0") 
+
+```
+
+### Differences by groups
+
+Splitting the sample into groups to compare the differences in the estimates might shed some light on the sources of these largest deviations and help identify most problematic categories. Below are charts comparing sample proportions by Respondents' gender, age, rural/urban residence, and education. THese additional variables come from the SDR database, i.e. are the product of *ex post* harmonization. 
+
+The last plot includes information about the sampling scheme used in these surveys. Sampling schemes have been coded, for each national survey, on the basis of survey documentation, into six categories: single-stage sample, multistage based on individual register, multistage based on address register, random route component, quota component, insufficient information, and no information.
+
+#### Gender
+
+```{r plot2, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 6}
+demo_means_cat %>%
+  filter(c_pr_demonst_years == 1) %>%
+  group_by(t_country_l1u, t_country_year) %>%
+  mutate(nobs = n()) %>%
+  filter(nobs > 1) %>%
+  select(t_country_l1u, t_country_year, t_survey_name, mean_demo_f, mean_demo_m) %>%
+  gather(group, value, 4:5) %>%
+  mutate(country = countrycode(t_country_l1u, 'iso2c', 'country.name'),
+         country_year = paste(country, t_country_year),
+         group = factor(group, labels = c("Women", "Men"))) %>%
+  ggplot(., aes(x = value, y = fct_rev(factor(country_year)), col = t_survey_name)) + 
+  geom_point(size = 3, alpha = 0.8) +
+  theme_demo_plot +
+  scale_color_manual(name="Project", 
+                     labels = c("Afrobarometer",
+                                "Comp. Nat. Elect. Project",
+                                "Eurobarometer",
+                                "Eur. Qual. Life Survey",
+                                "European Social Survey"), 
+                     values = myPalette) +
+  facet_wrap("group") +
+  xlab("Proportion participated in demonstrations in the last year") + 
+  ylab("") +
+  scale_x_continuous(labels = fmt_dcimals(1)) +
+  ggtitle("Participation in demonstrations by gender") + 
+  labs(caption="Source: SDR v.1.0") 
+
+```
+
+#### Age
+
+
+```{r plot3, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 11, fig.height = 6}
+demo_means_cat %>%
+  filter(c_pr_demonst_years == 1) %>%
+  group_by(t_country_l1u, t_country_year) %>%
+  mutate(nobs = n()) %>%
+  filter(nobs > 1) %>%
+  select(t_country_l1u, t_country_year, t_survey_name, 12:18) %>%
+  gather(group, value, 4:10) %>%
+  mutate(country = countrycode(t_country_l1u, 'iso2c', 'country.name'),
+         country_year = paste(country, t_country_year),
+         group = factor(group, labels = c("<18", "18-29", "30-39", "40-49", "50-59", "60-69", ">70"))) %>%
+  ggplot(., aes(x = value, y = fct_rev(factor(country_year)), col = t_survey_name)) + 
+  geom_point(size = 2, alpha = 0.8) +
+  theme_demo_plot +
+  scale_color_manual(name="Project", 
+                     labels = c("AFB",
+                                "CNEP",
+                                "EB",
+                                "EQLS",
+                                "ESS"), 
+                     values = myPalette) +
+  facet_wrap("group", nrow = 1) +
+  xlab("Proportion participated in demonstrations in the last year") + 
+  ylab("") +
+  scale_x_continuous(labels = fmt_dcimals(1)) +
+  ggtitle("Participation in demonstrations by age") + 
+  labs(caption="Source: SDR v.1.0") 
+
+```
+
+#### Urban/rural residence
+
+
+```{r plot4, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 6}
+demo_means_cat %>%
+  filter(c_pr_demonst_years == 1) %>%
+  group_by(t_country_l1u, t_country_year) %>%
+  mutate(nobs = n()) %>%
+  filter(nobs > 1) %>%
+  select(t_country_l1u, t_country_year, t_survey_name, mean_demo_r, mean_demo_u) %>%
+  gather(group, value, 4:5) %>%
+  mutate(country = countrycode(t_country_l1u, 'iso2c', 'country.name'),
+         country_year = paste(country, t_country_year),
+         group = factor(group, labels = c("Rural", "Urban"))) %>%
+  ggplot(., aes(x = value, y = fct_rev(factor(country_year)), col = t_survey_name)) + 
+  geom_point(size = 3, alpha = 0.8) +
+  theme_demo_plot +
+  scale_color_manual(name="Project", 
+                     labels = c("Afrobarometer",
+                                "Comp. Nat. Elect. Project",
+                                "Eurobarometer",
+                                "Eur. Qual. Life Survey",
+                                "European Social Survey"), 
+                     values = myPalette) +
+  facet_wrap("group") +
+  xlab("Proportion participated in demonstrations in the last year") + 
+  ylab("") +
+  scale_x_continuous(labels = fmt_dcimals(1)) +
+  ggtitle("Participation in demonstrations by urban/rural residence") + 
+  labs(caption="Source: SDR v.1.0")
+
+```
+
+#### Education
+
+
+```{r plot5, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 6}
+demo_means_cat %>%
+  filter(c_pr_demonst_years == 1) %>%
+  group_by(t_country_l1u, t_country_year) %>%
+  mutate(nobs = n()) %>%
+  filter(nobs > 1) %>%
+  select(t_country_l1u, t_country_year, t_survey_name, mean_demo_lhs, mean_demo_mhs) %>%
+  gather(group, value, 4:5) %>%
+  mutate(country = countrycode(t_country_l1u, 'iso2c', 'country.name'),
+         country_year = paste(country, t_country_year),
+         group = factor(group, labels = c("Less than high school", "High school or above"))) %>%
+  ggplot(., aes(x = value, y = fct_rev(factor(country_year)), col = t_survey_name)) + 
+  geom_point(size = 3, alpha = 0.8) +
+  theme_demo_plot +
+  scale_color_manual(name="Project", 
+                     labels = c("Afrobarometer",
+                                "Comp. Nat. Elect. Project",
+                                "Eurobarometer",
+                                "Eur. Qual. Life Survey",
+                                "European Social Survey"), 
+                     values = myPalette) +
+  facet_wrap("group") +
+  xlab("Proportion participated in demonstrations in the last year") + 
+  ylab("") +
+  scale_x_continuous(labels = fmt_dcimals(1)) +
+  ggtitle("Participation in demonstrations by education level") + 
+  labs(caption="Source: SDR v.1.0") 
+
+```
+
+#### Sampling scheme
+
+
+```{r plot6, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 7}
+demo_means_cat %>%
+  filter(c_pr_demonst_years == 1) %>%
+  group_by(t_country_l1u, t_country_year) %>%
+  mutate(nobs = n()) %>%
+  filter(nobs > 1) %>%
+  mutate(country = countrycode(t_country_l1u, 'iso2c', 'country.name'),
+         country_year = paste(country, t_country_year)) %>%
+  left_join(sampling, by = c("survey","t_survey_name","t_survey_edition","t_country_l1u","t_country_set")) %>%
+  select(country_year, t_survey_name, t_survey_edition, mean_demo, sampling) %>%
+  mutate(sampling1 = case_when(
+    sampling == "no_info" ~ "No information",
+    sampling == "no_suff_info" ~ "Insufficient information",
+    sampling == "quota" ~ "Quota component",
+    sampling == "random_route" ~ "Random route component",
+    sampling == "multi_add" ~ "Multistage address register",
+    sampling == "multi_ind" ~ "Multistage individual register",
+    sampling == "srs" ~ "Single stage sample")) %>%
+  plot_ly(., x = ~mean_demo, y = ~fct_rev(factor(country_year)), color = ~sampling1,
+          colors = "Set2", type = 'scatter',
+          mode = "markers", marker = list(size = 10, alpha = 0.8),
+          hoverinfo = 'text', 
+          text = ~paste('Survey:', t_survey_name, t_survey_edition, 
+                        '<br>Demonstrated:', round(mean_demo,3))) %>%
+  layout(
+    xaxis = list(title = "Proportion participated in demonstrations in the last year"),
+    yaxis = list(title = ""),
+    margin = list(l = 100)
+  )
+
+```
