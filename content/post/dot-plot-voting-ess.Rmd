@@ -99,10 +99,10 @@ recode_missings(ess8) %>% # recodes missing values to NAs
   ggtitle("Women-to-men election turnout ratio") + 
   labs(caption="Source: European Social Survey Round 8") + 
   annotate("text", x = 0.935, y = 22.8,  
-           label = "women's turnout < men's turnout", 
+           label = "womens' turnout < mens' turnout", 
            col = "chocolate1", size = 3) + 
   annotate("text", x = 1.064, y = 22.8, 
-           label = "women's turnout > men's turnout", 
+           label = "womens' turnout > mens' turnout", 
            col = "chocolate1", size = 3)
 ```
 
