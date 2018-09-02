@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Age on Marta Kołczyńska</title>
+    <link>/tags/age/</link>
+    <description>Recent content in Age on Marta Kołczyńska</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
+    <lastBuildDate>Sun, 02 Sep 2018 10:09:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/age/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Age distributions in samples from cross-national survey projects</title>
+      <link>/post/sdr-age-distributions/</link>
+      <pubDate>Sun, 02 Sep 2018 10:09:00 +0000</pubDate>
+      
+      <guid>/post/sdr-age-distributions/</guid>
+      <description>Cross-national survey projects conduct surveys on representative samples of adult populations. How do the distributions of respondents’ age vary across surveys carried out in the same country in different years and different projects?
+Like in a couple of previous posts (here, here and here) I use data from the Survey Data Recycling dataset (SDR) version 1.0, which includes selected harmonized variables from 22 cross-national survey projects. SDR only includes surveys that claim to have samples representative for adult populations.</description>
+    </item>
+    
+  </channel>
+</rss>

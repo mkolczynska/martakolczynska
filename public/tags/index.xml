@@ -7,15 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Sun, 26 Aug 2018 17:32:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 02 Sep 2018 10:09:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Age</title>
+      <link>/tags/age/</link>
+      <pubDate>Sun, 02 Sep 2018 10:09:00 +0000</pubDate>
+      
+      <guid>/tags/age/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Cross National Research</title>
       <link>/tags/cross-national-research/</link>
-      <pubDate>Sun, 26 Aug 2018 17:32:00 +0000</pubDate>
+      <pubDate>Sun, 02 Sep 2018 10:09:00 +0000</pubDate>
       
       <guid>/tags/cross-national-research/</guid>
       <description></description>
@@ -24,7 +33,7 @@
     <item>
       <title>Data Quality</title>
       <link>/tags/data-quality/</link>
-      <pubDate>Sun, 26 Aug 2018 17:32:00 +0000</pubDate>
+      <pubDate>Sun, 02 Sep 2018 10:09:00 +0000</pubDate>
       
       <guid>/tags/data-quality/</guid>
       <description></description>
@@ -123,7 +132,7 @@
     <item>
       <title>R</title>
       <link>/tags/r/</link>
-      <pubDate>Sun, 26 Aug 2018 17:32:00 +0000</pubDate>
+      <pubDate>Sun, 02 Sep 2018 10:09:00 +0000</pubDate>
       
       <guid>/tags/r/</guid>
       <description></description>
@@ -132,7 +141,7 @@
     <item>
       <title>Sdr</title>
       <link>/tags/sdr/</link>
-      <pubDate>Sun, 26 Aug 2018 17:32:00 +0000</pubDate>
+      <pubDate>Sun, 02 Sep 2018 10:09:00 +0000</pubDate>
       
       <guid>/tags/sdr/</guid>
       <description></description>
@@ -141,7 +150,7 @@
     <item>
       <title>Shiny</title>
       <link>/tags/shiny/</link>
-      <pubDate>Mon, 13 Aug 2018 05:13:14 +0000</pubDate>
+      <pubDate>Sun, 02 Sep 2018 10:09:00 +0000</pubDate>
       
       <guid>/tags/shiny/</guid>
       <description></description>
@@ -159,7 +168,7 @@
     <item>
       <title>Surveys</title>
       <link>/tags/surveys/</link>
-      <pubDate>Sun, 26 Aug 2018 17:32:00 +0000</pubDate>
+      <pubDate>Sun, 02 Sep 2018 10:09:00 +0000</pubDate>
       
       <guid>/tags/surveys/</guid>
       <description></description>
