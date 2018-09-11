@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Tue, 07 Aug 2018 12:46:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 11 Sep 2018 03:41:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/political-inequality/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Measuring the Level and Inequality of Political Participation with Survey Data</title>
+      <link>/post/participation-inequality-ess/</link>
+      <pubDate>Tue, 11 Sep 2018 03:41:00 +0000</pubDate>
+      
+      <guid>/post/participation-inequality-ess/</guid>
+      <description>Political participation in the ESSCountry levels of political participationInequality of political participationDemocracy indicatorsEconomic inequalityMatrix scatter plotsHow to measure political inequality? The Variaties of Democracy project (V-Dem) has a set of political equality indicators that capture the extent to which political power is distributed according to wealth and income, membership in a particular social group, gender or sexual orientation (cf. V-Dem Codebook v.</description>
+    </item>
     
     <item>
       <title>Dot plot challenge: Voting gender gaps in Europe</title>

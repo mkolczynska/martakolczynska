@@ -7,18 +7,18 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Mon, 30 Jul 2018 03:41:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 11 Sep 2018 03:41:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/ess/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Inequality of political participation, European Social Survey 8</title>
+      <title>Measuring the Level and Inequality of Political Participation with Survey Data</title>
       <link>/post/participation-inequality-ess/</link>
-      <pubDate>Mon, 30 Jul 2018 03:41:00 +0000</pubDate>
+      <pubDate>Tue, 11 Sep 2018 03:41:00 +0000</pubDate>
       
       <guid>/post/participation-inequality-ess/</guid>
-      <description>Inequality of political participationlibrary(ess)library(democracyData) # devtools::install_github(&amp;quot;xmarquez/democracyData&amp;quot;)library(vdem) # devtools::install_github(&amp;quot;xmarquez/vdem&amp;quot;)library(tidyverse) # manipulating the datalibrary(labelled) # dealing with data labelslibrary(plyr) # mapvalueslibrary(countrycode) # converting country codeslibrary(reldist) # gini indexlibrary(DescTools) # Atkinson indexlibrary(entropy) # entropylibrary(plotly) # interactive plotslibrary(corrplot) # colored correlation matrixlibrary(rijkspalette) # pretty colors for the graphsESS dataess8 &amp;lt;- ess_rounds(c(8), &amp;quot;mkolczynska@gmail.com&amp;quot;)ess &amp;lt;- recode_missings(ess8) %&amp;gt;% select(idno, cntry, nwspol, vote, contplt, wrkprty, wrkorg, badge, sgnptit, pbldmn, bctprd, pstplonl, agea, gndr,pspwght)val_labels(ess) &amp;lt;- NULLess$news &amp;lt;- ifelse(ess$nwspol &amp;lt; 30 | is.</description>
+      <description>Political participation in the ESSCountry levels of political participationInequality of political participationDemocracy indicatorsEconomic inequalityMatrix scatter plotsHow to measure political inequality? The Variaties of Democracy project (V-Dem) has a set of political equality indicators that capture the extent to which political power is distributed according to wealth and income, membership in a particular social group, gender or sexual orientation (cf. V-Dem Codebook v.</description>
     </item>
     
   </channel>

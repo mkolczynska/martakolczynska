@@ -1,0 +1,327 @@
+---
+title: "Measuring the Level and Inequality of Political Participation with Survey Data"
+author: "Marta Kołczyńska"
+date: 2018-09-11T03:41:00
+categories: ["R"]
+tags: ["surveys", "ESS", "R", "political inequality", "political participation", "cross-national research"]
+output: 
+  blogdown::html_page:
+    toc: true
+    toc_depth: 4
+---
+
+How to measure political inequality? The [Variaties of Democracy project (V-Dem)](https://www.v-dem.net/en/) has a set of political equality indicators that capture the extent to which political power is distributed according to wealth and income, membership in a particular social group, gender or sexual orientation (cf. [V-Dem Codebook v.7.1](https://www.v-dem.net/media/filer_public/84/a8/84a880ae-e0ca-4ad3-aff8-556abfdaff70/v-dem_codebook_v71.pdf), p. 259-262). The level of political equality is scored on an ordinal scale for each indicator by experts and then converted to an interval variable based on a measurement model.
+
+In this post I try to construct a measure of the inequality of political participation, which can be considered a part of political inequality, derived directly from individual-level survey reported participation in political activities. I use data from the [European Social Survey, round 8](https://www.europeansocialsurvey.org/data/download.html?r=8) *via* the [`essurvey` package](https://github.com/ropensci/essurvey). I then check how this measure of inequality of political participation covaries with the [V-Dem](https://www.v-dem.net/en/about/) Political Equality indicator, economic inequality (from [SWIID](https://fsolt.org/swiid/)), and the [Worldwide Governance Indicators](http://info.worldbank.org/governance/wgi/).
+
+The code for manipulating the data and plotting can be found [here](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/participation-inequality-ess.Rmd).
+
+
+```{r packages, include=FALSE}
+library(essurvey) # import ESS data
+library(vdem) # devtools::install_github("xmarquez/vdem")
+
+#library(plyr) # mapvalues
+library(tidyverse) # manipulating the data
+library(countrycode) # converting country codes
+
+library(reldist) # gini index
+library(DescTools) # Atkinson index
+
+library(ggplot2) # plots
+library(GGally) # more plots, incl. matrix scatter and corr plot
+library(sf) # shape files and mapping
+
+### reading in pre-processed data for speed
+alldata <- read.csv("C:/Users/mkolc/Google Drive/Academia/Blog/drafts/ess8-democr-politineq.csv")
+
+### custom plot theme
+theme_dotplot <- theme_bw(14) +
+  theme(plot.title = element_text(size=12),
+        axis.text.y = element_text(size = rel(1)),
+        axis.ticks.y = element_blank(),
+        axis.text.x = element_text(size = rel(1)),
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.5),
+        panel.grid.minor.x = element_blank())
+```
+
+### Political participation in the ESS
+
+I apply a broad definition of political participation to include all activities that are related to politics. The European Social Survey asks about ten such activities (see the [ESS/8 questionnaire](https://www.europeansocialsurvey.org/docs/round8/fieldwork/source/ESS8_source_questionnaires.pdf)). I use all of them, dichotomizing when necessary:
+
+* following the news (1 if more than 30 minutes on a typical day; 0 otherwise),
+* voted in most recent general elections (1 if voted; 0 if did not vote; case excluded if ineligible to vote),
+* contacted a politician,
+* worked in a political party or action group,
+* worked in another organisation or association,
+* worn or displayed a campaign badge/sticker,
+* signed a petition,
+* taken part in a lawful public demonstration,
+* boycotted certain products,
+* posted or shared anything about politics online, for example on blogs, via email or on social media.
+
+The last eight items are coded as 1 in the case of reported activity in the last 12 months, and 0 otherwise. The ESS Round 8 covers 23 countries.
+
+
+```{r wrangling, warning=FALSE, message=FALSE, eval = FALSE, echo = FALSE}
+ess <- import_rounds(8) # imports Round 8 of ESS
+
+part_vars <- c("contplt", "wrkprty", "wrkorg", "badge", "sgnptit", "pbldmn", "bctprd", "pstplonl")
+vars <- c(part_vars, "vote")
+
+# simple function to clean political participation variables
+clean_part_vars <- function(x) {  
+  mapvalues(x, from = c(1,2,NA), to = c(1,0,NA))
+}
+
+ess <- recode_missings(ess8) %>% select(idno, cntry, nwspol, vote, agea, gndr,pspwght, part_vars) %>%
+  mutate_at(vars(one_of(part_vars)), funs(clean_part_vars)) %>%
+  mutate(vote = plyr::mapvalues(vote, from = c(1,2,3, NA), to = c(1,0,3, NA)),
+         nwspol = as.numeric(nwspol >= 30 & !is.na(nwspol))) %>% 
+  filter(agea >= 18 & vote != 3) %>% 
+  select(vars, idno, cntry, pspwght, vars)
+
+### weights
+
+# country means for each activity
+cntry <- ess %>% group_by(cntry) %>% summarise_at(vars, funs(weighted.mean(., pspwght)), na.rm = TRUE)
+
+# constructing weights = square of inverse of country means for each activity
+weight_sq <- 1 / sqrt(cntry[vars])
+newnames <- paste(colnames(weight_sq), "_weight_sq", sep="")
+colnames(weight_sq) <- newnames
+
+# constructing weights = log of inverse of country means for each activity
+weight_ln <- log(1 / cntry[vars])
+newnames <- paste(colnames(weight_ln), "_weight_ln", sep="")
+colnames(weight_ln) <- newnames
+
+newnames <- paste(colnames(cntry)[2:11], "_mean", sep="")
+colnames(cntry)[2:11] <- newnames
+# merging weights (weight_sq) with means (cntry)
+weight <- cbind(cntry[,1], weight_sq, weight_ln)
+
+# merging weights and means with ESS data
+ess <- left_join(ess, weight, by = "cntry")
+
+# calculating weighted participation scores for each individual (squared weight)
+ess$polpart_sq <- rowSums(mapply(`*`,ess[,1:10],ess[,14:23])) / rowSums(ess[,14:23])
+ess$polpart_sq <- round(ess$polpart_sq,3)
+# calculating weighted participation scores for each individual (log weight)
+ess$polpart_ln <- rowSums(mapply(`*`,ess[,1:10],ess[,24:33])) / rowSums(ess[,24:33])
+ess$polpart_ln <- round(ess$polpart_ln,3)
+
+# calculating sum (unweighted) participation scores for each individual
+ess <- data.frame(ess[!is.na(ess$polpart), ]) %>%
+  rowwise() %>%
+  mutate(polpart_sum = sum(c(vote, nwspol, contplt, wrkprty,  
+                           wrkorg, badge, sgnptit, pbldmn, bctprd, pstplonl)) / 10 )
+
+### participation inequality
+vars <- c(vars, "polpart_sq", "polpart_ln", "polpart_sum")
+
+# country means of each activity and the two participation indices (weighted and unweighted)
+cntrydata <- ess %>%  group_by(cntry) %>% 
+  summarise_at(vars, funs(weighted.mean(., pspwght)), na.rm = TRUE)
+
+# Gini coefficients for each participation index
+cntrydata <- cbind(cntrydata, aggregate(polpart_sq ~ cntry, data = ess, FUN = "gini")[,-1])
+cntrydata <- cbind(cntrydata, aggregate(polpart_ln ~ cntry, data = ess, FUN = "gini")[,-1])
+cntrydata <- cbind(cntrydata, aggregate(polpart_sum ~ cntry, data = ess, FUN = "gini")[,-1])
+
+# assigning better variable names
+colnames(cntrydata) <- c("cntry", "contact", "work.party", "work.org", "badge", "petition", 
+                         "demonstrate", "boycott", "post.online", "vote", "news",  
+                         "sq.pol.part.level", "ln.pol.part.level", "sum.pol.part.level", 
+                         "sq.pol.part.gini", "ln.pol.part.gini", "sum.pol.part.gini")
+
+### Democracy indicators
+# getting V-Dem data and other democracy/governance indicators
+vdem.part <- extract_vdem(name_pattern = "v2x_partipdem", include_uncertainty = FALSE)
+vdem.wgi <- extract_vdem(name_pattern = "wbgi", include_uncertainty = FALSE, include_external = TRUE)
+vdem.pe <- extract_vdem(name_pattern = "pe", include_uncertainty = FALSE)
+
+demo <- vdem.part %>%
+  full_join(vdem.wgi, by = c("vdem_country_name", "year")) %>%
+  full_join(vdem.pe, by = c("vdem_country_name", "year")) %>%
+  mutate(continent = countrycode(vdem_country_name, "country.name", "continent"),
+         cntry = countrycode(vdem_country_name, "country.name", "iso2c")) %>%
+  rowwise() %>% 
+  mutate(wgi = mean(c(e_wbgi_cce, e_wbgi_gee, e_wbgi_pse, e_wbgi_rle, e_wbgi_rqe, e_wbgi_vae)),
+         vdem.pe = mean(c(v2pepwrses, v2pepwrsoc, v2pepwrgen, v2pepwrort))) %>%
+  filter(year == 2015) %>%
+  select(v2x_partipdem, wgi, vdem.pe, vdem_country_name, continent, cntry) %>%
+  filter(continent == "Europe" | vdem_country_name == "Israel")
+
+colnames(demo) <- c("Vdem.parti.dem", "WGI", "Vdem.pol.eq", "country.name", "continent", "cntry")
+
+### Economic inequality (SWIID)
+# getting SWIID data
+swiid_all <- read.csv("https://raw.githubusercontent.com/fsolt/swiid/master/data/swiid_source.csv")
+
+swiid <- swiid_all %>% filter(year == 2015, welfare_def == "disp", 
+                              equiv_scale == "oecdm", monetary == TRUE) %>% 
+  mutate(cntry = countrycode(country, "country.name", "iso2c"),
+         continent = countrycode(country, "country.name", "continent")) %>%
+  group_by(cntry) %>%
+  filter(continent == "Europe" | country == "Israel") %>%
+  summarise(gini.swiid = mean(gini)) %>%
+  select(cntry, gini.swiid)
+
+# joining all data together (ESS participation, democracy indices, and economic inequality)
+alldata <- left_join(cntrydata, demo, by = "cntry") %>%
+  left_join(swiid, by = "cntry")
+
+```
+
+The chart below shows participation rates (proportions of respondents who reported participation in a given activity) in different activities. Including all 23 countries covered by ESS in one graph would make it unreadable, so I chose six countries representing different European regions and participation profiles.
+
+Generally in all countries the most popular forms of political activity are following the news and voting in elections. The variation in participation is greatest for boycotting and signing petitions and boycotting products. Among the 23 surveyed in the ESS there is a country where a third of the population wears campaign badges or stickers (Norway, nor shown in the graph), and two countries where almost half of the population boycotts products (Iceland and Sweden).
+
+```{r ess-activities, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 7, fig.height = 5}
+alldata %>% select(21, 2:11) %>%
+  filter(country.name %in% c("Iceland", "Slovenia", "Russia", "Germany", "Spain", "Sweden")) %>%
+  gather(variable, value, 2:11) %>%
+  ggplot(., aes(x = factor(variable), y = value)) +
+  geom_point(aes(col = country.name, group = country.name), size = 2.5) +
+  geom_line(aes(col = country.name, group = country.name), size=0.8) +
+  scale_colour_brewer(palette = "Set2") +
+  xlab("Activity type") + 
+  ylab("Participation rate") + 
+  ggtitle("Participation rates in political activities by country") +
+  labs(caption="Source: European Social Survey Round 8") +
+  theme_dotplot +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+        legend.title=element_blank())
+```
+
+The main question to ask when constructing any kind of index measure is how to weigh the components. The default is to not weigh at all, i.e. assign equal weights. The first variant of the Political Participation Score I construct is a sum of binary participation indicators divided by the sum of activities considered, i.e. by 10.
+
+In the case of political participation not weighting participation forms might not be the best idea since some of them are easier than others (e.g., demonstrating vs. following the news), some are more popular than others (e.g., voting in elections vs. working for a political party), and some are more effective than others (it's hard to say which ones). All these factors can additionally vary between countries due to the political situation, traditions, etc.  
+
+Any choice of weights will likely be to some extent arbitrary. I decided to use two methods.
+
+In the first version the weight for each activity is equal to the square root of the inverse of the participation rate in that activity. Dividing the weighted sum of activities by the sum of weights in each country normalizes PPS to a scale from 0 to 1. This way of weighing rewards unpopular activities more than the inverse of the participation rate, so it will increase inequality.
+
+The second version involves the log of the inverse of the participation rate. This method recudes the differences in weights compared to squared weights and rewards unpopular activities less than the inverse of the participation rate.
+
+Weighting by the inverse participation rate of each activity makes all country means equal to each other, which is not great for comparisons.
+
+As a result I have three versions of PPS:  
+1. Unweighted sum of binary indicators,  
+2. Sum of binary indicators weighted by the squared inverse of the participation rate,  
+3. Sum of binary indicators weighted by the log of the inverse of the participation rate.  
+All of them were normalized to a scale from 0 to 1.
+
+### Country levels of political participation
+
+After obtaining the three variants of the Political Participation Score for each respondent, I calculate their country means. Mapping the country means of the unweighted Political Participation Score shows a familiar pattern: Scandinavia has the highest mean value of participation, followed by Western Europe, with Eastern Europe at the bottom of the list.
+
+```{r ineq-map, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 9, fig.height = 5}
+world <- st_as_sf(rnaturalearth::countries110)
+europe <- dplyr::filter(world, region_un=="Europe" | region_un=="Africa" | region_un=="Asia" | name=='Israel')
+
+europe.bbox <- st_polygon(list(
+  matrix(c(-25,29,45,29,45,75,-25,75,-25,29),byrow = T,ncol = 2)))
+
+europe.clipped <- suppressWarnings(st_intersection(europe, st_sfc(europe.bbox, crs=st_crs(europe))))
+merge <- left_join(europe.clipped, alldata, by = c("iso_a2" = "cntry"))
+
+ggplot(merge, aes(fill=sum.pol.part.level)) +
+  geom_sf(alpha=0.8,col='white') +
+  coord_sf(crs="+proj=aea +lat_1=36.333333333333336 +lat_2=65.66666666666667 +lon_0=14") +
+  ggtitle("Mean Value of the Unweighted Political Participation Score") + 
+  labs(caption="Source: European Social Survey Round 8") +
+  scale_fill_gradient(na.value = "transparent", 
+                      low = "#56B1F7", high = "#132B43",
+                      name = "")
+```
+
+### Inequality of political participation
+
+Now I construct a measure of inequality for each variant of PPS by country. There are different measures of inequality, but for this exercise I will only use the Gini coefficient
+
+The dot plot shows mean values and Gini indices of the three variants of the Political Participation Score. The mean of political participation is highest in Iceland and its inequality is lowest in Iceland (except for the unweighted PPS, by a small margin). Hungary, Russia and Lithuania have the lowest means of political participation, and are at the top with regard to participation inequality. The graph also shows that while both versions of PPS maintain the rank order, weighting increases differences in mean levels and inequality.
+
+```{r country-dotplot, echo = FALSE, fig.width = 9, fig.height = 5}
+alldata %>% select(country.name, sq.pol.part.level, ln.pol.part.level, sum.pol.part.level,
+                   sq.pol.part.gini, ln.pol.part.gini, sum.pol.part.gini) %>%
+  arrange(sum.pol.part.level) %>%
+  mutate(ind = row_number()) %>%
+  gather(variable, value, 2:7) %>%
+  mutate(weighted = case_when(
+    grepl("sq", variable) ~ "Weighted: sq",
+    grepl("ln", variable) ~ "Weighted: log",
+    grepl("sum", variable) ~ "Unweighted")) %>%
+  ggplot(., aes(x = value, y = reorder(country.name, ind), col = variable)) + 
+  geom_point(size = 2.5) +
+  theme_dotplot + 
+  xlab("") + ylab("") +
+  ggtitle("Mean Value and Inequality of the Political Participation Score") + 
+  labs(caption="Source: European Social Survey Round 8") +
+  facet_wrap("weighted") +
+  scale_color_manual(values=c("deepskyblue1", "deepskyblue4", "chartreuse2", "chartreuse4",
+                              "coral1", "coral3"), 
+                     name="",
+                     breaks=c("sq.pol.part.gini", "sq.pol.part.level",
+                              "ln.pol.part.gini", "ln.pol.part.level",
+                              "sum.pol.part.gini", "sum.pol.part.level"),
+                     labels=c("Weighted (sq) PPS Gini", "Weighted (sq) PPS Mean",
+                              "Weighted (log) PPS Gini", "Weighted (log) PPS Mean",
+                              "Unweighted PPS Mean", "Unweighted PPS Mean"))
+```
+
+
+### Democracy indicators
+
+The V-Dem dataset (downloadable via the [`vdem` package](https://github.com/xmarquez/vdem)) aside its own democracy indicators also includes external variables, such as [Freedom House ratings](https://freedomhouse.org/) and the [Worldwide Governance Indicators (WGI)](http://info.worldbank.org/governance/wgi/#home). Since the ESS data cover Europe (and Israel) only, there won't be enough variation in the Freedom House ratings. I use WGI estimates, and the V-Dem Participatory Democracy Index, which measures the extent to which "the ideal of participatory democracy [is] achieved" ([V-Dem Codebook v.7.1](https://www.v-dem.net/media/filer_public/84/a8/84a880ae-e0ca-4ad3-aff8-556abfdaff70/v-dem_codebook_v71.pdf), p. 52). I select indicators from 2015, one year before the ESS Round 8 started.
+
+From the V-Dem data I also extract the set of political equality indicators mentioned at the beginning, and calculate the Political Equality Index by taking the mean of power distributed by socioeconomic position (`v2pepwrses`), power distributed by social group (`v2pepwrsoc`), power distributed by gender (`v2pepwrgen`), and power distributed by sexual orientation (`v2pepwrort`).
+
+
+### Economic inequality
+
+Finally, I use the [Standardized World Income Inequality Database (SWIID)](https://fsolt.org/swiid/) to get Gini coefficients of income. SWIID now has a very nice visualization tool, but raw data are also easily available. There are a few variants of the Gini index for each country-year to choose from, so I select those that deal with disposable income, OECD-modified, and monetary, and take the country mean in the case more than one value remains. This unfortunately leaves me with missing values for Russia, which only has consumption-based Gini indices. Again, I take values from 2015.
+
+
+### Matrix scatter plots
+
+After matching all data together I can start analyses. First I will look at the means and Gini coefficients of the different variants of the Political Participation Score. The matrix scatter plot below presents bivariate plots as well as correlations and univariate distributions on the main diagonal.
+
+Correlations between mean values of different versions of the PPS are all very strong and positive. The correlation between the Gini coefficients of the two weighted PPS is very strong and positive, and their correlations with the unweighted PPS Gini is weaker. Also, Gini coefficients of PPS and mean values of PPS are negatively correlated, and these correlations are strongest between measures with the same weight.
+
+All in all, it seems that regardless of the method of weighting different participation forms, the rank order of countries is more or less unchanged. 
+
+```{r matrix-plot1, echo = FALSE, warning = FALSE, fig.width = 8, fig.height = 7}
+ggpairs(alldata[,c("sq.pol.part.gini", "sq.pol.part.level",
+                              "ln.pol.part.gini", "ln.pol.part.level",
+                              "sum.pol.part.gini", "sum.pol.part.level")], 
+        title = "",  
+        axisLabels = "none", 
+        columnLabels = c("Wght (sq) PPS Gini", "Wght (sq) PPS Mean",
+                         "Wght (log) PPS Gini", "Wght (log) PPS Mean",
+                         "Unwght PPS Gini", "Unwght PPS Mean"))
+```
+
+There are too many PPS versions to plot all of them against the country-levels measures of governance and economic inequality, so for each country I calculate the mean of the means of the three variants of PPS (Mean of PPS Means) and the mean of Gini coefficients (Mean of PPS Ginis). I then correlate them with V-Dem indices, Worldwide Governance Indicators (the mean of six estimates) and economic inequality (SWIID Gini index). There are a few patterns to observe:
+
+1. The PPS Gini coefficient is strongly negatively correlated with the V-Dem Political Equality index, which is a good validity check,
+2. The same V-Dem Political Equality index is equally strongly, but positively correlated with the PPS mean, so the higher the political equality - the higher the overall political participation,
+3. The income Gini coefficient (from SWIID) is positively correlated with the PPS Gini coefficient and negatively with the PPS means; both correlation have moderate strength. This means that as income inequality increases, political participation inequality also tends to increase, while the level of political participation declines.
+
+```{r matrix-plot2, echo = FALSE, warning = FALSE, fig.width = 8, fig.height = 7}
+alldata %>% rowwise() %>%
+  mutate(pol.part.level.mean = mean(c(sq.pol.part.level, ln.pol.part.level, sum.pol.part.level)),
+         pol.part.gini.mean = mean(c(sq.pol.part.gini, ln.pol.part.gini, sum.pol.part.gini))) %>%
+  select(pol.part.level.mean, pol.part.gini.mean, Vdem.pol.eq, Vdem.parti.dem, WGI, gini.swiid) %>%
+  ggpairs(., 
+        title = "",  
+        axisLabels = "none", 
+        columnLabels = c("Mean of PPS Means", "Mean of PPS Ginis", 
+                         "V-dem pol eq", "V-dem parti dem", "WGI", "Gini SWIID"))
+```
+
+Similarly to many other social science concepts, measuring political inequality is not straightforward. Some definitions invoke "political power" and its unequal distribution as the central concept, but power can only be measured indirectly. The inequality of political participation can be seen as the manifestation of the inequality in the distribution of political power, and can be measured with survey data, as I have shown in this post. More work is necessary to determine most appropriate ways of constructing measures of individual political participation, especially with regard to the weighting of different activities, and to select the right measures of inequality.
+
+Political inequality and its links to economic inequality are the focus of the grant I currently work in, titled “Political Voice and Economic Inequality across Nations and Time”, led by dr. Joshua Dubrow at the [Institute of Philosophy and Sociology, Polish Academy of Sciences](http://www.ifispan.pl/en/), and funded by Poland's [National Science Centre](https://ncn.gov.pl/?language=en). More information about this project can be found [here](https://politicalinequality.org/2017/09/21/new-project-political-voice-and-economic-inequality-across-nations-and-time/) and [here](https://ncn.gov.pl/sites/default/files/listy-rankingowe/2016-09-15/streszczenia/356936-en.pdf).
