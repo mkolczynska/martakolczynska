@@ -216,9 +216,9 @@ All of them were normalized to a scale from 0 to 1.
 
 ### Country levels of political participation
 
-After obtaining the three variants of the Political Participation Score for each respondent, I calculate their country means. Mapping the country means of the unweighted Political Participation Score shows a familiar pattern: Scandinavia has the highest mean value of participation, followed by Western Europe, with Eastern Europe at the bottom of the list.
+After obtaining the three variants of the Political Participation Score for each respondent, I calculate their country means. Mapping the country means of the log-weighted Political Participation Score shows a familiar pattern: Scandinavia has the highest mean value of participation, followed by Western Europe, with Eastern Europe at the bottom of the list.
 
-```{r ineq-map, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 9, fig.height = 5}
+```{r pps-level-map, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 9, fig.height = 5}
 world <- st_as_sf(rnaturalearth::countries110)
 europe <- dplyr::filter(world, region_un=="Europe" | region_un=="Africa" | region_un=="Asia" | name=='Israel')
 
@@ -228,10 +228,10 @@ europe.bbox <- st_polygon(list(
 europe.clipped <- suppressWarnings(st_intersection(europe, st_sfc(europe.bbox, crs=st_crs(europe))))
 merge <- left_join(europe.clipped, alldata, by = c("iso_a2" = "cntry"))
 
-ggplot(merge, aes(fill=sum.pol.part.level)) +
+ggplot(merge, aes(fill=ln.pol.part.level)) +
   geom_sf(alpha=0.8,col='white') +
   coord_sf(crs="+proj=aea +lat_1=36.333333333333336 +lat_2=65.66666666666667 +lon_0=14") +
-  ggtitle("Mean Value of the Unweighted Political Participation Score") + 
+  ggtitle("Mean Value of the Log-weighted Political Participation Score") + 
   labs(caption="Source: European Social Survey Round 8") +
   scale_fill_gradient(na.value = "transparent", 
                       low = "#56B1F7", high = "#132B43",
@@ -240,9 +240,29 @@ ggplot(merge, aes(fill=sum.pol.part.level)) +
 
 ### Inequality of political participation
 
-Now I construct a measure of inequality for each variant of PPS by country. There are different measures of inequality, but for this exercise I will only use the Gini coefficient
+Now I construct a measure of inequality for each variant of PPS by country. There are different measures of inequality, but for this exercise I will only use the Gini coefficient. The map shows how the Gini coefficient of the log-weighted Political Participation Score is distributed spatially. Inequality of political participation is high where its level is low: in Eastern Europe and Italy, and the opposite is true for Scandinavia.
 
-The dot plot shows mean values and Gini indices of the three variants of the Political Participation Score. The mean of political participation is highest in Iceland and its inequality is lowest in Iceland (except for the unweighted PPS, by a small margin). Hungary, Russia and Lithuania have the lowest means of political participation, and are at the top with regard to participation inequality. The graph also shows that while both versions of PPS maintain the rank order, weighting increases differences in mean levels and inequality.
+```{r pps-ineq-map, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 9, fig.height = 5}
+world <- st_as_sf(rnaturalearth::countries110)
+europe <- dplyr::filter(world, region_un=="Europe" | region_un=="Africa" | region_un=="Asia" | name=='Israel')
+
+europe.bbox <- st_polygon(list(
+  matrix(c(-25,29,45,29,45,75,-25,75,-25,29),byrow = T,ncol = 2)))
+
+europe.clipped <- suppressWarnings(st_intersection(europe, st_sfc(europe.bbox, crs=st_crs(europe))))
+merge <- left_join(europe.clipped, alldata, by = c("iso_a2" = "cntry"))
+
+ggplot(merge, aes(fill=ln.pol.part.gini)) +
+  geom_sf(alpha=0.8,col='white') +
+  coord_sf(crs="+proj=aea +lat_1=36.333333333333336 +lat_2=65.66666666666667 +lon_0=14") +
+  ggtitle("Gini Coefficient of the Log-weighted Political Participation Score") + 
+  labs(caption="Source: European Social Survey Round 8") +
+  scale_fill_gradient(na.value = "transparent", 
+                      low = "chartreuse2", high = "chartreuse4",
+                      name = "")
+```
+
+The dot plot with country mean values and Gini indices of the three variants of the Political Participation Score confirms this pattern. The mean of political participation is highest in Iceland and its inequality is lowest in Iceland (except for the unweighted PPS, by a small margin). Hungary, Russia and Lithuania have the lowest means of political participation, and are at the top with regard to participation inequality. The graph also shows that while both versions of PPS maintain the rank order, weighting increases differences in mean levels and inequality.
 
 ```{r country-dotplot, echo = FALSE, fig.width = 9, fig.height = 5}
 alldata %>% select(country.name, sq.pol.part.level, ln.pol.part.level, sum.pol.part.level,
