@@ -10,11 +10,11 @@ output:
     toc_depth: 4
 ---
 
-How to measure political inequality? The [Variaties of Democracy project (V-Dem)](https://www.v-dem.net/en/) has a set of political equality indicators that capture the extent to which political power is distributed according to wealth and income, membership in a particular social group, gender or sexual orientation (cf. [V-Dem Codebook v.7.1](https://www.v-dem.net/media/filer_public/84/a8/84a880ae-e0ca-4ad3-aff8-556abfdaff70/v-dem_codebook_v71.pdf), p. 259-262). The level of political equality is scored on an ordinal scale for each indicator by experts and then converted to an interval variable based on a measurement model.
+How to measure political inequality? The [Variaties of Democracy project (V-Dem)](https://www.v-dem.net/en/){target="_blank"} has a set of political equality indicators that capture the extent to which political power is distributed according to wealth and income, membership in a particular social group, gender or sexual orientation (cf. [V-Dem Codebook v.7.1](https://www.v-dem.net/media/filer_public/84/a8/84a880ae-e0ca-4ad3-aff8-556abfdaff70/v-dem_codebook_v71.pdf){target="_blank"}, p. 259-262). The level of political equality is scored on an ordinal scale for each indicator by experts and then converted to an interval variable based on a measurement model.
 
-In this post I try to construct a measure of the inequality of political participation, which can be considered a part of political inequality, derived directly from individual-level survey reported participation in political activities. I use data from the [European Social Survey, round 8](https://www.europeansocialsurvey.org/data/download.html?r=8) *via* the [`essurvey` package](https://github.com/ropensci/essurvey). I then check how this measure of inequality of political participation covaries with the [V-Dem](https://www.v-dem.net/en/about/) Political Equality indicator, economic inequality (from [SWIID](https://fsolt.org/swiid/)), and the [Worldwide Governance Indicators](http://info.worldbank.org/governance/wgi/).
+In this post I try to construct a measure of the inequality of political participation, which can be considered a part of political inequality, derived directly from individual-level survey reported participation in political activities. I use data from the [European Social Survey, round 8](https://www.europeansocialsurvey.org/data/download.html?r=8){target="_blank"} *via* the [`essurvey` package](https://github.com/ropensci/essurvey){target="_blank"}. I then check how this measure of inequality of political participation covaries with the [V-Dem](https://www.v-dem.net/en/about/){target="_blank"} Political Equality indicator, economic inequality (from [SWIID](https://fsolt.org/swiid/)){target="_blank"}, and the [Worldwide Governance Indicators](http://info.worldbank.org/governance/wgi/){target="_blank"}.
 
-The code for manipulating the data and plotting can be found [here](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/participation-inequality-ess.Rmd).
+The code for manipulating the data and plotting can be found [here](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/participation-inequality-ess.Rmd){target="_blank"}.
 
 
 ```{r packages, include=FALSE}
@@ -33,7 +33,7 @@ library(GGally) # more plots, incl. matrix scatter and corr plot
 library(sf) # shape files and mapping
 
 ### reading in pre-processed data for speed
-alldata <- read.csv("C:/Users/mkolc/Google Drive/Academia/Blog/drafts/ess8-democr-politineq.csv")
+alldata <- read.csv("data/participation-inequality-ess.csv")
 
 ### custom plot theme
 theme_dotplot <- theme_bw(14) +
@@ -48,7 +48,7 @@ theme_dotplot <- theme_bw(14) +
 
 ### Political participation in the ESS
 
-I apply a broad definition of political participation to include all activities that are related to politics. The European Social Survey asks about ten such activities (see the [ESS/8 questionnaire](https://www.europeansocialsurvey.org/docs/round8/fieldwork/source/ESS8_source_questionnaires.pdf)). I use all of them, dichotomizing when necessary:
+I apply a broad definition of political participation to include all activities that are related to politics. The European Social Survey asks about ten such activities (see the [ESS/8 questionnaire](https://www.europeansocialsurvey.org/docs/round8/fieldwork/source/ESS8_source_questionnaires.pdf){target="_blank"}). I use all of them, dichotomizing when necessary:
 
 * following the news (1 if more than 30 minutes on a typical day; 0 otherwise),
 * voted in most recent general elections (1 if voted; 0 if did not vote; case excluded if ineligible to vote),
@@ -295,14 +295,14 @@ alldata %>% select(country.name, sq.pol.part.level, ln.pol.part.level, sum.pol.p
 
 ### Democracy indicators
 
-The V-Dem dataset (downloadable via the [`vdem` package](https://github.com/xmarquez/vdem)) aside its own democracy indicators also includes external variables, such as [Freedom House ratings](https://freedomhouse.org/) and the [Worldwide Governance Indicators (WGI)](http://info.worldbank.org/governance/wgi/#home). Since the ESS data cover Europe (and Israel) only, there won't be enough variation in the Freedom House ratings. I use WGI estimates, and the V-Dem Participatory Democracy Index, which measures the extent to which "the ideal of participatory democracy [is] achieved" ([V-Dem Codebook v.7.1](https://www.v-dem.net/media/filer_public/84/a8/84a880ae-e0ca-4ad3-aff8-556abfdaff70/v-dem_codebook_v71.pdf), p. 52). I select indicators from 2015, one year before the ESS Round 8 started.
+The V-Dem dataset (downloadable via the [`vdem` package](https://github.com/xmarquez/vdem){target="_blank"}) aside its own democracy indicators also includes external variables, such as [Freedom House ratings](https://freedomhouse.org/){target="_blank"} and the [Worldwide Governance Indicators (WGI)](http://info.worldbank.org/governance/wgi/#home){target="_blank"}. Since the ESS data cover Europe (and Israel) only, there won't be enough variation in the Freedom House ratings. I use WGI estimates, and the V-Dem Participatory Democracy Index, which measures the extent to which "the ideal of participatory democracy [is] achieved" ([V-Dem Codebook v.7.1](https://www.v-dem.net/media/filer_public/84/a8/84a880ae-e0ca-4ad3-aff8-556abfdaff70/v-dem_codebook_v71.pdf){target="_blank"}, p. 52). I select indicators from 2015, one year before the ESS Round 8 started.
 
 From the V-Dem data I also extract the set of political equality indicators mentioned at the beginning, and calculate the Political Equality Index by taking the mean of power distributed by socioeconomic position (`v2pepwrses`), power distributed by social group (`v2pepwrsoc`), power distributed by gender (`v2pepwrgen`), and power distributed by sexual orientation (`v2pepwrort`).
 
 
 ### Economic inequality
 
-Finally, I use the [Standardized World Income Inequality Database (SWIID)](https://fsolt.org/swiid/) to get Gini coefficients of income. SWIID now has a very nice visualization tool, but raw data are also easily available. There are a few variants of the Gini index for each country-year to choose from, so I select those that deal with disposable income, OECD-modified, and monetary, and take the country mean in the case more than one value remains. This unfortunately leaves me with missing values for Russia, which only has consumption-based Gini indices. Again, I take values from 2015.
+Finally, I use the [Standardized World Income Inequality Database (SWIID)](https://fsolt.org/swiid/){target="_blank"} to get Gini coefficients of income. SWIID now has a very nice visualization tool, but raw data are also easily available. There are a few variants of the Gini index for each country-year to choose from, so I select those that deal with disposable income, OECD-modified, and monetary, and take the country mean in the case more than one value remains. This unfortunately leaves me with missing values for Russia, which only has consumption-based Gini indices. Again, I take values from 2015.
 
 
 ### Matrix scatter plots
@@ -344,4 +344,4 @@ alldata %>% rowwise() %>%
 
 Similarly to many other social science concepts, measuring political inequality is not straightforward. Some definitions invoke "political power" and its unequal distribution as the central concept, but power can only be measured indirectly. The inequality of political participation can be seen as the manifestation of the inequality in the distribution of political power, and can be measured with survey data, as I have shown in this post. More work is necessary to determine most appropriate ways of constructing measures of individual political participation, especially with regard to the weighting of different activities, and to select the right measures of inequality.
 
-Political inequality and its links to economic inequality are the focus of the grant I currently work in, titled “Political Voice and Economic Inequality across Nations and Time”, led by dr. Joshua Dubrow at the [Institute of Philosophy and Sociology, Polish Academy of Sciences](http://www.ifispan.pl/en/), and funded by Poland's [National Science Centre](https://ncn.gov.pl/?language=en). More information about this project can be found [here](https://politicalinequality.org/2017/09/21/new-project-political-voice-and-economic-inequality-across-nations-and-time/) and [here](https://ncn.gov.pl/sites/default/files/listy-rankingowe/2016-09-15/streszczenia/356936-en.pdf).
+Political inequality and its links to economic inequality are the focus of the grant I currently work in, titled “Political Voice and Economic Inequality across Nations and Time”, led by dr. Joshua Dubrow at the [Institute of Philosophy and Sociology, Polish Academy of Sciences](http://www.ifispan.pl/en/){target="_blank"}, and funded by Poland's [National Science Centre](https://ncn.gov.pl/?language=en). More information about this project can be found [here](https://politicalinequality.org/2017/09/21/new-project-political-voice-and-economic-inequality-across-nations-and-time/){target="_blank"} and [here](https://ncn.gov.pl/sites/default/files/listy-rankingowe/2016-09-15/streszczenia/356936-en.pdf){target="_blank"}.

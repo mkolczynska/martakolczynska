@@ -10,13 +10,13 @@ output:
 
 ---
 
-The [International Sociological Association 19th World Congress of Sociology in Toronto (15-21 July)](https://www.isa-sociology.org/en/conferences/world-congress/toronto-2018/) has received quite some Twitter coverage. Waiting to board the flight back to Warsaw, I wanted to take a look at these Twitter data and apply the newly acquired skills in text analysis (thanks to the [Summer Institute for Computational Social Science, SICSS, Partner Site](https://compsocialscience.github.io/summer-institute/2018/helsinki/) in Tvärminne and Helsinki, Finland).
+The [International Sociological Association 19th World Congress of Sociology in Toronto (15-21 July)](https://www.isa-sociology.org/en/conferences/world-congress/toronto-2018/){target="_blank"} has received quite some Twitter coverage. Waiting to board the flight back to Warsaw, I wanted to take a look at these Twitter data and apply the newly acquired skills in text analysis (thanks to the [Summer Institute for Computational Social Science, SICSS, Partner Site](https://compsocialscience.github.io/summer-institute/2018/helsinki/){target="_blank"} in Tvärminne and Helsinki, Finland).
 
 A few years ago my colleagues from the Polish Academy of Sciences and I wrote a paper about the inequality in national representation at ISA events (congresses and fora) [^1]. Analyses in this post reveals a different type of inequality at ISA conferences.
 
 ### Getting data from Twitter
 
-Tweets are an increasingly popular source of data for social scientists, not least because they can be quickly and conveniently obtained through the Twitter API. There are many excellent tutorials about how to connect to Twitter to download tweets, e.g. on the SICSS [website](https://compsocialscience.github.io/summer-institute/2018/materials/day2-digital-trace-data/apis/rmarkdown/SICSS_APIs_markdown.html).
+Tweets are an increasingly popular source of data for social scientists, not least because they can be quickly and conveniently obtained through the Twitter API. There are many excellent tutorials about how to connect to Twitter to download tweets, e.g. on the SICSS [website](https://compsocialscience.github.io/summer-institute/2018/materials/day2-digital-trace-data/apis/rmarkdown/SICSS_APIs_markdown.html){target="_blank"}.
 
 First, the necessary packages:
 
@@ -37,7 +37,7 @@ I downloaded tweets that contained one of the conference hashtags: `#isa2018wcs`
 `data.table::fwrite(isa, file = "isa_tweets.csv")`
 
 ```{r load, warning=FALSE, message=FALSE, results="hide"}
-isa <- read.csv("isa_tweets.csv", stringsAsFactors = FALSE) # open Twitter extract
+isa <- read.csv("data/isa-twitter.csv", stringsAsFactors = FALSE) # open Twitter extract
 isa$status_id <- as.character(isa$status_id)
 isa$created_at <- as.POSIXct(strptime(isa$created_at, format = "%Y-%m-%dT%H:%M:%S")) # convert string to date and time
 isa$created_at <-  with_tz(isa$created_at, 'America/New_York') # set time zone
@@ -108,7 +108,7 @@ isa_words %>%
 
 ### Tweets by ISA Resesarch Committee
 
-[Research committees (RC)](https://www.isa-sociology.org/en/research-networks/research-committees/) are the core organizational unit in ISA. Research Committees bring together scholars interested in the same topic, e.g. political sociology or sociology of education. Right now there are 57 RCs.
+[Research committees (RC)](https://www.isa-sociology.org/en/research-networks/research-committees/){target="_blank"} are the core organizational unit in ISA. Research Committees bring together scholars interested in the same topic, e.g. political sociology or sociology of education. Right now there are 57 RCs.
 
 I noticed that many tweets have RC hashtags, so I wanted to see which RC got the most tweets and how equal or unequal the distribution of tweets was. To do this, I count the number of times each RC is mentioned in the collected tweets. I'm assuming that all string patterns `rc[digit][digit]` refer to a research commitee (some RCs have single-digit numbers, but they are commonly referred to as "RC-O-[digit]"). I'm also assuming that RCs have no other hashtags than with the mentioned string pattern.
 
@@ -143,4 +143,4 @@ ggplot(isa_rc, aes(rc, fill = rc)) + geom_bar() +
 
 The bar plot confirms this result: RC34 is mentioned in the highest number of tweets and there is quite some variation in the number of tweets across RCs. If there is variation, maybe it can be explained. Some candidates: number of members, age of members, something about the leadership, area of specialization, quality of sessions, number of electrical outlets in the room?
 
-[^1]: [Joshua K. Dubrow, Marta Kołczyńska, Irina Tomescu-Dubrow, and Kazimierz M. Slomczynski. 2018. "Sociologists everywhere: Country representation in conferences hosted by the International Sociological Association, 1990–2012". *Current Sociology* 66(3): 466-489.](https://www.academia.edu/14504525/Sociologists_everywhere_Country_representation_in_conferences_hosted_by_the_International_Sociological_Association_1990_2012)
+[^1]: [Joshua K. Dubrow, Marta Kołczyńska, Irina Tomescu-Dubrow, and Kazimierz M. Slomczynski. 2018. "Sociologists everywhere: Country representation in conferences hosted by the International Sociological Association, 1990–2012". *Current Sociology* 66(3): 466-489.](https://www.academia.edu/14504525/Sociologists_everywhere_Country_representation_in_conferences_hosted_by_the_International_Sociological_Association_1990_2012){target="_blank"}

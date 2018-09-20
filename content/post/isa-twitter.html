@@ -20,11 +20,11 @@ output:
 </ul>
 </div>
 
-<p>The <a href="https://www.isa-sociology.org/en/conferences/world-congress/toronto-2018/">International Sociological Association 19th World Congress of Sociology in Toronto (15-21 July)</a> has received quite some Twitter coverage. Waiting to board the flight back to Warsaw, I wanted to take a look at these Twitter data and apply the newly acquired skills in text analysis (thanks to the <a href="https://compsocialscience.github.io/summer-institute/2018/helsinki/">Summer Institute for Computational Social Science, SICSS, Partner Site</a> in Tvärminne and Helsinki, Finland).</p>
+<p>The <a href="https://www.isa-sociology.org/en/conferences/world-congress/toronto-2018/" target="_blank">International Sociological Association 19th World Congress of Sociology in Toronto (15-21 July)</a> has received quite some Twitter coverage. Waiting to board the flight back to Warsaw, I wanted to take a look at these Twitter data and apply the newly acquired skills in text analysis (thanks to the <a href="https://compsocialscience.github.io/summer-institute/2018/helsinki/" target="_blank">Summer Institute for Computational Social Science, SICSS, Partner Site</a> in Tvärminne and Helsinki, Finland).</p>
 <p>A few years ago my colleagues from the Polish Academy of Sciences and I wrote a paper about the inequality in national representation at ISA events (congresses and fora) <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>. Analyses in this post reveals a different type of inequality at ISA conferences.</p>
 <div id="getting-data-from-twitter" class="section level3">
 <h3>Getting data from Twitter</h3>
-<p>Tweets are an increasingly popular source of data for social scientists, not least because they can be quickly and conveniently obtained through the Twitter API. There are many excellent tutorials about how to connect to Twitter to download tweets, e.g. on the SICSS <a href="https://compsocialscience.github.io/summer-institute/2018/materials/day2-digital-trace-data/apis/rmarkdown/SICSS_APIs_markdown.html">website</a>.</p>
+<p>Tweets are an increasingly popular source of data for social scientists, not least because they can be quickly and conveniently obtained through the Twitter API. There are many excellent tutorials about how to connect to Twitter to download tweets, e.g. on the SICSS <a href="https://compsocialscience.github.io/summer-institute/2018/materials/day2-digital-trace-data/apis/rmarkdown/SICSS_APIs_markdown.html" target="_blank">website</a>.</p>
 <p>First, the necessary packages:</p>
 <pre class="r"><code>#devtools::install_github(&quot;mkearney/rtweet&quot;) # newest version of rtweet from GitHub
 library(rtweet) # for getting tweets from Twitter API
@@ -36,7 +36,7 @@ library(lubridate) # dealing with dates</code></pre>
 <p>I downloaded tweets that contained one of the conference hashtags: <code>#isa2018wcs</code> or <code>#isa18wcs</code> (the hashtag is just like any other string to filter tweets). Twitter downloads typically contain tweets from the last ~10 days, and the set of tweets can change from download to download. This is why I saved the downloaded tweets in a .csv file for future use. The code for downloading and saving tweets with the ISA 2018 World Congress of Sociology was as follows:</p>
 <p><code>isa &lt;- search_tweets(&quot;#isa2018wcs OR #isa18wcs&quot;, since = &quot;2018-06-01&quot;, n = 100000, type=&quot;recent&quot;, include_rts=TRUE)</code><br />
 <code>data.table::fwrite(isa, file = &quot;isa_tweets.csv&quot;)</code></p>
-<pre class="r"><code>isa &lt;- read.csv(&quot;isa_tweets.csv&quot;, stringsAsFactors = FALSE) # open Twitter extract
+<pre class="r"><code>isa &lt;- read.csv(&quot;data/isa-twitter.csv&quot;, stringsAsFactors = FALSE) # open Twitter extract
 isa$status_id &lt;- as.character(isa$status_id)
 isa$created_at &lt;- as.POSIXct(strptime(isa$created_at, format = &quot;%Y-%m-%dT%H:%M:%S&quot;)) # convert string to date and time
 isa$created_at &lt;-  with_tz(isa$created_at, &#39;America/New_York&#39;) # set time zone</code></pre>
@@ -120,7 +120,7 @@ isa_words &lt;- isa %&gt;%
 </div>
 <div id="tweets-by-isa-resesarch-committee" class="section level3">
 <h3>Tweets by ISA Resesarch Committee</h3>
-<p><a href="https://www.isa-sociology.org/en/research-networks/research-committees/">Research committees (RC)</a> are the core organizational unit in ISA. Research Committees bring together scholars interested in the same topic, e.g. political sociology or sociology of education. Right now there are 57 RCs.</p>
+<p><a href="https://www.isa-sociology.org/en/research-networks/research-committees/" target="_blank">Research committees (RC)</a> are the core organizational unit in ISA. Research Committees bring together scholars interested in the same topic, e.g. political sociology or sociology of education. Right now there are 57 RCs.</p>
 <p>I noticed that many tweets have RC hashtags, so I wanted to see which RC got the most tweets and how equal or unequal the distribution of tweets was. To do this, I count the number of times each RC is mentioned in the collected tweets. I’m assuming that all string patterns <code>rc[digit][digit]</code> refer to a research commitee (some RCs have single-digit numbers, but they are commonly referred to as “RC-O-[digit]”). I’m also assuming that RCs have no other hashtags than with the mentioned string pattern.</p>
 <pre class="r"><code>isa_rc &lt;- isa_words %&gt;% filter(str_detect(tolower(word), &quot;rc[0-9]{2}&quot;))
 isa_rc$rc &lt;- str_extract(isa_rc$word, &quot;rc[0-9]{2}&quot;)
@@ -153,6 +153,6 @@ head(isa_rc, 10)</code></pre>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p><a href="https://www.academia.edu/14504525/Sociologists_everywhere_Country_representation_in_conferences_hosted_by_the_International_Sociological_Association_1990_2012">Joshua K. Dubrow, Marta Kołczyńska, Irina Tomescu-Dubrow, and Kazimierz M. Slomczynski. 2018. “Sociologists everywhere: Country representation in conferences hosted by the International Sociological Association, 1990–2012”. <em>Current Sociology</em> 66(3): 466-489.</a><a href="#fnref1">↩</a></p></li>
+<li id="fn1"><p><a href="https://www.academia.edu/14504525/Sociologists_everywhere_Country_representation_in_conferences_hosted_by_the_International_Sociological_Association_1990_2012" target="_blank">Joshua K. Dubrow, Marta Kołczyńska, Irina Tomescu-Dubrow, and Kazimierz M. Slomczynski. 2018. “Sociologists everywhere: Country representation in conferences hosted by the International Sociological Association, 1990–2012”. <em>Current Sociology</em> 66(3): 466-489.</a><a href="#fnref1">↩</a></p></li>
 </ol>
 </div>

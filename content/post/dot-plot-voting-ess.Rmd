@@ -9,7 +9,7 @@ output:
     toc: true
 ---
 
-The August edition of the Storytelling with Data challenge [#SWDchallenge](http://www.storytellingwithdata.com/swdchallenge/) stars the dot plot. Here is a simple plot of the gender gap in voting in national elections using the most recent 8th Round of the [European Social Survey, ESS](http://www.europeansocialsurvey.org/).
+The August edition of the Storytelling with Data challenge [#SWDchallenge](http://www.storytellingwithdata.com/swdchallenge/){target="_blank"} stars the dot plot. Here is a simple plot of the gender gap in voting in national elections using the most recent 8th Round of the [European Social Survey, ESS](http://www.europeansocialsurvey.org/){target="_blank"}.
 
 ### Getting and reshaping the data
 
@@ -22,6 +22,9 @@ library(ggplot2) # plots
 
 With the `essurvey` package the ESS data can be downloaded directly to R.
 
+```{r include=FALSE}
+set_email("mkolczynska@gmail.com") # login email to the ESS data
+```
 ```{r eval=FALSE}
 set_email("your@email.here") # login email to the ESS data
 ```
