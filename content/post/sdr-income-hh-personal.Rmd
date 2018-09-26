@@ -14,9 +14,7 @@ output:
 
 Individual economic status is a necessary element of almost all sociological analyses, including studies of political attitudes and behavior. To supplement the already harmonized variables in the [Survey Data Recycling dataset (SDR) version 1.0](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q){target="_blank"} and for the purposes of my resesarch of the effects of education on political engagement, Przemek and I harmonized two additional variables: personal income and household income[^1].
 
-In this post I will briefly describe the harmonization procedures and explore the properties of the harmonized income variables. The full documentation as well as the data will be made available shortly. For more information about the SDR dataset see [here](https://dataharmonization.org/){target="_blank"}; for information about how to download the SDR dataset from Dataverse to R see this [post](https://martakolczynska.com/post/sdr-exploration/){target="_blank"}).  
-
-The code used in this post is available [here](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/sdr-income-hh-personal.Rmd){target="_blank"} on GitHub.
+In this post I will briefly describe the harmonization procedures and explore the properties of the harmonized income variables. The full documentation as well as the data will be made available shortly. For more information about the SDR dataset see [here](https://dataharmonization.org/){target="_blank"}; for information about how to download the SDR dataset from Dataverse to R see this [post](https://martakolczynska.com/post/sdr-exploration/){target="_blank"}. The code used in this post is available [here](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/sdr-income-hh-personal.Rmd){target="_blank"}.
 
 
 ### Data
@@ -28,7 +26,7 @@ Surveys measure economic status in various ways. Some issues to consider when ha
 4. weekly, monthly, or annual,  
 5. recorded as exact amounts in some currency, quantiles, or categories other than quantiles.  
 
-Since many surveys ask both about personal and household income, we decided to harmonize them separately. Within these two types of measures (of household and personal income) surveys typically have just one question with some combination of properties from points 2-5 above. It would be very hard to convert all income questions to a common metric, e.g. constant USD in purchasing power parity. Instead, we treated the income variables as rankings, trying to preserve relative distances between scores where possible. Income variables harmonized in this way can be used as control variables (e.g., to obtain the effect of education net of economic status), to compare groups within the sample (e.g., men and women), but **cannot be used for comparisons of sample aggregates, e.g., means**.
+Since many surveys ask both about personal and household income, we decided to harmonize them separately. Within these two types of measures (of household and personal income) surveys typically have just one question with some combination of properties from points 2-5 above. It would be very hard to convert all income questions to a common metric, e.g. constant USD in purchasing power parity. Instead, we treated the income variables as rankings, trying to preserve relative distances between scores where possible. Income variables harmonized in this way can be used as control variables (e.g., to obtain the effect of education net of economic status), to compare groups within the sample (e.g., men and women), but **cannot be used for comparisons of sample aggregates, e.g., means across surveys**.
 
 
 ```{r setup, warning=FALSE, message=FALSE, echo = FALSE}
@@ -104,33 +102,10 @@ master_survey %>% filter(!(is.na(hhinc_mean) & is.na(persinc_mean))) %>%
   column_spec(3:5, width = "6em")
 ```
 
-### Harmonized target variables
-
-We created four harmonized target variables for household and personal income each. The first one is a cleaned version of the source variables with the original codes for substantive answers and missing value codes for non-responses (`T_INCOME_HH` and `T_INCOME_PERSONAL`). The second variant (`T_INCOME_HH_RANK_100` and `T_INCOME_PERSONAL_RANK_100`) represents the rank position of the respondent, rescaled into the range between 0 (lowest income) to 100 (highest income). The third variant rescales income to the scale 0-100 maintaining the relative distances between values (`T_INCOME_HH_PROP_100` and `T_INCOME_PERSONAL_PROP_100`). The fourth variant corresponds to mid-points from the cumulative distribution within the given national sample and represents the individual's relative position in the sample (`T_INCOME_HH_DISTRIB` and `T_INCOME_PERSONAL_DISTRIB`).
-
-Below is an illustration of the recoding of source values (`S_INCOME_HH`) to target values on the example of household income in AFB/2/Mozambique.
-
-```{r recode-example, warning=FALSE, message=FALSE, echo = FALSE}
-master_mz %>% 
-  select(s_income_hh, t_income_hh, t_income_hh_rank_100, t_income_hh_prop_100, t_income_hh_distrib) %>%
-  group_by(s_income_hh) %>%
-  add_count(t_income_hh) %>%
-  summarise_if(is.numeric, funs(mean)) %>%
-  arrange(t_income_hh) %>%
-  mutate(cum.distr = round(cumsum(n) / sum(n),3),
-         rel.distr = round(n / sum(n),3)) %>%
-  select(1,2,3,4,8,7,5) %>%
-  kable(., 
-        align=c("r", "r", "r", "r", "r", "r", "r")) %>%
-  kable_styling(full_width = F, position = "left", font_size = 12) %>%
-  column_spec(1:2, width = "7em") %>% column_spec(c(3,4,7), width = "12em") %>%
-  column_spec(5:6, width = "6em")
-```
-
 
 ### Number of response options
 
-Surveys ask about the exact value of one's income, or ask that the respondent select a category containing their income, with categories sometimes constructed to represent quantiles in the country's income distribution. As a result, surveys differ with regard to the number of distinct values realized in each sample, which ranges from 4 to 622 in the case of household income, and from 6 to 928 for personal income. The graph below shows how the length of response scales varies within and between survey projects (with the x axis in log scale).
+As already mentioned, surveys ask about the exact value of one's income, or ask that the respondent select a category containing their income, with categories sometimes constructed to represent quantiles in the country's income distribution. As a result, surveys differ with regard to the number of distinct values realized in each sample, which ranges from 4 to 622 in the case of household income, and from 6 to 928 for personal income. The graph below shows how the length of response scales varies within and between survey projects (with the x axis in log scale).
 
 
 ```{r scale-length, warning=FALSE, message=FALSE, echo = FALSE}
@@ -192,6 +167,29 @@ master_pl %>%
         axis.text.y=element_blank(),
         axis.ticks.y=element_blank(),        
         legend.position="none")
+```
+
+### Harmonized target variables
+
+We created four harmonized target variables for household and personal income each. The first one is a cleaned version of the source variables with the original codes for substantive answers and missing value codes for non-responses (`t_income_hh` and `t_income_personal`). The second variant (`t_income_hh_rank_100` and `t_income_personal_rank_100`) represents the rank position of the respondent, rescaled into the range between 0 (lowest income) to 100 (highest income). The third variant rescales income to the scale 0-100 maintaining the relative distances between values (`t_income_hh_prop_100` and `t_income_personal_prop_100`). The fourth variant corresponds to mid-points from the cumulative distribution within the given national sample and represents the individual's relative position in the sample (`t_income_hh_distrib` and `t_income_personal_distrib`).
+
+Below is an illustration of the recoding of source values (`s_income_hh`) to target values on the example of household income in AFB/2/Mozambique.
+
+```{r recode-example, warning=FALSE, message=FALSE, echo = FALSE}
+master_mz %>% 
+  select(s_income_hh, t_income_hh, t_income_hh_rank_100, t_income_hh_prop_100, t_income_hh_distrib) %>%
+  group_by(s_income_hh) %>%
+  add_count(t_income_hh) %>%
+  summarise_if(is.numeric, funs(mean)) %>%
+  arrange(t_income_hh) %>%
+  mutate(cum.distr = round(cumsum(n) / sum(n),3),
+         rel.distr = round(n / sum(n),3)) %>%
+  select(1,2,3,4,8,7,5) %>%
+  kable(., 
+        align=c("r", "r", "r", "r", "r", "r", "r")) %>%
+  kable_styling(full_width = F, position = "left", font_size = 12) %>%
+  column_spec(1:2, width = "7em") %>% column_spec(c(3,4,7), width = "12em") %>%
+  column_spec(5:6, width = "6em")
 ```
 
 ### Next steps
