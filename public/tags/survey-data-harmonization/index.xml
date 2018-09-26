@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Survey Data Harmonization on Marta Kołczyńska</title>
+    <link>/tags/survey-data-harmonization/</link>
+    <description>Recent content in Survey Data Harmonization on Marta Kołczyńska</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
+    <lastBuildDate>Wed, 26 Sep 2018 23:49:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/survey-data-harmonization/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Harmonizing measures of income in cross-national surveys</title>
+      <link>/post/sdr-income-hh-personal/</link>
+      <pubDate>Wed, 26 Sep 2018 23:49:00 +0000</pubDate>
+      
+      <guid>/post/sdr-income-hh-personal/</guid>
+      <description>DataHarmonized target variablesNumber of response optionsItem non-responseDistributionsNext stepswith Przemek Powałko
+Individual economic status is a necessary element of almost all sociological analyses, including studies of political attitudes and behavior. To supplement the already harmonized variables in the Survey Data Recycling dataset (SDR) version 1.0 and for the purposes of my resesarch of the effects of education on political engagement, Przemek and I harmonized two additional variables: personal income and household income1.</description>
+    </item>
+    
+    <item>
+      <title>Age distributions in samples from cross-national survey projects</title>
+      <link>/post/sdr-age-distributions/</link>
+      <pubDate>Sun, 02 Sep 2018 10:09:00 +0000</pubDate>
+      
+      <guid>/post/sdr-age-distributions/</guid>
+      <description>Cross-national survey projects conduct surveys on representative samples of adult populations. How do the distributions of respondents’ age vary across surveys carried out in the same country in different years and different projects?
+Like in a couple of previous posts (here, here and here) I use data from the Survey Data Recycling dataset (SDR) version 1.0, which includes selected harmonized variables from 22 cross-national survey projects. SDR only includes surveys that claim to have samples representative for adult populations.</description>
+    </item>
+    
+    <item>
+      <title>Reliability of survey estimates: Participation in demonstrations</title>
+      <link>/post/sdr-demonstrations-multiplets/</link>
+      <pubDate>Sun, 26 Aug 2018 17:32:00 +0000</pubDate>
+      
+      <guid>/post/sdr-demonstrations-multiplets/</guid>
+      <description>DataDifferences within country-yearsDifferences by groupsGenderAgeUrban/rural residenceEducationSampling schemeThe growth in cross-national survey projects in the last decades leads to situations when two or more surveys are carried out in the same country and the same year but in different projects, and contain overlapping sets of survey questions. Assuming that the surveys are based on representative samples - a claim that major cross-national survey projects typically make - it could be expected that estimates from surveys carried out in the same country and year are reasonably close.</description>
+    </item>
+    
+    <item>
+      <title>Validating survey data: Educational attainment in SDR and the OECD</title>
+      <link>/post/education-sdr-oecd/</link>
+      <pubDate>Mon, 13 Aug 2018 05:13:14 +0000</pubDate>
+      
+      <guid>/post/education-sdr-oecd/</guid>
+      <description>Educational attainment dataOECD dataSDR dataCleaning and merging SDR and OECD dataResultsThe curious case of ISSP SwitzerlandConclusionAppendixwith Przemek Powałko
+General population surveys with representative samples should have a similar education structure as shown by data from administrative sources, especially if survey weights are used. In this post we compare sample aggregates from 15 cross-national survey projects (including the European Social Survey, the World Values Survey and the European Values Study, and others) from the Survey Data Recycling database with educational attainment statistics from the OECD.</description>
+    </item>
+    
+    <item>
+      <title>Shiny app for exploring harmonized cross-national survey data (SDR v.1.0)</title>
+      <link>/post/sdr-exploration-shiny/</link>
+      <pubDate>Sun, 05 Aug 2018 07:32:00 +0000</pubDate>
+      
+      <guid>/post/sdr-exploration-shiny/</guid>
+      <description>InstructionsReferences In the previous post I wrote about downloading and exploring the Survey Data Recycling (SDR), version 1.0 dataset, which consists of selected harmonized variables from 22 survey projects, 1966-2013.
+The SDR project will develop a website for browsing, subsetting, downloading, and visualizing data from the SDR project. This website is currently under construction. Meanwhile, I made a Shiny app with basic functionalities of the future on-line browsing and subsetting tool (also serves as its mock-up): https://mkolczynska.</description>
+    </item>
+    
+    <item>
+      <title>Exploring the dataset of survey datasets: Survey Data Recycling version 1.0</title>
+      <link>/post/sdr-exploration/</link>
+      <pubDate>Thu, 02 Aug 2018 15:41:00 +0000</pubDate>
+      
+      <guid>/post/sdr-exploration/</guid>
+      <description>IntroductionDownloading the SDR dataExploring SDR: availability of variables by projectExploring SDR: availability of variables with different formulationsIdentifying surveys containing selected variablesSubsetting the Master FileCountry coverage plotCombining data from different survey projects creates new opportunities for research, alas, at the cost of increased volume (obviously) and complexity of the data. The Survey Data Recycling project created a dataset with data from 22 international survey projects.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/sdr-income-hh-personal/</loc>
+    <lastmod>2018-09-26T23:49:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/participation-inequality-ess/</loc>
     <lastmod>2018-09-11T03:41:00+00:00</lastmod>
   </url>
@@ -75,13 +80,13 @@
   
   <url>
     <loc>/tags/cross-national-research/</loc>
-    <lastmod>2018-09-11T03:41:00+00:00</lastmod>
+    <lastmod>2018-09-26T23:49:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/data-quality/</loc>
-    <lastmod>2018-09-02T10:09:00+00:00</lastmod>
+    <lastmod>2018-09-26T23:49:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -129,7 +134,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-09-11T03:41:00+00:00</lastmod>
+    <lastmod>2018-09-26T23:49:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -159,19 +164,19 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2018-09-11T03:41:00+00:00</lastmod>
+    <lastmod>2018-09-26T23:49:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2018-09-11T03:41:00+00:00</lastmod>
+    <lastmod>2018-09-26T23:49:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/sdr/</loc>
-    <lastmod>2018-09-02T10:09:00+00:00</lastmod>
+    <lastmod>2018-09-26T23:49:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -188,8 +193,14 @@
   </url>
   
   <url>
+    <loc>/tags/survey-data-harmonization/</loc>
+    <lastmod>2018-09-26T23:49:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/surveys/</loc>
-    <lastmod>2018-09-11T03:41:00+00:00</lastmod>
+    <lastmod>2018-09-26T23:49:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

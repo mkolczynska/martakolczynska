@@ -3,7 +3,7 @@ title: "Shiny app for exploring harmonized cross-national survey data (SDR v.1.0
 author: "Marta Kołczyńska"
 date: 2018-08-05T07:32:00
 categories: ["SDR"]
-tags: ["surveys", "SDR", "R", "cross-national research", "shiny", "plotly", "tutorial"]
+tags: ["surveys", "SDR", "R", "cross-national research", "shiny", "plotly", "tutorial", "survey data harmonization"]
 output: 
   blogdown::html_page:
     toc: true

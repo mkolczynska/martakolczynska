@@ -1,0 +1,201 @@
+---
+title: "Harmonizing measures of income in cross-national surveys"
+author: "Marta Kołczyńska"
+date: 2018-09-26T23:49:00
+categories: ["SDR"]
+tags: ["surveys", "SDR", "R", "cross-national research", "data quality", "survey data harmonization"]
+output: 
+  blogdown::html_page:
+    toc: true
+    toc_depth: 4
+---
+
+**with Przemek Powałko**
+
+Individual economic status is a necessary element of almost all sociological analyses, including studies of political attitudes and behavior. To supplement the already harmonized variables in the [Survey Data Recycling dataset (SDR) version 1.0](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q){target="_blank"} and for the purposes of my resesarch of the effects of education on political engagement, Przemek and I harmonized two additional variables: personal income and household income[^1].
+
+In this post I will briefly describe the harmonization procedures and explore the properties of the harmonized income variables. The full documentation as well as the data will be made available shortly. For more information about the SDR dataset see [here](https://dataharmonization.org/){target="_blank"}; for information about how to download the SDR dataset from Dataverse to R see this [post](https://martakolczynska.com/post/sdr-exploration/){target="_blank"}).  
+
+The code used in this post is available [here](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/sdr-income-hh-personal.Rmd){target="_blank"} on GitHub.
+
+
+### Data
+
+Surveys measure economic status in various ways. Some issues to consider when harmonizing such variables from different survey projects include:  
+1. household or personal,  
+2. income or earnings,  
+3. net or gross,  
+4. weekly, monthly, or annual,  
+5. recorded as exact amounts in some currency, quantiles, or categories other than quantiles.  
+
+Since many surveys ask both about personal and household income, we decided to harmonize them separately. Within these two types of measures (of household and personal income) surveys typically have just one question with some combination of properties from points 2-5 above. It would be very hard to convert all income questions to a common metric, e.g. constant USD in purchasing power parity. Instead, we treated the income variables as rankings, trying to preserve relative distances between scores where possible. Income variables harmonized in this way can be used as control variables (e.g., to obtain the effect of education net of economic status), to compare groups within the sample (e.g., men and women), but **cannot be used for comparisons of sample aggregates, e.g., means**.
+
+
+```{r setup, warning=FALSE, message=FALSE, echo = FALSE}
+library(readstata13) # reading stata (.dta) files
+library(tidyverse) # manipulating data
+library(ggplot2) # pretty plots
+library(e1071) # skewness and kurtosis
+library(knitr) # to create nice tables
+library(kableExtra) # to customize tables (kables)
+library(ggstance) # horizontal box plots
+library(ggridges) # ridge plots
+library(viridis) # colors
+library(countrycode) # switch between country codes
+
+master_survey <- read.csv("C:/Users/mkolc/Google Drive/Academia/Blog/martakolczynska/content/post/data/sdr-income-master-survey.csv", 
+                    stringsAsFactors = FALSE)
+
+master_survey_gender <- read.csv("C:/Users/mkolc/Google Drive/Academia/Blog/martakolczynska/content/post/data/sdr-income-master-survey-gender.csv", 
+                    stringsAsFactors = FALSE)
+
+master1 <- read.csv("C:/Users/mkolc/Google Drive/Academia/Blog/martakolczynska/content/post/data/sdr-income-master.csv", 
+                    stringsAsFactors = FALSE)
+
+theme_plots <- theme_bw(13) +
+  theme(plot.title = element_text(size=14),
+        axis.text.y = element_text(size = rel(1)),
+        axis.ticks.y = element_blank(),
+        axis.text.x = element_text(size = rel(1)),
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.5),
+        panel.grid.minor.x = element_blank())
+
+# color scheme
+myPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+```
+
+Of the 22 international survey projects in the SDR v.1.0 dataset, source variables measuring household income are available in 18 projects, and individual income in 10 projects. Surveys in 9 projects have both variables.
+
+```{r table-project, warning=FALSE, message=FALSE, echo = FALSE}
+master_survey %>% filter(!(is.na(hhinc_mean) & is.na(persinc_mean))) %>%
+  mutate(project = case_when(
+    t_survey_name == "ABS" ~ "Asian Barometer",
+    t_survey_name == "AFB" ~ "Afrobarometer",
+    t_survey_name == "AMB" ~ "Americas Barometer",
+    t_survey_name == "ARB" ~ "Arab Barometer",
+    t_survey_name == "ASES" ~ "Asia Europe Survey",
+    t_survey_name == "CB" ~ "Caucasus Barometer",
+    t_survey_name == "CDCEE" ~ "Consolidation of Democracy in Central Eastern Europe",
+    t_survey_name == "CNEP" ~ "Comparative National Elections Project",
+    t_survey_name == "EB" ~ "Eurobarometer",
+    t_survey_name == "EQLS" ~ "European Quality of Life Survey",
+    t_survey_name == "ESS" ~ "European Social Survey",
+    t_survey_name == "EVS" ~ "European Values Study",
+    t_survey_name == "ISJP" ~ "International Social Justice Project",
+    t_survey_name == "ISSP" ~ "International Social Survey Programme",
+    t_survey_name == "NBB" ~ "New Baltics Barometer",
+    t_survey_name == "PA2" ~ "Political Action II",
+    t_survey_name == "PA8NS" ~ "Political Action - An 8 Nation Study",
+    t_survey_name == "PPE7N" ~ "Political Participation and Equality in 7 Nations",
+    t_survey_name == "WVS" ~ "World Values Survey"
+  )) %>%
+  group_by(t_survey_name, project) %>% 
+  summarise(hhinc = sum(!is.na(hhinc_mean)),
+            persinc = sum(!is.na(persinc_mean)),
+            hhpersinc = sum(!is.na(persinc_mean) & !is.na(hhinc_mean))) %>%
+  select(t_survey_name, project, hhinc, persinc, hhpersinc) %>%
+  kable(., col.names = c("Abbr.", "Project", "N surveys with household income", 
+                         "N surveys with personal income", "N surveys with both"), 
+        align=c("l", "l", "c", "c", "c")) %>%
+  kable_styling(full_width = F, position = "left", font_size = 12) %>%
+  column_spec(1, width = "4.5em") %>% column_spec(2, width = "20em") %>%
+  column_spec(3:5, width = "6em")
+```
+
+### Harmonized target variables
+
+We created four harmonized target variables for household and personal income each. The first one is a cleaned version of the source variables with the original codes for substantive answers and missing value codes for non-responses (`T_INCOME_HH` and `T_INCOME_PERSONAL`). The second variant (`T_INCOME_HH_RANK_100` and `T_INCOME_PERSONAL_RANK_100`) represents the rank position of the respondent, rescaled into the range between 0 (lowest income) to 100 (highest income). The third variant rescales income to the scale 0-100 maintaining the relative distances between values (`T_INCOME_HH_PROP_100` and `T_INCOME_PERSONAL_PROP_100`). The fourth variant corresponds to mid-points from the cumulative distribution within the given national sample and represents the individual's relative position in the sample (`T_INCOME_HH_DISTRIB` and `T_INCOME_PERSONAL_DISTRIB`).
+
+Below is an illustration of the recoding of source values (`S_INCOME_HH`) to target values on the example of household income in AFB/2/Mozambique.
+
+```{r recode-example, warning=FALSE, message=FALSE, echo = FALSE}
+master1 %>% filter(survey == "AFB2MZ1") %>% 
+  select(s_income_hh, t_income_hh, t_income_hh_rank_100, t_income_hh_prop_100, t_income_hh_distrib) %>%
+  group_by(s_income_hh) %>%
+  add_count(t_income_hh) %>%
+  summarise_if(is.numeric, funs(mean)) %>%
+  arrange(t_income_hh) %>%
+  mutate(cum.distr = round(cumsum(n) / sum(n),3),
+         rel.distr = round(n / sum(n),3)) %>%
+  select(1,2,3,4,8,7,5) %>%
+  kable(., 
+        align=c("r", "r", "r", "r", "r", "r", "r")) %>%
+  kable_styling(full_width = F, position = "left", font_size = 12) %>%
+  column_spec(1:2, width = "7em") %>% column_spec(c(3,4,7), width = "12em") %>%
+  column_spec(5:6, width = "6em")
+```
+
+
+### Number of response options
+
+Surveys ask about the exact value of one's income, or ask that the respondent select a category containing their income, with categories sometimes constructed to represent quantiles in the country's income distribution. As a result, surveys differ with regard to the number of distinct values realized in each sample, which ranges from 4 to 622 in the case of household income, and from 6 to 928 for personal income. The graph below shows how the length of response scales varies within and between survey projects (with the x axis in log scale).
+
+
+```{r scale-length, warning=FALSE, message=FALSE, echo = FALSE}
+master_survey %>% ungroup() %>% select(t_survey_name, persinc_scale_length, hhinc_scale_length) %>%
+  filter(!(is.na(persinc_scale_length) & is.na(hhinc_scale_length))) %>% 
+  gather(variable, value, 2:3) %>%
+  ggplot(., aes(x = value, y = t_survey_name, fill = variable)) + 
+  geom_boxploth() + scale_x_log10() +
+  ylab("") + xlab("Numer of different realized response options (ln)") +
+  ggtitle("Length of response scales to income variables across survey projects") +
+  scale_fill_manual(values=myPalette[4:5], 
+                    name="Income",
+                    breaks=c("hhinc_scale_length","persinc_scale_length"),
+                    labels=c("Household", "Personal")) + theme_plots
+```
+
+### Item non-response
+
+Income is one of the sensitive questions where item non-response tends to be high. The graph below shows the distribution of missing values to the two income questions by survey project. Item non-response in personal income ranges from 0 to 80% (ARB/2/Algeria). In the case of household income the highest non-response is 89% (ABS/2/China).
+
+
+```{r prop-mis-box, warning=FALSE, message=FALSE, echo = FALSE}
+master_survey %>% ungroup() %>% 
+  mutate(hhinc_prop_mis = replace(hhinc_prop_mis, hhinc_prop_mis == 1, NA),
+         persinc_prop_mis = replace(persinc_prop_mis, persinc_prop_mis == 1, NA)) %>%
+  select(t_survey_name, persinc_prop_mis, hhinc_prop_mis) %>%
+  filter(!(is.na(persinc_prop_mis) & is.na(hhinc_prop_mis))) %>% 
+  gather(variable, value, 2:3) %>%
+  ggplot(., aes(x = value, y = t_survey_name, fill = variable)) + 
+  geom_boxploth() +
+  xlim(0, 1) +
+  ylab("") + xlab("Proportion missing") +
+  ggtitle("Item non-response in income variables across survey projects") +
+  scale_fill_manual(values=myPalette[4:5], 
+                    name="Income",
+                    breaks=c("hhinc_prop_mis","persinc_prop_mis"),
+                    labels=c("Household", "Personal")) + theme_plots
+```
+
+### Distributions
+
+As already mentioned, different surveys record income in exact amounts (in the local currency or US dollars), in quantiles, or other categories. This has consequences for the distributions of income, which have different shapes in different surveys. Below is an illustration of the variation in the distribution of original (not transformed) variables on the example of household income in 25 samples from Poland.
+
+Of the presented surveys, EQLS first recoded income in 19 categories, and moved to exact values in rounds 2 and 3. ESS started with 10 categories (not corresponding to quantiles) and switched to deciles starting with round 4, which is when the distribution becomes almost uniform. EVS uses 10-12 categories. ISJP asks about exact amounts. ISSP started with 12 categories in 1991 and in later waves recorded exact amounts. Finally, WVS records household income in 9-10 categories.
+
+```{r distr-pl, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 7}
+master1 %>% filter(t_country_l1u == "PL" & !is.na(t_income_hh_prop_100)) %>%
+  ungroup() %>%
+  mutate(survey = paste(t_survey_name, t_survey_edition, sep = "/")) %>%
+  ggplot(., aes(x = t_income_hh_prop_100, fill = survey)) + 
+  geom_histogram(colors = "Set1") +
+  ggtitle("Distributions of household income in surveys in Poland") +
+  facet_wrap("survey") +
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank(),
+        axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank(),        
+        legend.position="none")
+```
+
+### Next steps
+
+Harmonized economic position variables open new possibilities for substantive and methodological research, e.g. on the effects of under- and over-rewarding on political participation and attitudes. Before this happens, a lot of time needs to be spent exploring the harmonized variables to identify errors or suspicious cases that should be either corrected or exaplained, or excluded.
+
+
+[^1]: This work was suppoted by the annual Silverman Research Support Award from the Department of Sociology, The Ohio State University (2017) and an internal research grant funded by the Institute of Philosophy and Sociology, Polish Academy of Science *Effects of status inconsistency on political values, attitudes and behavior: a cross-national analysis with survey data harmonized ex post*.

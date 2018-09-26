@@ -1,0 +1,607 @@
+---
+title: "Harmonizing measures of income in cross-national surveys"
+author: "Marta Kołczyńska"
+date: 2018-09-26T23:49:00
+categories: ["SDR"]
+tags: ["surveys", "SDR", "R", "cross-national research", "data quality", "survey data harmonization"]
+output: 
+  blogdown::html_page:
+    toc: true
+    toc_depth: 4
+---
+
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+
+<div id="TOC">
+<ul>
+<li><a href="#data">Data</a></li>
+<li><a href="#harmonized-target-variables">Harmonized target variables</a></li>
+<li><a href="#number-of-response-options">Number of response options</a></li>
+<li><a href="#item-non-response">Item non-response</a></li>
+<li><a href="#distributions">Distributions</a></li>
+<li><a href="#next-steps">Next steps</a></li>
+</ul>
+</div>
+
+<p><strong>with Przemek Powałko</strong></p>
+<p>Individual economic status is a necessary element of almost all sociological analyses, including studies of political attitudes and behavior. To supplement the already harmonized variables in the <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q" target="_blank">Survey Data Recycling dataset (SDR) version 1.0</a> and for the purposes of my resesarch of the effects of education on political engagement, Przemek and I harmonized two additional variables: personal income and household income<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
+<p>In this post I will briefly describe the harmonization procedures and explore the properties of the harmonized income variables. The full documentation as well as the data will be made available shortly. For more information about the SDR dataset see <a href="https://dataharmonization.org/" target="_blank">here</a>; for information about how to download the SDR dataset from Dataverse to R see this <a href="https://martakolczynska.com/post/sdr-exploration/" target="_blank">post</a>).</p>
+<p>The code used in this post is available <a href="https://github.com/mkolczynska/martakolczynska/blob/master/content/post/sdr-income-hh-personal.Rmd" target="_blank">here</a> on GitHub.</p>
+<div id="data" class="section level3">
+<h3>Data</h3>
+<p>Surveys measure economic status in various ways. Some issues to consider when harmonizing such variables from different survey projects include:<br />
+1. household or personal,<br />
+2. income or earnings,<br />
+3. net or gross,<br />
+4. weekly, monthly, or annual,<br />
+5. recorded as exact amounts in some currency, quantiles, or categories other than quantiles.</p>
+<p>Since many surveys ask both about personal and household income, we decided to harmonize them separately. Within these two types of measures (of household and personal income) surveys typically have just one question with some combination of properties from points 2-5 above. It would be very hard to convert all income questions to a common metric, e.g. constant USD in purchasing power parity. Instead, we treated the income variables as rankings, trying to preserve relative distances between scores where possible. Income variables harmonized in this way can be used as control variables (e.g., to obtain the effect of education net of economic status), to compare groups within the sample (e.g., men and women), but <strong>cannot be used for comparisons of sample aggregates, e.g., means</strong>.</p>
+<p>Of the 22 international survey projects in the SDR v.1.0 dataset, source variables measuring household income are available in 18 projects, and individual income in 10 projects. Surveys in 9 projects have both variables.</p>
+<table class="table" style="font-size: 12px; width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+Abbr.
+</th>
+<th style="text-align:left;">
+Project
+</th>
+<th style="text-align:center;">
+N surveys with household income
+</th>
+<th style="text-align:center;">
+N surveys with personal income
+</th>
+<th style="text-align:center;">
+N surveys with both
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 4.5em; ">
+ABS
+</td>
+<td style="text-align:left;width: 20em; ">
+Asian Barometer
+</td>
+<td style="text-align:center;width: 6em; ">
+30
+</td>
+<td style="text-align:center;width: 6em; ">
+0
+</td>
+<td style="text-align:center;width: 6em; ">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4.5em; ">
+AFB
+</td>
+<td style="text-align:left;width: 20em; ">
+Afrobarometer
+</td>
+<td style="text-align:center;width: 6em; ">
+15
+</td>
+<td style="text-align:center;width: 6em; ">
+0
+</td>
+<td style="text-align:center;width: 6em; ">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4.5em; ">
+AMB
+</td>
+<td style="text-align:left;width: 20em; ">
+Americas Barometer
+</td>
+<td style="text-align:center;width: 6em; ">
+90
+</td>
+<td style="text-align:center;width: 6em; ">
+0
+</td>
+<td style="text-align:center;width: 6em; ">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4.5em; ">
+ARB
+</td>
+<td style="text-align:left;width: 20em; ">
+Arab Barometer
+</td>
+<td style="text-align:center;width: 6em; ">
+16
+</td>
+<td style="text-align:center;width: 6em; ">
+16
+</td>
+<td style="text-align:center;width: 6em; ">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4.5em; ">
+ASES
+</td>
+<td style="text-align:left;width: 20em; ">
+Asia Europe Survey
+</td>
+<td style="text-align:center;width: 6em; ">
+18
+</td>
+<td style="text-align:center;width: 6em; ">
+0
+</td>
+<td style="text-align:center;width: 6em; ">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4.5em; ">
+CB
+</td>
+<td style="text-align:left;width: 20em; ">
+Caucasus Barometer
+</td>
+<td style="text-align:center;width: 6em; ">
+12
+</td>
+<td style="text-align:center;width: 6em; ">
+12
+</td>
+<td style="text-align:center;width: 6em; ">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4.5em; ">
+CDCEE
+</td>
+<td style="text-align:left;width: 20em; ">
+Consolidation of Democracy in Central Eastern Europe
+</td>
+<td style="text-align:center;width: 6em; ">
+0
+</td>
+<td style="text-align:center;width: 6em; ">
+27
+</td>
+<td style="text-align:center;width: 6em; ">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4.5em; ">
+CNEP
+</td>
+<td style="text-align:left;width: 20em; ">
+Comparative National Elections Project
+</td>
+<td style="text-align:center;width: 6em; ">
+3
+</td>
+<td style="text-align:center;width: 6em; ">
+3
+</td>
+<td style="text-align:center;width: 6em; ">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4.5em; ">
+EB
+</td>
+<td style="text-align:left;width: 20em; ">
+Eurobarometer
+</td>
+<td style="text-align:center;width: 6em; ">
+53
+</td>
+<td style="text-align:center;width: 6em; ">
+0
+</td>
+<td style="text-align:center;width: 6em; ">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4.5em; ">
+EQLS
+</td>
+<td style="text-align:left;width: 20em; ">
+European Quality of Life Survey
+</td>
+<td style="text-align:center;width: 6em; ">
+93
+</td>
+<td style="text-align:center;width: 6em; ">
+0
+</td>
+<td style="text-align:center;width: 6em; ">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4.5em; ">
+ESS
+</td>
+<td style="text-align:left;width: 20em; ">
+European Social Survey
+</td>
+<td style="text-align:center;width: 6em; ">
+134
+</td>
+<td style="text-align:center;width: 6em; ">
+0
+</td>
+<td style="text-align:center;width: 6em; ">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4.5em; ">
+EVS
+</td>
+<td style="text-align:left;width: 20em; ">
+European Values Study
+</td>
+<td style="text-align:center;width: 6em; ">
+128
+</td>
+<td style="text-align:center;width: 6em; ">
+0
+</td>
+<td style="text-align:center;width: 6em; ">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4.5em; ">
+ISJP
+</td>
+<td style="text-align:left;width: 20em; ">
+International Social Justice Project
+</td>
+<td style="text-align:center;width: 6em; ">
+20
+</td>
+<td style="text-align:center;width: 6em; ">
+20
+</td>
+<td style="text-align:center;width: 6em; ">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4.5em; ">
+ISSP
+</td>
+<td style="text-align:left;width: 20em; ">
+International Social Survey Programme
+</td>
+<td style="text-align:center;width: 6em; ">
+356
+</td>
+<td style="text-align:center;width: 6em; ">
+355
+</td>
+<td style="text-align:center;width: 6em; ">
+350
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4.5em; ">
+NBB
+</td>
+<td style="text-align:left;width: 20em; ">
+New Baltics Barometer
+</td>
+<td style="text-align:center;width: 6em; ">
+18
+</td>
+<td style="text-align:center;width: 6em; ">
+9
+</td>
+<td style="text-align:center;width: 6em; ">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4.5em; ">
+PA2
+</td>
+<td style="text-align:left;width: 20em; ">
+Political Action II
+</td>
+<td style="text-align:center;width: 6em; ">
+3
+</td>
+<td style="text-align:center;width: 6em; ">
+3
+</td>
+<td style="text-align:center;width: 6em; ">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4.5em; ">
+PA8NS
+</td>
+<td style="text-align:left;width: 20em; ">
+Political Action - An 8 Nation Study
+</td>
+<td style="text-align:center;width: 6em; ">
+8
+</td>
+<td style="text-align:center;width: 6em; ">
+6
+</td>
+<td style="text-align:center;width: 6em; ">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4.5em; ">
+PPE7N
+</td>
+<td style="text-align:left;width: 20em; ">
+Political Participation and Equality in 7 Nations
+</td>
+<td style="text-align:center;width: 6em; ">
+4
+</td>
+<td style="text-align:center;width: 6em; ">
+2
+</td>
+<td style="text-align:center;width: 6em; ">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 4.5em; ">
+WVS
+</td>
+<td style="text-align:left;width: 20em; ">
+World Values Survey
+</td>
+<td style="text-align:center;width: 6em; ">
+176
+</td>
+<td style="text-align:center;width: 6em; ">
+0
+</td>
+<td style="text-align:center;width: 6em; ">
+0
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="harmonized-target-variables" class="section level3">
+<h3>Harmonized target variables</h3>
+<p>We created four harmonized target variables for household and personal income each. The first one is a cleaned version of the source variables with the original codes for substantive answers and missing value codes for non-responses (<code>T_INCOME_HH</code> and <code>T_INCOME_PERSONAL</code>). The second variant (<code>T_INCOME_HH_RANK_100</code> and <code>T_INCOME_PERSONAL_RANK_100</code>) represents the rank position of the respondent, rescaled into the range between 0 (lowest income) to 100 (highest income). The third variant rescales income to the scale 0-100 maintaining the relative distances between values (<code>T_INCOME_HH_PROP_100</code> and <code>T_INCOME_PERSONAL_PROP_100</code>). The fourth variant corresponds to mid-points from the cumulative distribution within the given national sample and represents the individual’s relative position in the sample (<code>T_INCOME_HH_DISTRIB</code> and <code>T_INCOME_PERSONAL_DISTRIB</code>).</p>
+<p>Below is an illustration of the recoding of source values (<code>S_INCOME_HH</code>) to target values on the example of household income in AFB/2/Mozambique.</p>
+<table class="table" style="font-size: 12px; width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:right;">
+s_income_hh
+</th>
+<th style="text-align:right;">
+t_income_hh
+</th>
+<th style="text-align:right;">
+t_income_hh_rank_100
+</th>
+<th style="text-align:right;">
+t_income_hh_prop_100
+</th>
+<th style="text-align:right;">
+rel.distr
+</th>
+<th style="text-align:right;">
+cum.distr
+</th>
+<th style="text-align:right;">
+t_income_hh_distrib
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;width: 7em; ">
+0
+</td>
+<td style="text-align:right;width: 7em; ">
+0
+</td>
+<td style="text-align:right;width: 12em; ">
+0.00
+</td>
+<td style="text-align:right;width: 12em; ">
+0
+</td>
+<td style="text-align:right;width: 6em; ">
+0.506
+</td>
+<td style="text-align:right;width: 6em; ">
+0.506
+</td>
+<td style="text-align:right;width: 12em; ">
+25
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 7em; ">
+3
+</td>
+<td style="text-align:right;width: 7em; ">
+3
+</td>
+<td style="text-align:right;width: 12em; ">
+16.67
+</td>
+<td style="text-align:right;width: 12em; ">
+30
+</td>
+<td style="text-align:right;width: 6em; ">
+0.247
+</td>
+<td style="text-align:right;width: 6em; ">
+0.753
+</td>
+<td style="text-align:right;width: 12em; ">
+63
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 7em; ">
+4
+</td>
+<td style="text-align:right;width: 7em; ">
+4
+</td>
+<td style="text-align:right;width: 12em; ">
+33.33
+</td>
+<td style="text-align:right;width: 12em; ">
+40
+</td>
+<td style="text-align:right;width: 6em; ">
+0.121
+</td>
+<td style="text-align:right;width: 6em; ">
+0.874
+</td>
+<td style="text-align:right;width: 12em; ">
+81
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 7em; ">
+6
+</td>
+<td style="text-align:right;width: 7em; ">
+6
+</td>
+<td style="text-align:right;width: 12em; ">
+50.00
+</td>
+<td style="text-align:right;width: 12em; ">
+60
+</td>
+<td style="text-align:right;width: 6em; ">
+0.073
+</td>
+<td style="text-align:right;width: 6em; ">
+0.946
+</td>
+<td style="text-align:right;width: 12em; ">
+91
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 7em; ">
+8
+</td>
+<td style="text-align:right;width: 7em; ">
+8
+</td>
+<td style="text-align:right;width: 12em; ">
+66.67
+</td>
+<td style="text-align:right;width: 12em; ">
+80
+</td>
+<td style="text-align:right;width: 6em; ">
+0.031
+</td>
+<td style="text-align:right;width: 6em; ">
+0.978
+</td>
+<td style="text-align:right;width: 12em; ">
+96
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 7em; ">
+9
+</td>
+<td style="text-align:right;width: 7em; ">
+9
+</td>
+<td style="text-align:right;width: 12em; ">
+83.33
+</td>
+<td style="text-align:right;width: 12em; ">
+90
+</td>
+<td style="text-align:right;width: 6em; ">
+0.014
+</td>
+<td style="text-align:right;width: 6em; ">
+0.991
+</td>
+<td style="text-align:right;width: 12em; ">
+98
+</td>
+</tr>
+<tr>
+<td style="text-align:right;width: 7em; ">
+10
+</td>
+<td style="text-align:right;width: 7em; ">
+10
+</td>
+<td style="text-align:right;width: 12em; ">
+100.00
+</td>
+<td style="text-align:right;width: 12em; ">
+100
+</td>
+<td style="text-align:right;width: 6em; ">
+0.009
+</td>
+<td style="text-align:right;width: 6em; ">
+1.000
+</td>
+<td style="text-align:right;width: 12em; ">
+100
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="number-of-response-options" class="section level3">
+<h3>Number of response options</h3>
+<p>Surveys ask about the exact value of one’s income, or ask that the respondent select a category containing their income, with categories sometimes constructed to represent quantiles in the country’s income distribution. As a result, surveys differ with regard to the number of distinct values realized in each sample, which ranges from 4 to 622 in the case of household income, and from 6 to 928 for personal income. The graph below shows how the length of response scales varies within and between survey projects (with the x axis in log scale).</p>
+<p><img src="/post/sdr-income-hh-personal_files/figure-html/scale-length-1.png" width="672" /></p>
+</div>
+<div id="item-non-response" class="section level3">
+<h3>Item non-response</h3>
+<p>Income is one of the sensitive questions where item non-response tends to be high. The graph below shows the distribution of missing values to the two income questions by survey project. Item non-response in personal income ranges from 0 to 80% (ARB/2/Algeria). In the case of household income the highest non-response is 89% (ABS/2/China).</p>
+<p><img src="/post/sdr-income-hh-personal_files/figure-html/prop-mis-box-1.png" width="672" /></p>
+</div>
+<div id="distributions" class="section level3">
+<h3>Distributions</h3>
+<p>As already mentioned, different surveys record income in exact amounts (in the local currency or US dollars), in quantiles, or other categories. This has consequences for the distributions of income, which have different shapes in different surveys. Below is an illustration of the variation in the distribution of original (not transformed) variables on the example of household income in 25 samples from Poland.</p>
+<p>Of the presented surveys, EQLS first recoded income in 19 categories, and moved to exact values in rounds 2 and 3. ESS started with 10 categories (not corresponding to quantiles) and switched to deciles starting with round 4, which is when the distribution becomes almost uniform. EVS uses 10-12 categories. ISJP asks about exact amounts. ISSP started with 12 categories in 1991 and in later waves recorded exact amounts. Finally, WVS records household income in 9-10 categories.</p>
+<p><img src="/post/sdr-income-hh-personal_files/figure-html/distr-pl-1.png" width="768" /></p>
+</div>
+<div id="next-steps" class="section level3">
+<h3>Next steps</h3>
+<p>Harmonized economic position variables open new possibilities for substantive and methodological research, e.g. on the effects of under- and over-rewarding on political participation and attitudes. Before this happens, a lot of time needs to be spent exploring the harmonized variables to identify errors or suspicious cases that should be either corrected or exaplained, or excluded.</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>This work was suppoted by the annual Silverman Research Support Award from the Department of Sociology, The Ohio State University (2017) and an internal research grant funded by the Institute of Philosophy and Sociology, Polish Academy of Science <em>Effects of status inconsistency on political values, attitudes and behavior: a cross-national analysis with survey data harmonized ex post</em>.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>

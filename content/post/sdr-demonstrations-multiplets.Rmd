@@ -3,7 +3,7 @@ title: "Reliability of survey estimates: Participation in demonstrations"
 author: "Marta Kołczyńska"
 date: 2018-08-26T17:32:00
 categories: ["SDR"]
-tags: ["surveys", "SDR", "R", "cross-national research", "political participation", "data quality"]
+tags: ["surveys", "SDR", "R", "cross-national research", "political participation", "data quality", "survey data harmonization"]
 output: 
   blogdown::html_page:
     toc: true

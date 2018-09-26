@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Tue, 11 Sep 2018 03:41:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 26 Sep 2018 23:49:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Harmonizing measures of income in cross-national surveys</title>
+      <link>/post/sdr-income-hh-personal/</link>
+      <pubDate>Wed, 26 Sep 2018 23:49:00 +0000</pubDate>
+      
+      <guid>/post/sdr-income-hh-personal/</guid>
+      <description>DataHarmonized target variablesNumber of response optionsItem non-responseDistributionsNext stepswith Przemek Powałko
+Individual economic status is a necessary element of almost all sociological analyses, including studies of political attitudes and behavior. To supplement the already harmonized variables in the Survey Data Recycling dataset (SDR) version 1.0 and for the purposes of my resesarch of the effects of education on political engagement, Przemek and I harmonized two additional variables: personal income and household income1.</description>
+    </item>
     
     <item>
       <title>Measuring the level and inequality of political participation with survey data</title>
