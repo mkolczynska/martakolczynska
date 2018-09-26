@@ -46,10 +46,10 @@ library(countrycode) # switch between country codes
 master_survey <- read.csv("C:/Users/mkolc/Google Drive/Academia/Blog/martakolczynska/content/post/data/sdr-income-master-survey.csv", 
                     stringsAsFactors = FALSE)
 
-master_survey_gender <- read.csv("C:/Users/mkolc/Google Drive/Academia/Blog/martakolczynska/content/post/data/sdr-income-master-survey-gender.csv", 
+master_pl <- read.csv("C:/Users/mkolc/Google Drive/Academia/Blog/martakolczynska/content/post/data/sdr-income-master-pl.csv", 
                     stringsAsFactors = FALSE)
 
-master1 <- read.csv("C:/Users/mkolc/Google Drive/Academia/Blog/martakolczynska/content/post/data/sdr-income-master.csv", 
+master_mz <- read.csv("C:/Users/mkolc/Google Drive/Academia/Blog/martakolczynska/content/post/data/sdr-income-master-mz.csv", 
                     stringsAsFactors = FALSE)
 
 theme_plots <- theme_bw(13) +
@@ -111,7 +111,7 @@ We created four harmonized target variables for household and personal income ea
 Below is an illustration of the recoding of source values (`S_INCOME_HH`) to target values on the example of household income in AFB/2/Mozambique.
 
 ```{r recode-example, warning=FALSE, message=FALSE, echo = FALSE}
-master1 %>% filter(survey == "AFB2MZ1") %>% 
+master_mz %>% 
   select(s_income_hh, t_income_hh, t_income_hh_rank_100, t_income_hh_prop_100, t_income_hh_distrib) %>%
   group_by(s_income_hh) %>%
   add_count(t_income_hh) %>%
@@ -177,13 +177,14 @@ As already mentioned, different surveys record income in exact amounts (in the l
 Of the presented surveys, EQLS first recoded income in 19 categories, and moved to exact values in rounds 2 and 3. ESS started with 10 categories (not corresponding to quantiles) and switched to deciles starting with round 4, which is when the distribution becomes almost uniform. EVS uses 10-12 categories. ISJP asks about exact amounts. ISSP started with 12 categories in 1991 and in later waves recorded exact amounts. Finally, WVS records household income in 9-10 categories.
 
 ```{r distr-pl, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 7}
-master1 %>% filter(t_country_l1u == "PL" & !is.na(t_income_hh_prop_100)) %>%
+master_pl %>%
   ungroup() %>%
   mutate(survey = paste(t_survey_name, t_survey_edition, sep = "/")) %>%
   ggplot(., aes(x = t_income_hh_prop_100, fill = survey)) + 
   geom_histogram(colors = "Set1") +
   ggtitle("Distributions of household income in surveys in Poland") +
   facet_wrap("survey") +
+  theme_plots +
   theme(axis.title.x=element_blank(),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank(),
