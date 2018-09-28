@@ -18,7 +18,7 @@
       <pubDate>Sun, 05 Aug 2018 07:32:00 +0000</pubDate>
       
       <guid>/post/sdr-exploration-shiny/</guid>
-      <description>InstructionsReferences In the previous post I wrote about downloading and exploring the Survey Data Recycling (SDR), version 1.0 dataset, which consists of selected harmonized variables from 22 survey projects, 1966-2013.
+      <description>InstructionsReferences In the previous post I wrote about downloading and exploring the Survey Data Recycling (SDR), version 1 dataset, which consists of selected harmonized variables from 22 survey projects, 1966-2013.
 The SDR project will develop a website for browsing, subsetting, downloading, and visualizing data from the SDR project. This website is currently under construction. Meanwhile, I made a Shiny app with basic functionalities of the future on-line browsing and subsetting tool (also serves as its mock-up): https://mkolczynska.</description>
     </item>
     

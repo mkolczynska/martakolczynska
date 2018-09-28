@@ -1,7 +1,7 @@
 ---
 title: "Harmonizing measures of income in cross-national surveys"
 author: "Marta Kołczyńska"
-date: 2018-09-26T17:29:00
+date: 2018-09-27T17:29:00
 categories: ["SDR"]
 tags: ["surveys", "SDR", "R", "cross-national research", "data quality", "survey data harmonization"]
 output: 
@@ -24,8 +24,8 @@ output:
 </div>
 
 <p><strong>with Przemek Powałko</strong></p>
-<p>Individual economic status is a necessary element of almost all sociological analyses, including studies of political attitudes and behavior. To supplement the already harmonized variables in the <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q" target="_blank">Survey Data Recycling dataset (SDR) version 1.0</a> and for the purposes of my resesarch of the effects of education on political engagement, Przemek and I harmonized two additional variables: personal income and household income<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
-<p>In this post I will briefly describe the harmonization procedures and explore the properties of the harmonized income variables. The full documentation as well as the data will be made available shortly. For more information about the SDR dataset see <a href="https://dataharmonization.org/" target="_blank">here</a>; for information about how to download the SDR dataset from Dataverse to R see this <a href="https://martakolczynska.com/post/sdr-exploration/" target="_blank">post</a>. The code used in this post is available <a href="https://github.com/mkolczynska/martakolczynska/blob/master/content/post/sdr-income-hh-personal.Rmd" target="_blank">here</a>.</p>
+<p>Individual economic status is a necessary element of almost all sociological analyses, including studies of political attitudes and behavior. To supplement the already harmonized variables in the <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q" target="_blank">Survey Data Recycling dataset (SDR) version 1</a> and for the purposes of my resesarch of the effects of education on political engagement, Przemek and I harmonized two additional variables: personal income and household income<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
+<p>In this post I will briefly describe the harmonization procedures and explore the properties of the harmonized income variables. The full documentation as well as the data will be made available shortly. The code used in this post is available <a href="https://github.com/mkolczynska/martakolczynska/blob/master/content/post/sdr-income-hh-personal.Rmd" target="_blank">here</a>.</p>
 <div id="data" class="section level3">
 <h3>Data</h3>
 <p>Surveys measure economic status in various ways. Some issues to consider when harmonizing such variables from different survey projects include:<br />
@@ -35,7 +35,7 @@ output:
 4. weekly, monthly, or annual,<br />
 5. recorded as exact amounts in some currency, quantiles, or categories other than quantiles.</p>
 <p>Since many surveys ask both about personal and household income, we decided to harmonize them separately. Within these two types of measures (of household and personal income) surveys typically have just one question with some combination of properties from points 2-5 above. It would be very hard to convert all income questions to a common metric, e.g. constant USD in purchasing power parity. Instead, we treated the income variables as rankings, trying to preserve relative distances between scores where possible. Income variables harmonized in this way can be used as control variables (e.g., to obtain the effect of education net of economic status), to compare groups within the sample (e.g., men and women), but <strong>cannot be used for comparisons of sample aggregates, e.g., means across surveys</strong>.</p>
-<p>Of the 22 international survey projects in the SDR v.1.0 dataset, source variables measuring household income are available in 18 projects, and individual income in 10 projects. Surveys in 9 projects have both variables.</p>
+<p>Of the 22 international survey projects in the SDR v.1 dataset, source variables measuring household income are available in 18 projects, and individual income in 10 projects. Surveys in 9 projects have both variables.</p>
 <table class="table" style="font-size: 12px; width: auto !important; ">
 <thead>
 <tr>
@@ -401,7 +401,7 @@ World Values Survey
 </div>
 <div id="harmonized-target-variables" class="section level3">
 <h3>Harmonized target variables</h3>
-<p>We created four harmonized target variables for household and personal income each. The first one is a cleaned version of the source variables with the original codes for substantive answers and missing value codes for non-responses (<code>t_income_hh</code> and <code>t_income_personal</code>). The second variant (<code>t_income_hh_rank_100</code> and <code>t_income_personal_rank_100</code>) represents the rank position of the respondent, rescaled into the range between 0 (lowest income) to 100 (highest income). The third variant rescales income to the scale 0-100 maintaining the relative distances between values (<code>t_income_hh_prop_100</code> and <code>t_income_personal_prop_100</code>). The fourth variant corresponds to mid-points from the cumulative distribution within the given national sample and represents the individual’s relative position in the sample (<code>t_income_hh_distrib</code> and <code>t_income_personal_distrib</code>).</p>
+<p>We created four harmonized target variables for household and personal income each. The first one is a cleaned version of the source variables with the original codes for substantive answers and unified missing value codes for non-responses, and - where applicable - reversed so that higher values correspond to more income (<code>t_income_hh</code> and <code>t_income_personal</code>). The second variant (<code>t_income_hh_rank_100</code> and <code>t_income_personal_rank_100</code>) represents the rank position of the respondent, rescaled into the range between 0 (lowest income) to 100 (highest income). The third variant rescales income to the scale 0-100 maintaining the relative distances between values (<code>t_income_hh_prop_100</code> and <code>t_income_personal_prop_100</code>). The fourth variant corresponds to the relative position in the cumulative distribution within the given national sample (<code>t_income_hh_distrib</code> and <code>t_income_personal_distrib</code>).</p>
 <p>Below is an illustration of the recoding of source values (<code>s_income_hh</code>) to target values on the example of household income in AFB/2/Mozambique.</p>
 <table class="table" style="font-size: 12px; width: auto !important; ">
 <thead>
