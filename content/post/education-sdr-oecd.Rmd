@@ -16,13 +16,13 @@ output:
 
 &nbsp;  
 
-The [Survey Data Recycling dataset (SDR) version 1.0](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q){target="_blank"} includes selected harmonized variables from 22 cross-national survey projects, including measures of educational attainment - the highest level of education completed by the respondent. SDR only includes surveys that are intended as representative for entire adult populations (for other selection criteria see [here](https://dataharmonization.org/about/data/surveys/){target="_blank"}, for more information about SDR and the data see the project [website](https://dataharmonization.org){target="_blank"} or this [post](https://martakolczynska.com/post/sdr-exploration/){target="_blank"}). For general population surveys based on representative samples one would expect survey aggregates of educational attainment to closely track educational attainment measures from non-survey sources. In this post I compare shares of individuals with at least upper secondary education in SDR surveys to OECD data.
+The [Survey Data Recycling dataset (SDR) version 1](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q){target="_blank"} includes selected harmonized variables from 22 cross-national survey projects, including measures of educational attainment - the highest level of education completed by the respondent. SDR only includes surveys that are intended as representative for entire adult populations (for other selection criteria see [here](https://dataharmonization.org/about/data/surveys/){target="_blank"}, for more information about SDR and the data see the project [website](https://dataharmonization.org){target="_blank"} or this [post](https://martakolczynska.com/post/sdr-exploration/){target="_blank"}). For general population surveys based on representative samples one would expect survey aggregates of educational attainment to closely track educational attainment measures from non-survey sources. In this post I compare shares of individuals with at least upper secondary education in SDR surveys to OECD data.
 
 ### Educational attainment data
 
 Data on the education structure of the adult population (instead of gross or net enrollment ratios) are not that easy to get. OECD provides data on the shares of populations by educational attainment in the [Educational attainment and labour-force status database, code `EAG_NEAC`](https://stats.oecd.org/viewhtml.aspx?datasetcode=EAG_NEAC&lang=en){target="_blank"}. This database includes the indicator "Share of population by educational attainment" (`NEAC_SHARE_EA`), which is available for several education levels and for different year ranges. I chose "At least upper secondary education" (`L3T8`) and the age range 25-64 (`Y25T64`).
 
-The SDR project harmonized selected variables on political attitudes, behavior, and basic sociodemographics, from 22 cross-national survey projects covering 142 countries/territories between 1966 and 2013. From the SDR v.1.0 dataset I selected only whole country samples (i.e., excluding split-ups like West and East Germany or Flanders and Wallonia). For calculating shares of samples with at least upper secondary education I only used the target variable “Education level” (`t_edu`), not “Schooling years” (`t_school_yrs`), which is also available in the SDR v.1.0 dataset. I used respondents in the 25-64 age range and applied calibrated case weights (`t_weight_l1u_2`). More information about how these variables were constructed is available in the [SDR documentation](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q){target="_blank"}.
+The SDR project harmonized selected variables on political attitudes, behavior, and basic sociodemographics, from 22 cross-national survey projects covering 142 countries/territories between 1966 and 2013. From the SDR v.1 dataset I selected only whole country samples (i.e., excluding split-ups like West and East Germany or Flanders and Wallonia). For calculating shares of samples with at least upper secondary education I only used the target variable “Education level” (`t_edu`), not “Schooling years” (`t_school_yrs`), which is also available in the SDR v.1 dataset. I used respondents in the 25-64 age range and applied calibrated case weights (`t_weight_l1u_2`). More information about how these variables were constructed is available in the [SDR documentation](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q){target="_blank"}.
 
 Respondents with at least upper secondary education were identified with the following condition: 
 `(t_edu == 30 & c_edu_incomplete == 0) | (t_edu > 30 & t_edu < 90)`,
@@ -41,7 +41,7 @@ where `t_edu` (the harmonized "education level" target variable) takes the follo
   
 and `c_edu_incomplete` is a flag indicating whether the given level of education has been completed (`c_edu_incomplete == 0`) or not (`c_edu_incomplete == 1`).  
   
-After matching the SDR v.1.0 and OECD datasets (and losing some cases on both sides) I ended up with 542 cases (national samples) from 15 projects: Asian Barometer (ABS), Afrobarometer (AFB), Americas Barometer (AMB), Asia-Europe Survey (ASES), Consolidation and Democracy in Central Eastern Europe (CDCEE), Comparative National Elections Project (CNEP), European Quality of Life Survey (EQLS), European Social Survey (ESS,) European Values Study (EVS), International Social Justice Project (ISJP), International Social Survey Programme (ISSP), Latinobarometro (LB), Life in Transition Survey (LITS), New Baltic Barometer (NBB), and the World Values Survey (WVS), and for 38 countries (that the OECD dataset only has information for a limited number of countries).
+After matching the SDR v.1 and OECD datasets (and losing some cases on both sides) I ended up with 542 cases (national samples) from 15 projects: Asian Barometer (ABS), Afrobarometer (AFB), Americas Barometer (AMB), Asia-Europe Survey (ASES), Consolidation and Democracy in Central Eastern Europe (CDCEE), Comparative National Elections Project (CNEP), European Quality of Life Survey (EQLS), European Social Survey (ESS,) European Values Study (EVS), International Social Justice Project (ISJP), International Social Survey Programme (ISSP), Latinobarometro (LB), Life in Transition Survey (LITS), New Baltic Barometer (NBB), and the World Values Survey (WVS), and for 38 countries (that the OECD dataset only has information for a limited number of countries).
 
 #### OECD data
 
@@ -144,7 +144,7 @@ The correlation (Pearson’s *r*) between the SDR percentage of respondents with
 ```{r scatter1, warning=FALSE, message=FALSE}
 ggplot(merge, aes(x=obsValue, y=mean_hs, col = off)) + geom_point(show.legend=F) + 
   scale_color_manual(values=c("black", "red")) +
-  ggtitle("Figure 1: Educational attainment from SDR v.1.0 and OECD") + 
+  ggtitle("Figure 1: Educational attainment from SDR v.1 and OECD") + 
   xlab("OECD: % of population with at least upper secondary education") +
   ylab("SDR: % of population with at least upper secondary education") +
   xlim(0,100) + ylim(0,100) +
@@ -158,7 +158,7 @@ Figure 2 presents separate plots for each survey project, showing that most of t
 ```{r scatter.project, warning=FALSE, message=FALSE}
 ggplot(merge, aes(x=obsValue, y=mean_hs, col = off)) + geom_point(show.legend=F) + 
   scale_color_manual(values=c("black", "red")) +
-  ggtitle("Figure 2: Educational attainment from SDR v.1.0 and OECD by project") + 
+  ggtitle("Figure 2: Educational attainment from SDR v.1 and OECD by project") + 
   xlab("OECD: % of population with at least upper secondary education") +
   ylab("SDR: % of population with at least upper secondary education") +
   xlim(0,100) + ylim(0,100) +
@@ -168,7 +168,7 @@ ggplot(merge, aes(x=obsValue, y=mean_hs, col = off)) + geom_point(show.legend=F)
 
 ### The curious case of ISSP Switzerland
 
-ISSP surveys in Switzerland are a particularly interesting case. As shown in Table 1 below, the time series starts with survey proportions of respondents with at least upper secondary education (column “SDR % HS+”) of around 90% in 1996, drops to around 40% in 1998, stays low until 2010, and then increases back to 85% in 2011. Note that only selected waves of ISSP are included in SDR v.1.0. Also note that survey proportions from 2006 and 2007, and from 2008 and 2009 are identical; this is because these two waves were carried out together on the same sample.
+ISSP surveys in Switzerland are a particularly interesting case. As shown in Table 1 below, the time series starts with survey proportions of respondents with at least upper secondary education (column “SDR % HS+”) of around 90% in 1996, drops to around 40% in 1998, stays low until 2010, and then increases back to 85% in 2011. Note that only selected waves of ISSP are included in SDR v.1. Also note that survey proportions from 2006 and 2007, and from 2008 and 2009 are identical; this is because these two waves were carried out together on the same sample.
 
 ```{r, warning=FALSE, message=FALSE}
 merge %>% filter(t_survey_name == "ISSP" & t_country_l1u == "CH") %>%
@@ -181,7 +181,7 @@ merge %>% filter(t_survey_name == "ISSP" & t_country_l1u == "CH") %>%
 ```
 
 Further investigation required digging into the original data and documentation, which benefitted from the help of Przemek. It turns out that some ISSP waves have two variables capturing respondent's education level: one is country-specific and the other is recoded to a common scheme across countries by ISSP. For example, in ISSP/2007, the country-specific variable for Switzerland (`ch_degr`) has 14 categories (including one for missing values). The `degree` variable is the recoded one and has 7 categories (also including one for missing values). The frequencies in both variables are nice enough to make a relatively safe bet as to how `ch_degr` was mapped onto `degree` by the ISSP team.
-Przemek and I checked the SDR v.1.0 documentation and the code used to harmonize education variables from ISSP. It turns out that the source variable used for harmonization if ISSP/2007/Switzerland was the recoded `degree` variable. The scheme in Table 2 shows how the three variables are related.
+Przemek and I checked the SDR v.1 documentation and the code used to harmonize education variables from ISSP. It turns out that the source variable used for harmonization if ISSP/2007/Switzerland was the recoded `degree` variable. The scheme in Table 2 shows how the three variables are related.
 
 | Table 2: Mapping scheme of ISSP/2007/Switzerland: `degree`, `ch_degr`, `t_edu` 
 | ![](issp-2007-ch-sdr.png){width=600px}  
@@ -195,7 +195,7 @@ Data dictionaries of the source variables for `t_edu` (i.e., the non-country-spe
 
 ### Conclusion
 
-Comparing the distribution of survey variables to data from non-survey sources can help identify errors in the recoding or harmonization of survey data and potentially reveal other surprises. A simple comparison of sample proportions of respondents with at least upper secondary education from surveys in the SDR v.1.0 dataset to analogous data from OECD led to the identification of samples with large differences between these two measurements. The examination of data and documentation from ISSP/Switzerland suggests that errors might have originated from the conversion of country-specific education variables to an education variable with uniform coding for the whole ISSP wave. Investigations of other surveys and projects can provide new insight.  
+Comparing the distribution of survey variables to data from non-survey sources can help identify errors in the recoding or harmonization of survey data and potentially reveal other surprises. A simple comparison of sample proportions of respondents with at least upper secondary education from surveys in the SDR v.1 dataset to analogous data from OECD led to the identification of samples with large differences between these two measurements. The examination of data and documentation from ISSP/Switzerland suggests that errors might have originated from the conversion of country-specific education variables to an education variable with uniform coding for the whole ISSP wave. Investigations of other surveys and projects can provide new insight.  
 This situation also proves the importance of clearly identifying the source data and variables and all transformation in harmonization projects, so that users can trace back the error to its source – in the case of educational attainment in ISSP/Switzerland it seems that the problem is not in the original measurement, but in the subsequent transformations.
 
 

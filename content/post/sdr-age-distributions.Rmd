@@ -13,11 +13,11 @@ output:
 Cross-national survey projects conduct surveys on representative samples of adult populations.
 How do the distributions of respondents' age vary across surveys carried out in the same country in different years and different projects?
 
-Like in a couple of previous posts ([here](https://martakolczynska.com/post/sdr-exploration/){target="_blank"}, [here](https://martakolczynska.com/post/education-sdr-oecd/) and [here](https://martakolczynska.com/post/sdr-demonstrations-multiplets/)) I use data from the [Survey Data Recycling dataset (SDR) version 1.0](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q){target="_blank"}, which includes selected harmonized variables from 22 cross-national survey projects. SDR only includes surveys that claim to have samples representative for adult populations. The code for manipulating the data and plotting can be found [here](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/sdr-age-distributions.Rmd){target="_blank"} on GitHub.
+Like in a couple of previous posts ([here](https://martakolczynska.com/post/sdr-exploration/){target="_blank"}, [here](https://martakolczynska.com/post/education-sdr-oecd/) and [here](https://martakolczynska.com/post/sdr-demonstrations-multiplets/)) I use data from the [Survey Data Recycling dataset (SDR) version 1](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q){target="_blank"}, which includes selected harmonized variables from 22 cross-national survey projects. SDR only includes surveys that claim to have samples representative for adult populations. The code for manipulating the data and plotting can be found [here](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/sdr-age-distributions.Rmd){target="_blank"} on GitHub.
 
-The ridgeline plot (thanks to the [`ggridges` package](https://github.com/clauswilke/ggridges){target="_blank"}) presents the distributions of age in all 32 samples from Poland from the SDR v.1.0 dataset, arranged from the oldest surveys at the bottom to the most recent surveys at the top. Colors identify age quartiles, and differences in the hight of graphs between surveys reflect differences in the sample sizes. Distributions are weighted with the case weights provided with the original data. In the SDR dataset values higher than 96 were recoded to missing, because many surveys has surprisingly high numbers of respondents aged 97-99 (likely because these are common missing value codes).
+The ridgeline plot (thanks to the [`ggridges` package](https://github.com/clauswilke/ggridges){target="_blank"}) presents the distributions of age in all 32 samples from Poland from the SDR v.1 dataset, arranged from the oldest surveys at the bottom to the most recent surveys at the top. Colors identify age quartiles, and differences in the hight of graphs between surveys reflect differences in the sample sizes. Distributions are weighted with the case weights provided with the original data. In the SDR dataset values higher than 96 were recoded to missing, because many surveys has surprisingly high numbers of respondents aged 97-99 (likely because these are common missing value codes).
 
-Age distributions for all surveys included in the SDR v.1.0 dataset can be plotted with this Shiny app: [https://mkolczynska.shinyapps.io/sdr_age_distributions/](https://mkolczynska.shinyapps.io/sdr_age_distributions/){target="_blank"}.
+Age distributions for all surveys included in the SDR v.1 dataset can be plotted with this Shiny app: [https://mkolczynska.shinyapps.io/sdr_age_distributions/](https://mkolczynska.shinyapps.io/sdr_age_distributions/){target="_blank"}.
 
 How does this variation influence the comparability of sample estimates between samples? And how to adjust samples when calculating and comparing, e.g., rates of participation in politics?
 
@@ -33,7 +33,7 @@ master_prep <- read.csv("data/sdr-age-distributions.csv")
 ```
 
 ```{r wrangling, warning=FALSE, message=FALSE, eval = FALSE, echo = FALSE}
-## recode of the SDR v.1.0 MAster File.
+## recode of the SDR v.1 MAster File.
 
 master_prep <- master %>%
   select(t_country_year, t_survey_name, t_survey_edition, t_country_l1u, t_country_set, t_age, t_weight_l1u_2) %>%
@@ -73,7 +73,7 @@ master_prep %>% filter(t_country_l1u == "PL") %>%
     ylab("") +
     guides(fill=guide_legend(title="Quartiles")) + 
     ggtitle("Distribution of age (weighted) in national surveys") +
-    labs(caption="Source: SDR v.1.0") 
+    labs(caption="Source: SDR v.1") 
 
 ```
 

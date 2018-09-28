@@ -12,7 +12,7 @@ output:
 
 The growth in cross-national survey projects in the last decades leads to situations when two or more surveys are carried out in the same country and the same year but in different projects, and contain overlapping sets of survey questions. Assuming that the surveys are based on representative samples - a claim that major cross-national survey projects typically make - it could be expected that estimates from surveys carried out in the same country and year are reasonably close.  
 
-In this post I analyze survey multiplets with regard to the popualar survey question about participation in a public demonstrations in the last year (or 12 months). I use data from the [Survey Data Recycling dataset (SDR) version 1.0](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q){target="_blank"}, which includes selected harmonized variables from 22 cross-national survey projects. SDR only includes surveys that (1) contain items on political attitudes or political participation, and that (2) are intended as representative for entire adult populations. For other selection criteria see [here](https://dataharmonization.org/about/data/surveys/){target="_blank"}; for information about how to download the SDR dataset from Dataverse to R see this [post](https://martakolczynska.com/post/sdr-exploration/){target="_blank"}).  
+In this post I analyze survey multiplets with regard to the popualar survey question about participation in a public demonstrations in the last year (or 12 months). I use data from the [Survey Data Recycling dataset (SDR) version 1](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q){target="_blank"}, which includes selected harmonized variables from 22 cross-national survey projects. SDR only includes surveys that (1) contain items on political attitudes or political participation, and that (2) are intended as representative for entire adult populations. For other selection criteria see [here](https://dataharmonization.org/about/data/surveys/){target="_blank"}; for information about how to download the SDR dataset from Dataverse to R see this [post](https://martakolczynska.com/post/sdr-exploration/){target="_blank"}).  
 
 The code for manipulating the data and for plotting is pretty long, so I don’t show it here to keep the post concise; the full code can be found [here](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/sdr-demonstrations-multiplets.Rmd){target="_blank"} on GitHub.
 
@@ -171,7 +171,7 @@ demo_means_cat %>%
   ylab("") +
   scale_x_continuous(labels = fmt_dcimals(1)) +
   ggtitle("Participation in demonstrations") + 
-  labs(caption="Source: SDR v.1.0") 
+  labs(caption="Source: SDR v.1") 
 
 ```
 
@@ -209,7 +209,7 @@ demo_means_cat %>%
   ylab("") +
   scale_x_continuous(labels = fmt_dcimals(1)) +
   ggtitle("Participation in demonstrations by gender") + 
-  labs(caption="Source: SDR v.1.0") 
+  labs(caption="Source: SDR v.1") 
 
 ```
 
@@ -242,7 +242,7 @@ demo_means_cat %>%
   ylab("") +
   scale_x_continuous(labels = fmt_dcimals(1)) +
   ggtitle("Participation in demonstrations by age") + 
-  labs(caption="Source: SDR v.1.0") 
+  labs(caption="Source: SDR v.1") 
 
 ```
 
@@ -275,7 +275,7 @@ demo_means_cat %>%
   ylab("") +
   scale_x_continuous(labels = fmt_dcimals(1)) +
   ggtitle("Participation in demonstrations by urban/rural residence") + 
-  labs(caption="Source: SDR v.1.0")
+  labs(caption="Source: SDR v.1")
 
 ```
 
@@ -308,7 +308,7 @@ demo_means_cat %>%
   ylab("") +
   scale_x_continuous(labels = fmt_dcimals(1)) +
   ggtitle("Participation in demonstrations by education level") + 
-  labs(caption="Source: SDR v.1.0") 
+  labs(caption="Source: SDR v.1") 
 
 ```
 

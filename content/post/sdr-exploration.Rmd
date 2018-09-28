@@ -1,5 +1,5 @@
 ---
-title: "Exploring the dataset of survey datasets: Survey Data Recycling version 1.0"
+title: "Exploring the dataset of survey datasets: Survey Data Recycling version 1"
 author: "Marta Kołczyńska"
 date: 2018-08-02T15:41:00
 topic: ["SDR"]
@@ -22,7 +22,7 @@ The harmonized SDR data and documentation, including detailed descriptions of th
 
 The clear advantage of SDR data is its extended coverage, both geographically and over time. The cost of this is increased volume and complexity. In this post I show how to download and explore the individual-level dataset (Master File).
 
-#### Survey projects in SDR v.1.0: 
+#### Survey projects in SDR v.1: 
 
 Abbr.     | Project name   
 ----------|----------------------------------------------------
@@ -54,7 +54,7 @@ WVS       | [World Values Survey](http://www.worldvaluessurvey.org/){target="_bl
 
 ###  Downloading the SDR data
 
-The SDR data bundle version 1.0 (Master Box v.1.0) is available from [Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q){target="_blank"}. Thanks to the `dataverse` package, these data can be loaded directly to R.
+The SDR data bundle version 1 (Master Box v.1) is available from [Dataverse](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q){target="_blank"}. Thanks to the `dataverse` package, these data can be loaded directly to R.
 
 Here are all the other necessary packages:
 ```{r packages, warning=FALSE, message=FALSE}
@@ -158,7 +158,7 @@ master_vars_survey <- master %>%
 
 ```
 
-The result of these operations is a data frame with 22 rows (corresponding to 22 survey projects in SDR v.1.0). The first column contains project names, and the next 8 columns contain values ranging from 0 to 1, corresponding to the proportion of national surveys in the given project that contain a given variable.
+The result of these operations is a data frame with 22 rows (corresponding to 22 survey projects in SDR v.1). The first column contains project names, and the next 8 columns contain values ranging from 0 to 1, corresponding to the proportion of national surveys in the given project that contain a given variable.
 
 ```{r sdr wrangled, warning=FALSE, message=FALSE}
 head(master_vars_survey)
@@ -392,7 +392,7 @@ ggplot(merge, aes(fill=factor(n))) +
   geom_sf(alpha=0.8,col='white') +
   coord_sf(crs = "+proj=moll") +
   ggtitle('Country coverage: trust in parliament and demonstrating "ever"') + 
-  labs(caption="Source: SDR v.1.0") +
+  labs(caption="Source: SDR v.1") +
   scale_fill_manual(na.value = "transparent", 
                       values = "deepskyblue4") +
   theme(legend.position = "none") 

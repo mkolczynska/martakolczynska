@@ -1,7 +1,7 @@
 ---
 title: "Harmonizing measures of income in cross-national surveys"
 author: "Marta Kołczyńska"
-date: 2018-09-26T17:29:00
+date: 2018-09-27T17:29:00
 categories: ["SDR"]
 tags: ["surveys", "SDR", "R", "cross-national research", "data quality", "survey data harmonization"]
 output: 
@@ -12,9 +12,9 @@ output:
 
 **with Przemek Powałko**
 
-Individual economic status is a necessary element of almost all sociological analyses, including studies of political attitudes and behavior. To supplement the already harmonized variables in the [Survey Data Recycling dataset (SDR) version 1.0](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q){target="_blank"} and for the purposes of my resesarch of the effects of education on political engagement, Przemek and I harmonized two additional variables: personal income and household income[^1].
+Individual economic status is a necessary element of almost all sociological analyses, including studies of political attitudes and behavior. To supplement the already harmonized variables in the [Survey Data Recycling dataset (SDR) version 1](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q){target="_blank"} and for the purposes of my resesarch of the effects of education on political engagement, Przemek and I harmonized two additional variables: personal income and household income[^1].
 
-In this post I will briefly describe the harmonization procedures and explore the properties of the harmonized income variables. The full documentation as well as the data will be made available shortly. For more information about the SDR dataset see [here](https://dataharmonization.org/){target="_blank"}; for information about how to download the SDR dataset from Dataverse to R see this [post](https://martakolczynska.com/post/sdr-exploration/){target="_blank"}. The code used in this post is available [here](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/sdr-income-hh-personal.Rmd){target="_blank"}.
+In this post I will briefly describe the harmonization procedures and explore the properties of the harmonized income variables. The full documentation as well as the data will be made available shortly. The code used in this post is available [here](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/sdr-income-hh-personal.Rmd){target="_blank"}.
 
 
 ### Data
@@ -64,7 +64,7 @@ myPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2",
 
 ```
 
-Of the 22 international survey projects in the SDR v.1.0 dataset, source variables measuring household income are available in 18 projects, and individual income in 10 projects. Surveys in 9 projects have both variables.
+Of the 22 international survey projects in the SDR v.1 dataset, source variables measuring household income are available in 18 projects, and individual income in 10 projects. Surveys in 9 projects have both variables.
 
 ```{r table-project, warning=FALSE, message=FALSE, echo = FALSE}
 master_survey %>% filter(!(is.na(hhinc_mean) & is.na(persinc_mean))) %>%
@@ -114,8 +114,8 @@ master_survey %>% ungroup() %>% select(t_survey_name, persinc_scale_length, hhin
   gather(variable, value, 2:3) %>%
   ggplot(., aes(x = value, y = t_survey_name, fill = variable)) + 
   geom_boxploth() + scale_x_log10() +
-  ylab("") + xlab("Numer of different realized response options (ln)") +
-  ggtitle("Length of response scales to income variables across survey projects") +
+  ylab("") + xlab("Number of different realized response options (log scale)") +
+  ggtitle("Length of response scales of income variables across survey projects") +
   scale_fill_manual(values=myPalette[4:5], 
                     name="Income",
                     breaks=c("hhinc_scale_length","persinc_scale_length"),
@@ -137,7 +137,7 @@ master_survey %>% ungroup() %>%
   ggplot(., aes(x = value, y = t_survey_name, fill = variable)) + 
   geom_boxploth() +
   xlim(0, 1) +
-  ylab("") + xlab("Proportion missing") +
+  ylab("") + xlab("Proportion of missing values") +
   ggtitle("Item non-response in income variables across survey projects") +
   scale_fill_manual(values=myPalette[4:5], 
                     name="Income",
@@ -171,7 +171,7 @@ master_pl %>%
 
 ### Harmonized target variables
 
-We created four harmonized target variables for household and personal income each. The first one is a cleaned version of the source variables with the original codes for substantive answers and missing value codes for non-responses (`t_income_hh` and `t_income_personal`). The second variant (`t_income_hh_rank_100` and `t_income_personal_rank_100`) represents the rank position of the respondent, rescaled into the range between 0 (lowest income) to 100 (highest income). The third variant rescales income to the scale 0-100 maintaining the relative distances between values (`t_income_hh_prop_100` and `t_income_personal_prop_100`). The fourth variant corresponds to mid-points from the cumulative distribution within the given national sample and represents the individual's relative position in the sample (`t_income_hh_distrib` and `t_income_personal_distrib`).
+We created four harmonized target variables for household and personal income each. The first one is a cleaned version of the source variables with the original codes for substantive answers and unified missing value codes for non-responses, and - where applicable - reversed so that higher values correspond to more income (`t_income_hh` and `t_income_personal`). The second variant (`t_income_hh_rank_100` and `t_income_personal_rank_100`) represents the rank position of the respondent, rescaled into the range between 0 (lowest income) to 100 (highest income). The third variant rescales income to the scale 0-100 maintaining the relative distances between values (`t_income_hh_prop_100` and `t_income_personal_prop_100`). The fourth variant corresponds to the relative position in the cumulative distribution within the given national sample (`t_income_hh_distrib` and `t_income_personal_distrib`).
 
 Below is an illustration of the recoding of source values (`s_income_hh`) to target values on the example of household income in AFB/2/Mozambique.
 

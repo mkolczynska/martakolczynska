@@ -11,7 +11,7 @@ output:
 ---
 &nbsp;  
 
-In the [previous post](https://martakolczynska.netlify.com/post/sdr-exploration/) I wrote about downloading and exploring the [Survey Data Recycling (SDR), version 1.0 dataset](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q){target="_blank"}, which consists of selected harmonized variables from 22 survey projects, 1966-2013.
+In the [previous post](https://martakolczynska.netlify.com/post/sdr-exploration/) I wrote about downloading and exploring the [Survey Data Recycling (SDR), version 1 dataset](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q){target="_blank"}, which consists of selected harmonized variables from 22 survey projects, 1966-2013.
 
 The [SDR project](dataharmonization.org){target="_blank"} will develop a website for browsing, subsetting, downloading, and visualizing data from the SDR project. This website is currently under construction. Meanwhile, I made a Shiny app with basic functionalities of the future on-line browsing and subsetting tool (also serves as its mock-up): https://mkolczynska.shinyapps.io/sdr_data_browser/. 
 
