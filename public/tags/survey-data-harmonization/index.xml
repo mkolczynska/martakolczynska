@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Thu, 27 Sep 2018 17:29:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 29 Sep 2018 10:06:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/survey-data-harmonization/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Personal vs. household income in cross-national surveys</title>
+      <link>/post/sdr-income-hh-personal-cor/</link>
+      <pubDate>Sat, 29 Sep 2018 10:06:00 +0000</pubDate>
+      
+      <guid>/post/sdr-income-hh-personal-cor/</guid>
+      <description>Sample correlationsSample correlations by genderSample correlations by ageSample correlations by educationContrastConclusionOne of the reasons for the harmonization of personal income in addition to household income was to check if the two correlate highly enough to use household income as a substitute for personal income in analyses where economic status is a control variable. This would be great, because household income variables are available in 1177 surveys out of 1721 analyzed in the Survey Data Recycling dataset (SDR) version 1, while personal income only in 453 surveys.</description>
+    </item>
     
     <item>
       <title>Harmonizing measures of income in cross-national surveys</title>

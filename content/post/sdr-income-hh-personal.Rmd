@@ -41,13 +41,13 @@ library(ggridges) # ridge plots
 library(viridis) # colors
 library(countrycode) # switch between country codes
 
-master_survey <- read.csv("C:/Users/mkolc/Google Drive/Academia/Blog/martakolczynska/content/post/data/sdr-income-master-survey.csv", 
+master_survey <- read.csv("data/sdr-income-master-survey.csv", 
                     stringsAsFactors = FALSE)
 
-master_pl <- read.csv("C:/Users/mkolc/Google Drive/Academia/Blog/martakolczynska/content/post/data/sdr-income-master-pl.csv", 
+master_pl <- read.csv("data/sdr-income-master-pl.csv", 
                     stringsAsFactors = FALSE)
 
-master_mz <- read.csv("C:/Users/mkolc/Google Drive/Academia/Blog/martakolczynska/content/post/data/sdr-income-master-mz.csv", 
+master_mz <- read.csv("data/sdr-income-master-mz.csv", 
                     stringsAsFactors = FALSE)
 
 theme_plots <- theme_bw(13) +

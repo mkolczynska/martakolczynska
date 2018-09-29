@@ -226,7 +226,7 @@
 
   <div>
     <i class="fa fa-calendar fa-fw"></i>
-    <time>01 Oct 2018, 10:06</time>
+    <time>29 Sep 2018, 10:06</time>
   </div>
 
   
@@ -268,16 +268,17 @@
 </ul>
 </div>
 
-<p>The main reason for the harmonization of personal income in addition to household income was to check if the two correlate highly enough to use household income as a substitute for personal income. This would be great, because household income is available in 1177 surveys out of 1721 in the <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q" target="_blank">Survey Data Recycling dataset (SDR) version 1.0</a>, while personal income only in 453 surveys. Since 419 national surveys from the SDR dataset have data both for personal and for household income, it’s possible to see how the correlations actually look like.</p>
+<p>One of the reasons for the harmonization of personal income in addition to household income was to check if the two correlate highly enough to use household income as a substitute for personal income in analyses where economic status is a control variable. This would be great, because household income variables are available in 1177 surveys out of 1721 analyzed in the <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q" target="_blank">Survey Data Recycling dataset (SDR) version 1</a>, while personal income only in 453 surveys. Since 419 national surveys from the SDR dataset have data both for personal and for household income, it’s possible to see how the correlations actually look like.</p>
+<p>Household and personal income are not part of the SDR v.1 dataset, but they have been harmonized extra and are compatible with the SDR master file. More information about the income source variables and their harmonization can be found in this <a href="https://martakolczynska.com/post/sdr-income-hh-personal/">post</a>.</p>
 <div id="sample-correlations" class="section level3">
 <h3>Sample correlations</h3>
-<p>I start by calculating correlations between personal and household income separately for each sample. I use Spearman’s <span class="math inline">\(\rho\)</span> instead of Pearson’s <span class="math inline">\(r\)</span>, because the harmonized income variables have very different distributions in different surveys, as a consequence of the original measurement: in exact income amounts, categories, or quantiles.</p>
-<p>Sample correlations range from 0.2 (ISSP/1991/West Germany) to 0.95 (ISSP/1991/Netherlands), with the mean and median around 0.55. The graph below presents the distribution.</p>
+<p>I start by calculating correlations between personal and household income separately for each sample. These two variables have been transformed in a minimal way compared to the original source variables: non-substantive responses (“don’t know”, “not applicable”, “refused”) were recoded to missing, and in a few cases coding was reversed so that higher values correspond to more income.</p>
+<p>I use Spearman’s <span class="math inline">\(\rho\)</span> instead of Pearson’s <span class="math inline">\(r\)</span>, because the harmonized income variables have very different distributions in different surveys, as a consequence of the original measurement: in exact income amounts, categories, or quantiles. As shown in the graph below, sample correlations range from 0.2 (ISSP/1991/West Germany) to 0.95 (ISSP/1991/Netherlands), with the mean and median around 0.55.</p>
 <p><img src="/post/sdr-income-hh-personal-cor_files/figure-html/hh-personal-plot-1.png" width="672" /></p>
 </div>
 <div id="sample-correlations-by-gender" class="section level3">
 <h3>Sample correlations by gender</h3>
-<p>Next I calculate the same correlations separately for the female and male subsample. The graph below shows that female sub-samples account for most of the low correlations. The median correlation for male subsamples is around 0.67, while for female subsamples it’s 0.48.</p>
+<p>Next I calculate the same correlations separately for the female and male subsample. The graph below shows that female sub-samples account for most of the low correlations. The median correlation for male subsamples is around 0.67, while for female subsamples it’s 0.48. The lowest correlation is -0.088 in the female subsample in ISSP/1991/West Germany, followed by the female subsample in Political Action 2/West Germany (-0.068), ISSP/1989/Netherlands (-0.011) and ISSP/1991/West Germany (-0.006).</p>
 <p><img src="/post/sdr-income-hh-personal-cor_files/figure-html/hh-personal-gender-plot-1.png" width="672" /></p>
 </div>
 <div id="sample-correlations-by-age" class="section level3">
@@ -292,7 +293,7 @@
 </div>
 <div id="contrast" class="section level3">
 <h3>Contrast</h3>
-<p>I end with a contrast of distributions of correlations between personal and housegold income for two groups: (1) females, aged less than 30 without high school education (yellow in the graph below), and (2) males, aged 30-64, with high school education or above. Again, I only use surveys that have at least 50 respondents in each of the two groups. In this case it’s just 96 surveys from Arab Barometer, ISJP, ISSP, the New Baltics Barometer, and the classic studies from the 1960s and 1970s: Political Action II, Political Action: An Eight Nation Study, and Political Participation and Equality in Seven Nations.</p>
+<p>I end with a contrast of distributions of correlations between personal and housegold income for two groups: (1) females, aged less than 30 without high school education (yellow in the graph below), and (2) males, aged 30-64, with high school education or above. Again, I only use surveys that have at least 50 respondents in each of the two groups. In this case it’s just 86 surveys, primarily from ISSP, but also from the from Arab Barometer, ISJP, ISSP, the New Baltics Barometer, and the classic studies from the 1960s and 1970s: Political Action II, Political Action: An Eight Nation Study, and Political Participation and Equality in Seven Nations.</p>
 <p><img src="/post/sdr-income-hh-personal-cor_files/figure-html/hh-personal-contrast-1.png" width="672" /></p>
 </div>
 <div id="conclusion" class="section level3">
