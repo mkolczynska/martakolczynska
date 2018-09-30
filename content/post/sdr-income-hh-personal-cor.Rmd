@@ -54,7 +54,7 @@ master_cor %>%
   xlim(-0.25, 1) +
   xlab("Correlation between household and personal income (Spearman's rho)") +
   ylab("Density") +
-  ggtitle("Correlations between household and personal income") +
+  ggtitle("Correlations between household and personal income (Spearman's rho)") +
   theme_plots +
   annotate("rect", xmin = -0.2, xmax = 0.2, ymin = 2.7, ymax = 3, alpha = .1) +
   annotate("text", x = 0, y = 2.85, label = "N = 419 national surveys")
@@ -84,7 +84,7 @@ master_cor %>%
   xlim(-0.25, 1) +
   xlab("Correlation between household and personal income (Spearman's rho)") +
   ylab("Density") +
-  ggtitle("Distribution of correlations between household and personal income 
+  ggtitle("Correlations between household and personal income 
           (Spearman's rho) in national samples split by gender") +
   scale_fill_manual(values=myPalette[2:3], 
                     name="Gender",
@@ -123,7 +123,7 @@ master_cor %>%
   xlim(-0.25, 1) +
   xlab("Correlation between household and personal income (Spearman's rho)") +
   ylab("Density") +
-  ggtitle("Distribution of correlations between household and personal income 
+  ggtitle("Correlations between household and personal income 
           (Spearman's rho) in national samples split by age groups") +
   scale_fill_manual(values=myPalette[4:6], 
                     name="Age",
@@ -162,7 +162,7 @@ master_cor %>%
   xlim(-0.25, 1) +
   xlab("Correlation between household and personal income (Spearman's rho)") +
   ylab("Density") +
-  ggtitle("Distribution of correlations between household and personal income 
+  ggtitle("Correlations between household and personal income 
           (Spearman's rho) in national samples split by education level") +
   scale_fill_manual(values=myPalette[6:7], 
                     name="",
@@ -208,7 +208,7 @@ master_cor %>%
   xlim(-0.5, 1) +
   xlab("Correlation between household and personal income (Spearman's rho)") +
   ylab("Density") +
-  ggtitle("Distribution of correlations between household and personal income 
+  ggtitle("Correlations between household and personal income 
           (Spearman's rho) in national samples split by age groups") +
   scale_fill_manual(values=myPalette[4:5], 
                     name="",
