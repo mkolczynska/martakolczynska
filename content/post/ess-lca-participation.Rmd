@@ -1,0 +1,328 @@
+---
+title: "Political participation patterns in Poland"
+description: "Latent class analysis and European Social Survey Round 8"
+author: "Marta Kołczyńska"
+date: "`r Sys.time()`"
+categories: ["R"]
+tags: ["surveys", "ESS", "R", "political inequality", "political participation", "latent class analysis"]
+output: 
+  blogdown::html_page:
+    toc: true
+    toc_depth: 4
+---
+
+I recently came across Jennifer Oser's 2017 [article](https://link.springer.com/article/10.1007/s11205-016-1364-8){target="_blank"} in *Social Indicators Research* about "political tool kits", i.e. profiles (or patterns) of participation in different political activities. Her general argument is that research on citizen participation would benefit from analyses of such participation patterns instead of (or at least in addition to) just looking at determinants of participation in single activities. She employs latent class analysis to data from the [U.S. Citizen, Involvement and Democracy Survey](https://www.icpsr.umich.edu/icpsrweb/civicleads/studies/4607){target="_blank"} and finds that four categories of participants can be distinguished (p. 245):  
+1. "the disengaged" (60% of the population) who only participate in elections and nothing else,  
+2. "mainstream participants" (24%), who engage in the more popular forms of participation,  
+3. "high-voting engaged" (10%) participate in direct activities, but not in electoral-oriented activities, and  
+4. "all-around activists" (6%) who are generally very active.  
+
+Overall, class size increases with declining activity, and there are some predictable socio-demographic differences between classes.
+
+I check whether the same 4-group model applies to Poland, using this as an opportunity to learn latent class analysis. Crucial to this kind of analysis is a dataset with recorded participation in many types of activities. Oser uses the U.S. Citizen, Involvement and Democracy Survey, which asks about participation in the last 12 months in 15 distinct activities[^1]. The best dataset from this point of view I know of is the [European Social Survey (ESS)](https://www.europeansocialsurvey.org/){target="_blank"}, which asks about 9 forms of participation, also in the last 12 months (with the exception of voting in the last elections whenever they were)[^2]. The U.S. CID survey and ESS Round 3 were designed to be comparable and share a set of identical questions, but in this example I use the most recent round of ESS, Round 8. The full code used for graphs and tables in this post can be found [here](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/ess-lca-participation.Rmd){target="_blank"}.
+
+
+```{r setup, warning=FALSE, message=FALSE, echo = FALSE}
+
+library(essurvey) # import ESS data
+library(tidyverse) # manipulating data
+library(ggplot2) # plots
+library(labelled) # handling labelled data (e.g., in .sav or .dta format)
+library(reshape2) # for reshaping data
+library(poLCA) # performs latent class analysis
+library(knitr) # nice tables
+library(kableExtra) # customize tables (kables)
+library(eurostat) # get NUTS2 region shapes
+library(tmap) # create maps
+
+### custom plot theme
+theme_plots <- theme_bw(12) +
+  theme(plot.title = element_text(size=11),
+        axis.text.y = element_text(size = 11),
+        axis.ticks.y = element_blank(),
+        axis.text.x = element_text(size = 11),
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.5),
+        panel.grid.minor.x = element_blank())
+
+### my palette
+myPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+```
+
+
+```{r wrangling, warning=FALSE, message=FALSE, results='hide', echo = FALSE}
+ess8 <- import_country("Poland", 8)
+
+#list of protest variables to keep the code shorter
+protest_vars <- c("contplt", "wrkprty", "wrkorg", "badge", "sgnptit", "pbldmn", "bctprd", "pstplonl")
+
+# function to recode protest variables to dummies
+clean_protest_vars <- function(x) {
+  plyr::mapvalues(x, from = c(1,2,NA), to = c(1,0,NA))
+}
+
+# cleaning missing values and selecting variables for analysis
+ess <- recode_missings(ess8) %>% 
+  dplyr::select(idno, cntry, pspwght, polintr, nwspol, vote, protest_vars, trstprl,
+                eduyrs, eisced, isco08, domicil, agea, gndr, hincfel, hinctnta, hhmmb, region) %>%
+  remove_labels()
+
+# reshaping and recoding data
+essclean <- ess %>% 
+  mutate(eisced = replace(eisced, eisced == 55, NA),
+         vote = plyr::mapvalues(vote, from = c(1,2,3, NA), to = c(1,0,NA, NA)),
+         polintr = as.numeric(polintr == 1),
+         hincfel = - hincfel + 4,
+         eduyrs = replace(eduyrs, eduyrs >= 20, 20),
+         eduyrs = replace(eduyrs, eduyrs <= 7, 7),
+         female = gndr - 1,
+         city = as.numeric(domicil <= 2),
+         age = agea) %>%
+  mutate_at(vars(one_of(protest_vars)), funs(clean_protest_vars)) %>%
+  mutate_at(vars(one_of(protest_vars)), funs(.+1)) %>%
+  mutate(polintr = polintr + 1,
+         vote = vote + 1,
+         nwspol = nwspol + 1)
+```
+
+#### Political participation in Poland
+
+I start by calculating the prevelance of each political activity. As can be read from the graph below, with the exception of voting in elections (declared by 74% of respondents), political participation in Poland in very low. For any activity apart from signing petitions and voting, participation rates are below 10% down to around 2% for working for political parties. This already suggests that increasing the number of classes will very quickly lead to tiny sizes of classes.
+
+```{r participation-level, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 4}
+# bar plot of political participation levels by activity
+essclean %>%
+  dplyr::select(protest_vars, vote) %>%
+  gather(activity, participate, 1:9) %>%
+  mutate(activity = plyr::mapvalues(activity, 
+                    from = c("vote", "sgnptit", "contplt", "pstplonl", "wrkorg", 
+                             "pbldmn", "badge", "bctprd", "wrkprty"), 
+                    to = c("vote", "petition", "contact", "post.online", "work.org", 
+                             "demonstr", "badge", "boycott", "work.party"))) %>%  
+  group_by(activity) %>%
+  summarise(mean = mean(participate, na.rm = TRUE) - 1) %>%
+  ggplot(., aes(x = reorder(activity, -mean), y = mean)) + 
+  geom_col(fill = "gray60") +
+  ylab("Participation rate in the last 12 months") +
+  xlab("") +
+  ggtitle("Participation in different political activities") +
+  labs(caption="Source: European Social Survey Round 8, Poland") +
+  theme_plots
+```
+
+#### Latent class analysis
+
+Latent class analysis is a technique of identifying patterns across a set of nominal or ordinal variables, including binary indicators of participation in various activities. In this particular example latent class analysis will distinguish between individuals who engage in different subsets of the political activities the ESS asks about.
+
+To estimate latent class models I use the [`poLCA` package](https://cran.r-project.org/web/packages/poLCA/index.html){target="_blank"} and relied on this [post](https://statistics.ohlsen-web.de/latent-class-analysis-polca/){target="_blank"} and this [presentation](http://daob.nl/wp-content/uploads/2015/07/ESRA-course-slides.pdf){target="_blank"} for guidance. 
+
+```{r lca-analysis,  warning=FALSE, message=FALSE, results='hide', echo = FALSE}
+#defining the function to calculate entropy
+entropy <- function (p) sum(-p*log(p))
+
+# setting the data for the LCA and the model variables
+data <- essclean  
+f <- with(data, cbind(vote, contplt, wrkprty, wrkorg, 
+                      badge, sgnptit, pbldmn, bctprd, pstplonl)~1)
+
+# random number generator seed
+set.seed(01012)
+
+# empty list to store results for different numbers of classes
+lca_list <- list()
+
+# loop to generate separate models for 1-6 classes
+for(i in 1:6){
+  lca_list[[i]] <-poLCA(f, data=data, nclass = i, na.rm = FALSE, nrep=20, maxiter=3000)
+}
+
+# empty vectors to store the results
+entrop <- model <- LLR <- cAIC <- aBIC <- BIC <- df <- LL <- vector()
+
+# filling the vectors with results
+for(i in 1:length(lca_list)){
+  model[i] <- i
+  LL[i] <- lca_list[[i]]$llik
+  df[i] <- lca_list[[i]]$resid.df
+  BIC[i] <- lca_list[[i]]$bic
+  aBIC[i] <- (-2* lca_list[[i]]$llik) + ((log((lca_list[[i]]$N + 2)/24)) * lca_list[[i]]$npar)
+  cAIC[i] <- (-2*lca_list[[i]]$llik) + lca_list[[i]]$npar * (1 + log(lca_list[[i]]$N))
+  LLR[i] <- lca_list[[i]]$Gsq
+  error_prior<-entropy(lca_list[[i]]$P)
+  error_post<-mean(apply(lca_list[[i]]$posterior,1, entropy),na.rm = TRUE)
+  entrop[i] <- round(((error_prior-error_post) / error_prior),3)
+}
+
+# combining the vectors into a data frame
+r1 <- data.frame(cbind(c(1:6), BIC, aBIC, cAIC, LLR))
+```
+
+The crucial step with latent class analysis is the choice of the model with the most appropriate number of classes. There should be enough classes to capture all the important patterns in the data, and at the same time few enough classes to allow for meaningful interpretation and labeling of the distinct patterns. In practice, models are typically chosen based on fit statistics, in particular on the Bayesian Information Criterion (BIC), whose lower values indicate better model fit.
+
+I estimate models for 1-6 classes, and calculate fit statistics for each of them. They are presented in the table and graph below. BIC points to the three-class model as providing optimal fit, and this is the model I will explore further.
+&nbsp;  
+
+```{r lca-model-selection-table, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 5}
+
+# pretty table (kable) to present the model summary
+kable(r1, caption = "Fit statistics of models",
+      align=c("c", "c", "c", "c", "c"),
+      col.names = c("N classes", "BIC", "aBIC", "cAIC", "Log-likelihood ratio")) %>%
+  kable_styling(full_width = F, position = "left", font_size = 12) %>%
+  column_spec(1:4, width = "7em") %>% column_spec(1:4, width = "9em")
+```
+
+```{r lca-model-selection-graph, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 5}
+
+# graph to present the model summary
+gather(r1,variable,value,2:5) %>%
+  ggplot(.) + 
+  geom_point(aes(x = factor(V1), y=value), size = 3) +
+  geom_line(aes(x = factor(V1), y=value, group = 1)) +
+  theme_bw()+
+  labs(x = "", y="", title = "") + 
+  facet_grid(variable ~. ,scales = "free") +
+  theme_bw(base_size = 16, base_family = "") +   
+  theme_plots
+```
+
+#### Three types of participants: the Disengaged, Activists, and Protesters
+
+The graph below presents patterns of participation in different activities for each class. Activities are sorted in the order of descending participation in the entire sample. The bars indicate the prevelance of a given form of participation in the entire sample. The colored dots provide probabilities of participation in the given activity for members of the three latent classes, and the lines help connect the dots.
+
+The largest group are the disengaged, who participate in general elections and do little more. According to the model, they account for about 87% of the population. The two engaged groups are around 6-7% each. The group I labelled "Activists" consists of individuals who, apart from voting, also choose institutional forms of participation, such as contacting politicians, and working for political parties and other organizations. The third group, "Protesters", are primarily engaged in posting and sharing political content on-line, participating in demonstrations, wearing badges or stickers, and boycotting. The graph shows clearly that the two active groups - "Activists" and "Protesters" - tend to engage in different forms of participation, with the exception of signing petitions and wearing badges, which have similar probabilities in both groups.
+
+```{r lca-class-graph, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 9.5, fig.height = 5}
+# auxuliary file with participation levels by activity
+a <- data %>%
+    dplyr::select(protest_vars, vote) %>%
+    gather(activity, participate, 1:9) %>%
+  group_by(activity) %>%
+  summarise_all(funs(mean = mean(., na.rm = TRUE) - 1))
+
+# graph with participation levels and participation probabilities by class
+reshape2::melt(lca_list[[3]]$probs, level=2) %>%
+  filter(Var2 == "Pr(2)") %>%
+  mutate(activity = fct_relevel(L2,
+                                "vote",
+                                "sgnptit",
+                                "contplt",
+                                "pstplonl",
+                                "wrkorg",
+                                "pbldmn",
+                                "badge",
+                                "bctprd",
+                                "wrkprty")) %>%
+  mutate(id = as.numeric(activity),
+         class = plyr::mapvalues(substr(Var1,7,7), from = c(1,2,3),
+                                 t = c("Activists (6%)", "Disengaged (87%)", "Protesters (7%)")))  %>%
+  full_join(a, by = "activity") %>%
+  mutate(activity = plyr::mapvalues(activity, from = c("vote", "sgnptit", "contplt",
+                                                       "pstplonl", "wrkorg", "pbldmn",
+                                                       "badge", "bctprd", "wrkprty"), 
+                                    to = c("vote", "petition", "contact", "post.online",
+                                           "work.org", "demonstr", "badge", "boycott", "work.party"))) %>%
+  ggplot() + 
+  geom_col(aes(x = reorder(activity, id), y = mean / 3), fill = "gray80") +
+  geom_line(aes(x = reorder(activity, id), 
+                y = value, group = class, col = class), 
+            size = 1) + 
+  geom_point(aes(x = reorder(activity, id), 
+                y = value, group = class, col = class), 
+             size = 3) + 
+  scale_colour_manual(values=myPalette[2:4],
+                      name="") +
+  ylab("Observed / predicted participation") + 
+  xlab("") +
+  ggtitle("Participation in different forms of political activity") +
+  labs(caption="Source: European Social Survey Round 8, Poland") +
+  theme_plots
+```
+
+The table below shows class means of standard predictors of political participation. According to this very basic analysis, "protesters" are on average younger, more female-dominated, more urban and less trusting of the parliament than the other groups. The "disengaged" tend to be older, less educated, and have lower income. Modeling the factors associated with class membership is material for a separate post.
+&nbsp;  
+
+
+```{r analysis, warning=FALSE, message=FALSE, echo = FALSE}
+
+# table with means/proportions of respondents by class
+cbind(essclean, predclass = lca_list[[3]]$predclass) %>%
+  mutate(class = plyr::mapvalues(predclass, from = c(1,2,3),
+                                 t = c("Activists", "Disengaged", "Protesters"))) %>%
+  group_by(class) %>%
+  summarise(n = n(),
+            mean_age = round(mean(age, na.rm = TRUE),3),
+            mean_female = round(mean(female, na.rm = TRUE),3),
+            mean_eduyrs = round(mean(eduyrs, na.rm = TRUE),3),
+            mean_hinctnta = round(mean(hinctnta, na.rm = TRUE),3),
+            mean_city = round(mean(city, na.rm = TRUE),3),
+            mean_trstprl = round(mean(trstprl, na.rm = TRUE),3)) %>%
+  kable(., caption = "Means / proportions by latent class",
+        col.names=c("Class", "N", "Age", "Female", 
+                    "Education", "Income", 
+                    "Urban", "Trust parliament")) %>%
+  kable_styling(full_width = F, position = "left", font_size = 12) %>%
+  column_spec(1:7, width = "6em") %>% column_spec(8, width = "9em") %>%
+  footnote(general = "Age in years; Education in schooling years; Income in deciles of household income;
+           Urban = 'A big city' or 'The suburbs or outskirts of a big city'; Trust in parliament 0-10 scale;
+           Source: European Social Survey, Round 8, Poland.")
+```
+
+#### Region maps
+
+Ahead of Poland's local government elections, I'm interested in looking at regional differences in participation. The ESS provides sub-national region identifiers in the NUTS classification (where available). In the Polish dataset regions are defined at the NUTS2 level, corresponding to 16 *województwa*. The three maps below show the proportions of each class - "Activists", the "Disengaged", and "Protesters" - by region.
+
+```{r region-maps, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 9.5, fig.height = 5}
+nuts2data <- cbind(essclean, predclass = lca_list[[3]]$predclass) %>%
+  mutate(class = plyr::mapvalues(predclass, from = c(1,2,3),
+                                 t = c("Activists", "Disengaged", "Protesters"))) %>% 
+  group_by(region) %>%
+  summarise(mean_class1 = mean(predclass == 1),
+            mean_class2 = mean(predclass == 2),
+            mean_class3 = mean(predclass == 3))
+
+# get NUTS2 shape files from Eurostat
+geodata <- get_eurostat_geospatial(output_class = "sfdf", resolution = "10", nuts_level = 2, year = 2013)
+
+# merge NUTS2 shape data with class proportions from the ESS
+map_data <- right_join(geodata, nuts2data, by = c("id" = "region"))
+
+map1 <- tm_shape(geodata) +
+  tm_fill("lightgrey") +
+  tm_shape(map_data, is.master = TRUE) +
+  tm_polygons("mean_class1", title = "Proportion of \n'Activists'",
+              palette = "Oranges", border.col = "white") +
+  tm_text("NUTS_NAME", just = "center", size = 0.6) +
+  tm_scale_bar(position=c("right", "TOP")) +
+  tm_credits("Data: ESS/8/Poland") +
+  tm_layout(inner.margins = c(0.2,0,0,0))
+
+map2 <- tm_shape(geodata) +
+  tm_fill("lightgrey") +
+  tm_shape(map_data, is.master = TRUE) +
+  tm_polygons("mean_class2", title = "Proportion of \n'Disengaged'",
+              palette = "Blues", border.col = "white") +
+  tm_text("NUTS_NAME", just = "center", size = 0.6) +
+  tm_scale_bar(position=c("right", "TOP")) +
+  tm_credits("Data: ESS/8/Poland") +
+  tm_layout(inner.margins = c(0.2,0,0,0))
+
+map3 <- tm_shape(geodata) +
+  tm_fill("lightgrey") +
+  tm_shape(map_data, is.master = TRUE) +
+  tm_polygons("mean_class3", title = "Proportion of \n'Protesters'",
+              palette = "Greens", border.col = "white") +
+  tm_text("NUTS_NAME", just = "center", size = 0.6) +
+  tm_scale_bar(position=c("right", "TOP")) +
+  tm_credits("Data: ESS/8/Poland") +
+  tm_layout(inner.margins = c(0.2,0,0,0))
+
+#current.mode <- tmap_mode("plot")
+tmap_arrange(map3, map1, map2)
+
+```
+
+
+[^1]: Voting in the last election, signing a petition; displaying a campaign badge or sticker; buycotting; donating money to a political organization or group; contacting politicians; boycotting products; visiting websites of political candidates or organizations; forwarding electronic messages with electronic content; working for a candidate's campaign; working in a political party or action group, participating in political activities over the internet; taking part in a lawful public demonstration; working in a political organization (not campaign-related); participating in an illegal demonstration.
+
+[^2]: Voting in the last election; contacting a politician, government or local government official; working in a political party or action group; working in another organisation or association; wearing or displaying a campaign badge/sticker; signing a petition; taking part in a lawful public demonstration; boycotting certain products; posting or sharing anything about politics online, for example on blogs, via email or on social media such as Facebook or Twitter. Source: [ESS Round 8. Source Questionnaire](https://www.europeansocialsurvey.org/data/round-index.html){target="_blank"}
