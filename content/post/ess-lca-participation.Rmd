@@ -2,7 +2,7 @@
 title: "Political participation patterns in Poland"
 description: "Latent class analysis and European Social Survey Round 8"
 author: "Marta Kołczyńska"
-date: "`r Sys.time()`"
+date: 2018-10-18T16:13:14
 categories: ["R"]
 tags: ["surveys", "ESS", "R", "political inequality", "political participation", "latent class analysis"]
 output: 
