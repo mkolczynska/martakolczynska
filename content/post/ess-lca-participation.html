@@ -2,7 +2,7 @@
 title: "Political participation patterns in Poland"
 description: "Latent class analysis and European Social Survey Round 8"
 author: "Marta Kołczyńska"
-date: "2018-10-18 21:18:57"
+date: "2018-10-18 21:47:02"
 categories: ["R"]
 tags: ["surveys", "ESS", "R", "political inequality", "political participation", "latent class analysis"]
 output: 
@@ -304,7 +304,9 @@ Protesters
 </div>
 <div id="region-maps" class="section level4">
 <h4>Region maps</h4>
-<p>Ahead of Poland’s local government elections, I’m interested in looking at regional differences in participation. The ESS provides sub-national region identifiers in the NUTS classification (where available). In the Polish dataset regions are defined at the NUTS2 level, corresponding to 16 <em>województwa</em>. The three maps below show the proportions of each class - “Activists”, the “Disengaged”, and “Protesters” - by region.</p>
+<p>Ahead of Poland’s local government elections, I’m interested in looking at regional differences in participation. The ESS provides sub-national region identifiers in the NUTS classification (where available). In the Polish dataset regions are defined at the NUTS2 level, corresponding to 16 <em>województwa</em>.</p>
+<p>With the <a href="http://ropengov.github.io/eurostat/" target="_blank"><code>eurostat</code> package</a> I download NUTS 2 shapes, combine them with aggregated ESS data, and plot with the <a href="https://github.com/mtennekes/tmap" target="_blank"><code>tmap</code> package</a>.</p>
+<p>The three maps below show the proportions of each class - “Activists”, the “Disengaged”, and “Protesters” - by region.</p>
 <p><img src="/post/ess-lca-participation_files/figure-html/region-maps-1.png" width="912" /></p>
 </div>
 <div class="footnotes">

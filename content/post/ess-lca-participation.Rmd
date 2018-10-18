@@ -270,7 +270,11 @@ cbind(essclean, predclass = lca_list[[3]]$predclass) %>%
 
 #### Region maps
 
-Ahead of Poland's local government elections, I'm interested in looking at regional differences in participation. The ESS provides sub-national region identifiers in the NUTS classification (where available). In the Polish dataset regions are defined at the NUTS2 level, corresponding to 16 *województwa*. The three maps below show the proportions of each class - "Activists", the "Disengaged", and "Protesters" - by region.
+Ahead of Poland's local government elections, I'm interested in looking at regional differences in participation. The ESS provides sub-national region identifiers in the NUTS classification (where available). In the Polish dataset regions are defined at the NUTS2 level, corresponding to 16 *województwa*. 
+
+With the [`eurostat` package](http://ropengov.github.io/eurostat/){target="_blank"} I download NUTS 2 shapes, combine them with aggregated ESS data, and plot with the [`tmap` package](https://github.com/mtennekes/tmap){target="_blank"}.
+
+The three maps below show the proportions of each class - "Activists", the "Disengaged", and "Protesters" - by region.
 
 ```{r region-maps, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 9.5, fig.height = 5}
 nuts2data <- cbind(essclean, predclass = lca_list[[3]]$predclass) %>%
