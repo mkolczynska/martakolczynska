@@ -17,6 +17,8 @@ output:
 
 One of accompanying events of the [BigSurv18: Big Data Meets Survey Science](https://www.bigsurv18.org/){target="_blank"} conference in Barcelona last week was the Green City Hackathon. The challenge was as follows: The city of Barcelona wants to reduce car traffic, in particular by promoting use of bicycles. The city is collecting quite a lot of data on bike use, especially about the [public city bike share system "Bicing"](https://www.bicing.cat/){target="_blank"}, and needs the data analyzed, including descriptives, predictions, analytic tools, etc. The goal of the Green City Hackathon was to design or at least propose such analyses and/or tools, dealing with bike usage, safety, complaints, or other related issues. The data challenge primarily used data coming from the [Open Data BCN portal](http://opendata-ajuntament.barcelona.cat/en/){target="_blank"}, a key unit in the [Barcelona Digital City Plan](https://ajuntament.barcelona.cat/digital/en/digital-innovation/urban-i-lab){target="_blank"}, but other data sources were also permitted.
 
+The full code used to generate this post can be found [here](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/bigsurv18-hachathon.Rmd){target="_blank"}.
+
 ### Team number 5
 
 The hackathon situation is unlike much of academic research experience: working with people met for the first time, who have different backgrounds and skills, need to get up to speed fast, extremely limited time, little knowledge of the subject matter, need for presentable results, acceptance of "no results" as results, i.e. plans for future actions (analyses, data collection, etc.) instead of findings and conclusions.
@@ -229,9 +231,7 @@ sync(m1, m3)
   
 \newline
 
-To see how systematic these differences are, we divided the stations into three groups by altitude: below 50 m a.s.l., 50-99 m, and 100 meters or higher, and plotted the proportion of time the stations were empty each day for all days in September. As the below graph shows, stations located highest (in red) are empty most often, while stations located al lowest altitudes (in green) are seldom empty.
-
-This is probably because bike use and bike replenishment are out of sync and leave some of the stations without bikes most of the time.
+To see how systematic these differences are, we divided the stations into three groups by altitude: below 50 m a.s.l., 50-99 m, and 100 meters or higher, and plotted the proportion of time the stations were empty each day for all days in September. As the below graph shows, stations located highest (in red) are empty most often, while stations located al lowest altitudes (in green) are seldom empty. One possible reason is that bike use and bike replenishment are out of sync and leave some of the stations without bikes most of the time.
 
 ```{r plot-no-bikes, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 5}
 stations %>%
