@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Thu, 18 Oct 2018 16:13:14 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 30 Oct 2018 10:00:14 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Biking in Barcelona: Green City Hackathon</title>
+      <link>/post/bigsurv18-hackathon/</link>
+      <pubDate>Tue, 30 Oct 2018 10:00:14 +0000</pubDate>
+      
+      <guid>/post/bigsurv18-hackathon/</guid>
+      <description>BigSurv18 and the Green City HackathonTeam number 5DataBike useAltitude of Bicing stationsLocation of mechanical and electric bike stationsEmpty stations by station altitudeNext stepswith Saleha Habibullah, Sakinat Folorunso, and Vera Paul
+BigSurv18 and the Green City HackathonOne of accompanying events of the BigSurv18: Big Data Meets Survey Science conference in Barcelona last week was the Green City Hackathon.</description>
+    </item>
     
     <item>
       <title>Political participation patterns in Poland</title>

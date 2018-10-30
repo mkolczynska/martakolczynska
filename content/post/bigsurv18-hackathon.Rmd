@@ -1,0 +1,256 @@
+---
+title: "Biking in Barcelona: Green City Hackathon"
+description: "BigSurv18, October 24-25, 2018"
+author: "Marta Kołczyńska"
+date: 2018-10-30T10:00:14
+categories: ["R"]
+tags: ["biking", "hackathon", "big data", "Barcelona"]
+output:
+  blogdown::html_page:
+    toc: true
+    toc_depth: 4
+---
+
+*with Saleha Habibullah, [Sakinat Folorunso](https://twitter.com/SakinatTijani){target="_blank"}, and Vera Paul*
+
+### BigSurv18 and the Green City Hackathon
+
+One of accompanying events of the [BigSurv18: Big Data Meets Survey Science](https://www.bigsurv18.org/){target="_blank"} conference in Barcelona last week was the Green City Hackathon. The challenge was as follows: The city of Barcelona wants to reduce car traffic, in particular by promoting use of bicycles. The city is collecting quite a lot of data on bike use, especially about the [public city bike share system "Bicing"](https://www.bicing.cat/){target="_blank"}, and needs the data analyzed, including descriptives, predictions, analytic tools, etc. The goal of the Green City Hackathon was to design or at least propose such analyses and/or tools, dealing with bike usage, safety, complaints, or other related issues. The data challenge primarily used data coming from the [Open Data BCN portal](http://opendata-ajuntament.barcelona.cat/en/){target="_blank"}, a key unit in the [Barcelona Digital City Plan](https://ajuntament.barcelona.cat/digital/en/digital-innovation/urban-i-lab){target="_blank"}, but other data sources were also permitted.
+
+### Team number 5
+
+The hackathon situation is unlike much of academic research experience: working with people met for the first time, who have different backgrounds and skills, need to get up to speed fast, extremely limited time, little knowledge of the subject matter, need for presentable results, acceptance of "no results" as results, i.e. plans for future actions (analyses, data collection, etc.) instead of findings and conclusions.
+
+After a quick brainstorm we (Saleha, Sakinat, Vera, and Marta) decided to focus on the most basic barriers to using the Bicing system: lack of available bikes in Bicing stations and altitude (Barcelona is a hilly city!). To our surprise we found that these two issues are related.
+
+```{r setup, warning=FALSE, message=FALSE, echo = FALSE, results='hide'}
+library(tidyverse) # data cleaning and manipulation
+library(forecast) # time series data
+library(RColorBrewer) # color palettes
+library(lubridate) # dealing with dates
+library(ggpmisc) # ggplot extras like annotating peaks
+library(sp) # spatial data frames
+library(mapview) # interactive maps
+
+stations <- read.table(file = "http://opendata-ajuntament.barcelona.cat/data/dataset/fa94d2f3-3428-47b8-9f2b-f1e4423e745a/resource/8ebbe011-4a69-40ee-ba56-6757f36a60f9/download/2018_09_setembre_bicing_estacions.csv",
+                       sep = ";", header = TRUE, dec = ".", stringsAsFactors = FALSE)
+
+bikeuse <- read.table("http://opendata-ajuntament.barcelona.cat/data/dataset/4a469cf6-dbab-4aa1-b492-aa0af9af93c9/resource/727981d3-3038-4aa7-81b4-b47a35f99f37/download/2018_09_setembre_bicing_us.csv",
+                       sep = ";", header = TRUE, dec = ".", stringsAsFactors = FALSE)
+
+# formatting dates as POSIXct to be recognized as dates
+bikeuse$datetime <- as.POSIXct(bikeuse$dateTime,format="%Y-%m-%d %H:%M",tz=Sys.timezone())
+stations$datetime <- as.POSIXct(stations$updateTime,format="%d/%m/%y %H:%M",tz=Sys.timezone())
+stations$hour <- hour(stations$datetime)
+
+# fixing commas in decimals in longitude and latitude
+stations$longitude <- as.numeric(gsub(",", ".", stations$longitude))
+stations$latitude <- as.numeric(gsub(",", ".", stations$latitude))
+
+# custom ggplot theme
+theme_plots <- theme_bw(12) +
+  theme(plot.title = element_text(size=12),
+        axis.text.y = element_text(size = rel(1)),
+        axis.ticks.y = element_blank(),
+        axis.text.x = element_text(size = rel(1)),
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.5),
+        panel.grid.minor.x = element_blank())
+
+length(unique(stations$id))
+table(stations$type)
+
+```
+
+
+### Data
+
+We used data from the [Open Data BCN portal](http://opendata-ajuntament.barcelona.cat/en/){target="_blank"}, specifically two datasets:  
+
+1. [Bicing bike use in September](http://opendata-ajuntament.barcelona.cat/data/en/dataset/us-del-servei-bicing){target="_blank"} with data on the number of bikes in use recorded every 15 minutes,
+2. [Bicing stations status in September](http://opendata-ajuntament.barcelona.cat/data/dataset/bicing){target="_blank"} with data on the number of bikes and free slots in each of the 463 Bicing stations, again recorded in 15-minute intervals.
+
+
+### Bike use
+
+First, we wanted to find out a little about how the bikes are used. We plot bike use (the number of Bicing bikes in use) over time for a random weekday in September. The graph below clearly shows the peaks and valleys of bike use during the day: the morning peak is about 8.45 AM followed by an evening peak just before 7 PM. Other weekdays exhibited similar patterns. This suggests that Bicing bikes are used for commutes to work or school.
+
+
+```{r bike-use-graph-weekday, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 3.5}
+bikeuse %>%
+  filter(day(datetime) == 5) %>%
+  ggplot(., aes(x = datetime, y = bikesInUsage)) + geom_line(size = 1.5) +
+  stat_peaks(colour = "red", span = 21, ignore_threshold = 0.5) +
+  stat_peaks(geom = "text", colour = "red", span = 21, ignore_threshold = 0.5,
+             hjust = -0.1, x.label.fmt = "%H:%M", angle = 45) +
+  ggtitle("Bike use, September 5 (Wednesday)") +
+  xlab("Time") +
+  ylim(0, 1200) +
+  theme_plots
+```
+
+The pattern of morning and evening peaks can also be observed on weekends, but the peaks are much lower, and later in the day.
+
+```{r bike-use-graph-weekend, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 3.5}
+bikeuse %>%
+  filter(day(datetime) == 1) %>%
+  ggplot(., aes(x = datetime, y = bikesInUsage)) + geom_line(size = 1.5) +
+  stat_peaks(colour = "red", span = 21, ignore_threshold = 0.5) +
+  stat_peaks(geom = "text", colour = "red", span = 21, ignore_threshold = 0.5,
+             hjust = -0.1, x.label.fmt = "%H:%M", angle = 45) +
+  ggtitle("Bike use, September 1 (Saturday)") +
+  xlab("Time") +
+  ylim(0, 500) +
+  theme_plots
+```
+
+Looking at the whole month, one can distinguish weekdays from weekends (darker blue). Weekday anomalies (lighter blue, September 11 and 24) turned out to be holidays (according to [this website](https://ajuntament.barcelona.cat/calendarifestius/en/){target="_blank"}). For some reason the data end on September 27, and so does the plot.
+
+
+```{r bike-use-graph-sept, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 4}
+bikeuse %>%
+  ggplot(., aes(x = datetime, y = bikesInUsage)) + 
+  geom_line(size = 1) +
+  ggtitle("Bike use") +
+  xlab("Time") +
+  ylim(0,1250) +
+  theme_plots +
+  annotate("rect", fill = "steelblue", alpha = 0.5, 
+           xmin = as.POSIXct('2018-09-01'), 
+           xmax = as.POSIXct('2018-09-03'), ymin = -Inf, ymax = Inf) +
+  annotate("rect", fill = "steelblue", alpha = 0.5, 
+           xmin = as.POSIXct('2018-09-08'), 
+           xmax = as.POSIXct('2018-09-10'), ymin = -Inf, ymax = Inf) +
+  annotate("rect", fill = "steelblue", alpha = 0.5, 
+           xmin = as.POSIXct('2018-09-15'), 
+           xmax = as.POSIXct('2018-09-17'), ymin = -Inf, ymax = Inf) +
+  annotate("rect", fill = "steelblue", alpha = 0.5, 
+           xmin = as.POSIXct('2018-09-22'), 
+           xmax = as.POSIXct('2018-09-24'), ymin = -Inf, ymax = Inf) +
+  annotate("rect", fill = "lightblue", alpha = 0.5, 
+           xmin = as.POSIXct('2018-09-11'), 
+           xmax = as.POSIXct('2018-09-12'), ymin = -Inf, ymax = Inf) +
+  annotate("rect", fill = "lightblue", alpha = 0.5, 
+           xmin = as.POSIXct('2018-09-24'), 
+           xmax = as.POSIXct('2018-09-25'), ymin = -Inf, ymax = Inf)
+```
+
+Decomposing the time series reveals daily seasonality as well as weekly cycles, the latter interrupted by the mid-week holidays.
+
+```{r bike-use-graph-sept-decomposed, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 5}
+# convert to time series
+bikeuse1 <- ts(bikeuse[,2],start=c(1), frequency = 24*60/15)
+
+#seasonplot(bikeuse1, year.labels=FALSE, main="Seasonal plot") 
+
+# decompose and plot time series
+autoplot(decompose(bikeuse1, type="mult")) + 
+  ggtitle("Decomposition of city bike use in Barcelona, September 2018") +
+  xlab("Day of September 2018") +
+  theme_plots +
+  annotate("rect", fill = "steelblue", alpha = 0.5, 
+           xmin = 1, xmax = 3, ymin = -Inf, ymax = Inf) +
+  annotate("rect", fill = "steelblue", alpha = 0.5, 
+           xmin = 8, xmax = 10, ymin = -Inf, ymax = Inf) +
+  annotate("rect", fill = "steelblue", alpha = 0.5, 
+           xmin = 15, xmax = 17, ymin = -Inf, ymax = Inf) +
+  annotate("rect", fill = "steelblue", alpha = 0.5, 
+           xmin = 22, xmax = 24, ymin = -Inf, ymax = Inf) +
+  annotate("rect", fill = "lightblue", alpha = 0.5, 
+           xmin = 11, xmax = 12, ymin = -Inf, ymax = Inf) +
+  annotate("rect", fill = "lightblue", alpha = 0.5, 
+           xmin = 24, xmax = 25, ymin = -Inf, ymax = Inf)
+```
+
+
+### Altitude of Bicing stations
+
+Next, we investigated the location of Bicing stations and their altitude. The map below shows the location of the Bicing stations with colors indicating the altitude of the station. Most of the station are green, which means they are located between 0 and 50 meters above sea level. The yellow and orange stations are around 70-80 meters a.s.l., and the red stations are most elevated - 100 meters and up to 138 m a.s.l.
+
+```{r map-altitude, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 7, fig.height = 4}
+
+stations1 <- stations %>% 
+  group_by(id) %>%
+  summarise(prop_no_bikes = mean(bikes == 0),
+            prop_no_slots = mean(slots == 0),
+            latitude = mean(latitude),
+            longitude = mean(longitude),
+            type = first(type),
+            altitude = mean(altitude)) %>%
+  arrange(desc(prop_no_bikes)) %>%
+  filter(prop_no_bikes < 1)
+
+xy1 <- stations1[,c(5,4)]
+
+# convert to spacial points data frame (spdf)
+spdf_stations <- SpatialPointsDataFrame(coords = xy1, data = stations1,
+                               proj4string = CRS("+proj=longlat +datum=WGS84 +ellps=WGS84 +towgs84=0,0,0"))
+
+# define color palette for altitude
+pal <- colorRampPalette(rev(brewer.pal(10, "RdYlGn")))
+mapview(spdf_stations, zcol = "altitude", col.regions = pal(100), layer.name = 'Altitude')
+```
+
+### Location of mechanical and electric bike stations
+
+We also wanted to see if altitude has anything to do with the type of station, i.e. whether it's for mechanical or electric bikes. The map below suggests that electric bike stations, which account for about 10% of all Bicing stations) are relatively evenly distributed across the city.
+
+```{r map-station-type, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 7, fig.height = 4}
+m1 <- mapview(spdf_stations, zcol = "altitude", col.regions = pal(100), layer.name = 'Altitude')
+m2 <- mapview(spdf_stations, zcol = "type", layer.name = 'Station type')
+sync(m1, m2)
+```
+
+An analysis of the data shows however that more electric bike stations are located at higher altitudes. While among stations located below 50 m above sea level electric bike stations account for about 9% and 10% for stations between 50 and 10 meters, among stations above 100 m a.s.l. the share increases to 17%.
+
+```{r map-station-type-means, warning=FALSE, message=FALSE, echo = FALSE}
+stations %>%
+  mutate(alt3 = case_when(
+    altitude < 50 ~ "1. Less than 50 m",
+    altitude >= 50 & altitude < 100 ~ "2. 50-99 m",
+    altitude >= 100 ~ "3. 100 m and above")) %>%
+  group_by(id) %>%
+  summarise(alt3 = first(alt3),
+            type = first(type)) %>%
+  group_by(alt3) %>%
+  summarise(mean_electric = mean(type == "BIKE-ELECTRIC"))
+```  
+
+### Empty stations by station altitude
+
+The map of stations with color coded proportion of time when no bikes are available shows that stations that are more elevated tend to be without bikes more often than those located lower. 
+
+```{r all-maps, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 8}
+m1 <- mapview(spdf_stations, zcol = "altitude", col.regions = pal(100), layer.name = 'Altitude')
+m3 <- mapview(spdf_stations, zcol = "prop_no_bikes", layer.name = 'Time without bikes')
+sync(m1, m3)
+
+```
+  
+\newline
+
+To see how systematic these differences are, we divided the stations into three groups by altitude: below 50 m a.s.l., 50-99 m, and 100 meters or higher, and plotted the proportion of time the stations were empty each day for all days in September. As the below graph shows, stations located highest (in red) are empty most often, while stations located al lowest altitudes (in green) are seldom empty.
+
+This is probably because bike use and bike replenishment are out of sync and leave some of the stations without bikes most of the time.
+
+```{r plot-no-bikes, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 5}
+stations %>%
+  mutate(alt3 = case_when(
+    altitude < 50 ~ 1,
+    altitude >= 50 & altitude < 100 ~ 2,
+    altitude >= 100 ~ 3)) %>%
+  group_by(alt3, datetime) %>%
+  summarise(prop_no_bikes = mean(bikes == 0, na.rm = TRUE)) %>%
+  ggplot(., aes(datetime, prop_no_bikes, col = factor(alt3), group = factor(alt3))) +
+    geom_line() +
+    xlab("Date") +
+    ylab("Proportion of time with no bikes") +
+    ggtitle("Proportion of time with no bikes by station altitude") +
+    scale_color_manual(name = "Altitude of station",
+                       values = c("chartreuse4", "gold", "orangered"),
+                       labels = c("low (<50m)", "medium (50-99m)", "high (>100m)"))
+```
+
+### Next steps
+
+This is what we were able to accomplish in the approximately 4.5 hours of group work on the challenge. The available data allow much more elaborated analyses of bike use at different times and locations. The station and bike use data could be matched with weather data, survey data, residential data, etc. for further insights. Ideally, there would be a dataset with all rental and return parameters for each bike to see what commute routes are most popular and at what times, and whether, for example, people bike downhill in the mornings and try to use electric bikes in the evenings to go back uphill to their homes.

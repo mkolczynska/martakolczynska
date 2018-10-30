@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/bigsurv18-hackathon/</loc>
+    <lastmod>2018-10-30T10:00:14+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/ess-lca-participation/</loc>
     <lastmod>2018-10-18T16:13:14+00:00</lastmod>
   </url>
@@ -89,6 +94,24 @@
   </url>
   
   <url>
+    <loc>/tags/barcelona/</loc>
+    <lastmod>2018-10-30T10:00:14+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/big-data/</loc>
+    <lastmod>2018-10-30T10:00:14+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/biking/</loc>
+    <lastmod>2018-10-30T10:00:14+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/cross-national-research/</loc>
     <lastmod>2018-09-29T10:06:00+00:00</lastmod>
     <priority>0</priority>
@@ -137,6 +160,12 @@
   </url>
   
   <url>
+    <loc>/tags/hackathon/</loc>
+    <lastmod>2018-10-30T10:00:14+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/isa/</loc>
     <lastmod>2018-07-23T15:24:00+00:00</lastmod>
     <priority>0</priority>
@@ -150,7 +179,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-10-18T16:13:14+00:00</lastmod>
+    <lastmod>2018-10-30T10:00:14+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -180,7 +209,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2018-10-18T16:13:14+00:00</lastmod>
+    <lastmod>2018-10-30T10:00:14+00:00</lastmod>
     <priority>0</priority>
   </url>
   
