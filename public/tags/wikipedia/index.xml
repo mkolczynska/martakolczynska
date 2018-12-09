@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Wikipedia on Marta Kołczyńska</title>
+    <link>/tags/wikipedia/</link>
+    <description>Recent content in Wikipedia on Marta Kołczyńska</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
+    <lastBuildDate>Tue, 13 Nov 2018 16:41:14 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/wikipedia/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>What comes first: Exploring public interest in tech-related topics</title>
+      <link>/post/delabuw-hackathon-what-comes-first/</link>
+      <pubDate>Tue, 13 Nov 2018 16:41:14 +0000</pubDate>
+      
+      <guid>/post/delabuw-hackathon-what-comes-first/</guid>
+      <description>What comes first?Wikipedia, Google, NewsInterest in technologyCross-correlationsNews coverage versus Wikipedia page viewswith Maria Khachatryan, Filip Kowalski, Jakub Siwiec, and Paweł Zawadzki
+The Hackathon Next Generation Internet Data Sprint was organized by the Digital Economy Lab of the University of Warsaw on November 9 and 10, 2018. The goal of the hackathon was to explore datasets on Wikipedia page views and edits, Reddit posts, media mentions, and others, to generate insights about the use of the internet and new technologies.</description>
+    </item>
+    
+  </channel>
+</rss>

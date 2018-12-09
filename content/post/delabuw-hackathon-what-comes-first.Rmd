@@ -1,0 +1,239 @@
+---
+title: "What comes first: Exploring public interest in tech-related topics"
+description: "DELab Next Generation Internet Data Sprint, November 9-10, 2018"
+author: "Marta Kołczyńska"
+date: 2018-11-13T16:41:14
+categories: ["R"]
+tags: ["R", "hackathon", "DELab UW", "Next Generation Internet Data Sprint", "NGI", "Wikipedia", "Google trends"]
+output:
+  blogdown::html_page:
+    toc: true
+    toc_depth: 4
+---
+
+*with Maria Khachatryan, Filip Kowalski, Jakub Siwiec, and Paweł Zawadzki*
+
+[The Hackathon Next Generation Internet Data Sprint](http://www.delab.uw.edu.pl/pl/ngi_hackathon/){target="_blank"} was organized by the  [Digital Economy Lab of the University of Warsaw](http://www.delab.uw.edu.pl/en/about/){target="_blank"} on November 9 and 10, 2018. The goal of the hackathon was to explore datasets on Wikipedia page views and edits, Reddit posts, media mentions, and others, to generate insights about the use of the internet and new technologies.
+
+We decided to focus on public interest in selected key words related to the internet, to see how this interest is reflected in different data types. The remainder of the post (below the tweets) summarizes the ca. 9 hours of our work.
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The winning team (What comes first) examined the relationship between Wikipedia page views of NGI keywords and their frequency in news over time  <a href="https://twitter.com/hashtag/ngidatasprint?src=hash&amp;ref_src=twsrc%5Etfw">#ngidatasprint</a> <a href="https://twitter.com/NGI4eu?ref_src=twsrc%5Etfw">@NGI4eu</a> <a href="https://t.co/6hA8TWlWFr">pic.twitter.com/6hA8TWlWFr</a></p>&mdash; DELab UW (@DELabUW) <a href="https://twitter.com/DELabUW/status/1061986113995317248?ref_src=twsrc%5Etfw">November 12, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Congratulations for all <a href="https://twitter.com/hashtag/ngidatasprint?src=hash&amp;ref_src=twsrc%5Etfw">#ngidatasprint</a> participants! <a href="https://twitter.com/NGI4eu?ref_src=twsrc%5Etfw">@NGI4eu</a> <a href="https://twitter.com/EconUW?ref_src=twsrc%5Etfw">@EconUW</a> <a href="https://twitter.com/nesta_uk?ref_src=twsrc%5Etfw">@nesta_uk</a> <a href="https://twitter.com/Eurecat_news?ref_src=twsrc%5Etfw">@Eurecat_news</a> <a href="https://t.co/1vDSWt6SZP">pic.twitter.com/1vDSWt6SZP</a></p>&mdash; DELab UW (@DELabUW) <a href="https://twitter.com/DELabUW/status/1061994480759435265?ref_src=twsrc%5Etfw">November 12, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+## What comes first?
+
+### Wikipedia, Google, News
+
+What comes first: interest in a given topic of the general public, specialists, or the news? How do events trigger Google searches, news coverage, and Wikipedia views?
+
+Data sources:    
+* Wikipedia page views and edits,  
+* Google searches,  
+* coverage in the news media and academic pre-print repositories (SSRN and arXiv).  
+
+All data are monthly.
+
+```{r setup, warning=FALSE, message=FALSE, echo = FALSE}
+library(tidyverse)
+library(gtrendsR)
+library(lubridate)
+library(data.table)
+library(zoo)
+library(stats)
+library(plotly)
+
+tech_news <- read.csv("data/delabuw-hackathon-what-comes-first/tech_one_word/tech_one_word.csv",
+                          stringsAsFactors = FALSE) %>%
+  gather(date, occnews, 2:33) %>%
+  rename(keyword = X) %>%
+  mutate(date = gsub('X', '', date),
+         date = paste(date, ".01", sep = ""),
+         date = ymd(date))
+
+csv_dir_tech <- "data/delabuw-hackathon-what-comes-first"
+csv_lst_tech <- file.path(csv_dir_tech, list.files(csv_dir_tech))  # list of all files in the selected directory
+csv_lst_tech <- csv_lst_tech[grep(".csv", csv_lst_tech)]  # make sure only .csv files
+techtabs = lapply(csv_lst_tech, function(x) read.csv(x, stringsAsFactors = FALSE, encoding = "UTF-8"))
+
+clean_wiki <- function(inname, tab) {
+  
+  inname[[tab]] %>% 
+    gather(month, valname, 5:ncol(inname[[tab]])) %>%
+    mutate(month = gsub('X', '', month),
+           date = paste(month, "01", sep = ""),
+           date = ymd(date)) %>%
+    filter(lang %in% c("en")) %>%
+    select(name, date, valname)
+}
+
+techedits <- clean_wiki(techtabs, 1) %>% rename(medits = valname)
+techreverts <- clean_wiki(techtabs, 5) %>% rename(mreverts = valname)
+techpageviews <- clean_wiki(techtabs, 8) %>% rename(mpageviews = valname)
+tech_wiki <- full_join(techedits, techreverts) %>%
+  full_join(., techpageviews) %>%
+  mutate(name = tolower(name)) %>%
+  filter(name %in% unique(tech_news$keyword))
+
+### Google trends data
+
+techlist <- unique(tech_news$keyword) %>% gsub('_', ' ', .)
+tech_google_list <- list()
+
+for (i in 1:length(techlist)) {
+  tech_google_list[[i]] <- gtrends(c(techlist[i]), time = "all", gprop = "web")
+}
+
+tech_google <- do.call(rbind, lapply(tech_google_list, function (x) x[[1]])) %>%
+  mutate(hits = ifelse(hits == "<1", 0, hits),
+         hits = as.numeric(hits))
+
+tech_google$keyword <- gsub(' ', '_', tech_google$keyword)
+
+### Merging all data
+
+tech_wiki_google_news <- full_join(tech_google, tech_wiki, by = c("date", "keyword" = "name")) %>%
+  mutate(views_per_edit = ifelse(medits >0, mpageviews / medits, NA)) %>%
+  group_by(keyword) %>%
+  mutate(hits_3m = rollmean(hits, 3, align = "center", fill = NA),
+         medits_3m = rollmean(medits, 3, align = "center", fill = NA),
+         mreverts_3m = rollmean(mreverts, 3, align = "center", fill = NA)) %>%
+  ungroup() %>%
+  mutate(keyword = tolower(keyword)) %>%
+  full_join(tech_news) %>%
+  select(-category, -views_per_edit, -geo, -gprop) %>%
+  mutate(occnews_3m = rollmean(occnews, 3, align = "center", fill = NA)) %>%
+  select(3,1,2,4,5,6,10,7,8,9,11)
+
+```
+
+### Interest in technology
+
+We chose four keywords (wireless, linux, bitcoin, and cyberattack) to illustrate the different patterns in interest as measured by Google searches, Wikipedia edits and pageviews, and occurrences in the news and academic pre-prints.
+
+The graph of 'linux' keyword shows a high variability of Wiki edits, while Google hits, Wiki page views and news were smooth except one month in the case of news. Google hits, Wiki page and news curves show the lateral trend for wireless keyword graph, while Wiki page views can be viewed as a downward one.
+
+```{r graph-wireless, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 4}
+cols <- c("Google hits"="gold","Wiki edits"="chartreuse3","Wiki page views"="blue4", "News" = "indianred2")
+
+word <- "wireless"
+tech_wiki_google_news %>%
+  filter(keyword == word, date > "2016-01-01" & date <= "2018-06-30") %>%
+  ggplot(data = .) +
+  geom_line(aes(x = date, y = as.numeric(hits), col = "Google hits"), size = 1.5) + 
+  geom_line(aes(x = date, y = medits, col = "Wiki edits"), size = 1.5) +
+  geom_line(aes(x = date, y = mpageviews/1000, col = "Wiki page views"), size = 1.5) +
+  geom_line(aes(x = date, y = occnews * 100, col = "News"), size = 1.5) +
+  scale_colour_manual(name="Legend",values=cols) +
+  ylab("") + xlab("") + ggtitle(paste("Keyword: ", word, sep= "")) +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+```
+
+On the graphs of 'cyberattack' and 'bitcoin' keywords, we can see a sharp rise of Wiki page views occurring together with news and Google hits rise. What is interesting, we cannot say the same about Wiki edits. Actually, in the end of 2017 the rise in Wiki page views, news and hits happened in the same moment as the sharp one-month fall of Wiki edits.  
+
+```{r graph-linux, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 4}
+word <- "linux"
+tech_wiki_google_news %>%
+  filter(keyword == word, date > "2016-01-01" & date <= "2018-06-30") %>%
+  ggplot(data = .) +
+  geom_line(aes(x = date, y = as.numeric(hits), col = "Google hits"), size = 1.5) + 
+  geom_line(aes(x = date, y = medits, col = "Wiki edits"), size = 1.5) +
+  geom_line(aes(x = date, y = mpageviews/10000, col = "Wiki page views"), size = 1.5) +
+  geom_line(aes(x = date, y = occnews * 100, col = "News"), size = 1.5) +
+  scale_colour_manual(name="Legend",values=cols) +
+  ylab("") + xlab("") + ggtitle(paste("Keyword: ", word, sep= "")) +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+```
+
+
+```{r graph-cyberattack, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 4}
+word <- "cyberattack"
+tech_wiki_google_news %>%
+  filter(keyword == word, date > "2016-01-01" & date <= "2018-06-30") %>%
+  ggplot(data = .) +
+  geom_line(aes(x = date, y = as.numeric(hits), col = "Google hits"), size = 1.5) + 
+  geom_line(aes(x = date, y = medits, col = "Wiki edits"), size = 1.5) +
+  geom_line(aes(x = date, y = mpageviews/100, col = "Wiki page views"), size = 1.5) +
+  geom_line(aes(x = date, y = occnews * 1000, col = "News"), size = 1.5) +
+  scale_colour_manual(name="Legend",values=cols) +
+  ylab("") + xlab("") + ggtitle(paste("Keyword: ", word, sep= "")) +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+```
+
+```{r graph-bitcoin, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 4}
+word <- "bitcoin"
+tech_wiki_google_news %>%
+  filter(keyword == word, date > "2016-01-01" & date <= "2018-06-30") %>%
+  ggplot(data = .) +
+  geom_line(aes(x = date, y = as.numeric(hits), col = "Google hits"), size = 1.5) + 
+  geom_line(aes(x = date, y = medits, col = "Wiki edits"), size = 1.5) +
+  geom_line(aes(x = date, y = mpageviews/10000, col = "Wiki page views"), size = 1.5) +
+  geom_line(aes(x = date, y = occnews * 1000, col = "News"), size = 1.5) +
+  scale_colour_manual(name="Legend",values=cols) +
+  ylab("") + xlab("") + ggtitle(paste("Keyword: ", word, sep= "")) +
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+```
+
+
+### Cross-correlations
+
+We have started to analyze the temporal correlation of public and media interest in specific topics quantitatively with cross-correlations between the time series. The graph below shows the cross-correlation for Google hits and news occurrences for the keyword "cyberattack". It seems that Google hits and news occurrences are correlated contemporaneously, or Google hits precede news occurrences by about one month (positive correlation for the lag of -1).
+
+
+```{r ccf, warning=FALSE, message=FALSE, echo = FALSE}
+tech_wiki_google_news_ccf <- tech_wiki_google_news %>%
+  filter(!is.na(medits), !is.na(hits), keyword == "cyberattack") %>%
+  select(hits, medits, mpageviews, occnews)
+
+ccf(tech_wiki_google_news_ccf$hits, 
+           tech_wiki_google_news_ccf$occnews,
+           na.action = na.omit,
+           ylab = "Cross-correlation",
+           main = "Cyberattack: Google hits vs. news occurrences")
+
+```
+
+
+### News coverage *versus* Wikipedia page views
+
+The animated scatterplot shows the changes in the interest in tech-related keywords. The x axis shows an index of keyword occurrences in the news and academic pre-prints. Wikipedia page views are on the y axis. The size of the bubble indicates monthly Wikipedia edits. All three measures are cunstructed such that they represent the three dimensions of interest in the keywords as they accumulate over time.
+
+As we can see, these three dimensions of interest are related but not perfectly. Typically, as Wikipedia page views increase, so does the index of news occurrences. However, the growth in interest is not always balanced: while interest in 'Bitcoin' grew stronger in terms of Wikipedia page views than in terms of news occurrences, the pattern is the opposite in the case of '5g' or 'wireless'. This might again have to do with the extent to which certain keywords - such as Bitcoin - capture the imagination of the public more than other, more technical keywords, such as 'wireless'.
+
+If we look closely we can also see that some words fist move closer to one axis than to the other. This requires further investigation to see, for example, whether certain profiles of interest are characteristic for certain types of keywords. This kind of analysis may bring us closer to answering the question - what comes first?
+
+
+```{r graph-bubbles, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 8}
+tech_wiki_google_news_nomiss <- tech_wiki_google_news %>% 
+  select(date, keyword, occnews, mpageviews, medits) %>%
+  filter(!is.na(occnews) & !is.na(mpageviews) & !is.na(medits)) %>%
+  group_by(keyword) %>%
+  mutate(cum_occnews = cumsum(occnews),
+         cum_mpageviews = cumsum(mpageviews),
+         cum_medits = cumsum(medits))
+
+p <- tech_wiki_google_news_nomiss %>%
+  mutate(date = substr(as.character(date),1,7)) %>%
+  ggplot(., aes(x = cum_occnews, y = cum_mpageviews/1000000, col = keyword, size = cum_medits)) +
+  geom_point(aes(frame = date)) +
+  geom_text(aes(frame = date, label=keyword), size = 4, hjust = 0, nudge_x = 1.5, nudge_y = 1.5) +
+  theme(legend.position="none") +
+  xlab("Cumulative news occurrences") +
+  ylab("Cumulative Wikipedia page views (mln)")
+  
+
+ggplotly(p)
+```
+

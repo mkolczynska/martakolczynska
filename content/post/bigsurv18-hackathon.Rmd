@@ -4,7 +4,7 @@ description: "BigSurv18, October 24-25, 2018"
 author: "Marta Kołczyńska"
 date: 2018-10-30T10:00:14
 categories: ["R"]
-tags: ["biking", "hackathon", "big data", "Barcelona"]
+tags: ["R", "biking", "hackathon", "big data", "Barcelona"]
 output:
   blogdown::html_page:
     toc: true

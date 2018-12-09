@@ -76,6 +76,15 @@
     </item>
     
     <item>
+      <title>Delab Uw</title>
+      <link>/tags/delab-uw/</link>
+      <pubDate>Tue, 13 Nov 2018 16:41:14 +0000</pubDate>
+      
+      <guid>/tags/delab-uw/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Dot Plot</title>
       <link>/tags/dot-plot/</link>
       <pubDate>Tue, 07 Aug 2018 12:46:00 +0000</pubDate>
@@ -121,9 +130,18 @@
     </item>
     
     <item>
+      <title>Google Trends</title>
+      <link>/tags/google-trends/</link>
+      <pubDate>Tue, 13 Nov 2018 16:41:14 +0000</pubDate>
+      
+      <guid>/tags/google-trends/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Hackathon</title>
       <link>/tags/hackathon/</link>
-      <pubDate>Tue, 30 Oct 2018 10:00:14 +0000</pubDate>
+      <pubDate>Tue, 13 Nov 2018 16:41:14 +0000</pubDate>
       
       <guid>/tags/hackathon/</guid>
       <description></description>
@@ -144,6 +162,24 @@
       <pubDate>Thu, 18 Oct 2018 16:13:14 +0000</pubDate>
       
       <guid>/tags/latent-class-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Next Generation Internet Data Sprint</title>
+      <link>/tags/next-generation-internet-data-sprint/</link>
+      <pubDate>Tue, 13 Nov 2018 16:41:14 +0000</pubDate>
+      
+      <guid>/tags/next-generation-internet-data-sprint/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ngi</title>
+      <link>/tags/ngi/</link>
+      <pubDate>Tue, 13 Nov 2018 16:41:14 +0000</pubDate>
+      
+      <guid>/tags/ngi/</guid>
       <description></description>
     </item>
     
@@ -186,7 +222,7 @@
     <item>
       <title>R</title>
       <link>/tags/r/</link>
-      <pubDate>Thu, 18 Oct 2018 16:13:14 +0000</pubDate>
+      <pubDate>Tue, 13 Nov 2018 16:41:14 +0000</pubDate>
       
       <guid>/tags/r/</guid>
       <description></description>
@@ -288,6 +324,15 @@
       <pubDate>Mon, 23 Jul 2018 15:24:00 +0000</pubDate>
       
       <guid>/tags/twitter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Wikipedia</title>
+      <link>/tags/wikipedia/</link>
+      <pubDate>Tue, 13 Nov 2018 16:41:14 +0000</pubDate>
+      
+      <guid>/tags/wikipedia/</guid>
       <description></description>
     </item>
     
