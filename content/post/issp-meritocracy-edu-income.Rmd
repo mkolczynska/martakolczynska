@@ -1,0 +1,290 @@
+---
+title: "Measuring meritocracy with survey data"
+description: "Analysis of ISSP 2014"
+author: "Marta Kołczyńska"
+date: 2019-01-08T15:00:00
+categories: ["R"]
+tags: ["meritocracy", "inequality", "surveys", "ISSP", "R"]
+output: 
+  blogdown::html_page:
+    toc: true
+    toc_depth: 4
+---
+
+Meritocracy is a principle according to which rewards are based on merit, as well as an ideal situation resulting from the operation of this principle. In their [1985 Social Foces paper titled "How Far to Meritocracy? Empirical Tests of a Controversial Thesis", Tadeusz Krauze and Kazimierz M. Słomczyński](https://academic.oup.com/sf/article-abstract/63/3/623/2231437?redirectedFrom=fulltext){target="_blank"} proposed an algorithm to construct a theoretical joint distribution of education and income, given their marginal distributions, that would satisfy the conditions of meritocratic allocation. The meritocratic principle is simple: "more educated persons should not have lower social status than
+less educated ones", which is equivalent to saying that "persons at a given level of education should have status levels equal to or higher than those of persons at a lower level of education" (Krauze and Slomczynski 1985: 628). Meritocracy is defined as the extent to which the observed distribution of income by education corresponds to the theoretical distribution under meritocracy. The difference between the observed and the meritocratic distribution is the distance to meritocracy.  
+
+In this post I show how to calculate the distance to meritocracy using survey data on the example of the [International Social Survey Project (ISSP)](http://www.issp.org/menu-top/home/){target="_blank"} [wave 2014](https://www.gesis.org/issp/modules/issp-modules-by-topic/citizenship/2014/){target="_blank"}. The code can be found [here](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/issp-meritocracy.Rmd){target="_blank"}.
+
+
+```{r setup, warning=FALSE, message=FALSE, echo = FALSE}
+library(readstata13) # read in Stata 13 data
+library(tidyverse) # tools for data manipulation
+library(naniar) # functions for recoding missing values
+library(emdist) # Earth Mover's Distance
+library(questionr) # weighted frequency tables
+library(knitr) # pretty tables
+library(kableExtra) # formatting tables (kables)
+library(sf) # shape files and mapping
+library(countrycode) # converting country codes
+
+issp2014 <- read.csv("data/issp-meritocracy-edu-income.csv",
+              stringsAsFactors = FALSE)
+
+```
+
+```{r recodes, warning=FALSE, message=FALSE, echo = FALSE, eval = FALSE}
+
+issp2014_all <- read.dta13("ZA6670_v2-0-0.dta",
+                           convert.factors = FALSE)
+
+issp2014 <- issp2014_all %>%
+  dplyr::select(matches("_RINC")) %>%
+  replace_with_na(replace = list(AT_RINC = c(999990, 999999),
+                                 AU_RINC = c(999990, 999999),
+                                 BE_RINC = c(999990, 999999),
+                                 CH_RINC = c(999990, 999999, 999997, 999998),
+                                 CL_RINC = c(9999990, 9999998, 9999999),
+                                 CZ_RINC = c(999990, 999997, 999998),
+                                 DE_RINC = c(999990, 999999),
+                                 DK_RINC = c(999990),
+                                 ES_RINC = c(999990, 999999),
+                                 FI_RINC = c(999990, 999999),
+                                 FR_RINC = c(999990, 999999, 999997, 999998),
+                                 GB_RINC = c(999990, 999999, 999997),
+                                 GE_RINC = c(999990, 999999),
+                                 HR_RINC = c(999990, 999999),
+                                 HU_RINC = c(999990, 999999),
+                                 IL_RINC = c(999990, 999999, 999997, 999998),
+                                 IN_RINC = c(999990, 999999),
+                                 IS_RINC = c(9999990, 9999999, 9999997, 9999998),
+                                 JP_RINC = c(99999990, 99999999),
+                                 KR_RINC = c(99999990, 99999999),
+                                 LT_RINC = c(999990, 999999, 999997),
+                                 NL_RINC = c(999990, 999999),
+                                 NO_RINC = c(9999990, 9999999),
+                                 PH_RINC = c(999990, 999999),
+                                 PL_RINC = c(999990, 999999, 999998),
+                                 RU_RINC = c(999990, 999999, 999997),
+                                 SE_RINC = c(999990, 999999),
+                                 SI_RINC = c(999990, 999999, 999997, 999998),
+                                 SK_RINC = c(999990, 999999),
+                                 TR_RINC = c(999990, 999999),
+                                 TW_RINC = c(999990, 999999, 999997, 999998),
+                                 US_RINC = c(999990, 999999, 999997, 999998),
+                                 VE_RINC = c(999990, 999999),
+                                 ZA_RINC = c(999990, 999999, 999997, 999998))) %>%
+  transmute(rinc = rowMeans(., na.rm = TRUE)) %>%
+  bind_cols(issp2014_all) %>%
+  group_by(C_ALPHAN) %>%
+  mutate(cntry = C_ALPHAN,
+         degree = ifelse(DEGREE == 9, NA, DEGREE),
+         rinc_qui = ntile(rinc, 5)) %>%
+  ungroup()  %>%
+  select(cntry, WEIGHT, rinc_qui, degree)
+
+```
+
+
+
+### Determining meritocratic allocation
+
+Cell proportions in the meritocratic allocation matrix ($d_{i,j}$) can be determined using the given marginals. The formula for the cell frequency $d_{i,j}$, is as follows:  
+$$d_{i,j} = min(a_i — \sum_{k=0}^{j-1} d_{i,k}; b_i — \sum_{k=0}^{i-1} d_{k,j})$$  
+where $i= 1,2,...,m$; $j =1,2,...,n$, with $m$ equal to the number of rows and $n$ to the number of columns; $a_i$ and $b_j$ are margins of the observed distribution, and the terms $d_{i,k}$ and $d_{k,j}$ refer to the already determined entries of the meritocratic matrix (Krauze and Slomczynski 1985: 628).  
+
+
+```{r meritocracy-edu-income, warning=FALSE, message=FALSE, echo = FALSE}
+
+issp2014.list <- split(as.data.frame(issp2014), issp2014$cntry)
+
+issp2014.fair.list <- list()
+
+cntry.data <- data.frame(matrix(nrow = length(unique(issp2014$cntry)), ncol = 2,
+                                dimnames = list(c(), c("cntry", "emd"))))
+
+for (i in 1:length(issp2014.list)) {
+  
+  data <- prop.table(wtd.table(-issp2014.list[[i]]$degree, 
+                               -issp2014.list[[i]]$rinc_qui, 
+                               weights = issp2014.list[[i]]$WEIGHT))
+  
+  merit <- matrix(rep(0, nrow(data)*ncol(data)), 
+                  nrow = nrow(data), 
+                  ncol = ncol(data))
+  
+  for (x in 1:nrow(data)) {
+    for (y in 1:ncol(data)) {
+      merit[x,y] <- min(margin.table(data, 1)[x] - sum(merit[x,1:(y-1)]), 
+                        margin.table(data, 2)[y] - sum(merit[1:(x-1),y]))
+      merit <- round(merit, 5)
+    }
+  }
+  
+  rownames(merit) <- as.character(abs(as.numeric(names(margin.table(data, 1)))))
+  colnames(merit) <- as.character(abs(as.numeric(names(margin.table(data, 2)))))
+  
+  issp2014.fair.list[[i]] <- merit
+  
+  cntry.data$cntry[i] <- names(issp2014.list)[i]
+  cntry.data$emd[i] <- emd2d(merit, data, xdist = 1/nrow(data), 
+                                 ydist = 1/ncol(data), dist="manhattan")
+
+}
+names(issp2014.fair.list) <- names(issp2014.list)
+```
+
+How this works in practice is best illustrated with an example. The table below show marginal distributions of education (highest completed education level) and personal income (5 categories; "Income 5" is the highest income category and "Income 1" is the lowest) in ISSP/2014 in Poland.
+
+
+```{r margins-pl, warning=FALSE, message=FALSE, echo = FALSE}
+merit.pl <- issp2014.fair.list$PL
+
+rownames(merit.pl) <- c("Upper tertiary", "Lower tertiary", "Post-sec, non-tert.", "Upper secondary",
+                  "Lower secondary", "Primary", "No education")
+colnames(merit.pl) <- paste("Income", as.character(abs(as.numeric(names(margin.table(merit.pl, 2))))))
+
+options(knitr.kable.NA = '')
+round(cbind(rbind(matrix(nrow = 7, ncol = 5),
+                  margin.table(merit.pl, 2)), 
+            c(margin.table(merit.pl, 1),1)), 5) %>%
+  kable() %>%
+  kable_styling(full_width = F, position = "left") %>%
+  column_spec(1, width = "10em", bold = TRUE) %>%
+  column_spec(2:6, width = "6em") %>%
+  column_spec(7, width = "6em", color = "#0072B2", bold = TRUE) %>%
+  row_spec(8, color = "#0072B2", bold = TRUE)
+```
+
+The procedure starts from the cell corresponding to highest education and highest status, which is filled with the maximum possible proportion of people given the margins. This value is $min(0.13811, 0.24585) = 0.13811$. Next, the remaining part of the "Income 5" margin $0.24585 - 0.13811 = 0.10774$ is moved to the next highest education category (Lower tertiary). It doesn't fit there, because the margin is 0.05299, so the remaining part of "Income 5" ends up in "Post-secondary non-tertiary". After the cell "Post-secondary non-tertiary" and "Income 5" is filled and the margin form "Income 5" is exhausted, the remaining part of the "Post-secondary non-tertiary" margin is moved to "Income 4". And the zig-zag continues until the whole table is filled out.
+
+For the Polish ISSP/2014 sample, meritocratic allocation of income categories by education looks as follows:  
+
+
+```{r meritocracy-pl, warning=FALSE, message=FALSE, echo = FALSE}
+round(cbind(rbind(merit.pl,
+                  margin.table(merit.pl, 2)), 
+            c(margin.table(merit.pl, 1),1)), 5) %>%
+  kable() %>%
+  kable_styling(full_width = F, position = "left") %>%
+  column_spec(1, width = "10em", bold = TRUE) %>%
+  column_spec(2:6, width = "6em") %>%
+  column_spec(7, width = "6em", color = "#0072B2", bold = TRUE) %>%
+  row_spec(8, color = "#0072B2", bold = TRUE)
+```
+
+Meanwhile the empirical distribution looks like this:
+
+```{r empirical-pl, warning=FALSE, message=FALSE, echo = FALSE}
+issp2014_pl <- issp2014 %>%
+  filter(cntry == "PL") %>%
+  select(degree, rinc_qui, WEIGHT)
+
+data.pl <- prop.table(wtd.table(-issp2014_pl$degree, -issp2014_pl$rinc_qui, weights = issp2014_pl$WEIGHT))
+
+rownames(data.pl) <- c("Upper tertiary", "Lower tertiary", "Post-sec, non-tert.", "Upper secondary",
+                  "Lower secondary", "Primary", "No education")
+colnames(data.pl) <- paste("Income", as.character(abs(as.numeric(names(margin.table(data.pl, 2))))))
+
+round(cbind(rbind(data.pl,margin.table(data.pl, 2)), 
+            c(margin.table(data.pl, 1), 1)), 5) %>%
+  kable() %>%
+  kable_styling(full_width = F, position = "left") %>%
+  column_spec(1, width = "10em", bold = TRUE) %>%
+  column_spec(2:6, width = "6em") %>%
+  column_spec(7, width = "6em", color = "#0072B2", bold = TRUE) %>%
+  row_spec(8, color = "#0072B2", bold = TRUE)
+
+```
+
+The difference between the empirical and the meritocratic distribution is as shown below, with positive values in green indicating cells where the empirical frequency is higher than the theoretical one, and negative values in blue indicating cells where the empirical frequency is lower than the theoretical frequency.
+ 
+```{r diff-pl, warning=FALSE, message=FALSE, echo = FALSE}
+
+bind_cols(data.frame(rownames(data.pl)),
+  as.data.frame.matrix(round(data.pl - merit.pl, 5))) %>%
+  rename(Education = rownames.data.pl.) %>%
+  mutate_at(vars(matches("Income")), function(x) {
+    cell_spec(x, bold = T, 
+              color = spec_color(x, option = "D", end = 0.9))
+  }) %>%
+  mutate(Education = cell_spec(Education, align = "l")) %>%
+  kable(escape = F, align = c("l", rep("r", 7))) %>%
+  kable_styling(full_width = F, position = "left") %>%
+  column_spec(1, width = "10em", bold = TRUE) %>%
+  column_spec(2:6, width = "6em")
+
+```
+
+### Calculating the distance to meritocracy
+
+The distance between the two bivariate distributions, one with the meritocratic allocation and the other with the empirical distribution, can be measured in various ways. One possible measure is the [Earth Mover's Distance (EMD)](https://en.wikipedia.org/wiki/Earth_mover%27s_distance){target="_blank"}, which represents the minimal effort required to turn one distribution into the other, taking into account the amount to be moved and the distance. In this way EMD is different from the Dissimilarity Index used originally by Krauze and Slomczynski (1985), as the latter is used for nominal variables and does not take into account the distance (number of ranks up or down) by which parts of the distribution need to be moved to match the meritocratic distribution.
+
+### Distance to meritocracy by country
+
+I identified the meritocratic distribution of income by education for countries included in ISSP/2014 using the procedure described earlier, and calculated the Earth Mover's Distance between the country's empirical and theoretical distributions. Manhattan distance is used in calculating the distances between cells of the table. The distance between two adjacent cells across rows (columns) was set to *1 / number of rows (columns)*.
+
+The results are as shown on the dot plot below. Of the countries covered by ISSP/2014, Central Europe and the United States seem to be the most meritocratic, and the Philippines and Venezuela - the least meritocratic.
+
+```{r dot-plot, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 7, fig.height = 5}
+cntry.data %>%
+  mutate(country = countrycode(substr(cntry, 1, 2), "iso2c", "country.name")) %>%
+  ggplot(.) + 
+  geom_point(aes(x=reorder(country, emd), y=emd), size = 2, col = "#0072B2") +
+  xlab("") +
+  ylab("Earth Mover's Distance") +
+  ylim(0, max(cntry.data$emd)) +
+  coord_flip() +
+  labs(title = "'How Far to Meritocracy?'",
+       subtitle = "Earth Mover's Distance between Meritocratic and Observed Allocations by Country",
+       caption = "Data source: ISSP/2014") +
+  theme_bw()
+```
+
+The world and Europe map visualize how distances to meritocracy are distributed geographically. 
+
+
+```{r world-map, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 9, fig.height = 5}
+world <- st_as_sf(rnaturalearth::countries110) %>%
+  filter(continent != "Antarctica")
+
+cntry.data <- cntry.data %>%
+  mutate(iso2c = substr(cntry, 1, 2))
+
+merge.world <- left_join(world, cntry.data, by = c("iso_a2" = "iso2c"))
+
+ggplot(merge.world, aes(fill=emd)) +
+  geom_sf(alpha=0.8,col='white') +
+  labs(title = "Distance to Meritocracy",
+       subtitle = "Earth Mover's Distance  between Meritocratic and Observed Allocations",
+       caption = "Source: ISSP/2014") +  labs(caption="Data source: ISSP/2014") +
+  scale_fill_gradient(na.value = "transparent", 
+                      low = "#56B1F7", high = "#132B43",
+                      name = "")
+```                      
+
+
+```{r europe-map, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 6}
+world <- st_as_sf(rnaturalearth::countries110) %>%
+  filter(continent != "Antarctica")
+
+europe <- dplyr::filter(world, region_un=="Europe" | region_un=="Africa" | region_un=="Asia" | name=='Israel')
+
+europe.bbox <- st_polygon(list(
+  matrix(c(-25,29,45,29,45,75,-25,75,-25,29),byrow = T,ncol = 2)))
+
+europe.clipped <- suppressWarnings(st_intersection(europe, st_sfc(europe.bbox, crs=st_crs(europe))))
+merge.europe <- left_join(europe.clipped, cntry.data, by = c("iso_a2" = "iso2c"))
+
+ggplot(merge.europe, aes(fill=emd)) +
+  geom_sf(alpha=0.8,col='white') +
+  coord_sf(crs="+proj=aea +lat_1=36.333333333333336 +lat_2=65.66666666666667 +lon_0=14") +
+  labs(title = "Distance to Meritocracy in Europe",
+       subtitle = "Earth Mover's Distance between Meritocratic and Observed Allocation",
+       caption = "Source: ISSP/2014") +  labs(caption="Data source: ISSP/2014") +
+  scale_fill_gradient(na.value = "transparent", 
+                      low = "#56B1F7", high = "#132B43",
+                      name = "")
+```
+
+

@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/issp-meritocracy-edu-income/</loc>
+    <lastmod>2019-01-08T15:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/delabuw-hackathon-what-comes-first/</loc>
     <lastmod>2018-11-13T16:41:14+00:00</lastmod>
   </url>
@@ -183,8 +188,20 @@
   </url>
   
   <url>
+    <loc>/tags/inequality/</loc>
+    <lastmod>2019-01-08T15:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/isa/</loc>
     <lastmod>2018-07-23T15:24:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/issp/</loc>
+    <lastmod>2019-01-08T15:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -196,7 +213,13 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-11-13T16:41:14+00:00</lastmod>
+    <lastmod>2019-01-08T15:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/meritocracy/</loc>
+    <lastmod>2019-01-08T15:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -238,13 +261,13 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2018-11-13T16:41:14+00:00</lastmod>
+    <lastmod>2019-01-08T15:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2018-11-13T16:41:14+00:00</lastmod>
+    <lastmod>2019-01-08T15:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -274,7 +297,7 @@
   
   <url>
     <loc>/tags/surveys/</loc>
-    <lastmod>2018-10-18T16:13:14+00:00</lastmod>
+    <lastmod>2019-01-08T15:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Polish Panel Survey (POLPAN) and Alluvial Diagrams">
+  <meta name="generator" content="Hugo 0.42.2" />
+
+  <title>Voter shifts in parliamentary elections in Poland, 2007-2015 &middot; Marta Kołczyńska</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="/css/circle.css">
+    
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="/"><img src="/images/puzzleblacksmall.png" alt="logo" /></a>
+
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/research/"><i class='fa fa-bar-chart fa-fw'></i>Research</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/contact/"><i class='fa fa-envelope fa-fw'></i>Contact</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/MartaKolcz" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/mkolczynska" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2018. Marta Kołczyńska</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Voter shifts in parliamentary elections in Poland, 2007-2015</h1>
+  <h2>Polish Panel Survey (POLPAN) and Alluvial Diagrams</h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>20 Dec 2018, 11:32</time>
+  </div>
+
+  
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="/tags/r">R</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/polpan">POLPAN</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/political-participation">political participation</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/surveys">surveys</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/poland">Poland</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/data-visualization">data visualization</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/alluvial-diagrams">alluvial diagrams</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  <div id="TOC">
+<ul>
+<li><a href="#how-2015-voters-voted-in-2007-and-2011">How 2015 voters voted in 2007 and 2011</a></li>
+<li><a href="#how-2007-voters-voted-in-2011-and-2015">How 2007 voters voted in 2011 and 2015</a></li>
+<li><a href="#about-polpan">About POLPAN</a></li>
+</ul>
+</div>
+
+<p>Where did the current governing party get their votes from? Did supporters of the previous ruling party switch preferences or did they abstain from voting altogether? Cross-sectional datasets, such as one-off election polls, do not typically provide data to answer these questions. Panel studies, such as the <a href="polpan.org" target="_blank">Polish Panel Survey (POLPAN)</a>, do.</p>
+<p>The graphs below show voting trajectories of POLPAN respondents in the last three parliamentary elections in Poland: in 2007, 2011, and 2015. Data come from three most recent waves of POLPAN carried out in 2008, 2013, and 2018. To improve readability, the graphs only present flows with more than two respondents. Respondents with any missing values have been excluded, which means that the sample only includes respondents who participated all three most recent waves of POLPAN, and are aged 31 or above. Mean age equals 55 (range from 31 to 95), and 51% of the samples are women.</p>
+<p>The graphs were created with the <a href="https://github.com/mbojan/alluvial" target="_blank">‘alluvial’ package</a><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. The code used in this post is available <a href="https://github.com/mkolczynska/martakolczynska/blob/master/content/post/polpan-voting-alluvial-plots.Rmd" target="_blank">here</a>.</p>
+<div id="how-2015-voters-voted-in-2007-and-2011" class="section level3">
+<h3>How 2015 voters voted in 2007 and 2011</h3>
+<p>In the first graph flows are colored from the point of view of the most recent elections, showing past preferences of voters for particular parties in 2015. It shows, for example, that the current ruling party - PiS (Prawo i Sprawiedliwość = Law and Justice), which substantially improved their voter share between 2011 and 2015, won quite some votes from the previous majority party - PO (Platforma Obywatelska = Civic Platform), as well as mobilized a number of former non-voters.</p>
+<p>At the same time, PO lost support to the advantage of PiS and other parties, but attracted some voters who had previously opted for the left-wing parties.</p>
+<p><img src="/post/polpan-voting-alluvial-plots_files/figure-html/graph-2015-1.png" width="672" /></p>
+</div>
+<div id="how-2007-voters-voted-in-2011-and-2015" class="section level3">
+<h3>How 2007 voters voted in 2011 and 2015</h3>
+<p>The second graph presents the same flows from the point of view of the 2007 election. It shows, among others, how supporters of the majority party in 2007, PO, in subsequent elections either switched to PiS or decided not to vote at all. Of the individuals who voted for left-wing parties (primarily the Democratic Left Alliance, SLD) in 2007, over half eventually switched to PO, either in 2011 or in 2015. As of 2015 SLD has no representation in the Polish parliament.</p>
+<p><img src="/post/polpan-voting-alluvial-plots_files/figure-html/graph-2007-1.png" width="672" /></p>
+</div>
+<div id="about-polpan" class="section level3">
+<h3>About POLPAN</h3>
+<p>The <a href="polpan.org" target="_blank">Polish Panel Survey (POLPAN)</a> is a panel study carried out in Poland since 1988 in 5-year intervals. It is focused on describing the social structure and its change, and includes detailed items of respondents’ employment situation and history, education history, as well as meritocratic attitudes, attitudes toward stat institutions, political participation, household composition, and others. Fieldwork for the 2018 round has been completed, and the data will be made publicly available soon. The data from earlier waves of POLPAN are available through the Polish <a href="http://www.ads.org.pl/wyszukiwanieE.php?typ=string&amp;kategoria=tytop&amp;co=polpan&amp;send=Search" target="_blank">Social Data Archive</a> and the <a href="https://dbk.gesis.org/dbksearch/sdesc.asp?search=polpan&amp;field=all&amp;db=e&amp;sort=score+DESC&amp;maxRec=100&amp;filt=dbk&amp;filt=datorium&amp;from=index.asp&amp;button=Search&amp;groups=on&amp;product=on&amp;ll=10&amp;tab=0" target="_blank">GESIS - Leibniz Institute for the Social Sciences</a>.</p>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>There are a few ways to create such graphs in R. I like <a href="https://github.com/mbojan/alluvial" target="_blank">‘alluvial’ package</a>, but alternatives include <a href="https://github.com/heike/ggparallel" target="_blank">‘ggparallel’</a> and <a href="https://github.com/corybrunson/ggalluvial" target="_blank">‘ggalluvial’</a>.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="/post/delabuw-hackathon-what-comes-first/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="/post/delabuw-hackathon-what-comes-first/">What comes first: Exploring public interest in tech-related topics</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="next">
+      <a href="/post/issp-meritocracy-edu-income/">Measuring meritocracy with survey data</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="/post/issp-meritocracy-edu-income/"><i class="fa fa-chevron-right"></i></a>
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'https-martakolczynska-netlify-com';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+</div>
+</div>
+<script src="/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-123060748-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

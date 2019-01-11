@@ -1,0 +1,811 @@
+---
+title: "Measuring meritocracy with survey data"
+description: "Analysis of ISSP 2014"
+author: "Marta Kołczyńska"
+date: 2019-01-08T15:00:00
+categories: ["R"]
+tags: ["meritocracy", "inequality", "surveys", "ISSP", "R"]
+output: 
+  blogdown::html_page:
+    toc: true
+    toc_depth: 4
+---
+
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+
+<div id="TOC">
+<ul>
+<li><a href="#determining-meritocratic-allocation">Determining meritocratic allocation</a></li>
+<li><a href="#calculating-the-distance-to-meritocracy">Calculating the distance to meritocracy</a></li>
+<li><a href="#distance-to-meritocracy-by-country">Distance to meritocracy by country</a></li>
+</ul>
+</div>
+
+<p>Meritocracy is a principle according to which rewards are based on merit, as well as an ideal situation resulting from the operation of this principle. In their <a href="https://academic.oup.com/sf/article-abstract/63/3/623/2231437?redirectedFrom=fulltext" target="_blank">1985 Social Foces paper titled “How Far to Meritocracy? Empirical Tests of a Controversial Thesis”, Tadeusz Krauze and Kazimierz M. Słomczyński</a> proposed an algorithm to construct a theoretical joint distribution of education and income, given their marginal distributions, that would satisfy the conditions of meritocratic allocation. The meritocratic principle is simple: “more educated persons should not have lower social status than
+less educated ones”, which is equivalent to saying that “persons at a given level of education should have status levels equal to or higher than those of persons at a lower level of education” (Krauze and Slomczynski 1985: 628). Meritocracy is defined as the extent to which the observed distribution of income by education corresponds to the theoretical distribution under meritocracy. The difference between the observed and the meritocratic distribution is the distance to meritocracy.</p>
+<p>In this post I show how to calculate the distance to meritocracy using survey data on the example of the <a href="http://www.issp.org/menu-top/home/" target="_blank">International Social Survey Project (ISSP)</a> <a href="https://www.gesis.org/issp/modules/issp-modules-by-topic/citizenship/2014/" target="_blank">wave 2014</a>. The code can be found <a href="https://github.com/mkolczynska/martakolczynska/blob/master/content/post/issp-meritocracy.Rmd" target="_blank">here</a>.</p>
+<div id="determining-meritocratic-allocation" class="section level3">
+<h3>Determining meritocratic allocation</h3>
+<p>Cell proportions in the meritocratic allocation matrix (<span class="math inline">\(d_{i,j}\)</span>) can be determined using the given marginals. The formula for the cell frequency <span class="math inline">\(d_{i,j}\)</span>, is as follows:<br />
+<span class="math display">\[d_{i,j} = min(a_i — \sum_{k=0}^{j-1} d_{i,k}; b_i — \sum_{k=0}^{i-1} d_{k,j})\]</span><br />
+where <span class="math inline">\(i= 1,2,...,m\)</span>; <span class="math inline">\(j =1,2,...,n\)</span>, with <span class="math inline">\(m\)</span> equal to the number of rows and <span class="math inline">\(n\)</span> to the number of columns; <span class="math inline">\(a_i\)</span> and <span class="math inline">\(b_j\)</span> are margins of the observed distribution, and the terms <span class="math inline">\(d_{i,k}\)</span> and <span class="math inline">\(d_{k,j}\)</span> refer to the already determined entries of the meritocratic matrix (Krauze and Slomczynski 1985: 628).</p>
+<p>How this works in practice is best illustrated with an example. The table below show marginal distributions of education (highest completed education level) and personal income (5 categories; “Income 5” is the highest income category and “Income 1” is the lowest) in ISSP/2014 in Poland.</p>
+<table class="table" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Income 5
+</th>
+<th style="text-align:right;">
+Income 4
+</th>
+<th style="text-align:right;">
+Income 3
+</th>
+<th style="text-align:right;">
+Income 2
+</th>
+<th style="text-align:right;">
+Income 1
+</th>
+<th style="text-align:right;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+Upper tertiary
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.13811
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+Lower tertiary
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.05299
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+Post-sec, non-tert.
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.05588
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+Upper secondary
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.55461
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+Lower secondary
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.04645
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+Primary
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.14386
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+No education
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; ">
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.00809
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;font-weight: bold;color: #0072B2;">
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.24585
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.22634
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.16102
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.17557
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.19121
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;font-weight: bold;color: #0072B2;">
+1.00000
+</td>
+</tr>
+</tbody>
+</table>
+<p>The procedure starts from the cell corresponding to highest education and highest status, which is filled with the maximum possible proportion of people given the margins. This value is <span class="math inline">\(min(0.13811, 0.24585) = 0.13811\)</span>. Next, the remaining part of the “Income 5” margin <span class="math inline">\(0.24585 - 0.13811 = 0.10774\)</span> is moved to the next highest education category (Lower tertiary). It doesn’t fit there, because the margin is 0.05299, so the remaining part of “Income 5” ends up in “Post-secondary non-tertiary”. After the cell “Post-secondary non-tertiary” and “Income 5” is filled and the margin form “Income 5” is exhausted, the remaining part of the “Post-secondary non-tertiary” margin is moved to “Income 4”. And the zig-zag continues until the whole table is filled out.</p>
+<p>For the Polish ISSP/2014 sample, meritocratic allocation of income categories by education looks as follows:</p>
+<table class="table" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Income 5
+</th>
+<th style="text-align:right;">
+Income 4
+</th>
+<th style="text-align:right;">
+Income 3
+</th>
+<th style="text-align:right;">
+Income 2
+</th>
+<th style="text-align:right;">
+Income 1
+</th>
+<th style="text-align:right;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+Upper tertiary
+</td>
+<td style="text-align:right;width: 6em; ">
+0.13811
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.13811
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+Lower tertiary
+</td>
+<td style="text-align:right;width: 6em; ">
+0.05299
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.05299
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+Post-sec, non-tert.
+</td>
+<td style="text-align:right;width: 6em; ">
+0.05475
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00113
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.05588
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+Upper secondary
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; ">
+0.22521
+</td>
+<td style="text-align:right;width: 6em; ">
+0.16102
+</td>
+<td style="text-align:right;width: 6em; ">
+0.16838
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.55461
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+Lower secondary
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00719
+</td>
+<td style="text-align:right;width: 6em; ">
+0.03926
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.04645
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+Primary
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; ">
+0.14386
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.14386
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+No education
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00000
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00809
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.00809
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;font-weight: bold;color: #0072B2;">
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.24585
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.22634
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.16102
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.17557
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.19121
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;font-weight: bold;color: #0072B2;">
+1.00000
+</td>
+</tr>
+</tbody>
+</table>
+<p>Meanwhile the empirical distribution looks like this:</p>
+<table class="table" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+Income 5
+</th>
+<th style="text-align:right;">
+Income 4
+</th>
+<th style="text-align:right;">
+Income 3
+</th>
+<th style="text-align:right;">
+Income 2
+</th>
+<th style="text-align:right;">
+Income 1
+</th>
+<th style="text-align:right;">
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+Upper tertiary
+</td>
+<td style="text-align:right;width: 6em; ">
+0.08212
+</td>
+<td style="text-align:right;width: 6em; ">
+0.01689
+</td>
+<td style="text-align:right;width: 6em; ">
+0.01181
+</td>
+<td style="text-align:right;width: 6em; ">
+0.01512
+</td>
+<td style="text-align:right;width: 6em; ">
+0.01216
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.13811
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+Lower tertiary
+</td>
+<td style="text-align:right;width: 6em; ">
+0.02265
+</td>
+<td style="text-align:right;width: 6em; ">
+0.01104
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00530
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00680
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00720
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.05299
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+Post-sec, non-tert.
+</td>
+<td style="text-align:right;width: 6em; ">
+0.01620
+</td>
+<td style="text-align:right;width: 6em; ">
+0.01669
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00342
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00699
+</td>
+<td style="text-align:right;width: 6em; ">
+0.01258
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.05588
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+Upper secondary
+</td>
+<td style="text-align:right;width: 6em; ">
+0.12048
+</td>
+<td style="text-align:right;width: 6em; ">
+0.15203
+</td>
+<td style="text-align:right;width: 6em; ">
+0.09404
+</td>
+<td style="text-align:right;width: 6em; ">
+0.08242
+</td>
+<td style="text-align:right;width: 6em; ">
+0.10563
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.55461
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+Lower secondary
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00178
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00718
+</td>
+<td style="text-align:right;width: 6em; ">
+0.01097
+</td>
+<td style="text-align:right;width: 6em; ">
+0.01717
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00936
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.04645
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+Primary
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00242
+</td>
+<td style="text-align:right;width: 6em; ">
+0.02206
+</td>
+<td style="text-align:right;width: 6em; ">
+0.03353
+</td>
+<td style="text-align:right;width: 6em; ">
+0.04312
+</td>
+<td style="text-align:right;width: 6em; ">
+0.04272
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.14386
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+No education
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00020
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00046
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00194
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00395
+</td>
+<td style="text-align:right;width: 6em; ">
+0.00155
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.00811
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;font-weight: bold;color: #0072B2;">
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.24585
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.22634
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.16102
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.17557
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;">
+0.19121
+</td>
+<td style="text-align:right;width: 6em; font-weight: bold;color: #0072B2;font-weight: bold;color: #0072B2;">
+1.00000
+</td>
+</tr>
+</tbody>
+</table>
+<p>The difference between the empirical and the meritocratic distribution is as shown below, with positive values in green indicating cells where the empirical frequency is higher than the theoretical one, and negative values in blue indicating cells where the empirical frequency is lower than the theoretical frequency.</p>
+<table class="table" style="width: auto !important; ">
+<thead>
+<tr>
+<th style="text-align:left;">
+Education
+</th>
+<th style="text-align:right;">
+Income 5
+</th>
+<th style="text-align:right;">
+Income 4
+</th>
+<th style="text-align:right;">
+Income 3
+</th>
+<th style="text-align:right;">
+Income 2
+</th>
+<th style="text-align:right;">
+Income 1
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+<span style="     text-align: l;">Upper tertiary</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(68, 1, 84, 1);">-0.05599</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(155, 217, 60, 1);">0.01689</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(70, 192, 111, 1);">0.01181</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(70, 192, 111, 1);">0.01512</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(33, 143, 141, 1);">0.01216</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+<span style="     text-align: l;">Lower tertiary</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(71, 46, 124, 1);">-0.03034</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(118, 208, 84, 1);">0.01104</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(46, 179, 124, 1);">0.0053</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(46, 179, 124, 1);">0.0068</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(35, 138, 141, 1);">0.0072</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+<span style="     text-align: l;">Post-sec, non-tert.</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(72, 32, 114, 1);">-0.03855</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(147, 215, 65, 1);">0.01556</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(41, 175, 127, 1);">0.00342</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(46, 180, 124, 1);">0.00699</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(33, 143, 141, 1);">0.01258</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+<span style="     text-align: l;">Upper secondary</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(187, 223, 39, 1);">0.12048</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(68, 1, 84, 1);">-0.07318</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(68, 1, 84, 1);">-0.06698</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(68, 1, 84, 1);">-0.08596</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(187, 223, 39, 1);">0.10563</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+<span style="     text-align: l;">Lower secondary</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(53, 94, 141, 1);">0.00178</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(98, 203, 95, 1);">0.00718</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(66, 190, 113, 1);">0.01097</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(55, 184, 120, 1);">0.00998</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(51, 98, 141, 1);">-0.0299</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+<span style="     text-align: l;">Primary</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(53, 95, 141, 1);">0.00242</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(187, 223, 39, 1);">0.02206</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(187, 223, 39, 1);">0.03353</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(187, 223, 39, 1);">0.04312</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(68, 1, 84, 1);">-0.10114</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 10em; font-weight: bold;">
+<span style="     text-align: l;">No education</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(54, 92, 141, 1);">2e-04</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(64, 189, 114, 1);">0.00046</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(37, 173, 130, 1);">0.00194</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(40, 174, 128, 1);">0.00395</span>
+</td>
+<td style="text-align:right;width: 6em; ">
+<span style=" font-weight: bold;    color: rgba(41, 123, 142, 1);">-0.00654</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="calculating-the-distance-to-meritocracy" class="section level3">
+<h3>Calculating the distance to meritocracy</h3>
+<p>The distance between the two bivariate distributions, one with the meritocratic allocation and the other with the empirical distribution, can be measured in various ways. One possible measure is the <a href="https://en.wikipedia.org/wiki/Earth_mover%27s_distance" target="_blank">Earth Mover’s Distance (EMD)</a>, which represents the minimal effort required to turn one distribution into the other, taking into account the amount to be moved and the distance. In this way EMD is different from the Dissimilarity Index used originally by Krauze and Slomczynski (1985), as the latter is used for nominal variables and does not take into account the distance (number of ranks up or down) by which parts of the distribution need to be moved to match the meritocratic distribution.</p>
+</div>
+<div id="distance-to-meritocracy-by-country" class="section level3">
+<h3>Distance to meritocracy by country</h3>
+<p>I identified the meritocratic distribution of income by education for countries included in ISSP/2014 using the procedure described earlier, and calculated the Earth Mover’s Distance between the country’s empirical and theoretical distributions. Manhattan distance is used in calculating the distances between cells of the table. The distance between two adjacent cells across rows (columns) was set to <em>1 / number of rows (columns)</em>.</p>
+<p>The results are as shown on the dot plot below. Of the countries covered by ISSP/2014, Central Europe and the United States seem to be the most meritocratic, and the Philippines and Venezuela - the least meritocratic.</p>
+<p><img src="/post/issp-meritocracy-edu-income_files/figure-html/dot-plot-1.png" width="672" /></p>
+<p>The world and Europe map visualize how distances to meritocracy are distributed geographically.</p>
+<p><img src="/post/issp-meritocracy-edu-income_files/figure-html/world-map-1.png" width="864" /></p>
+<p><img src="/post/issp-meritocracy-edu-income_files/figure-html/europe-map-1.png" width="768" /></p>
+</div>
