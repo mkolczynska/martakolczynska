@@ -257,7 +257,7 @@ ggplot(merge.world, aes(fill=emd)) +
   geom_sf(alpha=0.8,col='white') +
   labs(title = "Distance to Meritocracy",
        subtitle = "Earth Mover's Distance  between Meritocratic and Observed Allocations",
-       caption = "Source: ISSP/2014") +  labs(caption="Data source: ISSP/2014") +
+       caption="Data source: ISSP/2014") +
   scale_fill_gradient(na.value = "transparent", 
                       low = "#56B1F7", high = "#132B43",
                       name = "")
@@ -281,7 +281,7 @@ ggplot(merge.europe, aes(fill=emd)) +
   coord_sf(crs="+proj=aea +lat_1=36.333333333333336 +lat_2=65.66666666666667 +lon_0=14") +
   labs(title = "Distance to Meritocracy in Europe",
        subtitle = "Earth Mover's Distance between Meritocratic and Observed Allocation",
-       caption = "Source: ISSP/2014") +  labs(caption="Data source: ISSP/2014") +
+       caption="Data source: ISSP/2014") +
   scale_fill_gradient(na.value = "transparent", 
                       low = "#56B1F7", high = "#132B43",
                       name = "")

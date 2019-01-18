@@ -1,0 +1,79 @@
+---
+title: "Voter shifts in parliamentary elections in Poland, 2007-2015"
+description: "Polish Panel Survey (POLPAN) and Alluvial Diagrams"
+author: "Marta Kołczyńska"
+date: 2019-01-16T11:32:14
+categories: ["R"]
+tags: ["R", "POLPAN", "political participation", "surveys", "Poland", "data visualization", "alluvial diagrams"]
+output:
+  blogdown::html_page:
+    toc: true
+    toc_depth: 4
+---
+
+Where did the current governing party get their votes from? Did supporters of the previous ruling party switch preferences or did they abstain from voting altogether? Cross-sectional datasets, such as one-off election polls, do not typically provide data to answer these questions. Panel studies, such as the [Polish Panel Survey (POLPAN)](http://polpan.org/){target="_blank"}, do.
+
+The graphs below show voting trajectories of POLPAN respondents in the last three parliamentary elections in Poland: in 2007, 2011, and 2015. Data come from three most recent waves of POLPAN carried out in 2008, 2013, and 2018. Respondents with any missing values have been excluded, which means that the sample only includes respondents who participated all three most recent waves of POLPAN, and are aged 31 or above. Mean age equals 55 (range from 31 to 95), and 51% of the samples are women. The sample used to plot the below graphs comprises 686 respondents. To improve readability, the graphs only present flows with more than two respondents. 
+
+The graphs were created with the ['alluvial' package](https://github.com/mbojan/alluvial){target="_blank"}[^1]. The code used in this post is available [here](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/polpan-voting-alluvial-plots.Rmd){target="_blank"}.
+
+
+```{r setup, warning=FALSE, message=FALSE, echo = FALSE}
+library(tidyverse)
+library(alluvial)
+
+myPalette <- c("#999999", "#E67900", "#56B4E9", "#F0B942", "#009E73", "#0072B2", "#D55E00", "#CC79A7")
+
+polpan.party <- read.csv("C:/Users/mkolc/Google Drive/Academia/Blog/martakolczynska/content/post/data/polpan-voting-alluvial-plots.csv") %>%
+  mutate_if(is.factor, 
+            funs(factor(., levels(.)[c(2,5,4,6,1,3)])))
+
+```
+
+### How 2015 voters voted in 2007 and 2011
+
+In the first graph flows are colored from the point of view of the most recent elections, showing past preferences of voters for particular parties in 2015. It shows, for example, that the current ruling party - PiS (Prawo i Sprawiedliwość = Law and Justice), which substantially improved their voter share between 2011 and 2015, won quite some votes from the previous majority party - PO (Platforma Obywatelska = Civic Platform), as well as mobilized a number of former non-voters. At the same time, PO lost support to the advantage of PiS and other parties, but attracted some voters who had previously opted for the left-wing parties.
+
+
+```{r graph-2015, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 7, fig.height = 6}
+par(oma=c(1,1,1,1))
+alluvial(polpan.party[,1:3], freq=polpan.party$n, xw=0.05, alpha=0.8,
+         border = myPalette[ match(polpan.party$party2015, unique(polpan.party$party2015))],
+         gap.width=0.05, 
+         layer = polpan.party$party2015 == "PO",
+         col= myPalette[ match(polpan.party$party2015, unique(polpan.party$party2015))],
+         hide = polpan.party$n < quantile(polpan.party$n, .50),
+         axis_labels = c("2007", "2011", "2015"),
+         cex = 0.9,
+         cex.axis = 0.9)
+mtext("Between-party voter flows in parliamentary elections in Poland, 2007-2015", 3, line = 4, font=2)
+
+```
+
+### How 2007 voters voted in 2011 and 2015
+
+
+The second graph presents the same flows from the point of view of the 2007 election. It shows, among others, how some supporters of the majority party in 2007, PO, in subsequent elections either switched to PiS or decided not to vote at all. Of the individuals who voted for left-wing parties (primarily the Democratic Left Alliance, SLD) in 2007, over half eventually switched to PO, either in 2011 or in 2015. As of 2015 SLD has no representation in the Polish parliament.
+
+
+```{r graph-2007, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 7, fig.height = 6}
+par(oma=c(1,1,1,1))
+alluvial(polpan.party[,1:3], freq=polpan.party$n, xw=0.05, alpha=0.8,
+         border = myPalette[ match(polpan.party$party2007, unique(polpan.party$party2007))],
+         gap.width=0.05, 
+         layer = polpan.party$party2007 == "PiS",
+         col= myPalette[ match(polpan.party$party2007, unique(polpan.party$party2007))],
+         hide = polpan.party$n < quantile(polpan.party$n, .50),
+         axis_labels = c("2007", "2011", "2015"),
+         cex = 0.9,
+         cex.axis = 0.9)
+mtext("Between-party voter flows in parliamentary elections in Poland, 2007-2015", 3, line = 4, font=2)
+
+```
+
+### About POLPAN
+
+The [Polish Panel Survey (POLPAN)](http://polpan.org/){target="_blank"} is a panel study carried out in Poland since 1988 in 5-year intervals. The current edition is funded by the Polish [National Science Centre](https://projekty.ncn.gov.pl/index.php?s=3153){target="_blank"}.
+It is focused on describing the social structure and its change, and includes detailed items of respondents' employment situation and history, education history, as well as meritocratic attitudes, attitudes toward stat institutions, political participation, household composition, and others. Fieldwork for the 2018 round has been completed, and the data will be made publicly available soon. The data from earlier waves of POLPAN are available through the Polish [Social Data Archive](http://www.ads.org.pl/wyszukiwanieE.php?typ=string&kategoria=tytop&co=polpan&send=Search){target="_blank"}  and the [GESIS - Leibniz Institute for the Social Sciences](https://dbk.gesis.org/dbksearch/sdesc.asp?search=polpan&field=all&db=e&sort=score+DESC&maxRec=100&filt=dbk&filt=datorium&from=index.asp&button=Search&groups=on&product=on&ll=10&tab=0){target="_blank"}.
+
+[^1]: There are a few ways to create such graphs in R. I like ['alluvial' package](https://github.com/mbojan/alluvial){target="_blank"}, but alternatives include ['ggparallel'](https://github.com/heike/ggparallel){target="_blank"} and ['ggalluvial'](https://github.com/corybrunson/ggalluvial){target="_blank"}.

@@ -209,7 +209,7 @@ master_cor %>%
   xlab("Correlation between household and personal income (Spearman's rho)") +
   ylab("Density") +
   ggtitle("Correlations between household and personal income 
-          (Spearman's rho) in national samples split by age groups") +
+          (Spearman's rho) in national samples: contrasting groups") +
   scale_fill_manual(values=myPalette[4:5], 
                     name="",
                     breaks=c("1 0 0", "0 1 1"),

@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Thu, 20 Dec 2018 11:32:14 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 16 Jan 2019 11:32:14 +0000</lastBuildDate>
     
 	<atom:link href="/tags/alluvial-diagrams/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Voter shifts in parliamentary elections in Poland, 2007-2015</title>
       <link>/post/polpan-voting-alluvial-plots/</link>
-      <pubDate>Thu, 20 Dec 2018 11:32:14 +0000</pubDate>
+      <pubDate>Wed, 16 Jan 2019 11:32:14 +0000</pubDate>
       
       <guid>/post/polpan-voting-alluvial-plots/</guid>
       <description>How 2015 voters voted in 2007 and 2011How 2007 voters voted in 2011 and 2015About POLPANWhere did the current governing party get their votes from? Did supporters of the previous ruling party switch preferences or did they abstain from voting altogether? Cross-sectional datasets, such as one-off election polls, do not typically provide data to answer these questions. Panel studies, such as the Polish Panel Survey (POLPAN), do.</description>
