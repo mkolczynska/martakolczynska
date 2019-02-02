@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Econimic Participation on Marta Kołczyńska</title>
+    <link>/tags/econimic-participation/</link>
+    <description>Recent content in Econimic Participation on Marta Kołczyńska</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
+    <lastBuildDate>Sat, 02 Feb 2019 13:28:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/econimic-participation/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Downloading country-level indicators on participation and economic inequality</title>
+      <link>/post/participation-inequality-indices/</link>
+      <pubDate>Sat, 02 Feb 2019 13:28:00 +0000</pubDate>
+      
+      <guid>/post/participation-inequality-indices/</guid>
+      <description>DataPackagesVarieties of Democracy (V-Dem): Dedicated packagePolyarchy: Semicolon delimited .csvFreedom House: Excel file with by-year sheetsPolity IV: SPSS fileDemocracy Barometer: Excel file with header in top rowsThe Standardized World Income Inequality Database (SWIID): Plain .csvWorld Bank’s World Development Indicators: Dedicated packageMerging all datasetsCountry graphsVariable graphsWriting to file/* Whole document: */code.r{ /* Code block */font-size: 8px;}with Viktoriia Muliavka</description>
+    </item>
+    
+  </channel>
+</rss>

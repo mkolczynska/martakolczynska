@@ -1,0 +1,221 @@
+---
+title: "Downloading country-level indicators on participation and economic inequality"
+description: "A quick guide to working with different file formats"
+author: "Marta Kołczyńska"
+date: 2019-02-02T13:28:00
+categories: ["R"]
+tags: ["R", "tutorial", "macro indicators", "political participation", "economic inequality", "cross-national research",
+"SWIID", "World Bank", "Freedom House", "Democracy Barometer", "V-Dem", "Polyarchy", "Polity IV"]
+output: 
+  blogdown::html_page:
+    toc: true
+    toc_depth: 4    
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#data">Data</a></li>
+<li><a href="#packages">Packages</a></li>
+<li><a href="#varieties-of-democracy-v-dem-dedicated-package">Varieties of Democracy (V-Dem): Dedicated package</a></li>
+<li><a href="#polyarchy-semicolon-delimited-.csv">Polyarchy: Semicolon delimited .csv</a></li>
+<li><a href="#freedom-house-excel-file-with-by-year-sheets">Freedom House: Excel file with by-year sheets</a></li>
+<li><a href="#polity-iv-spss-file">Polity IV: SPSS file</a></li>
+<li><a href="#democracy-barometer-excel-file-with-header-in-top-rows">Democracy Barometer: Excel file with header in top rows</a></li>
+<li><a href="#the-standardized-world-income-inequality-database-swiid-plain-.csv">The Standardized World Income Inequality Database (SWIID): Plain .csv</a></li>
+<li><a href="#world-banks-world-development-indicators-dedicated-package">World Bank’s World Development Indicators: Dedicated package</a></li>
+<li><a href="#merging-all-datasets">Merging all datasets</a></li>
+<li><a href="#country-graphs">Country graphs</a></li>
+<li><a href="#variable-graphs">Variable graphs</a></li>
+<li><a href="#writing-to-file">Writing to file</a></li>
+</ul>
+</div>
+
+<p><em>with Viktoriia Muliavka</em></p>
+<p>Social and political scientists often need to put together datasets of country-level political, economic, and demographic variables with data from different sources. These data are available on websites of the institutions or projects that created them, in various formats, which makes downloading them and combining a bit of a steeplechase.</p>
+<p>In this post we show how we created a dataset of country-level indicators of political participation and economic inequality in the <a href="https://politicalinequality.org/2017/09/21/new-project-political-voice-and-economic-inequality-across-nations-and-time/" target="_blank">Political Inequality project (POLINQ)</a>.</p>
+<p>With this guide we hope to reduce the barrier to collecting and combining country-level indicators in an automated and reproducible way as opposed to doing this manually.</p>
+<div id="data" class="section level3">
+<h3>Data</h3>
+<p>We use the following datasets:</p>
+<ol style="list-style-type: decimal">
+<li><a href="https://www.v-dem.net/en/" target="_blank">Varieties of Democracy (V-Dem)</a><br />
+</li>
+<li><a href="https://www.prio.org/Data/Governance/Vanhanens-index-of-democracy/Polyarchy-Dataset-Downloads/" target="_blank">Polyarchy</a><br />
+</li>
+<li><a href="https://freedomhouse.org/" target="_blank">Freedom House</a><br />
+</li>
+<li><a href="http://www.systemicpeace.org/polityproject.html" target="_blank">Polity IV</a><br />
+</li>
+<li><a href="http://www.democracybarometer.org/" target="_blank">Democracy Barometer</a><br />
+</li>
+<li><a href="https://fsolt.org/swiid/" target="_blank">The Standardized World Income Inequality Database (SWIID)</a><br />
+</li>
+<li><a href="https://datacatalog.worldbank.org/dataset/world-development-indicators" target="_blank">World Bank’s World Development Indicators</a></li>
+</ol>
+<p>It is worth noting that there exists a package for downloading democracy indicators (<a href="https://github.com/xmarquez/democracyData" target="_blank"><code>democracyData</code></a>), but it does not include the sub-indicators or sub-scales that are used to create the final composite scores, only the composite scores themselves. Still, it would be sufficient as a data source for many analyses.</p>
+<p>Downloading the data is the first step towards a combined dataset. To merge the indicators, it is also necessary to standardize country codes and year formats. The <a href="https://github.com/vincentarelbundock/countrycode" target="_blank"><code>countrycode</code></a> package is invaluable to convert between country code types. Years typically only need conversions between string and numeric types.</p>
+</div>
+<div id="packages" class="section level3">
+<h3>Packages</h3>
+<pre class="r"><code>#devtools::install_github(&quot;xmarquez/vdem&quot;)
+library(vdem) # get V-Dem data
+library(WDI) # get data from World Bank&#39;s WDI
+library(countrycode) # convert country codes
+library(tidyverse) # manipulate data
+library(xlsx) # read xlsx files
+library(readxl) # read xls files
+library(haven) # read SPSS files
+library(data.table) # fwrite to quickly write to .csv
+library(ggplot2) # ggraphs
+
+# custom color palette
+myPalette &lt;- c(&quot;#999999&quot;, &quot;#E69F00&quot;, &quot;#56B4E9&quot;, &quot;#009E73&quot;, 
+               &quot;#F0E442&quot;, &quot;#0072B2&quot;, &quot;#D55E00&quot;, &quot;#CC79A7&quot;)</code></pre>
+</div>
+<div id="varieties-of-democracy-v-dem-dedicated-package" class="section level3">
+<h3>Varieties of Democracy (V-Dem): Dedicated package</h3>
+<p><a href="https://www.v-dem.net/en/" target="_blank">Varieties of Democracy (V-Dem)</a> data can be downloaded via a dedicated R package (<a href="https://github.com/xmarquez/vdem" target="_blank"><code>vdem</code></a>), and a particular indicator can be selected with the parameter <code>name_pattern</code>.</p>
+<p>The variable <code>vdem_country_text_id</code> already contains ISO3 character country codes (ISO3c), which is our preferred country code format.</p>
+<pre class="r"><code>vdem.part &lt;- extract_vdem(name_pattern = &quot;v2x_partipdem&quot;, include_uncertainty = FALSE) %&gt;%
+  select(iso3 = vdem_country_text_id, year, vdem_par = v2x_partipdem)</code></pre>
+</div>
+<div id="polyarchy-semicolon-delimited-.csv" class="section level3">
+<h3>Polyarchy: Semicolon delimited .csv</h3>
+<p><a href="https://www.prio.org/Data/Governance/Vanhanens-index-of-democracy/Polyarchy-Dataset-Downloads/" target="_blank">Polyarchy</a> data are available as semicolon-delimited .csv files, as well as in Stata, SPSS, and Excel formats. The .csv format is the simplest, so this is the one we prefer. The <code>read.csv2</code> function reads semicolon-delimited files as a default. Alternatively, <code>read.csv</code> could be used with an appropriate setting of the separator character.</p>
+<p>Country codes are available in the <a href="http://www.correlatesofwar.org/data-sets/cow-country-codes" target="_blank">Correlates of War format</a>, which needs converting to ISO3c with the <code>countrycode</code> function. The year and the participation variable we are primarily interested in also need converting to numeric.</p>
+<pre class="r"><code>polyarchy &lt;- read.csv2(&quot;https://www.prio.org/Global/upload/CSCW/Data/Governance/file42534_polyarchy_v2.csv&quot;,
+                       stringsAsFactors = FALSE) %&gt;%
+  mutate(iso3 = countrycode(Abbr, &quot;cowc&quot;, &quot;iso3c&quot;)) %&gt;%
+  select(iso3, year = Year, polyarch_part = Part) %&gt;%
+  mutate(year = as.numeric(year),
+         polyarch_part = as.numeric(polyarch_part))</code></pre>
+</div>
+<div id="freedom-house-excel-file-with-by-year-sheets" class="section level3">
+<h3>Freedom House: Excel file with by-year sheets</h3>
+<p><a href="https://freedomhouse.org/" target="_blank">Freedom House</a> ratings started in 1973, but the subcategory scores are only available since 2006. They can be downloaded in an .xlsx document with separate sheets including data for single years. The first sheet contains information about the contents of the remaining sheets, and the consecutive sheets contain information by year starting from the most recent year (2018), while the last sheet contains category scores (which are no use to use, since we need sub-category scores).</p>
+<p>We encoutered problems trying to read in the file directly from the URL into R with the <code>read.xlsx</code> function, so we found a workaround where we download the file to a temporary folder, and then open and manipulate it from there. It takes a moment to run, but it works.</p>
+<p>From the downloaded file we only need selected columns from selected sheets. To identify those sheets and columns, we first read all sheet names from the .xlsx file and identify the sheets that contain the data we want to extract - those are sheets number 2 through 14.</p>
+<p>Next we read all column names from one of the sheets with the data we are interested in (assuming that all remaining sheets have the same structure) - columns 1 (with country.territory names) and 6 (with the participation scores).</p>
+<p>We loop through the sheets and store the extracted columns in a list. Then we append all elements of the list to create a country-year-level file.</p>
+<p>Finally, we convert country.territory names to ISO3 codes, and fix the issue of Kosovo, which does not have an official ISO3 code, but the temporary one is “XKX”.</p>
+<pre class="r"><code>myurl &lt;- &quot;https://freedomhouse.org/sites/default/files/Aggregate%20Category%20and%20Subcategory%20Scores%20FIW2003-2018.xlsx&quot; # set URL to the file to be downloaded
+td = tempdir() # read in the path to the temp directory
+tmp &lt;- tempfile(tmpdir = td, fileext = &quot;.xlsx&quot;) # create path to the temp file in the temp directory
+download.file(url = myurl, destfile = tmp, mode=&quot;wb&quot;) # download file from URL to the temp file with set extention
+excel_sheets(tmp) # read sheet names from the downloaded file
+names(read.xlsx(file = tmp, sheetIndex = 2)) # read column names from the second sheet
+
+fh.list &lt;- list() # create empty list to store selected parts of the 13 sheets
+for (i in 1:13) {
+  fh.list[[i]] &lt;- read.xlsx(file = tmp, 
+                            sheetIndex = i+1, # index (number) of sheet int he .xlsx file
+                            colIndex = c(1,6)) # indexes (numbers) of columns to be extracted
+  fh.list[[i]]$Country.Territory &lt;- gsub(&quot;[*].*$&quot;,&quot;&quot;,fh.list[[i]]$Country.Territory) # eliminate asterisks from Country.Territory variable
+  fh.list[[i]]$year &lt;- 2018 - i + 1 # add year column
+}
+
+fh &lt;- do.call(&quot;rbind&quot;, fh.list) %&gt;% # bind (append) rows of all elements of fh.list
+  mutate(iso3 = countrycode(Country.Territory, &quot;country.name&quot;, &quot;iso3c&quot;)) %&gt;%
+  mutate(iso3 = ifelse(Country.Territory %in% c(&quot;Kosovo&quot;, &quot;Kosovo*&quot;), &quot;XKX&quot;, iso3)) %&gt;%
+  select(iso3, year, fh_B_aggr = B.Aggr)</code></pre>
+</div>
+<div id="polity-iv-spss-file" class="section level3">
+<h3>Polity IV: SPSS file</h3>
+<p><a href="http://www.systemicpeace.org/polityproject.html" target="_blank">Polity IV</a> distributes data in .xls and .sav (SPSS) formats. We had the same problems with directly reading the .xls file from the URL as with Freedom House, so we decided to use the .sav file instead. The only additional step we had to make beyond country code translations and setting the year variable ot numeric format was recoding of special codes in the <code>polcomp</code> variable (-66, -77, -88) to missing.</p>
+<p>These special codes indicate foreign “interruptions” (-66), cases of “interregnum” or anarchy (-77), and “transition” (-88). For more information consult the <a href="https://www.systemicpeace.org/inscr/p4manualv2016.pdf" target="_blank">Polity IV manual</a>.</p>
+<pre class="r"><code>polity &lt;- read_sav(&quot;http://www.systemicpeace.org/inscr/p4v2017.sav&quot;) %&gt;%
+  mutate(iso3 = countrycode(country, &quot;country.name&quot;, &quot;iso3c&quot;)) %&gt;%
+  mutate(iso3 = ifelse(country == &quot;Kosovo&quot;, &quot;XKX&quot;, iso3)) %&gt;%
+  select(iso3, year, p4_polcomp = polcomp) %&gt;%
+  mutate(p4_polcomp = ifelse(p4_polcomp %in% c(-66, -77, -88), NA, p4_polcomp))</code></pre>
+</div>
+<div id="democracy-barometer-excel-file-with-header-in-top-rows" class="section level3">
+<h3>Democracy Barometer: Excel file with header in top rows</h3>
+<p>The <a href="http://www.democracybarometer.org/" target="_blank">Democracy Barometer</a> published its data in .xls, .xlsx, and .dta (Stata) files. The .dta file curiously has only missing values on the variable of interest to us, so we use the .xls file. Like with Freedom House data, we download the file to a temporary folder, and open from there. One modification that’s necessary is skipping the first four rows of the excel sheet, which contain a header that needs to be removed prior to reading the data.</p>
+<pre class="r"><code>myurl &lt;- &quot;http://www.democracybarometer.org/Data/DB_data_1990-2016_Standardized.xls&quot;
+td = tempdir()
+tmp &lt;- tempfile(tmpdir = td, fileext = &quot;.xls&quot;)
+download.file(url = myurl, destfile = tmp, mode=&quot;wb&quot;)
+excel_sheets(tmp)
+
+db &lt;- readxl::read_excel(tmp, skip = 4) %&gt;%
+  mutate(iso3 = countrycode(`Ccode QOG`, &quot;iso3n&quot;, &quot;iso3c&quot;)) %&gt;%
+  select(iso3, year = Year, db_PARTICIP = PARTICIP) %&gt;%
+  mutate(db_PARTICIP = as.numeric(db_PARTICIP))</code></pre>
+</div>
+<div id="the-standardized-world-income-inequality-database-swiid-plain-.csv" class="section level3">
+<h3>The Standardized World Income Inequality Database (SWIID): Plain .csv</h3>
+<p>Data from the <a href="https://fsolt.org/swiid/" target="_blank">Standardized World Income Inequality Database (SWIID)</a> can be downloaded as a .csv file from <a href="https://github.com/fsolt/swiid" target="_blank">Github</a>.</p>
+<pre class="r"><code>swiid &lt;- read.csv(&quot;https://raw.githubusercontent.com/fsolt/swiid/master/data/swiid7_1_summary.csv&quot;,
+                  stringsAsFactors = FALSE, encoding = &quot;UTF-8&quot;) %&gt;%
+  mutate(iso3 = countrycode(country, &quot;country.name&quot;, &quot;iso3c&quot;)) %&gt;%
+  mutate(iso3 = ifelse(country == &quot;Kosovo&quot;, &quot;XKX&quot;, iso3)) %&gt;%
+  select(iso3, year, gini_disp)</code></pre>
+</div>
+<div id="world-banks-world-development-indicators-dedicated-package" class="section level3">
+<h3>World Bank’s World Development Indicators: Dedicated package</h3>
+<p>Data from the <a href="https://datacatalog.worldbank.org/dataset/world-development-indicators" target="_blank">World Bank’s World Development Indicators</a> have a dedicated package <a href="https://github.com/vincentarelbundock/WDI" target="_blank"><code>WDI</code></a>, which allows to search for data that contain a string (function <code>WDIsearch</code>) and to download data for a selected indicator, country coverage and time range (<code>WDI</code>).</p>
+<pre class="r"><code>poverty &lt;- WDI(country=&quot;all&quot;, indicator=c(&quot;SI.POV.NAHC&quot;),
+    start=1900, end=2018, extra=TRUE, cache=NULL) %&gt;%
+  filter(!is.na(SI.POV.NAHC)) %&gt;%
+  select(iso3 = iso3c, year, wb_poverty = SI.POV.NAHC)</code></pre>
+</div>
+<div id="merging-all-datasets" class="section level3">
+<h3>Merging all datasets</h3>
+<p>After all datasets are downloaded and have the same structure, country codes, and year variables, mergin them does not pose a problem. The last step is to create a variable with country names on the basis of the country codes.</p>
+<pre class="r"><code>merged &lt;- full_join(db, fh) %&gt;%
+  full_join(polity) %&gt;%
+  full_join(polyarchy) %&gt;%
+  full_join(swiid) %&gt;%
+  full_join(vdem.part) %&gt;%
+  full_join(poverty) %&gt;%
+  mutate(country = countrycode(iso3, &quot;iso3c&quot;, &quot;country.name&quot;))</code></pre>
+</div>
+<div id="country-graphs" class="section level3">
+<h3>Country graphs</h3>
+<p>Now the merged dataset can be used in models or plots. FOr examples, the graph below shows the changes in the Participation score of the Democracy Barometer in four selected countries: Canada, Germany, Poland, and Ukraine.</p>
+<pre class="r"><code>merged %&gt;%
+  filter(country %in% c(&quot;Poland&quot;, &quot;Ukraine&quot;, &quot;Germany&quot;, &quot;Canada&quot;),
+         year &gt; 1990) %&gt;%
+  ggplot(., aes(x = year, y = db_PARTICIP, group = country, col = country)) +
+  geom_line(size = 1) +
+  ylab(&quot;Democracy Barometer: Participation&quot;) +
+  expand_limits(y = 0) +
+    scale_x_continuous(name = &quot;Year&quot;,
+                     breaks = seq(1990, 2015, 5)) +
+  ggtitle(&quot;Changes in Democracy Barometer&#39;s Participation Scores&quot;) +
+  labs(caption = &quot;Data: Democracy Barometer, PARTICIP.&quot;) +
+  scale_color_manual(values = myPalette[c(1, 2, 5, 3)], 
+                    name=&quot;Country&quot;,
+                    breaks=c(&quot;Canada&quot;, &quot;Germany&quot;, &quot;Poland&quot;, &quot;Ukraine&quot;)) +
+  theme_light()</code></pre>
+<p><img src="/post/participation-inequality-indices_files/figure-html/plot-cntry-1.png" width="672" /></p>
+</div>
+<div id="variable-graphs" class="section level3">
+<h3>Variable graphs</h3>
+<p>The second graph shows changes in the same Participation score and disposable income inequality (from teh SWIID) in Poland after 1990.</p>
+<pre class="r"><code>merged %&gt;%
+  filter(country %in% c(&quot;Poland&quot;),
+         year &gt; 1990) %&gt;%
+  select(iso3, year, db_PARTICIP, gini_disp) %&gt;%
+  gather(variable, value, 3:4) %&gt;%
+  ggplot(., aes(x = year, y = value, col = variable)) +
+  geom_line(size = 1) +
+  ylab(&quot;Value&quot;) + expand_limits(y = 0) +
+  scale_x_continuous(name = &quot;Year&quot;,
+                     breaks = seq(1990, 2015, 5)) +
+  ggtitle(&quot;Changes in Democracy Barometer&#39;s Participation Scores and \nDisposable Income Inequality&quot;) +
+  labs(caption = &quot;Data: Democracy Barometer, PARTICIP; SWIID, gini_disp.&quot;) +
+  scale_color_manual(values = myPalette[1:2], 
+                     name=&quot;Variable&quot;,
+                     breaks = c(&quot;db_PARTICIP&quot;, &quot;gini_disp&quot;),
+                     labels=c(&quot;Democracy Barometer \nParticipation&quot;, &quot;Gini Disposable \nIncome&quot;)) +
+  theme_light()</code></pre>
+<p><img src="/post/participation-inequality-indices_files/figure-html/plot-var-1.png" width="672" /></p>
+</div>
+<div id="writing-to-file" class="section level3">
+<h3>Writing to file</h3>
+<p>The final dataset can be saved to a .csv file for future use.</p>
+<pre class="r"><code>fwrite(merged, &quot;merged.csv&quot;)</code></pre>
+</div>

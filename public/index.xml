@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Wed, 16 Jan 2019 11:32:14 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 02 Feb 2019 13:28:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Downloading country-level indicators on participation and economic inequality</title>
+      <link>/post/participation-inequality-indices/</link>
+      <pubDate>Sat, 02 Feb 2019 13:28:00 +0000</pubDate>
+      
+      <guid>/post/participation-inequality-indices/</guid>
+      <description>DataPackagesVarieties of Democracy (V-Dem): Dedicated packagePolyarchy: Semicolon delimited .csvFreedom House: Excel file with by-year sheetsPolity IV: SPSS fileDemocracy Barometer: Excel file with header in top rowsThe Standardized World Income Inequality Database (SWIID): Plain .csvWorld Bank’s World Development Indicators: Dedicated packageMerging all datasetsCountry graphsVariable graphsWriting to filewith Viktoriia Muliavka
+Social and political scientists often need to put together datasets of country-level political, economic, and demographic variables with data from different sources.</description>
+    </item>
     
     <item>
       <title>Voter shifts in parliamentary elections in Poland, 2007-2015</title>

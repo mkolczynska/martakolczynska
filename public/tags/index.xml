@@ -60,7 +60,7 @@
     <item>
       <title>Cross National Research</title>
       <link>/tags/cross-national-research/</link>
-      <pubDate>Sat, 29 Sep 2018 10:06:00 +0000</pubDate>
+      <pubDate>Sat, 02 Feb 2019 13:28:00 +0000</pubDate>
       
       <guid>/tags/cross-national-research/</guid>
       <description></description>
@@ -94,11 +94,29 @@
     </item>
     
     <item>
+      <title>Democracy Barometer</title>
+      <link>/tags/democracy-barometer/</link>
+      <pubDate>Sat, 02 Feb 2019 13:28:00 +0000</pubDate>
+      
+      <guid>/tags/democracy-barometer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Dot Plot</title>
       <link>/tags/dot-plot/</link>
       <pubDate>Tue, 07 Aug 2018 12:46:00 +0000</pubDate>
       
       <guid>/tags/dot-plot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Economic Inequality</title>
+      <link>/tags/economic-inequality/</link>
+      <pubDate>Sat, 02 Feb 2019 13:28:00 +0000</pubDate>
+      
+      <guid>/tags/economic-inequality/</guid>
       <description></description>
     </item>
     
@@ -126,6 +144,15 @@
       <pubDate>Tue, 07 Aug 2018 12:46:00 +0000</pubDate>
       
       <guid>/tags/european-social-survey/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Freedom House</title>
+      <link>/tags/freedom-house/</link>
+      <pubDate>Sat, 02 Feb 2019 13:28:00 +0000</pubDate>
+      
+      <guid>/tags/freedom-house/</guid>
       <description></description>
     </item>
     
@@ -189,6 +216,15 @@
       <pubDate>Thu, 18 Oct 2018 16:13:14 +0000</pubDate>
       
       <guid>/tags/latent-class-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Macro Indicators</title>
+      <link>/tags/macro-indicators/</link>
+      <pubDate>Sat, 02 Feb 2019 13:28:00 +0000</pubDate>
+      
+      <guid>/tags/macro-indicators/</guid>
       <description></description>
     </item>
     
@@ -258,9 +294,18 @@
     <item>
       <title>Political Participation</title>
       <link>/tags/political-participation/</link>
-      <pubDate>Wed, 16 Jan 2019 11:32:14 +0000</pubDate>
+      <pubDate>Sat, 02 Feb 2019 13:28:00 +0000</pubDate>
       
       <guid>/tags/political-participation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Polity Iv</title>
+      <link>/tags/polity-iv/</link>
+      <pubDate>Sat, 02 Feb 2019 13:28:00 +0000</pubDate>
+      
+      <guid>/tags/polity-iv/</guid>
       <description></description>
     </item>
     
@@ -274,9 +319,18 @@
     </item>
     
     <item>
+      <title>Polyarchy</title>
+      <link>/tags/polyarchy/</link>
+      <pubDate>Sat, 02 Feb 2019 13:28:00 +0000</pubDate>
+      
+      <guid>/tags/polyarchy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>R</title>
       <link>/tags/r/</link>
-      <pubDate>Wed, 16 Jan 2019 11:32:14 +0000</pubDate>
+      <pubDate>Sat, 02 Feb 2019 13:28:00 +0000</pubDate>
       
       <guid>/tags/r/</guid>
       <description></description>
@@ -337,6 +391,15 @@
     </item>
     
     <item>
+      <title>Swiid</title>
+      <link>/tags/swiid/</link>
+      <pubDate>Sat, 02 Feb 2019 13:28:00 +0000</pubDate>
+      
+      <guid>/tags/swiid/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Ted Talks</title>
       <link>/tags/ted-talks/</link>
       <pubDate>Wed, 22 Aug 2018 09:34:00 +0000</pubDate>
@@ -366,7 +429,7 @@
     <item>
       <title>Tutorial</title>
       <link>/tags/tutorial/</link>
-      <pubDate>Sun, 05 Aug 2018 07:32:00 +0000</pubDate>
+      <pubDate>Sat, 02 Feb 2019 13:28:00 +0000</pubDate>
       
       <guid>/tags/tutorial/</guid>
       <description></description>
@@ -382,11 +445,29 @@
     </item>
     
     <item>
+      <title>V Dem</title>
+      <link>/tags/v-dem/</link>
+      <pubDate>Sat, 02 Feb 2019 13:28:00 +0000</pubDate>
+      
+      <guid>/tags/v-dem/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Wikipedia</title>
       <link>/tags/wikipedia/</link>
       <pubDate>Tue, 13 Nov 2018 16:41:14 +0000</pubDate>
       
       <guid>/tags/wikipedia/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>World Bank</title>
+      <link>/tags/world-bank/</link>
+      <pubDate>Sat, 02 Feb 2019 13:28:00 +0000</pubDate>
+      
+      <guid>/tags/world-bank/</guid>
       <description></description>
     </item>
     

@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/participation-inequality-indices/</loc>
+    <lastmod>2019-02-02T13:28:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/polpan-voting-alluvial-plots/</loc>
     <lastmod>2019-01-16T11:32:14+00:00</lastmod>
   </url>
@@ -134,7 +139,7 @@
   
   <url>
     <loc>/tags/cross-national-research/</loc>
-    <lastmod>2018-09-29T10:06:00+00:00</lastmod>
+    <lastmod>2019-02-02T13:28:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -157,8 +162,20 @@
   </url>
   
   <url>
+    <loc>/tags/democracy-barometer/</loc>
+    <lastmod>2019-02-02T13:28:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/dot-plot/</loc>
     <lastmod>2018-08-07T12:46:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/economic-inequality/</loc>
+    <lastmod>2019-02-02T13:28:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -177,6 +194,12 @@
   <url>
     <loc>/tags/european-social-survey/</loc>
     <lastmod>2018-08-07T12:46:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/freedom-house/</loc>
+    <lastmod>2019-02-02T13:28:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -223,8 +246,14 @@
   </url>
   
   <url>
+    <loc>/tags/macro-indicators/</loc>
+    <lastmod>2019-02-02T13:28:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/</loc>
-    <lastmod>2019-01-16T11:32:14+00:00</lastmod>
+    <lastmod>2019-02-02T13:28:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -272,7 +301,13 @@
   
   <url>
     <loc>/tags/political-participation/</loc>
-    <lastmod>2019-01-16T11:32:14+00:00</lastmod>
+    <lastmod>2019-02-02T13:28:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/polity-iv/</loc>
+    <lastmod>2019-02-02T13:28:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -283,14 +318,20 @@
   </url>
   
   <url>
+    <loc>/tags/polyarchy/</loc>
+    <lastmod>2019-02-02T13:28:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/post/</loc>
-    <lastmod>2019-01-16T11:32:14+00:00</lastmod>
+    <lastmod>2019-02-02T13:28:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2019-01-16T11:32:14+00:00</lastmod>
+    <lastmod>2019-02-02T13:28:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -331,6 +372,12 @@
   </url>
   
   <url>
+    <loc>/tags/swiid/</loc>
+    <lastmod>2019-02-02T13:28:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/</loc>
     <lastmod>2018-09-02T10:09:00+00:00</lastmod>
     <priority>0</priority>
@@ -361,7 +408,7 @@
   
   <url>
     <loc>/tags/tutorial/</loc>
-    <lastmod>2018-08-05T07:32:00+00:00</lastmod>
+    <lastmod>2019-02-02T13:28:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -372,8 +419,20 @@
   </url>
   
   <url>
+    <loc>/tags/v-dem/</loc>
+    <lastmod>2019-02-02T13:28:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/wikipedia/</loc>
     <lastmod>2018-11-13T16:41:14+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/world-bank/</loc>
+    <lastmod>2019-02-02T13:28:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
