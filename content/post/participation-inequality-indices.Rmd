@@ -18,7 +18,7 @@ Social and political scientists often need to put together datasets of country-l
 
 In this post we show how we created a dataset of country-level indicators of political participation and economic inequality in the [Political Inequality project (POLINQ)](https://politicalinequality.org/2017/09/21/new-project-political-voice-and-economic-inequality-across-nations-and-time/){target="_blank"}. 
 
-With this guide we hope to reduce the barrier to collecting and combining country-level indicators in an automated and reproducible way as opposed to doing this manually.
+With this guide we hope to reduce the barrier to collecting and combining country-level indicators in an automated and reproducible way as opposed to doing this manually. The code used to create this post can be found [here](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/participation-inequality-indices.Rmd){target="_blank"}.
 
 
 ### Data

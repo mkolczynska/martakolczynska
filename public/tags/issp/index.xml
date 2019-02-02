@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Tue, 08 Jan 2019 15:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 08 Jan 2019 15:10:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/issp/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Measuring meritocracy with survey data</title>
       <link>/post/issp-meritocracy-edu-income/</link>
-      <pubDate>Tue, 08 Jan 2019 15:00:00 +0000</pubDate>
+      <pubDate>Tue, 08 Jan 2019 15:10:00 +0000</pubDate>
       
       <guid>/post/issp-meritocracy-edu-income/</guid>
       <description>Determining meritocratic allocationCalculating the distance to meritocracyDistance to meritocracy by countryMeritocracy is a principle according to which rewards are based on merit, as well as an ideal situation resulting from the operation of this principle. In their 1985 Social Foces paper titled “How Far to Meritocracy? Empirical Tests of a Controversial Thesis”, Tadeusz Krauze and Kazimierz M. Słomczyński proposed an algorithm to construct a theoretical joint distribution of education and income, given their marginal distributions, that would satisfy the conditions of meritocratic allocation.</description>
