@@ -1,0 +1,148 @@
+---
+title: "Downloading country-level indicators on participation and economic inequality 2"
+description: "A quick guide to working with different file formats with `rio`"
+author: "Marta Kołczyńska"
+date: 2019-02-03T15:52:00
+categories: ["R"]
+tags: ["R", "rio", "tutorial", "macro indicators", "political participation", "economic inequality", "cross-national research",
+"SWIID", "World Bank", "Freedom House", "Democracy Barometer", "V-Dem", "Polyarchy", "Polity IV"]
+output: 
+  blogdown::html_page:
+    toc: true
+    toc_depth: 4    
+---
+
+
+<div id="TOC">
+<ul>
+<li><a href="#data">Data</a></li>
+<li><a href="#packages">Packages</a></li>
+<li><a href="#varieties-of-democracy-v-dem-dedicated-package">Varieties of Democracy (V-Dem): Dedicated package</a></li>
+<li><a href="#polyarchy-semicolon-delimited-csv-file---rio">Polyarchy: Semicolon delimited CSV file <code>-&gt; rio</code></a></li>
+<li><a href="#freedom-house-excel-file-with-by-year-sheets">Freedom House: Excel file with by-year sheets</a></li>
+<li><a href="#polity-iv-spss-file---rio">Polity IV: SPSS file <code>-&gt; rio</code></a></li>
+<li><a href="#democracy-barometer-excel-file-with-header-in-top-rows---rio">Democracy Barometer: Excel file with header in top rows <code>-&gt; rio</code></a></li>
+<li><a href="#the-standardized-world-income-inequality-database-swiid-plain-csv-file---rio">The Standardized World Income Inequality Database (SWIID): Plain CSV file <code>-&gt; rio</code></a></li>
+<li><a href="#world-banks-world-development-indicators-dedicated-package">World Bank’s World Development Indicators: Dedicated package</a></li>
+<li><a href="#merging-all-datasets">Merging all datasets</a></li>
+<li><a href="#writing-to-file">Writing to file</a></li>
+</ul>
+</div>
+
+<p>Shortly after writing this <a href="https://martakolczynska.com/post/participation-inequality-indices/" target="_blank">post</a> on importing datasets in different formats (CSV, XLS, XLSX, SAV) to R, I got the following comment:</p>
+<blockquote class="twitter-tweet" data-lang="en">
+<p lang="en" dir="ltr">
+Check out {rio}, which might simplify a lot of that import code.
+</p>
+— Thomas J. Leeper (<span class="citation">@thosjleeper</span>) <a href="https://twitter.com/thosjleeper/status/1092055278370111492?ref_src=twsrc%5Etfw">February 3, 2019</a>
+</blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<p>And simplify it did. <a href="https://github.com/leeper/rio" target="_blank"><code>rio</code></a> imports and exports data from/to different formats, and conveniently has the <code>stringsAsFactors</code> option set to <code>FALSE</code> by default. <code>rio</code> won’t make importing data entirely effort-free and there still will be surprises in the structure of the data in the files, but at least one doesn’t have to worry about delimiters in CSV files and which function for reading Excel files to use.</p>
+<div id="data" class="section level3">
+<h3>Data</h3>
+<p>The <a href="https://martakolczynska.com/post/participation-inequality-indices/#data" target="_blank">same</a>.</p>
+</div>
+<div id="packages" class="section level3">
+<h3>Packages</h3>
+<pre class="r"><code>#devtools::install_github(&quot;xmarquez/vdem&quot;)
+library(vdem) # gets V-Dem data
+library(WDI) # gets data from World Bank&#39;s WDI
+library(countrycode) # converts country codes
+library(tidyverse) # for manipulating data
+library(rio) # for reading all kinds of file types
+library(readxl) # for reading xls and xlsx files
+library(data.table) # fwrite to quickly write to CSV</code></pre>
+</div>
+<div id="varieties-of-democracy-v-dem-dedicated-package" class="section level3">
+<h3>Varieties of Democracy (V-Dem): Dedicated package</h3>
+<p>The same - dedicated packages are still my preferred option.</p>
+<pre class="r"><code>vdem.part &lt;- extract_vdem(name_pattern = &quot;v2x_partipdem&quot;, include_uncertainty = FALSE) %&gt;%
+  select(iso3 = vdem_country_text_id, year, vdem_par = v2x_partipdem)</code></pre>
+</div>
+<div id="polyarchy-semicolon-delimited-csv-file---rio" class="section level3">
+<h3>Polyarchy: Semicolon delimited CSV file <code>-&gt; rio</code></h3>
+<p><code>rio::import</code> instead of <code>read.csv</code>.</p>
+<pre class="r"><code>polyarchy &lt;- import(&quot;https://www.prio.org/Global/upload/CSCW/Data/Governance/file42534_polyarchy_v2.csv&quot;) %&gt;%
+  mutate(iso3 = countrycode(Abbr, &quot;cowc&quot;, &quot;iso3c&quot;)) %&gt;%
+  select(iso3, year = Year, polyarch_part = Part) %&gt;%
+  mutate(year = as.numeric(year),
+         polyarch_part = as.numeric(polyarch_part))</code></pre>
+</div>
+<div id="freedom-house-excel-file-with-by-year-sheets" class="section level3">
+<h3>Freedom House: Excel file with by-year sheets</h3>
+<p>While the <code>rio</code> package can download data from an XLSX file without problems with a single line:</p>
+<pre class="r"><code>fh &lt;- import(&quot;https://freedomhouse.org/sites/default/files/Aggregate%20Category%20and%20Subcategory%20Scores%20FIW2003-2018.xlsx&quot;, 
+             sheet = 2)</code></pre>
+<p>in this particular case it’s necessary to understand the structure of the whole document before deciding which elements to extract. One possibility would be to just open the file in Excel, take a look, and then loop through sheets with <code>rio</code>.</p>
+<p>The other possibility is to go the old way: save the XLSX file to the temp folder, look at its structure, and extract the selected pieces.</p>
+<pre class="r"><code>myurl &lt;- &quot;https://freedomhouse.org/sites/default/files/Aggregate%20Category%20and%20Subcategory%20Scores%20FIW2003-2018.xlsx&quot; # sets URL to the file to be downloaded
+td = tempdir() # reads in the path to the temp directory
+tmp &lt;- tempfile(tmpdir = td, fileext = &quot;.xlsx&quot;) # creates path to the temp file in the temp directory
+download.file(url = myurl, destfile = tmp, mode=&quot;wb&quot;) # downloads file from URL to the temp file with set extention
+excel_sheets(tmp) # reads sheet names from the downloaded file
+names(read_excel(path = tmp, sheet = 2)) # reads column names from the second sheet
+
+fh.list &lt;- list() # creates empty list to store selected parts of the 13 sheets
+for (i in 1:13) {
+  fh.list[[i]] &lt;- read_excel(path = tmp, 
+                             sheet = i+1) %&gt;% # indexes (numbers) of columns to be extracted
+    select(`Country/Territory`, fh_B_aggr = `B Aggr`) %&gt;% # selects columns
+    mutate(country = gsub(&quot;[*].*$&quot;, &quot;&quot;, `Country/Territory`), # converts to iso3c codes
+           year = 2018 - i + 1) # adds year column
+}
+
+fh &lt;- do.call(&quot;rbind&quot;, fh.list) %&gt;% # binds (append) rows of all elements of fh.list
+  mutate(iso3 = countrycode(country, &quot;country.name&quot;, &quot;iso3c&quot;)) %&gt;%
+  mutate(iso3 = ifelse(country %in% c(&quot;Kosovo&quot;, &quot;Kosovo*&quot;), &quot;XKX&quot;, iso3)) %&gt;%
+  select(-country)</code></pre>
+</div>
+<div id="polity-iv-spss-file---rio" class="section level3">
+<h3>Polity IV: SPSS file <code>-&gt; rio</code></h3>
+<p><code>rio::import</code> instead of <code>haven::read_sav</code>.</p>
+<pre class="r"><code>polity &lt;- import(&quot;http://www.systemicpeace.org/inscr/p4v2017.sav&quot;) %&gt;%
+  mutate(iso3 = countrycode(country, &quot;country.name&quot;, &quot;iso3c&quot;)) %&gt;%
+  mutate(iso3 = ifelse(country == &quot;Kosovo&quot;, &quot;XKX&quot;, iso3),
+         p4_polcomp = ifelse(polcomp %in% c(-66, -77, -88), NA, polcomp)) %&gt;%
+  select(iso3, year, p4_polcomp)</code></pre>
+</div>
+<div id="democracy-barometer-excel-file-with-header-in-top-rows---rio" class="section level3">
+<h3>Democracy Barometer: Excel file with header in top rows <code>-&gt; rio</code></h3>
+<p><code>rio::import</code> instead of <code>readxl::read_excel</code>.</p>
+<pre class="r"><code>db &lt;- import(&quot;http://www.democracybarometer.org/Data/DB_data_1990-2016_Standardized.xls&quot;, 
+             skip = 4) %&gt;%
+  mutate(iso3 = countrycode(`Ccode QOG`, &quot;iso3n&quot;, &quot;iso3c&quot;),
+         PARTICIP = as.numeric(PARTICIP)) %&gt;%
+  select(iso3, year = Year, db_PARTICIP = PARTICIP)</code></pre>
+</div>
+<div id="the-standardized-world-income-inequality-database-swiid-plain-csv-file---rio" class="section level3">
+<h3>The Standardized World Income Inequality Database (SWIID): Plain CSV file <code>-&gt; rio</code></h3>
+<p><code>rio::import</code> instead of <code>read.csv</code>, but parameters (such as <code>encoding</code> to deal with country names like São Tomé and Príncipe) stay the same.</p>
+<pre class="r"><code>swiid &lt;- import(&quot;https://raw.githubusercontent.com/fsolt/swiid/master/data/swiid7_1_summary.csv&quot;,
+                  encoding = &quot;UTF-8&quot;) %&gt;%
+  mutate(iso3 = countrycode(country, &quot;country.name&quot;, &quot;iso3c&quot;)) %&gt;%
+  mutate(iso3 = ifelse(country == &quot;Kosovo&quot;, &quot;XKX&quot;, iso3)) %&gt;%
+  select(iso3, year, gini_disp)</code></pre>
+</div>
+<div id="world-banks-world-development-indicators-dedicated-package" class="section level3">
+<h3>World Bank’s World Development Indicators: Dedicated package</h3>
+<p>The same - dedicated packages are still my preferred option.</p>
+<pre class="r"><code>poverty &lt;- WDI(country=&quot;all&quot;, indicator=c(&quot;SI.POV.NAHC&quot;),
+    start=1900, end=2018, extra=TRUE, cache=NULL) %&gt;%
+  filter(!is.na(SI.POV.NAHC)) %&gt;%
+  select(iso3 = iso3c, year, wb_poverty = SI.POV.NAHC)</code></pre>
+</div>
+<div id="merging-all-datasets" class="section level3">
+<h3>Merging all datasets</h3>
+<pre class="r"><code>merged &lt;- full_join(db, fh) %&gt;%
+  full_join(polity) %&gt;%
+  full_join(polyarchy) %&gt;%
+  full_join(swiid) %&gt;%
+  full_join(vdem.part) %&gt;%
+  full_join(poverty) %&gt;%
+  mutate(country = countrycode(iso3, &quot;iso3c&quot;, &quot;country.name&quot;))</code></pre>
+</div>
+<div id="writing-to-file" class="section level3">
+<h3>Writing to file</h3>
+<p>The final dataset can be saved to one of the many types of files supported by <code>rio</code>, just modify the extension.</p>
+<pre class="r"><code>export(merged, &quot;merged.csv&quot;)</code></pre>
+</div>

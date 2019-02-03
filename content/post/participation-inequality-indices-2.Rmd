@@ -1,5 +1,5 @@
 ---
-title: "Downloading country-level indicators on participation and economic inequality 2.0"
+title: "Downloading country-level indicators on participation and economic inequality 2"
 description: "A quick guide to working with different file formats with `rio`"
 author: "Marta Kołczyńska"
 date: 2019-02-03T15:52:00
