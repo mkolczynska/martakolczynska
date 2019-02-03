@@ -3,7 +3,7 @@ title: "Measuring the level and inequality of political participation with surve
 author: "Marta Kołczyńska"
 date: 2018-09-11T03:41:00
 categories: ["R"]
-tags: ["surveys", "ESS", "R", "political inequality", "political participation", "cross-national research"]
+tags: ["surveys", "ESS", "V-Dem", "R", "political inequality", "political participation", "cross-national research"]
 output: 
   blogdown::html_page:
     toc: true

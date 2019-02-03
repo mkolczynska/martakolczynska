@@ -3,7 +3,7 @@ title: "Measuring the level and inequality of political participation with surve
 author: "Marta Kołczyńska"
 date: 2018-09-11T03:41:00
 categories: ["R"]
-tags: ["surveys", "ESS", "R", "political inequality", "political participation", "cross-national research"]
+tags: ["surveys", "ESS", "V-Dem", "R", "political inequality", "political participation", "cross-national research"]
 output: 
   blogdown::html_page:
     toc: true
@@ -23,7 +23,7 @@ output:
 </div>
 
 <p>How to measure political inequality? The <a href="https://www.v-dem.net/en/" target="_blank">Variaties of Democracy project (V-Dem)</a> has a set of political equality indicators that capture the extent to which political power is distributed according to wealth and income, membership in a particular social group, gender or sexual orientation (cf. <a href="https://www.v-dem.net/media/filer_public/84/a8/84a880ae-e0ca-4ad3-aff8-556abfdaff70/v-dem_codebook_v71.pdf" target="_blank">V-Dem Codebook v.7.1</a>, p. 259-262). The level of political equality is scored on an ordinal scale for each indicator by experts and then converted to an interval variable based on a measurement model.</p>
-<p>In this post I try to construct a measure of the inequality of political participation, which can be considered a part of political inequality, derived directly from individual-level survey reported participation in political activities. I use data from the <a href="https://www.europeansocialsurvey.org/data/download.html?r=8" target="_blank">European Social Survey, round 8</a> <em>via</em> the <a href="https://github.com/ropensci/essurvey" target="_blank"><code>essurvey</code> package</a>. I then check how this measure of inequality of political participation covaries with the <a href="https://www.v-dem.net/en/about/" target="_blank">V-Dem</a> Political Equality indicator, economic inequality (from <a href="https://fsolt.org/swiid/">SWIID</a>){target=“_blank“}, and the <a href="http://info.worldbank.org/governance/wgi/" target="_blank">Worldwide Governance Indicators</a>.</p>
+<p>In this post I try to construct a measure of the inequality of political participation, which can be considered a part of political inequality, derived directly from individual-level survey reported participation in political activities. I use data from the <a href="https://www.europeansocialsurvey.org/data/download.html?r=8" target="_blank">European Social Survey, round 8</a> <em>via</em> the <a href="https://github.com/ropensci/essurvey" target="_blank"><code>essurvey</code> package</a>. I then check how this measure of inequality of political participation covaries with the <a href="https://www.v-dem.net/en/about/" target="_blank">V-Dem</a> Political Equality indicator, economic inequality (from <a href="https://fsolt.org/swiid/">SWIID</a>){target=&quot;_blank&quot;}, and the <a href="http://info.worldbank.org/governance/wgi/" target="_blank">Worldwide Governance Indicators</a>.</p>
 <p>The code for manipulating the data and plotting can be found <a href="https://github.com/mkolczynska/martakolczynska/blob/master/content/post/participation-inequality-ess.Rmd" target="_blank">here</a>.</p>
 <div id="political-participation-in-the-ess" class="section level3">
 <h3>Political participation in the ESS</h3>

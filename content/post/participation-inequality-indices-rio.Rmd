@@ -1,0 +1,167 @@
+---
+title: "Downloading country-level indicators on participation and economic inequality 2.0"
+description: "A quick guide to working with different file formats with `rio`"
+author: "Marta Kołczyńska"
+date: 2019-02-03T15:52:00
+categories: ["R"]
+tags: ["R", "rio", "tutorial", "macro indicators", "political participation", "economic inequality", "cross-national research",
+"SWIID", "World Bank", "Freedom House", "Democracy Barometer", "V-Dem", "Polyarchy", "Polity IV"]
+output: 
+  blogdown::html_page:
+    toc: true
+    toc_depth: 4    
+---
+
+Shortly after writing this [post](https://martakolczynska.com/post/participation-inequality-indices/){target="_blank"} on importing datasets in different formats (CSV, XLS, XLSX, SAV) to R, I got the following comment:
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Check out {rio}, which might simplify a lot of that import code.</p>&mdash; Thomas J. Leeper (@thosjleeper) <a href="https://twitter.com/thosjleeper/status/1092055278370111492?ref_src=twsrc%5Etfw">February 3, 2019</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+And simplify it did. [`rio`](https://github.com/leeper/rio){target="_blank"} imports and exports data from/to different formats, and conveniently has the `stringsAsFactors` option set to `FALSE` by default. `rio` won't make importing data entirely effort-free and there still will be surprises in the structure of the data in the files, but at least one doesn't have to worry about delimiters in CSV files and which function for reading Excel files to use.
+
+### Data
+
+The [same](https://martakolczynska.com/post/participation-inequality-indices/#data){target="_blank"}.
+
+### Packages
+
+```{r setup, warning=FALSE, message=FALSE}
+#devtools::install_github("xmarquez/vdem")
+library(vdem) # gets V-Dem data
+library(WDI) # gets data from World Bank's WDI
+library(countrycode) # converts country codes
+library(tidyverse) # for manipulating data
+library(rio) # for reading all kinds of file types
+library(readxl) # for reading xls and xlsx files
+library(data.table) # fwrite to quickly write to CSV
+```
+
+### Varieties of Democracy (V-Dem): Dedicated package
+
+The same - dedicated packages are still my preferred option.
+
+```{r vdem, warning=FALSE, message=FALSE, echo=TRUE, results='hide'}
+vdem.part <- extract_vdem(name_pattern = "v2x_partipdem", include_uncertainty = FALSE) %>%
+  select(iso3 = vdem_country_text_id, year, vdem_par = v2x_partipdem)
+```
+
+### Polyarchy: Semicolon delimited CSV file `-> rio`
+
+`rio::import` instead of `read.csv`.
+
+```{r polyarchy, warning=FALSE, message=FALSE, echo=TRUE, results='hide'}
+polyarchy <- import("https://www.prio.org/Global/upload/CSCW/Data/Governance/file42534_polyarchy_v2.csv") %>%
+  mutate(iso3 = countrycode(Abbr, "cowc", "iso3c")) %>%
+  select(iso3, year = Year, polyarch_part = Part) %>%
+  mutate(year = as.numeric(year),
+         polyarch_part = as.numeric(polyarch_part))
+```
+
+
+### Freedom House: Excel file with by-year sheets
+
+While the `rio` package can download data from an XLSX file without problems with a single line:
+
+```{r eval = FALSE}
+fh <- import("https://freedomhouse.org/sites/default/files/Aggregate%20Category%20and%20Subcategory%20Scores%20FIW2003-2018.xlsx", 
+             sheet = 2)
+```
+
+in this particular case it's necessary to understand the structure of the whole document before deciding which elements to extract. One possibility would be to just open the file in Excel, take a look, and then loop through sheets with `rio`.
+
+The other possibility is to go the old way: save the XLSX file to the temp folder, look at its structure, and extract the selected pieces.
+
+```{r fh, warning=FALSE, message=FALSE, echo=TRUE, results='hide'}
+myurl <- "https://freedomhouse.org/sites/default/files/Aggregate%20Category%20and%20Subcategory%20Scores%20FIW2003-2018.xlsx" # sets URL to the file to be downloaded
+td = tempdir() # reads in the path to the temp directory
+tmp <- tempfile(tmpdir = td, fileext = ".xlsx") # creates path to the temp file in the temp directory
+download.file(url = myurl, destfile = tmp, mode="wb") # downloads file from URL to the temp file with set extention
+excel_sheets(tmp) # reads sheet names from the downloaded file
+names(read_excel(path = tmp, sheet = 2)) # reads column names from the second sheet
+
+fh.list <- list() # creates empty list to store selected parts of the 13 sheets
+for (i in 1:13) {
+  fh.list[[i]] <- read_excel(path = tmp, 
+                             sheet = i+1) %>% # indexes (numbers) of columns to be extracted
+    select(`Country/Territory`, fh_B_aggr = `B Aggr`) %>% # selects columns
+    mutate(country = gsub("[*].*$", "", `Country/Territory`), # converts to iso3c codes
+           year = 2018 - i + 1) # adds year column
+}
+
+fh <- do.call("rbind", fh.list) %>% # binds (append) rows of all elements of fh.list
+  mutate(iso3 = countrycode(country, "country.name", "iso3c")) %>%
+  mutate(iso3 = ifelse(country %in% c("Kosovo", "Kosovo*"), "XKX", iso3)) %>%
+  select(-country)
+```
+
+
+### Polity IV: SPSS file `-> rio`
+
+`rio::import` instead of `haven::read_sav`.
+
+```{r p4, warning=FALSE, message=FALSE, echo=TRUE, results='hide'}
+polity <- import("http://www.systemicpeace.org/inscr/p4v2017.sav") %>%
+  mutate(iso3 = countrycode(country, "country.name", "iso3c")) %>%
+  mutate(iso3 = ifelse(country == "Kosovo", "XKX", iso3),
+         p4_polcomp = ifelse(polcomp %in% c(-66, -77, -88), NA, polcomp)) %>%
+  select(iso3, year, p4_polcomp)
+```
+
+
+### Democracy Barometer: Excel file with header in top rows `-> rio`
+
+`rio::import` instead of `readxl::read_excel`.
+
+```{r dem-barometer, warning=FALSE, message=FALSE, echo=TRUE, results='hide'}
+db <- import("http://www.democracybarometer.org/Data/DB_data_1990-2016_Standardized.xls", 
+             skip = 4) %>%
+  mutate(iso3 = countrycode(`Ccode QOG`, "iso3n", "iso3c"),
+         PARTICIP = as.numeric(PARTICIP)) %>%
+  select(iso3, year = Year, db_PARTICIP = PARTICIP)
+```
+
+
+### The Standardized World Income Inequality Database (SWIID): Plain CSV file `-> rio`
+
+`rio::import` instead of `read.csv`, but parameters (such as `encoding` to deal with country names like São Tomé and Príncipe) stay the same.
+
+```{r swiid, warning=FALSE, message=FALSE, echo=TRUE, results='hide'}
+swiid <- import("https://raw.githubusercontent.com/fsolt/swiid/master/data/swiid7_1_summary.csv",
+                  encoding = "UTF-8") %>%
+  mutate(iso3 = countrycode(country, "country.name", "iso3c")) %>%
+  mutate(iso3 = ifelse(country == "Kosovo", "XKX", iso3)) %>%
+  select(iso3, year, gini_disp)
+```
+
+
+### World Bank's World Development Indicators: Dedicated package
+
+The same - dedicated packages are still my preferred option.
+
+```{r wb-poverty, warning=FALSE, message=FALSE, echo=TRUE, results='hide'}
+poverty <- WDI(country="all", indicator=c("SI.POV.NAHC"),
+    start=1900, end=2018, extra=TRUE, cache=NULL) %>%
+  filter(!is.na(SI.POV.NAHC)) %>%
+  select(iso3 = iso3c, year, wb_poverty = SI.POV.NAHC)
+```
+
+### Merging all datasets
+
+```{r merge, warning=FALSE, message=FALSE, echo=TRUE, results='hide'}
+merged <- full_join(db, fh) %>%
+  full_join(polity) %>%
+  full_join(polyarchy) %>%
+  full_join(swiid) %>%
+  full_join(vdem.part) %>%
+  full_join(poverty) %>%
+  mutate(country = countrycode(iso3, "iso3c", "country.name"))
+```
+
+### Writing to file
+
+The final dataset can be saved to one of the many types of files supported by `rio`, just modify the extension.
+
+```{r save, eval=FALSE}
+export(merged, "merged.csv")
+```
+

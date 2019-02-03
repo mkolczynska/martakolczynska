@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Sat, 02 Feb 2019 13:28:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 03 Feb 2019 15:52:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/swiid/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Downloading country-level indicators on participation and economic inequality 2.0</title>
+      <link>/post/participation-inequality-indices-rio/</link>
+      <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
+      
+      <guid>/post/participation-inequality-indices-rio/</guid>
+      <description>DataPackagesVarieties of Democracy (V-Dem): Dedicated packagePolyarchy: Semicolon delimited CSV file -&amp;gt; rioFreedom House: Excel file with by-year sheetsPolity IV: SPSS file -&amp;gt; rioDemocracy Barometer: Excel file with header in top rows -&amp;gt; rioThe Standardized World Income Inequality Database (SWIID): Plain CSV file -&amp;gt; rioWorld Bank’s World Development Indicators: Dedicated packageMerging all datasetsWriting to fileShortly after writing this post on importing datasets in different formats (CSV, XLS, XLSX, SAV) to R, I got the following comment:</description>
+    </item>
     
     <item>
       <title>Downloading country-level indicators on participation and economic inequality</title>

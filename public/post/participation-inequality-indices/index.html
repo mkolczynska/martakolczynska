@@ -42,8 +42,12 @@
   
 
   
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/foundation.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
   
   <script>hljs.initHighlightingOnLoad();</script>
   
@@ -321,8 +325,7 @@ library(vdem) # gets V-Dem data
 library(WDI) # gets data from World Bank&#39;s WDI
 library(countrycode) # converts country codes
 library(tidyverse) # for manipulating data
-library(xlsx) # for reading xlsx files
-library(readxl) # for reading xls files
+library(readxl) # for reading xls and xlsx files
 library(haven) # for reading SPSS files
 library(data.table) # fwrite to quickly write to CSV
 library(ggplot2) # ggraphs
@@ -362,21 +365,21 @@ td = tempdir() # reads in the path to the temp directory
 tmp &lt;- tempfile(tmpdir = td, fileext = &quot;.xlsx&quot;) # creates path to the temp file in the temp directory
 download.file(url = myurl, destfile = tmp, mode=&quot;wb&quot;) # downloads file from URL to the temp file with set extention
 excel_sheets(tmp) # reads sheet names from the downloaded file
-names(read.xlsx(file = tmp, sheetIndex = 2)) # reads column names from the second sheet
+names(read_excel(path = tmp, sheet = 2)) # reads column names from the second sheet
 
 fh.list &lt;- list() # creates empty list to store selected parts of the 13 sheets
 for (i in 1:13) {
-  fh.list[[i]] &lt;- read.xlsx(file = tmp, 
-                            sheetIndex = i+1, # index (number) of sheet int he .xlsx file
-                            colIndex = c(1,6)) # indexes (numbers) of columns to be extracted
-  fh.list[[i]]$Country.Territory &lt;- gsub(&quot;[*].*$&quot;,&quot;&quot;,fh.list[[i]]$Country.Territory) # eliminate asterisks from Country.Territory variable
-  fh.list[[i]]$year &lt;- 2018 - i + 1 # adds year column
+  fh.list[[i]] &lt;- read_excel(path = tmp, 
+                             sheet = i+1) %&gt;% # indexes (numbers) of columns to be extracted
+    select(`Country/Territory`, fh_B_aggr = `B Aggr`) %&gt;%
+    mutate(country = gsub(&quot;[*].*$&quot;, &quot;&quot;, `Country/Territory`),
+           year = 2018 - i + 1) # adds year column
 }
 
 fh &lt;- do.call(&quot;rbind&quot;, fh.list) %&gt;% # binds (append) rows of all elements of fh.list
-  mutate(iso3 = countrycode(Country.Territory, &quot;country.name&quot;, &quot;iso3c&quot;)) %&gt;%
-  mutate(iso3 = ifelse(Country.Territory %in% c(&quot;Kosovo&quot;, &quot;Kosovo*&quot;), &quot;XKX&quot;, iso3)) %&gt;%
-  select(iso3, year, fh_B_aggr = B.Aggr)</code></pre>
+  mutate(iso3 = countrycode(country, &quot;country.name&quot;, &quot;iso3c&quot;)) %&gt;%
+  mutate(iso3 = ifelse(country %in% c(&quot;Kosovo&quot;, &quot;Kosovo*&quot;), &quot;XKX&quot;, iso3)) %&gt;%
+  select(-country)</code></pre>
 </div>
 <div id="polity-iv-spss-file" class="section level3">
 <h3>Polity IV: SPSS file</h3>
@@ -397,7 +400,7 @@ tmp &lt;- tempfile(tmpdir = td, fileext = &quot;.xls&quot;)
 download.file(url = myurl, destfile = tmp, mode=&quot;wb&quot;)
 excel_sheets(tmp)
 
-db &lt;- readxl::read_excel(tmp, skip = 4) %&gt;%
+db &lt;- read_excel(tmp, skip = 4) %&gt;%
   mutate(iso3 = countrycode(`Ccode QOG`, &quot;iso3n&quot;, &quot;iso3c&quot;)) %&gt;%
   select(iso3, year = Year, db_PARTICIP = PARTICIP) %&gt;%
   mutate(db_PARTICIP = as.numeric(db_PARTICIP))</code></pre>
@@ -474,7 +477,7 @@ db &lt;- readxl::read_excel(tmp, skip = 4) %&gt;%
 </div>
 <div id="writing-to-file" class="section level3">
 <h3>Writing to file</h3>
-<p>The final dataset can be saved to a C file for future use.</p>
+<p>The final dataset can be saved to a CSV file for future use.</p>
 <pre class="r"><code>fwrite(merged, &quot;merged.csv&quot;)</code></pre>
 </div>
 
@@ -498,8 +501,14 @@ db &lt;- readxl::read_excel(tmp, skip = 4) %&gt;%
   </div>
   <div class="pure-u-10-24">
     
+    <nav class="next">
+      <a href="/post/participation-inequality-indices-rio/">Downloading country-level indicators on participation and economic inequality 2.0</a>
+    </nav>
+    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="/post/participation-inequality-indices-rio/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>

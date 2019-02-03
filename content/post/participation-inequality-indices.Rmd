@@ -46,8 +46,7 @@ library(vdem) # gets V-Dem data
 library(WDI) # gets data from World Bank's WDI
 library(countrycode) # converts country codes
 library(tidyverse) # for manipulating data
-library(xlsx) # for reading xlsx files
-library(readxl) # for reading xls files
+library(readxl) # for reading xls and xlsx files
 library(haven) # for reading SPSS files
 library(data.table) # fwrite to quickly write to CSV
 library(ggplot2) # ggraphs
@@ -108,21 +107,21 @@ td = tempdir() # reads in the path to the temp directory
 tmp <- tempfile(tmpdir = td, fileext = ".xlsx") # creates path to the temp file in the temp directory
 download.file(url = myurl, destfile = tmp, mode="wb") # downloads file from URL to the temp file with set extention
 excel_sheets(tmp) # reads sheet names from the downloaded file
-names(read.xlsx(file = tmp, sheetIndex = 2)) # reads column names from the second sheet
+names(read_excel(path = tmp, sheet = 2)) # reads column names from the second sheet
 
 fh.list <- list() # creates empty list to store selected parts of the 13 sheets
 for (i in 1:13) {
-  fh.list[[i]] <- read.xlsx(file = tmp, 
-                            sheetIndex = i+1, # index (number) of sheet int he .xlsx file
-                            colIndex = c(1,6)) # indexes (numbers) of columns to be extracted
-  fh.list[[i]]$Country.Territory <- gsub("[*].*$","",fh.list[[i]]$Country.Territory) # eliminate asterisks from Country.Territory variable
-  fh.list[[i]]$year <- 2018 - i + 1 # adds year column
+  fh.list[[i]] <- read_excel(path = tmp, 
+                             sheet = i+1) %>% # indexes (numbers) of columns to be extracted
+    select(`Country/Territory`, fh_B_aggr = `B Aggr`) %>%
+    mutate(country = gsub("[*].*$", "", `Country/Territory`),
+           year = 2018 - i + 1) # adds year column
 }
 
 fh <- do.call("rbind", fh.list) %>% # binds (append) rows of all elements of fh.list
-  mutate(iso3 = countrycode(Country.Territory, "country.name", "iso3c")) %>%
-  mutate(iso3 = ifelse(Country.Territory %in% c("Kosovo", "Kosovo*"), "XKX", iso3)) %>%
-  select(iso3, year, fh_B_aggr = B.Aggr)
+  mutate(iso3 = countrycode(country, "country.name", "iso3c")) %>%
+  mutate(iso3 = ifelse(country %in% c("Kosovo", "Kosovo*"), "XKX", iso3)) %>%
+  select(-country)
 ```
 
 
@@ -153,7 +152,7 @@ tmp <- tempfile(tmpdir = td, fileext = ".xls")
 download.file(url = myurl, destfile = tmp, mode="wb")
 excel_sheets(tmp)
 
-db <- readxl::read_excel(tmp, skip = 4) %>%
+db <- read_excel(tmp, skip = 4) %>%
   mutate(iso3 = countrycode(`Ccode QOG`, "iso3n", "iso3c")) %>%
   select(iso3, year = Year, db_PARTICIP = PARTICIP) %>%
   mutate(db_PARTICIP = as.numeric(db_PARTICIP))
@@ -252,7 +251,7 @@ merged %>%
 
 ### Writing to file
 
-The final dataset can be saved to a C file for future use.
+The final dataset can be saved to a CSV file for future use.
 
 ```{r save, eval=FALSE}
 fwrite(merged, "merged.csv")
