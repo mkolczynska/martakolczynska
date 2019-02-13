@@ -2,7 +2,7 @@
 title: "Political trust among electoral winners and losers in Europe"
 description: "Poland in comparative perspective"
 author: "Marta Kołczyńska"
-date: 2019-02-13T17:52:00
+date: 2019-02-13T11:24:00
 categories: ["R"]
 tags: ["R", "political trust", "political inequality", "cross-national research", "ESS", "ParlGov"]
 output: 
