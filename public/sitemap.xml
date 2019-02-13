@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/ess-trust-institutions-electoral-winners-losers/</loc>
+    <lastmod>2019-02-13T17:52:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/participation-inequality-indices-2/</loc>
     <lastmod>2019-02-03T15:52:00+00:00</lastmod>
   </url>
@@ -113,6 +118,10 @@
   </url>
   
   <url>
+    <loc>/post/citations/</loc>
+  </url>
+  
+  <url>
     <loc>/tags/age/</loc>
     <lastmod>2018-09-02T10:09:00+00:00</lastmod>
     <priority>0</priority>
@@ -144,7 +153,7 @@
   
   <url>
     <loc>/tags/cross-national-research/</loc>
-    <lastmod>2019-02-03T15:52:00+00:00</lastmod>
+    <lastmod>2019-02-13T17:52:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -192,7 +201,7 @@
   
   <url>
     <loc>/tags/ess/</loc>
-    <lastmod>2018-10-18T16:13:14+00:00</lastmod>
+    <lastmod>2019-02-13T17:52:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -258,7 +267,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-02-03T15:52:00+00:00</lastmod>
+    <lastmod>2019-02-13T17:52:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -287,6 +296,12 @@
   </url>
   
   <url>
+    <loc>/tags/parlgov/</loc>
+    <lastmod>2019-02-13T17:52:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/plotly/</loc>
     <lastmod>2018-08-05T07:32:00+00:00</lastmod>
     <priority>0</priority>
@@ -300,13 +315,19 @@
   
   <url>
     <loc>/tags/political-inequality/</loc>
-    <lastmod>2018-10-18T16:13:14+00:00</lastmod>
+    <lastmod>2019-02-13T17:52:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/political-participation/</loc>
     <lastmod>2019-02-03T15:52:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/political-trust/</loc>
+    <lastmod>2019-02-13T17:52:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -330,13 +351,13 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2019-02-03T15:52:00+00:00</lastmod>
+    <lastmod>2019-02-13T17:52:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2019-02-03T15:52:00+00:00</lastmod>
+    <lastmod>2019-02-13T17:52:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

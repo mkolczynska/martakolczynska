@@ -1,0 +1,281 @@
+---
+title: "Political trust among electoral winners and losers in Europe"
+description: "Poland in comparative perspective"
+author: "Marta Kołczyńska"
+date: 2019-02-13T17:52:00
+categories: ["R"]
+tags: ["R", "political trust", "political inequality", "cross-national research", "ESS", "ParlGov"]
+output: 
+  blogdown::html_page:
+    toc: true
+    toc_depth: 4    
+---
+
+
+Voting for a party that ends up losing the election is known to be associated with lower satisfaction with democracy and trust in the parliament (cf. [Martini and Quaranta 2019](https://onlinelibrary.wiley.com/doi/full/10.1111/1475-6765.12284){target="_blank"}). How does Poland compare to other European countries? How has the winner-loser trust gap changed in Poland over time, and how have trust levels among supporters of current and former ruling parties changed in periods when they were not in government? I use data from the [European Social Survey, round 8](https://www.europeansocialsurvey.org/data/){target="_blank"} combined with the [ParlGov dataset](http://www.parlgov.org/){target="_blank"} on electoral results and cabinet composition to answer these questions.
+
+```{r setup, include=FALSE}
+library(countrycode) # converts country codes
+library(tidyverse) # for manipulating data
+library(rio) # for reading all kinds of file types
+library(Hmisc) # for calculating weighted variance
+library(spatstat) # for calculating weighted medians
+
+ess8_all <- rio::import("data/ess-trust-inst-elect-winners-all8.csv")
+
+ess_pl <- rio::import("data/ess-trust-inst-elect-winners-pl.csv")
+
+theme_plot <- theme_bw(10) +
+  theme(axis.text.y = element_text(size = rel(1)),
+        axis.ticks.y = element_blank(),
+        axis.text.x = element_text(size = rel(1)),
+        panel.grid.major.x = element_blank(),
+        panel.grid.major.y = element_line(size = 0.5),
+        panel.grid.minor.x = element_blank(),
+        panel.grid.minor.y = element_line(size = 0.5))
+```
+
+
+```{r recodes, eval=FALSE, include = FALSE}
+
+### import data on election results and cabinet composition
+cabinet <- rio::import("http://www.parlgov.org/static/data/development-cp1252/view_cabinet.csv", encoding = "UTF-8") %>%
+  mutate(iso2 = countrycode(country_name_short, "iso3c", "iso2c"),
+         election_date = as.Date(election_date),
+         start_date = lubridate::ymd(start_date))
+
+### import data on ESS fieldwork dates to check if elections were before or after
+ess_fldwrk <- rio::import("data/ess-1-8-fieldwork-dates.csv")
+
+### ESS 8 all countries
+ess <- import_rounds(8, ess_email = "email@email") %>%
+  recode_missings() %>%
+  filter(vote == 1, cntry != "IT") %>%
+  select(essround, cntry, trstprl, trstlgl, trstprt, starts_with("prtv"), pspwght)
+
+# factor analysis of trust in institutions
+cor <- cor(ess[,c("trstprl", "trstlgl", "trstprt")], use = "complete.obs")
+fa.fit <- psych::fa(cor, nfactors=1, fm="pa")
+ess$trstinst <- as.numeric(predict(fa.fit, ess[,c("trstprl", "trstlgl", "trstprt")]))
+
+# data frame of party codes of parties in parliament by country
+# based on cabinet data
+gov <- as.data.frame(rbind(
+  c(1, 2, NA, NA, NA),
+  c(3, 2, 12, 8, NA),
+  c(3, 2, 4, 1, NA),
+  c(4, 2, 6, NA, NA),
+  c(1, 2, NA, NA, NA),
+  c(2, 4, 3, NA, NA),
+  c(2, NA, NA, NA, NA),
+  c(3, 1, NA, NA, NA),
+  c(7, 9, 10, NA, NA),
+  c(1, NA, NA, NA, NA),
+  c(1, NA, NA, NA, NA),
+  c(3, NA, NA, NA, NA),
+  c(1, 6, 7, 9, 4),
+  c(1, 3, 12, NA, NA),
+  c(1, 7, NA, NA, NA),
+  c(2, 1, NA, NA, NA),
+  c(8, 7, NA, NA, NA),
+  c(6, 7, NA, NA, NA),
+  c(13, NA, NA, NA, NA),
+  c(1, NA, NA, NA, NA),
+  c(6, 4, NA, NA, NA),
+  c(8, 5, 1, NA, NA)))
+
+# assigning country names
+gov$cntry <- unique(ess$cntry)
+
+# merging the survey data with the gov data frame and wrangling
+ess8_all <- ess %>%
+  full_join(., gov) %>%
+  mutate(vote_party = select(., prtvtbat:prtvtesi) %>% rowSums(na.rm = TRUE)) %>%
+  filter(vote_party != 0) %>%
+  # Lithuania has 2 variables for "party voted"
+  mutate(vote_gov = ifelse(cntry == "LT" & (prtvblt1 %in% c(1,7) | prtvblt2 %in% c(1,7) |
+                                              prtvblt3 %in% c(1,7)), 1, 0)) %>%
+  mutate(vote_gov = ifelse(cntry == "LT", vote_gov,
+                           ifelse(vote_party==V1 | vote_party==V2 | vote_party==V3 | 
+                                    vote_party==V4 | vote_party==V5, 1, 0))) %>%
+  mutate(vote_gov = ifelse(is.na(vote_gov), 0, vote_gov),
+         country = countrycode(cntry, "iso2c", "country.name")) %>%
+  filter(!is.na(trstprl)) %>%
+  select(cntry, trstinst, vote_gov, pspwght) %>%
+  remove_labels()
+
+### ESS 1-8 Poland
+
+# import ESS data for all rounds from Poland into a list
+pl_full <- import_country("Poland", c(1:8), ess_email = "email@email.com")
+
+# function to clean the ESS data
+clean_ess <- function(data) {
+  data %>%
+    select(essround, cntry, trstprl, pspwght, party = matches("prtvt.pl|prtvtpl")) %>%
+    rename()
+}
+
+pl_full_clean <- lapply(pl_full, clean_ess) %>%  # clean the ESS data in the list
+  do.call(rbind, .) %>%  # combine elements of the list into a data frame
+  filter(!is.na(party)) %>%  # delete if didn't vote for a party (or missing values)
+  mutate(vote_gov = case_when(  # create "voted for government" variable
+    essround %in% c(1,2) & party %in% c(1,6) ~ 1,
+    essround %in% c(3) & party %in% c(14,3,16) ~ 1,
+    essround %in% c(4,5) & party %in% c(3,5) ~ 1,
+    essround %in% c(6,7) & party %in% c(2,5) ~ 1,
+    essround %in% c(8) & party %in% c(6) ~ 1,
+    TRUE ~ 0),
+    vote_po_pis_sld = case_when(  # create "voted for PO, PiS, or SLD" variable
+      essround %in% c(1,2) & party == 7 ~ 1,
+      essround %in% c(1,2) & party == 5 ~ 2,
+      essround %in% c(1,2) & party == 1 ~ 3,
+      essround %in% c(3) & party == 9 ~ 1,
+      essround %in% c(3) & party == 14 ~ 2,
+      essround %in% c(3) & party == 18 ~ 3,
+      essround %in% c(4,5) & party == 3 ~ 1,
+      essround %in% c(4,5) & party == 6 ~ 2,
+      essround %in% c(4,5) & party == 1 ~ 3,    
+      essround %in% c(6,7) & party == 2 ~ 1,
+      essround %in% c(6,7) & party == 6 ~ 2,
+      essround %in% c(6,7) & party == 8 ~ 3,
+      essround %in% c(8) & party == 4 ~ 1,
+      essround %in% c(8) & party == 6 ~ 2,
+      essround %in% c(8) & party == 8 ~ 3,
+      TRUE ~ -1
+      ))
+```
+
+### Winner-loser trust gap across countries
+
+First, I graph winner-loser gaps in trust in state institutions in 2016/2017, using the most recent ESS Round 8. Trust in state institutions is a factor of trust in the parliament, the legal system, and the polital parties, and only individuals who have voted in the most recent election before ESS Round 8 fieldwork were included. In the graph below, countries are sorted according to the decreasing gap between the median trust in institutions among respondents who declared having voted for one of the party in the government at the time of the survey and those who declared having voted for one of the opposition parties. The width of the box indicates the number of respondents in the given category. I decided to exclude Italy because of its unstable government situation.
+
+It turns out that while in most countries electoral winners have higher trust in institutions than electoral losers, in three countries the association is the opposite: Israel, Norway, and Estonia. This might be related to governments having lost popular support or being minority governments. In Spain and Switzerland the medians of the two groups are almost the same. The highest polarization is in Hungary, Poland, and France.
+
+
+```{r ess8-comparative, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 6.5, fig.height = 7}
+ess8_all %>%
+  group_by(cntry, vote_gov) %>%
+  summarise(med_trstinst = weighted.median(trstinst, w = pspwght, na.rm= TRUE)) %>%
+  spread(vote_gov, med_trstinst) %>%
+  mutate(diff = `0` - `1`) %>%
+  arrange(diff) %>%
+  ungroup() %>%
+  mutate(rank = row_number()) %>%
+  full_join(ess8_all) %>%
+  ggplot(., aes(x = reorder(country, rank), y = trstinst)) +
+  geom_boxplot(aes(fill = factor(vote_gov)), varwidth  = TRUE) +
+  scale_fill_manual(name="Voted for \ngovernment",
+                        breaks=c("1", "0"),
+                        labels=c("Yes", "No"),
+                      values=c("#E69F00", "#56B4E9")) +
+  ggtitle("Difference in trust in state institutions \nbetween electoral winners and losers in Europe") +
+  labs(caption = "Notes: Only voters included. Countries sorted according to the between-group difference in medians.
+  Box width indicates the number of respondents in the given category.
+  Trust in state institutions is a factor of trust in parliament, justice system, and political parties.
+       Data source: European Social Survey Round 8 (2016-2017), ParlGov.") +
+  ylab("Trust in state institutions") +
+  xlab("") +
+  theme_plot +
+  theme(panel.grid.major.y = element_blank(),
+        panel.grid.minor.y = element_blank(),
+        axis.text.y = element_text(size=rel(1.2))) +
+  coord_flip()
+
+```
+
+
+### Winner-loser trust gap in Poland
+
+Next, I take a closer look at the winner-loser gap in Poland, using all eight rounds of the ESS. The first round did not include the item on trust in political parties, so in the graphs below I only use trust in parliament, which in the ESS is measured on a 0-10 scale. X axis ticks indicate the year when ESS fieldwork (or most of it) took place.
+
+The time series starts in 2002 with a relatively small trust gap of less than a point on a 0-10 scale. The gap then drops to almost zero in 2004, due to the decline in trust among supporters of the ruling parties, Socialdemocratic Alliance (SLD) and the Polish Peasant's Party (PSL), which formed a coalition from 2001 to 2005. The gap increased again in 2006 under a new government coalition led by Law and Justice (PiS). In 2007 PiS lost the pre-term election and a coalition of the Civic Platform (PO) and the Polish Peasant's Party took over. The trust gap remained roughly stable - with overall increases in trust levels - until 2010, increased sharply in 2012, largely due to the drop in trust of the losers, and shrank again in 2015 (the survey was carried out before the 2015 parliamentary election). In late 2015 PiS won the election and formed a single-party government. The trust gap in 2017 was the largest ever, owing to a sharp increase in trust among supporters of PiS.
+
+
+
+```{r ess-pl-gov, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 6, fig.height = 5}
+dodge <- position_dodge(width=0.5)
+
+ess_pl %>%
+  filter(!is.na(vote_gov), !is.na(trstprl)) %>%
+  group_by(essround, vote_gov) %>%
+  summarise(nobs = n(),
+            mean_trstparl = weighted.mean(trstprl, w = pspwght, na.rm = TRUE),
+            sd_trstparl = sqrt(wtd.var(trstprl, pspwght, na.rm = TRUE)),
+            error_trstparl = qnorm(0.975)*sd_trstparl/sqrt(nobs)) %>%
+  ungroup() %>%
+  mutate(year = plyr::mapvalues(essround, from = c(1:8), to = c(2002, 2004, 2006, 2008, 2010, 2012,
+                                                                2015, 2017))) %>%
+  ggplot(., aes(x = year, y = mean_trstparl, group = factor(vote_gov), col = factor(vote_gov))) +
+  geom_point(position = dodge) +
+  geom_line(position = dodge) +
+  geom_pointrange(aes(ymin = mean_trstparl - error_trstparl, 
+                      ymax = mean_trstparl + error_trstparl),
+                  position = dodge, size = 0.5) +
+  scale_color_manual(name="Voted for \ngovernment",
+                     breaks=c("1", "0"),
+                     labels=c("Yes", "No"),
+                     values=c("#E69F00", "#56B4E9")) +
+  ggtitle("Difference in trust in parliament between electoral \nwinners and losers in Poland") +
+  labs(caption = "Note: Error bars indicate 95% confidence intervals. Combined weights applied.
+       Data source: European Social Survey Round 8 (2016-2017), ParlGov.") +
+  scale_x_continuous(breaks = c(2002, 2004, 2006, 2008, 2010, 2012, 2015, 2017)) +
+  scale_y_continuous(breaks = c(0,1,2,3,4,5,6,7,8,9,10),
+                     limits = c(0,6)) +
+  ylab("Trust in parliament") +
+  xlab("Year") +
+  theme_plot
+
+```
+
+### Trust differences across parties in Poland
+
+What were the trust levels among supporters of three former (including one current) ruling parties, and how they changed when the parties lost power? The graph below shows mean levels of trust in parliament among supporters of SLD, PO, and PiS, between 2002 and 2017. The shading of the graph indicates which party was currently leading the government: blue for SLD, orange for PiS and grey for PO.
+
+At all points, with one exception, supporters of the ruling party have clearly higher levels of trust than supporters of the two opposition parties. The exception is in 2004, when trust levels are universally low. While average trust among SLD and PO supporters has stayed in the range roughly between 2 and 4 points (on a 0-10 scale), after the most recent election in 2015 mean trust among those who had voted for PiS increased to almost 5 points - likely a signal of particularistic rather than generalized attitudes.
+
+The next election is in the fall of 2019. Given the current political polarization and the upcoming parliamentary election in the fall of 2019, it is hard to make any predictions, especially for the future. Looking at the trust trends in the last years it seems likely that (1) if PiS loses, trust among their supporters will drop below current levels of the opposition and trust among winners (a coalition around PO?) will increase below current PiS levels, so the gap will stay roughly the same albeit at an overall lower level, while (2) if PiS wins, trust among supporters of the opposition might fall further, but trust among PiS supporters will unlikely increase. 
+
+
+```{r ess-pl-party, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 6.5, fig.height = 5}
+ess_pl %>%
+  filter(vote_po_pis_sld != -1) %>%
+  group_by(essround, vote_po_pis_sld) %>%
+  summarise(nobs = n(),
+            mean_trstparl = weighted.mean(trstprl, w = pspwght, na.rm = TRUE),
+            sd_trstparl = sqrt(wtd.var(trstprl, pspwght, na.rm = TRUE)),
+            error_trstparl = qnorm(0.975)*sd_trstparl/sqrt(nobs)) %>%
+  ungroup() %>%
+  mutate(year = plyr::mapvalues(essround, from = c(1:8), to = c(2002, 2004, 2006, 2008, 2010, 2012,
+                                                                2015, 2017))) %>%
+  ggplot(., aes(x = year, y = mean_trstparl, group = vote_po_pis_sld, col = factor(vote_po_pis_sld))) +
+  geom_point(position = dodge) +
+  geom_line(position = dodge) +
+  geom_pointrange(aes(ymin = mean_trstparl - error_trstparl, 
+                      ymax = mean_trstparl + error_trstparl),
+                  position = dodge, size = 0.5) +
+  scale_color_manual(name="Voted for:",
+                     breaks=c("1", "2", "3"),
+                     labels=c("Civic Platform (PO)", "Law and Justice (PiS)",
+                              "Democratic Left \nAlliance (SLD) \nor coalitions"),
+                     values=c("#999999", "#E69F00", "#56B4E9")) +
+  ggtitle("Difference in trust in parliament between supporters of \nthree former ruling parties in Poland") +
+  labs(caption = "Note: Error bars indicate 95% confidence intervals. Combined weights applied.
+       Data source: European Social Survey Round 8 (2016-2017), ParlGov.") +
+  scale_x_continuous(breaks = c(2002, 2004, 2006, 2008, 2010, 2012, 2015, 2017)) +
+  scale_y_continuous(breaks = c(0,1,2,3,4,5,6,7,8,9,10),
+                     limits = c(0,6)) +
+  ylab("Trust in parliament") +
+  xlab("Year") +
+  theme_plot +
+  annotate("rect", xmin = 2001, xmax = 2005, ymin = 0, ymax = 6,
+           alpha = .15, fill = "#56B4E9") +
+  annotate("rect", xmin = 2005, xmax = 2007, ymin = 0, ymax = 6,
+           alpha = .15, fill = "#E69F00") +
+  annotate("rect", xmin = 2007, xmax = 2015.5, ymin = 0, ymax = 6,
+           alpha = .15, fill = "#999999") +
+  annotate("rect", xmin = 2015.5, xmax = 2018, ymin = 0, ymax = 6,
+           alpha = .15, fill = "#E69F00")
+
+```
+

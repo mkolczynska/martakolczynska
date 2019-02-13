@@ -164,4 +164,3 @@ The final dataset can be saved to one of the many types of files supported by `r
 ```{r save, eval=FALSE}
 export(merged, "merged.csv")
 ```
-
