@@ -2,7 +2,7 @@
 title: "Political trust among electoral winners and losers in Europe"
 description: "Poland in comparative perspective"
 author: "Marta Kołczyńska"
-date: 2019-02-13T11:24:00
+date: 2019-02-13T11:29:00
 categories: ["R"]
 tags: ["R", "political trust", "political inequality", "cross-national research", "ESS", "ParlGov"]
 output: 
@@ -14,16 +14,14 @@ output:
 
 Voting for a party that ends up losing the election is known to be associated with lower satisfaction with democracy and trust in the parliament (cf. [Martini and Quaranta 2019](https://onlinelibrary.wiley.com/doi/full/10.1111/1475-6765.12284){target="_blank"}). How does Poland compare to other European countries? How has the winner-loser trust gap changed in Poland over time, and how have trust levels among supporters of current and former ruling parties changed in periods when they were not in government? I use data from the [European Social Survey, round 8](https://www.europeansocialsurvey.org/data/){target="_blank"} combined with the [ParlGov dataset](http://www.parlgov.org/){target="_blank"} on electoral results and cabinet composition to answer these questions.
 
-```{r setup, include=FALSE}
+The code used in this post is available [here](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/ess-trust-institutions-electoral-winners-losers.Rmd){target="_blank"}.
+
+```{r packages, include=FALSE}
 library(countrycode) # converts country codes
 library(tidyverse) # for manipulating data
 library(rio) # for reading all kinds of file types
 library(Hmisc) # for calculating weighted variance
 library(spatstat) # for calculating weighted medians
-
-ess8_all <- rio::import("data/ess-trust-inst-elect-winners-all8.csv")
-
-ess_pl <- rio::import("data/ess-trust-inst-elect-winners-pl.csv")
 
 theme_plot <- theme_bw(10) +
   theme(axis.text.y = element_text(size = rel(1)),
@@ -37,6 +35,7 @@ theme_plot <- theme_bw(10) +
 
 
 ```{r recodes, eval=FALSE, include = FALSE}
+### data download and cleaning code (not run)
 
 ### import data on election results and cabinet composition
 cabinet <- rio::import("http://www.parlgov.org/static/data/development-cp1252/view_cabinet.csv", encoding = "UTF-8") %>%
@@ -145,6 +144,13 @@ pl_full_clean <- lapply(pl_full, clean_ess) %>%  # clean the ESS data in the lis
       TRUE ~ -1
       ))
 ```
+
+
+```{r data-import, include=FALSE}
+ess8_all <- rio::import("data/ess-trust-inst-elect-winners-all8.csv")
+ess_pl <- rio::import("data/ess-trust-inst-elect-winners-pl.csv")
+```
+
 
 ### Winner-loser trust gap across countries
 
