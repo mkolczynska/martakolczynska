@@ -224,7 +224,7 @@ ess_pl %>%
                      values=c("#E69F00", "#56B4E9")) +
   ggtitle("Difference in trust in parliament between electoral \nwinners and losers in Poland") +
   labs(caption = "Note: Error bars indicate 95% confidence intervals. Combined weights applied.
-       Data source: European Social Survey Round 8 (2016-2017), ParlGov.") +
+       Data source: European Social Survey Rounds 1-8, ParlGov.") +
   scale_x_continuous(breaks = c(2002, 2004, 2006, 2008, 2010, 2012, 2015, 2017)) +
   scale_y_continuous(breaks = c(0,1,2,3,4,5,6,7,8,9,10),
                      limits = c(0,6)) +
@@ -267,7 +267,7 @@ ess_pl %>%
                      values=c("#999999", "#E69F00", "#56B4E9")) +
   ggtitle("Difference in trust in parliament between supporters of \nthree former ruling parties in Poland") +
   labs(caption = "Note: Error bars indicate 95% confidence intervals. Combined weights applied.
-       Data source: European Social Survey Round 8 (2016-2017), ParlGov.") +
+       Data source: European Social Survey Rounds 1-8, ParlGov.") +
   scale_x_continuous(breaks = c(2002, 2004, 2006, 2008, 2010, 2012, 2015, 2017)) +
   scale_y_continuous(breaks = c(0,1,2,3,4,5,6,7,8,9,10),
                      limits = c(0,6)) +

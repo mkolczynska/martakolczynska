@@ -7,10 +7,26 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Wed, 13 Feb 2019 11:29:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 20 Feb 2019 23:29:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>So you want to harmonize data?</title>
+      <link>/post/harmonization-versus-fugue/</link>
+      <pubDate>Wed, 20 Feb 2019 23:29:00 +0000</pubDate>
+      
+      <guid>/post/harmonization-versus-fugue/</guid>
+      <description>Harmonizing survey data is like writing a fugue.
+So You Want to Write a Fugue?
+Glenn GouldSo you want to write a fugue?
+You’ve got the urge to write a fugue
+You’ve got the nerve to write a fugue
+So go ahead and write a fugue that we can sing
+Pay no heed to what we’ve told you
+Give no mind to what we’ve told you</description>
+    </item>
     
     <item>
       <title>Political trust among electoral winners and losers in Europe</title>
