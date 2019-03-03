@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/codebook-labelled-data/</loc>
+    <lastmod>2019-03-03T03:03:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/harmonization-versus-fugue/</loc>
     <lastmod>2019-02-20T23:29:00+00:00</lastmod>
   </url>
@@ -280,7 +285,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-02-20T23:29:00+00:00</lastmod>
+    <lastmod>2019-03-03T03:03:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -364,13 +369,13 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2019-02-20T23:29:00+00:00</lastmod>
+    <lastmod>2019-03-03T03:03:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2019-02-20T23:29:00+00:00</lastmod>
+    <lastmod>2019-03-03T03:03:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -400,7 +405,7 @@
   
   <url>
     <loc>/tags/survey-data-harmonization/</loc>
-    <lastmod>2019-02-20T23:29:00+00:00</lastmod>
+    <lastmod>2019-03-03T03:03:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -443,6 +448,12 @@
   <url>
     <loc>/tags/tidytext/</loc>
     <lastmod>2018-08-22T09:34:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/tools/</loc>
+    <lastmod>2019-03-03T03:03:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

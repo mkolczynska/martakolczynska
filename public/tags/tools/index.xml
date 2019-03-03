@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tools on Marta Kołczyńska</title>
+    <link>/tags/tools/</link>
+    <description>Recent content in Tools on Marta Kołczyńska</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
+    <lastBuildDate>Sun, 03 Mar 2019 03:03:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Searchable codebook from labelled data in R</title>
+      <link>/post/codebook-labelled-data/</link>
+      <pubDate>Sun, 03 Mar 2019 03:03:00 +0000</pubDate>
+      
+      <guid>/post/codebook-labelled-data/</guid>
+      <description>Working with categorical data, such as from surveys, requires a codebook. After spending some time unsuccessfully looking for a function that would create a nice, searchable codebook from labelled data in R, I decided to write my own.What I want to achieve is a simple table with variable names, labels, and frequencies of labelled values like the one below, to search for specific keywords in the value labels and to see distributions of various variables.</description>
+    </item>
+    
+  </channel>
+</rss>

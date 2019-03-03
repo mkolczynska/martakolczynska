@@ -1,0 +1,109 @@
+---
+title: "Searchable codebook from labelled data in R"
+author: "Marta Kołczyńska"
+date: 2019-03-03T03:03:00
+categories: ["R"]
+tags: ["R", "survey data harmonization", "tools"]
+output: 
+  blogdown::html_page:
+    toc: true
+    toc_depth: 4    
+---
+
+
+
+<p>Working with categorical data, such as from surveys, requires a codebook. After spending some time unsuccessfully looking for a function that would create a nice, searchable codebook from labelled data in R, I decided to write my own.
+What I want to achieve is a simple table with variable names, labels, and frequencies of labelled values like the one below, to search for specific keywords in the value labels and to see distributions of various variables.</p>
+<p><img src="/images/codebook-labelled-data2.png" /></p>
+<p>I’m using the <a href="https://www.europeansocialsurvey.org/" target="_blank">European Social Survey</a> Round 8 data for illustration. The full code is available <a href="https://github.com/mkolczynska/martakolczynska/blob/master/content/post/codebook-labelled-data.Rmd" target="_blank">here</a>.</p>
+<pre class="r"><code>library(tidyverse) # for manipulating data
+library(haven) # for opening SPSS files
+library(labelled) # for using labels
+library(tibble) # for working with tibbles
+library(questionr) # for getting frequencies
+library(rio) # for exporting to different formats; here: XLSX
+
+ess_8 &lt;- read_sav(&quot;C:/ESS8e01.sav&quot;, user_na = TRUE)</code></pre>
+<p>The code has two parts. The first creates a table with variable names and corresponding variable labels. The <code>var_label</code> command creates a list of variable labels, which I convert to a data frame with <code>rbind</code>. <code>rownames_to_column</code> does exactly what the name suggests: it moves row names to a new variable. The final step is to rename the second variable (which has an automatically generated nasty long name that I don’t want to type) to <code>varlabel</code>.</p>
+<pre class="r"><code>var_labels &lt;- data.frame(do.call(rbind, var_label(ess_8))) %&gt;%  
+  rownames_to_column(var = &quot;varname&quot;) %&gt;%
+  rename(varlabel = !!names(.[2]))
+
+head(var_labels)</code></pre>
+<pre><code>##    varname                           varlabel
+## 1     name                   Title of dataset
+## 2 essround                          ESS round
+## 3  edition                            Edition
+## 4 proddate                    Production date
+## 5     idno Respondent&#39;s identification number
+## 6    cntry                            Country</code></pre>
+<p>The second part calculates frequencies for each variable, so that the whole distribution is in a single cell of the resulting table.</p>
+<pre class="r"><code>freqs &lt;- 
+  # creates a list of frequencies for all variables
+  lapply(ess_8, function(x) { return(questionr::freq(x)) }) %&gt;%
+  # keeps those list elements that have fewer than 1000 distinct values
+  keep(function(x) nrow(x) &lt; 1000) %&gt;%
+  # convert list to data frame
+  do.call(rbind, .) %&gt;% 
+  # row names become a new column `varname_value`
+  rownames_to_column(var = &quot;varname_value&quot;) %&gt;%
+  # extract `varname` as the string before the first period
+  mutate(varname = gsub(&quot;(.+?)(\\..*)&quot;, &quot;\\1&quot;, varname_value),
+  # extract `value` as the string after the period, which includes the value and value label
+         value = gsub(&quot;^[^.]*.&quot;,&quot;&quot;,varname_value)) %&gt;%
+  group_by(varname) %&gt;%
+  # save the position of each value within a variable as `npos`
+  mutate(npos = row_number(),
+  # concatenate `value` with frequency `n`
+         value_n = paste(value, n, sep = &quot;: &quot;)) %&gt;%
+  # select three variables
+  select(varname, value_n, npos) %&gt;%
+  # reshape to wide
+  spread(npos, value_n) %&gt;%
+  # replace `NA` with missing strings
+  mutate_at(vars(-varname), list(~ifelse(is.na(.), &quot;&quot;, .))) %&gt;%
+  # concatenate columns with values and frequencies
+  unite(&quot;valfreqs&quot;, c(2:ncol(.)), sep = &quot;\n&quot;) %&gt;%
+  # delete empty rows
+  mutate(valfreqs = sub(&quot;\\s+$&quot;, &quot;&quot;, valfreqs))
+
+head(freqs)</code></pre>
+<pre><code>## # A tibble: 6 x 2
+## # Groups:   varname [6]
+##   varname  valfreqs                                                        
+##   &lt;chr&gt;    &lt;chr&gt;                                                           
+## 1 actrolga &quot;[1] Not at all able: 11886\n[2] A little able: 10968\n[3] Quit~
+## 2 admub    &quot;[1] Group 1: 8858\n[2] Group 2: 8489\n[3] Group 3: 8738\n[4] G~
+## 3 aesfdrk  &quot;[1] Very safe: 11434\n[2] Safe: 17118\n[3] Unsafe: 4946\n[4] V~
+## 4 agea     &quot;[15] 15: 203\n[16] 16: 344\n[17] 17: 413\n[18] 18: 409\n[19] 1~
+## 5 anctry1  &quot;[10000] European: 91\n[11000] West European: 7\n[11010] Austri~
+## 6 anctry2  &quot;[10000] European: 152\n[11000] West European: 20\n[11010] Aust~</code></pre>
+<p>The <code>freqs</code> table is sorted alphabetically by <code>varname</code>, but merging it to <code>var_labels</code> will restore the original variable order in the dataset.</p>
+<pre class="r"><code>full_join(var_labels, freqs, by = &quot;varname&quot;)</code></pre>
+<p>Here is the whole procedure written as a function, with <code>data</code> as the input.</p>
+<pre class="r"><code>create_codebook &lt;- function(data) {
+  
+  var_labels &lt;- data.frame(cbind(names(var_label(data)), 
+                                 do.call(rbind, var_label(data)))) %&gt;%
+    rename(varname = X1, varlabel = X2)
+  
+  freqs &lt;- lapply(data, function(x) { return(questionr::freq(x)) }) %&gt;%
+    keep(function(x) nrow(x) &lt; 1000) %&gt;%
+    do.call(rbind, .) %&gt;% 
+    tibble::rownames_to_column(var = &quot;varname_value&quot;) %&gt;%
+    mutate(varname = gsub(&quot;(.+?)(\\..*)&quot;, &quot;\\1&quot;, varname_value),
+           value = gsub(&quot;^[^.]*.&quot;,&quot;&quot;,varname_value)) %&gt;%
+    group_by(varname) %&gt;%
+    mutate(npos = row_number(),
+           value_n = paste(value, n, sep = &quot;: &quot;)) %&gt;%
+    select(varname, value_n, npos) %&gt;%
+    spread(npos, value_n) %&gt;%
+    mutate_at(vars(-varname), funs(ifelse(is.na(.), &quot;&quot;, .))) %&gt;%
+    unite(&quot;valfreqs&quot;, c(2:ncol(.)), sep = &quot;\n&quot;) %&gt;%
+    mutate(valfreqs = sub(&quot;\\s+$&quot;, &quot;&quot;, valfreqs))
+  
+  full_join(var_labels, freqs, by = &quot;varname&quot;)
+}</code></pre>
+<p>Applying the <code>create_codebook</code> function to the <code>ess_8</code> table and exporting to excel creates the codebook just as I wanted.</p>
+<pre class="r"><code>create_codebook(ess_8) %&gt;%
+  export(&quot;ESS_8_codebook.xlsx&quot;)</code></pre>

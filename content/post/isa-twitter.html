@@ -21,7 +21,7 @@ output:
 </div>
 
 <p>The <a href="https://www.isa-sociology.org/en/conferences/world-congress/toronto-2018/" target="_blank">International Sociological Association 19th World Congress of Sociology in Toronto (15-21 July)</a> has received quite some Twitter coverage. Waiting to board the flight back to Warsaw, I wanted to take a look at these Twitter data and apply the newly acquired skills in text analysis (thanks to the <a href="https://compsocialscience.github.io/summer-institute/2018/helsinki/" target="_blank">Summer Institute for Computational Social Science, SICSS, Partner Site</a> in Tvärminne and Helsinki, Finland).</p>
-<p>A few years ago my colleagues from the Polish Academy of Sciences and I wrote a paper about the inequality in national representation at ISA events (congresses and fora) <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>. Analyses in this post reveals a different type of inequality at ISA conferences.</p>
+<p>A few years ago my colleagues from the Polish Academy of Sciences and I wrote a paper about the inequality in national representation at ISA events (congresses and fora) <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. Analyses in this post reveals a different type of inequality at ISA conferences.</p>
 <div id="getting-data-from-twitter" class="section level3">
 <h3>Getting data from Twitter</h3>
 <p>Tweets are an increasingly popular source of data for social scientists, not least because they can be quickly and conveniently obtained through the Twitter API. There are many excellent tutorials about how to connect to Twitter to download tweets, e.g. on the SICSS <a href="https://compsocialscience.github.io/summer-institute/2018/materials/day2-digital-trace-data/apis/rmarkdown/SICSS_APIs_markdown.html" target="_blank">website</a>.</p>
@@ -34,8 +34,8 @@ library(ggplot2) # for plotting
 library(tidytext) # for tokenizing
 library(lubridate) # dealing with dates</code></pre>
 <p>I downloaded tweets that contained one of the conference hashtags: <code>#isa2018wcs</code> or <code>#isa18wcs</code> (the hashtag is just like any other string to filter tweets). Twitter downloads typically contain tweets from the last ~10 days, and the set of tweets can change from download to download. This is why I saved the downloaded tweets in a .csv file for future use. The code for downloading and saving tweets with the ISA 2018 World Congress of Sociology was as follows:</p>
-<p><code>isa &lt;- search_tweets(&quot;#isa2018wcs OR #isa18wcs&quot;, since = &quot;2018-06-01&quot;, n = 100000, type=&quot;recent&quot;, include_rts=TRUE)</code><br />
-<code>data.table::fwrite(isa, file = &quot;isa_tweets.csv&quot;)</code></p>
+<p><code>isa &lt;- search_tweets("#isa2018wcs OR #isa18wcs", since = "2018-06-01", n = 100000, type="recent", include_rts=TRUE)</code><br />
+<code>data.table::fwrite(isa, file = "isa_tweets.csv")</code></p>
 <pre class="r"><code>isa &lt;- read.csv(&quot;data/isa-twitter.csv&quot;, stringsAsFactors = FALSE) # open Twitter extract
 isa$status_id &lt;- as.character(isa$status_id)
 isa$created_at &lt;- as.POSIXct(strptime(isa$created_at, format = &quot;%Y-%m-%dT%H:%M:%S&quot;)) # convert string to date and time
@@ -63,7 +63,7 @@ isa$created_at &lt;-  with_tz(isa$created_at, &#39;America/New_York&#39;) # set 
 <p>And here are the texts of a few sample tweets:</p>
 <pre class="r"><code>head(isa$text)</code></pre>
 <pre><code>## [1] &quot;We&#39;re proud to publish Shirley Anne Tate&#39;s #book series Critical Mixed Race Studies (first title in the series, Remi Joseph-Salisbury&#39;s \&quot;Black Mixed-Race Men\&quot; out next month). Learn more about the series here: https://t.co/VbuXyDHJg5 or at stand 40 at #isa2018wcs #RC05 @RemiJS90 https://t.co/iOBAivJB2W&quot;
-## [2] &quot;The fabulous @AlaSirriyeh with her wonderful new book â\200\230The Politics of Compassionâ\200\231 @policypress #booktour #isa18wcs https://t.co/Cto3bXF20Q&quot;                                                                                                                                                                  
+## [2] &quot;The fabulous @AlaSirriyeh with her wonderful new book âThe Politics of Compassionâ @policypress #booktour #isa18wcs https://t.co/Cto3bXF20Q&quot;                                                                                                                                                                  
 ## [3] &quot;We&#39;re proud to publish Shirley Anne Tate&#39;s #book series Critical Mixed Race Studies (first title in the series, Remi Joseph-Salisbury&#39;s \&quot;Black Mixed-Race Men\&quot; out next month). Learn more about the series here: https://t.co/VbuXyDHJg5 or at stand 40 at #isa2018wcs #RC05 @RemiJS90 https://t.co/iOBAivJB2W&quot;
 ## [4] &quot;Thanks David Tabara for convening  excellent conversation re. environmental solutions at #isa2018wcs . Thanks for invite to give a pop-up presentation on Sustainable Canada Dialogues  @DialogSustainab . Info on this solution-focused network: https://t.co/liWma5eJu5&quot;                                        
 ## [5] &quot;Brilliant performance by the Red Urban Project  to help close #isa2018wcs https://t.co/hFpuiJqwsM&quot;                                                                                                                                                                                                                
@@ -136,7 +136,7 @@ head(isa_rc, 10)</code></pre>
 ## 8  1.01968e+18 2018-07-18 14:34:17 rc25 rc25
 ## 9  1.02033e+18 2018-07-20 09:34:58 rc22 rc22
 ## 10 1.02005e+18 2018-07-19 14:44:42 rc22 rc22</code></pre>
-<p>Most tweets mention just one research committee, but some refer to two or more, particularly in the case of joint sessions. Some tweets also refer to the same RC with more than one hashtag, e.g. <code>#rc34youth</code> and <code>#rc34toronto</code>. These instances need to be collapsed to count as one.</p>
+<p>Most tweets mention just one research committee, but some refer to two or more, particularly in the case of joint sessions. Some tweets also refer to the same RC with more than one hashtag, e.g. <code>#rc34youth</code> and <code>#rc34toronto</code>. These instances need to be collapsed to count as one.</p>
 <pre class="r"><code>isa_rc &lt;- isa_rc %&gt;% group_by(status_id, created_at, rc) %&gt;% summarise(count = n())</code></pre>
 <p>A simple word cloud reveals the unanimous winner in the RC tweet competition: RC34 Sociology of Youth.</p>
 <pre class="r"><code>wordcloud(isa_rc$rc, min.freq=1, random.color = TRUE, colors= palette(rainbow(20)))</code></pre>
@@ -153,6 +153,6 @@ head(isa_rc, 10)</code></pre>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p><a href="https://www.academia.edu/14504525/Sociologists_everywhere_Country_representation_in_conferences_hosted_by_the_International_Sociological_Association_1990_2012" target="_blank">Joshua K. Dubrow, Marta Kołczyńska, Irina Tomescu-Dubrow, and Kazimierz M. Slomczynski. 2018. “Sociologists everywhere: Country representation in conferences hosted by the International Sociological Association, 1990–2012”. <em>Current Sociology</em> 66(3): 466-489.</a><a href="#fnref1">↩</a></p></li>
+<li id="fn1"><p><a href="https://www.academia.edu/14504525/Sociologists_everywhere_Country_representation_in_conferences_hosted_by_the_International_Sociological_Association_1990_2012" target="_blank">Joshua K. Dubrow, Marta Kołczyńska, Irina Tomescu-Dubrow, and Kazimierz M. Slomczynski. 2018. “Sociologists everywhere: Country representation in conferences hosted by the International Sociological Association, 1990–2012”. <em>Current Sociology</em> 66(3): 466-489.</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
 </ol>
 </div>

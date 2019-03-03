@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.42.2" />
+
+  <title>Searchable codebook from labelled data in R &middot; Marta Kołczyńska</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/foundation.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="/css/circle.css">
+    
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="/"><img src="/images/puzzleblacksmall.png" alt="logo" /></a>
+
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/research/"><i class='fa fa-bar-chart fa-fw'></i>Research</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/contact/"><i class='fa fa-envelope fa-fw'></i>Contact</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/MartaKolcz" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/mkolczynska" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2018. Marta Kołczyńska</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>Searchable codebook from labelled data in R</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>03 Mar 2019, 03:03</time>
+  </div>
+
+  
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="/tags/r">R</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/survey-data-harmonization">survey data harmonization</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/tools">tools</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  <p>Working with categorical data, such as from surveys, requires a codebook. After spending some time unsuccessfully looking for a function that would create a nice, searchable codebook from labelled data in R, I decided to write my own.
+What I want to achieve is a simple table with variable names, labels, and frequencies of labelled values like the one below, to search for specific keywords in the value labels and to see distributions of various variables.</p>
+<p><img src="/images/codebook-labelled-data2.png" /></p>
+<p>I’m using the <a href="https://www.europeansocialsurvey.org/" target="_blank">European Social Survey</a> Round 8 data for illustration. The full code is available <a href="https://github.com/mkolczynska/martakolczynska/blob/master/content/post/codebook-labelled-data.Rmd" target="_blank">here</a>.</p>
+<pre class="r"><code>library(tidyverse) # for manipulating data
+library(haven) # for opening SPSS files
+library(labelled) # for using labels
+library(tibble) # for working with tibbles
+library(questionr) # for getting frequencies
+library(rio) # for exporting to different formats; here: XLSX
+
+ess_8 &lt;- read_sav(&quot;C:/ESS8e01.sav&quot;, user_na = TRUE)</code></pre>
+<p>The code has two parts. The first creates a table with variable names and corresponding variable labels. The <code>var_label</code> command creates a list of variable labels, which I convert to a data frame with <code>rbind</code>. <code>rownames_to_column</code> does exactly what the name suggests: it moves row names to a new variable. The final step is to rename the second variable (which has an automatically generated nasty long name that I don’t want to type) to <code>varlabel</code>.</p>
+<pre class="r"><code>var_labels &lt;- data.frame(do.call(rbind, var_label(ess_8))) %&gt;%  
+  rownames_to_column(var = &quot;varname&quot;) %&gt;%
+  rename(varlabel = !!names(.[2]))
+
+head(var_labels)</code></pre>
+<pre><code>##    varname                           varlabel
+## 1     name                   Title of dataset
+## 2 essround                          ESS round
+## 3  edition                            Edition
+## 4 proddate                    Production date
+## 5     idno Respondent&#39;s identification number
+## 6    cntry                            Country</code></pre>
+<p>The second part calculates frequencies for each variable, so that the whole distribution is in a single cell of the resulting table.</p>
+<pre class="r"><code>freqs &lt;- 
+  # creates a list of frequencies for all variables
+  lapply(ess_8, function(x) { return(questionr::freq(x)) }) %&gt;%
+  # keeps those list elements that have fewer than 1000 distinct values
+  keep(function(x) nrow(x) &lt; 1000) %&gt;%
+  # convert list to data frame
+  do.call(rbind, .) %&gt;% 
+  # row names become a new column `varname_value`
+  rownames_to_column(var = &quot;varname_value&quot;) %&gt;%
+  # extract `varname` as the string before the first period
+  mutate(varname = gsub(&quot;(.+?)(\\..*)&quot;, &quot;\\1&quot;, varname_value),
+  # extract `value` as the string after the period, which includes the value and value label
+         value = gsub(&quot;^[^.]*.&quot;,&quot;&quot;,varname_value)) %&gt;%
+  group_by(varname) %&gt;%
+  # save the position of each value within a variable as `npos`
+  mutate(npos = row_number(),
+  # concatenate `value` with frequency `n`
+         value_n = paste(value, n, sep = &quot;: &quot;)) %&gt;%
+  # select three variables
+  select(varname, value_n, npos) %&gt;%
+  # reshape to wide
+  spread(npos, value_n) %&gt;%
+  # replace `NA` with missing strings
+  mutate_at(vars(-varname), list(~ifelse(is.na(.), &quot;&quot;, .))) %&gt;%
+  # concatenate columns with values and frequencies
+  unite(&quot;valfreqs&quot;, c(2:ncol(.)), sep = &quot;\n&quot;) %&gt;%
+  # delete empty rows
+  mutate(valfreqs = sub(&quot;\\s+$&quot;, &quot;&quot;, valfreqs))
+
+head(freqs)</code></pre>
+<pre><code>## # A tibble: 6 x 2
+## # Groups:   varname [6]
+##   varname  valfreqs                                                        
+##   &lt;chr&gt;    &lt;chr&gt;                                                           
+## 1 actrolga &quot;[1] Not at all able: 11886\n[2] A little able: 10968\n[3] Quit~
+## 2 admub    &quot;[1] Group 1: 8858\n[2] Group 2: 8489\n[3] Group 3: 8738\n[4] G~
+## 3 aesfdrk  &quot;[1] Very safe: 11434\n[2] Safe: 17118\n[3] Unsafe: 4946\n[4] V~
+## 4 agea     &quot;[15] 15: 203\n[16] 16: 344\n[17] 17: 413\n[18] 18: 409\n[19] 1~
+## 5 anctry1  &quot;[10000] European: 91\n[11000] West European: 7\n[11010] Austri~
+## 6 anctry2  &quot;[10000] European: 152\n[11000] West European: 20\n[11010] Aust~</code></pre>
+<p>The <code>freqs</code> table is sorted alphabetically by <code>varname</code>, but merging it to <code>var_labels</code> will restore the original variable order in the dataset.</p>
+<pre class="r"><code>full_join(var_labels, freqs, by = &quot;varname&quot;)</code></pre>
+<p>Here is the whole procedure written as a function, with <code>data</code> as the input.</p>
+<pre class="r"><code>create_codebook &lt;- function(data) {
+  
+  var_labels &lt;- data.frame(cbind(names(var_label(data)), 
+                                 do.call(rbind, var_label(data)))) %&gt;%
+    rename(varname = X1, varlabel = X2)
+  
+  freqs &lt;- lapply(data, function(x) { return(questionr::freq(x)) }) %&gt;%
+    keep(function(x) nrow(x) &lt; 1000) %&gt;%
+    do.call(rbind, .) %&gt;% 
+    tibble::rownames_to_column(var = &quot;varname_value&quot;) %&gt;%
+    mutate(varname = gsub(&quot;(.+?)(\\..*)&quot;, &quot;\\1&quot;, varname_value),
+           value = gsub(&quot;^[^.]*.&quot;,&quot;&quot;,varname_value)) %&gt;%
+    group_by(varname) %&gt;%
+    mutate(npos = row_number(),
+           value_n = paste(value, n, sep = &quot;: &quot;)) %&gt;%
+    select(varname, value_n, npos) %&gt;%
+    spread(npos, value_n) %&gt;%
+    mutate_at(vars(-varname), funs(ifelse(is.na(.), &quot;&quot;, .))) %&gt;%
+    unite(&quot;valfreqs&quot;, c(2:ncol(.)), sep = &quot;\n&quot;) %&gt;%
+    mutate(valfreqs = sub(&quot;\\s+$&quot;, &quot;&quot;, valfreqs))
+  
+  full_join(var_labels, freqs, by = &quot;varname&quot;)
+}</code></pre>
+<p>Applying the <code>create_codebook</code> function to the <code>ess_8</code> table and exporting to excel creates the codebook just as I wanted.</p>
+<pre class="r"><code>create_codebook(ess_8) %&gt;%
+  export(&quot;ESS_8_codebook.xlsx&quot;)</code></pre>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="/post/harmonization-versus-fugue/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="/post/harmonization-versus-fugue/">So you want to harmonize data?</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'https-martakolczynska-netlify-com';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+</div>
+</div>
+<script src="/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-123060748-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

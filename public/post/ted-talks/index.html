@@ -280,8 +280,8 @@ library(stringr) # working with strings
 library(lubridate) # working with dates
 library(ggExtra) # ggplot extras
 
-tedmain &lt;- read.csv(&#39;ted_main.csv&#39;, stringsAsFactors=FALSE)
-tedscripts &lt;- read.csv(&#39;transcripts.csv&#39;, stringsAsFactors=FALSE)
+tedmain &lt;- read.csv(&#39;data/ted_main.csv&#39;, stringsAsFactors=FALSE)
+tedscripts &lt;- read.csv(&#39;data/transcripts.csv&#39;, stringsAsFactors=FALSE)
 ted &lt;- inner_join(tedmain, tedscripts, by = &quot;url&quot;)
 ted$date &lt;- as.POSIXct(ted$film_date,  origin=&quot;1970-01-01&quot;)
 

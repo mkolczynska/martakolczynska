@@ -366,7 +366,7 @@
     <item>
       <title>R</title>
       <link>/tags/r/</link>
-      <pubDate>Wed, 20 Feb 2019 23:29:00 +0000</pubDate>
+      <pubDate>Sun, 03 Mar 2019 03:03:00 +0000</pubDate>
       
       <guid>/tags/r/</guid>
       <description></description>
@@ -411,7 +411,7 @@
     <item>
       <title>Survey Data Harmonization</title>
       <link>/tags/survey-data-harmonization/</link>
-      <pubDate>Wed, 20 Feb 2019 23:29:00 +0000</pubDate>
+      <pubDate>Sun, 03 Mar 2019 03:03:00 +0000</pubDate>
       
       <guid>/tags/survey-data-harmonization/</guid>
       <description></description>
@@ -468,6 +468,15 @@
       <pubDate>Wed, 22 Aug 2018 09:34:00 +0000</pubDate>
       
       <guid>/tags/tidytext/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tools</title>
+      <link>/tags/tools/</link>
+      <pubDate>Sun, 03 Mar 2019 03:03:00 +0000</pubDate>
+      
+      <guid>/tags/tools/</guid>
       <description></description>
     </item>
     

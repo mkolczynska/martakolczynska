@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Wed, 20 Feb 2019 23:29:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 03 Mar 2019 03:03:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Searchable codebook from labelled data in R</title>
+      <link>/post/codebook-labelled-data/</link>
+      <pubDate>Sun, 03 Mar 2019 03:03:00 +0000</pubDate>
+      
+      <guid>/post/codebook-labelled-data/</guid>
+      <description>Working with categorical data, such as from surveys, requires a codebook. After spending some time unsuccessfully looking for a function that would create a nice, searchable codebook from labelled data in R, I decided to write my own.What I want to achieve is a simple table with variable names, labels, and frequencies of labelled values like the one below, to search for specific keywords in the value labels and to see distributions of various variables.</description>
+    </item>
     
     <item>
       <title>So you want to harmonize data?</title>
@@ -18,14 +27,15 @@
       <pubDate>Wed, 20 Feb 2019 23:29:00 +0000</pubDate>
       
       <guid>/post/harmonization-versus-fugue/</guid>
-      <description>Harmonizing survey data is like writing a fugue.
-So You Want to Write a Fugue?
+      <description>So You Want to Write a Fugue?
 Glenn GouldSo you want to write a fugue?
 You’ve got the urge to write a fugue
 You’ve got the nerve to write a fugue
 So go ahead and write a fugue that we can sing
 Pay no heed to what we’ve told you
-Give no mind to what we’ve told you</description>
+Give no mind to what we’ve told you
+Just forget all that we’ve told you
+And the theory that you’ve read</description>
     </item>
     
     <item>
@@ -137,7 +147,7 @@ Individual economic status is a necessary element of almost all sociological ana
       <pubDate>Sun, 02 Sep 2018 10:09:00 +0000</pubDate>
       
       <guid>/post/sdr-age-distributions/</guid>
-      <description>Cross-national survey projects conduct surveys on representative samples of adult populations. How do the distributions of respondents’ age vary across surveys carried out in the same country in different years and different projects?
+      <description>Cross-national survey projects conduct surveys on representative samples of adult populations.How do the distributions of respondents’ age vary across surveys carried out in the same country in different years and different projects?
 Like in a couple of previous posts (here, here and here) I use data from the Survey Data Recycling dataset (SDR) version 1, which includes selected harmonized variables from 22 cross-national survey projects. SDR only includes surveys that claim to have samples representative for adult populations.</description>
     </item>
     

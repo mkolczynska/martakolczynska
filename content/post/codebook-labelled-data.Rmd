@@ -1,0 +1,121 @@
+---
+title: "Searchable codebook from labelled data in R"
+author: "Marta Kołczyńska"
+date: 2019-03-03T03:03:00
+categories: ["R"]
+tags: ["R", "survey data harmonization", "tools"]
+output: 
+  blogdown::html_page:
+    toc: true
+    toc_depth: 4    
+---
+
+Working with categorical data, such as from surveys, requires a codebook. After spending some time unsuccessfully looking for a function that would create a nice, searchable codebook from labelled data in R, I decided to write my own. 
+What I want to achieve is a simple table with variable names, labels, and frequencies of labelled values like the one below, to search for specific keywords in the value labels and to see distributions of various variables. 
+
+![](/images/codebook-labelled-data2.png)
+
+
+I'm using the [European Social Survey](https://www.europeansocialsurvey.org/){target="_blank"} Round 8 data for illustration. The full code is available [here](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/codebook-labelled-data.Rmd){target="_blank"}.
+
+
+```{r setup, warning=FALSE, message=FALSE}
+library(tidyverse) # for manipulating data
+library(haven) # for opening SPSS files
+library(labelled) # for using labels
+library(tibble) # for working with tibbles
+library(questionr) # for getting frequencies
+library(rio) # for exporting to different formats; here: XLSX
+
+ess_8 <- read_sav("C:/ESS8e01.sav", user_na = TRUE)
+```
+
+The code has two parts. The first creates a table with variable names and corresponding variable labels. The `var_label` command creates a list of variable labels, which I convert to a data frame with `rbind`. `rownames_to_column` does exactly what the name suggests: it moves row names to a new variable. The final step is to rename the second variable (which has an automatically generated nasty long name that I don't want to type) to `varlabel`.
+
+
+```{r codebook1, warning=FALSE, message=FALSE}
+
+var_labels <- data.frame(do.call(rbind, var_label(ess_8))) %>%  
+  rownames_to_column(var = "varname") %>%
+  rename(varlabel = !!names(.[2]))
+
+head(var_labels)
+```
+
+The second part calculates frequencies for each variable, so that the whole distribution is in a single cell of the resulting table.
+
+```{r codebook2, warning=FALSE, message=FALSE}
+freqs <- 
+  # creates a list of frequencies for all variables
+  lapply(ess_8, function(x) { return(questionr::freq(x)) }) %>%
+  # keeps those list elements that have fewer than 1000 distinct values
+  keep(function(x) nrow(x) < 1000) %>%
+  # convert list to data frame
+  do.call(rbind, .) %>% 
+  # row names become a new column `varname_value`
+  rownames_to_column(var = "varname_value") %>%
+  # extract `varname` as the string before the first period
+  mutate(varname = gsub("(.+?)(\\..*)", "\\1", varname_value),
+  # extract `value` as the string after the period, which includes the value and value label
+         value = gsub("^[^.]*.","",varname_value)) %>%
+  group_by(varname) %>%
+  # save the position of each value within a variable as `npos`
+  mutate(npos = row_number(),
+  # concatenate `value` with frequency `n`
+         value_n = paste(value, n, sep = ": ")) %>%
+  # select three variables
+  select(varname, value_n, npos) %>%
+  # reshape to wide
+  spread(npos, value_n) %>%
+  # replace `NA` with missing strings
+  mutate_at(vars(-varname), list(~ifelse(is.na(.), "", .))) %>%
+  # concatenate columns with values and frequencies
+  unite("valfreqs", c(2:ncol(.)), sep = "\n") %>%
+  # delete empty rows
+  mutate(valfreqs = sub("\\s+$", "", valfreqs))
+
+head(freqs)
+```
+
+The `freqs` table is sorted alphabetically by `varname`, but merging it to `var_labels` will restore the original variable order in the dataset. 
+
+```{r codebook3, warning=FALSE, eval=FALSE}
+full_join(var_labels, freqs, by = "varname")
+```
+
+Here is the whole procedure written as a function, with `data` as the input.
+
+```{r codebook-function, warning=FALSE, message=FALSE}
+create_codebook <- function(data) {
+  
+  var_labels <- data.frame(cbind(names(var_label(data)), 
+                                 do.call(rbind, var_label(data)))) %>%
+    rename(varname = X1, varlabel = X2)
+  
+  freqs <- lapply(data, function(x) { return(questionr::freq(x)) }) %>%
+    keep(function(x) nrow(x) < 1000) %>%
+    do.call(rbind, .) %>% 
+    tibble::rownames_to_column(var = "varname_value") %>%
+    mutate(varname = gsub("(.+?)(\\..*)", "\\1", varname_value),
+           value = gsub("^[^.]*.","",varname_value)) %>%
+    group_by(varname) %>%
+    mutate(npos = row_number(),
+           value_n = paste(value, n, sep = ": ")) %>%
+    select(varname, value_n, npos) %>%
+    spread(npos, value_n) %>%
+    mutate_at(vars(-varname), funs(ifelse(is.na(.), "", .))) %>%
+    unite("valfreqs", c(2:ncol(.)), sep = "\n") %>%
+    mutate(valfreqs = sub("\\s+$", "", valfreqs))
+  
+  full_join(var_labels, freqs, by = "varname")
+}
+
+```
+
+Applying the `create_codebook` function to the `ess_8` table and exporting to excel creates the codebook just as I wanted.
+
+```{r export, warning = FALSE}
+create_codebook(ess_8) %>%
+  export("ESS_8_codebook.xlsx")
+```
+

@@ -13,7 +13,7 @@ output:
 
 
 ### Introduction
-
+ 
 More and more cross-national survey projects collect new data using better methodologies, *ex ante* harmonization, following higher standards, and covering more and more diverse countries. The abundance of new survey data only increases the problem of backward and parallel compatibility, because new surveys cannot be easily combined with existing survey data or data from different survey projects, which prevents analyses on a global scale.
 
 One solution to this problem is *ex post* survey harmonization, i.e. combining existing data from cross-national surveys and transforming original (source) variables to a common coding scheme. The Survey Data Harmonization project and its successor, the [Survey Data Recycling (SDR) project](https://dataharmonization.org/){target="_blank"}, took on the challenge of *ex post* harmonization of data from 22 international survey projects. The resulting dataset (Master File) contains 2,289,060 records (corresponding to individual respondents) from 142 countries/territories between 1966 and 2013. Harmonized variables include: trust in state institutions (parliament, political parties, justice system, government), political engagement (participation in demonstrations, signing petitions, interest in politics), social trust, and sociodemographics: age, gender, education, rural and metropolitan residence.
@@ -68,7 +68,7 @@ library(countrycode) # switch between country codes
 
 ```
 
-```{r hook output, include=FALSE}
+```{r hook-output, include=FALSE}
 library(knitr)
 hook_output <- knit_hooks$get("output")
 knit_hooks$set(output = function(x, options) {
@@ -94,7 +94,7 @@ knit_hooks$set(output = function(x, options) {
 
 Knowing the repository's DOI, one can get a list of all data and documentation file with the `get_dataset` function[^1].
 
-```{r SDR repo, output.lines=15}
+```{r sdr-repo, output.lines=15}
 get_dataset("doi:10.7910/DVN/VWGF5Q") # lists the files from a Dataverse by its DOI
 ```
 
@@ -103,7 +103,7 @@ I will use the Stata version of the SDR Master File, which has the id `3006244` 
 
 The `get_file` function downloads the data file to R (see [documentation](https://github.com/IQSS/dataverse-client-r){target="_blank"} for details). The data file is pretty large, so this may take a while.
 
-```{r SDR master, warning=FALSE, message=FALSE}
+```{r sdr-master, warning=FALSE, message=FALSE}
 master.raw <- get_file(3006244) # downloading the dataset by its identifier
 tmp <- tempfile(fileext = ".dta")
 writeBin(as.vector(master.raw), tmp)
@@ -138,7 +138,7 @@ The below piece of code does the following:
 7. for each project, calculates the proportion of surveys that contain a given variable (proportion of `TRUE` values),
 8. drops unnecessary variables.
 
-```{r sdr wrangling, warning=FALSE, message=FALSE, results="hide"}
+```{r sdr-wrangling, warning=FALSE, message=FALSE, results="hide"}
 names(master)
 selected_vars <- c("t_survey_name", "t_survey_edition", "t_country_l1u", 
                    "t_country_set", "t_gender", "t_age", "t_edu", "t_school_yrs", 
@@ -160,7 +160,7 @@ master_vars_survey <- master %>%
 
 The result of these operations is a data frame with 22 rows (corresponding to 22 survey projects in SDR v.1). The first column contains project names, and the next 8 columns contain values ranging from 0 to 1, corresponding to the proportion of national surveys in the given project that contain a given variable.
 
-```{r sdr wrangled, warning=FALSE, message=FALSE}
+```{r sdr-wrangled, warning=FALSE, message=FALSE}
 head(master_vars_survey)
 ```
 
@@ -171,7 +171,7 @@ Before plotting these data, it's necessary to do a few more things:
 4. assign column names,  
 5. convert to matrix and transpose (so that variables are in rows and projects in columns).  
 
-```{r sdr vars project, warning=FALSE, message=FALSE}
+```{r sdr-vars-project, warning=FALSE, message=FALSE}
 master_vars_survey <- master_vars_survey[, c(1,2,3,9,4,5,6,7,8)] # change the order of variables
 
 master_vars_survey <- as.data.frame(master_vars_survey) # convert to data frame
@@ -191,7 +191,7 @@ Now the `master_matrix` is ready for plotting. First, I create a color palette f
 
 Next, I set the parameters and draw the heatmap (a colored table, really).
 
-```{r sdr heatmap, warning=FALSE, message=FALSE}
+```{r sdr-heatmap, warning=FALSE, message=FALSE}
 
 appel <- rijksPalette("Karel Appel")
 colfunc <- colorRampPalette(c("white", appel$palette(10)[7]))
@@ -238,7 +238,7 @@ When analyzing, for example, determinants of participation in demonstrations, it
 
 Doing this requires a few modifications to the data preparation code used in the previous example. I also narrow down the selection of variables in `selected_vars_2`.
 
-```{r sdr wrangling 2, warning=FALSE, message=FALSE}
+```{r sdr-wrangling-2, warning=FALSE, message=FALSE}
 selected_vars_2 <- c("t_survey_name", "t_survey_edition", "t_country_l1u", "t_country_set", 
                    "t_gender", "t_age", "t_edu", "t_school_yrs", "t_ruralurb", 
                    "t_tr_parli_11", "t_pr_demonst_fact", "c_pr_demonst_years")
@@ -259,7 +259,7 @@ master_vars_survey_2 <- master %>%
 ```
 After the data are prepared, the remaining steps are the same.
 
-```{r sdr vars survey 2, warning=FALSE, message=FALSE}
+```{r sdr-vars-survey-2, warning=FALSE, message=FALSE}
 master_vars_survey_2 <- as.data.frame(master_vars_survey_2)
 row.names(master_vars_survey_2) <- master_vars_survey_2$t_survey_name
 master_vars_survey_2 <- master_vars_survey_2[,2:ncol(master_vars_survey_2)]
@@ -305,7 +305,7 @@ This second heatmap reveals considerable variation in the design of the "partici
 
 Finally, in order to select the right subset of the SDR Master File, it's necessary to know which surveys have all the variables of interest. Let's assume I'm still interested in analyzing trust in parliament, education, and participation in demonstrations, but this time I only take surveys where questions about participation in demonstrations do not contain any  time specification, i.e., "ever" (`c_pr_demonst_years == 11`). I add `t_case_id` to the selected variables to uniquely identify rows for spreading.
 
-```{r surveys vars, warning=FALSE, message=FALSE}
+```{r surveys-vars, warning=FALSE, message=FALSE}
 
 selected_vars_3 <- c("t_country_set",
                      "t_case_id", "t_survey_name", "t_survey_edition", "t_country_l1u", 
@@ -329,7 +329,7 @@ nrow(surveys_with_vars)
 
 The result is a data frame with rows corresponding to national surveys and four variables that uniquely identify a national survey: `t_survey_name`, `t_survey_edition`, `t_country_l1u`, `t_country_set`. The first six rows look like this:
 
-```{r surveys head, warning=FALSE, message=FALSE}
+```{r surveys-head, warning=FALSE, message=FALSE}
 kable(surveys_with_vars[1:6,], align=c("c", "c", "c", "c")) %>%
   kable_styling(full_width = F, position = "left") %>%
   column_spec(1:4, width = "10em")
@@ -338,7 +338,7 @@ kable(surveys_with_vars[1:6,], align=c("c", "c", "c", "c")) %>%
 
 The 557 selected national surveys come from 7 survey projects as listed below.
 
-```{r Projects with vars, warning=FALSE, message=FALSE}
+```{r projects-vars, warning=FALSE, message=FALSE}
 surveys_with_vars %>% group_by(t_survey_name) %>% count() %>% 
   kable(., col.names = c("Project", "N surveys"), align=c("c", "c")) %>%
   kable_styling(full_width = F, position = "left") %>%
@@ -350,7 +350,7 @@ surveys_with_vars %>% group_by(t_survey_name) %>% count() %>%
 
 Knowing the key variables identifying national surveys with all the variables of interest (stored in `surveys_with_vars`), an `inner_join` will generate the appropriate subset of the Master File. The subset contains data from 557 national surveys from 7 survey projects, carried out in 111 countries/territories between 1981 and 2010, with a total of 702707 respondents. Further analyses can be performed on this subset only.
 
-```{r master subset, warning=FALSE, message=FALSE}
+```{r master-subset, warning=FALSE, message=FALSE}
 master_select <- inner_join(master, surveys_with_vars, 
                             by= c("t_survey_name", "t_survey_edition", 
                                   "t_country_l1u", "t_country_set"))
@@ -377,7 +377,7 @@ The last thing I will do is to plot the country coverage of the Master File subs
 There are a few ways of doing this, one of which uses the `rworldmap` package. A small fix is necessary to deal with Kosovo, which has no ISO2 code assigned in the `rworldmap` data, but does have an ISO3 code (KOS). The SDR data use ISO2 codes, so it's necessary to convert them to ISO3 (with just one line of code thanks to the `countrycode` package!).
 
 
-```{r subset map, warning=FALSE, message=FALSE, eval = FALSE}
+```{r subset-map, warning=FALSE, message=FALSE, eval = FALSE}
 # data frame with unique country codes
 countries <- data.frame(iso2 = unique(substr(surveys_with_vars$t_country_l1u, 1, 2)), 
   stringsAsFactors = FALSE) %>% mutate(n = 1)
@@ -397,9 +397,9 @@ ggplot(merge, aes(fill=factor(n))) +
                       values = "deepskyblue4") +
   theme(legend.position = "none") 
 ```
-![](subset-map.png)
+![](/images/subset-map.png)
 
-![](tbc.png)
+![](/images/tbc.png)
 
 
 [^1]: In order to show only a snippet of the long output I used a custom output hook function with `knitr` found on [StackOverflow](https://stackoverflow.com/questions/23114654/knitr-output-hook-with-an-output-lines-option-that-works-like-echo-26/23147563){target="_blank"}.

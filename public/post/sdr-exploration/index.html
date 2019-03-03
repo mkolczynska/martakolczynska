@@ -382,9 +382,11 @@
 </tr>
 <tr class="odd">
 <td>*Selected waves or samples.</td>
+<td></td>
 </tr>
 <tr class="even">
 <td><em>Note: Data as of Q2 2014.</em></td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -401,13 +403,13 @@ library(knitr) # to create nice tables
 library(kableExtra) # to customize tables (kables)
 library(sf) # to encode spatial vector data for maps
 library(countrycode) # switch between country codes</code></pre>
-<p>Knowing the repository’s DOI, one can get a list of all data and documentation file with the <code>get_dataset</code> function<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</p>
+<p>Knowing the repository’s DOI, one can get a list of all data and documentation file with the <code>get_dataset</code> function<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.</p>
 <pre class="r"><code>get_dataset(&quot;doi:10.7910/DVN/VWGF5Q&quot;) # lists the files from a Dataverse by its DOI</code></pre>
 <pre><code>## Dataset (140655): 
 ## Version: 1.1, RELEASED
 ## Release Date: 2018-08-22T14:31:37Z
 ## License: CC0
-## 20 Files:
+## 21 Files:
 ##                                                  label version      id
 ## 1                     Merge_Files_to_Master_Box_1_0.do       2 3006242
 ## 2                    Merge_Files_to_Master_Box_1_0.sps       2 3006243
@@ -419,7 +421,8 @@ library(countrycode) # switch between country codes</code></pre>
 ## 8          SDR_Master_File_Variable_Report_AGE_1_0.tab       2 3006221
 ## 9          SDR_Master_File_Variable_Report_EDU_1_0.tab       2 3006222
 ...</code></pre>
-<p>Among the files in the SDR Master Box there is the Master File with harmonized individual-level survey variables.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> I will use the Stata version of the SDR Master File, which has the id <code>3006244</code> (the Master File is also available in SPSS format, with the id <code>3006271</code>).</p>
+<p>Among the files in the SDR Master Box there is the Master File with harmonized individual-level survey variables.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
+I will use the Stata version of the SDR Master File, which has the id <code>3006244</code> (the Master File is also available in SPSS format, with the id <code>3006271</code>).</p>
 <p>The <code>get_file</code> function downloads the data file to R (see <a href="https://github.com/IQSS/dataverse-client-r" target="_blank">documentation</a> for details). The data file is pretty large, so this may take a while.</p>
 <pre class="r"><code>master.raw &lt;- get_file(3006244) # downloading the dataset by its identifier
 tmp &lt;- tempfile(fileext = &quot;.dta&quot;)
@@ -429,7 +432,7 @@ master &lt;- haven::read_dta(tmp) # creating a data frame from the temp file</co
 <div id="exploring-sdr-availability-of-variables-by-project" class="section level3">
 <h3>Exploring SDR: availability of variables by project</h3>
 <p>The SDR dataset contains data from 22 projects identified by the variable <code>t_survey_name</code>. Each project has one or more waves (<code>t_survey_edition</code>), each with many national samples identified as a combination of <code>t_survey_name</code>, <code>t_survey_edition</code>, <code>t_country_l1u</code>, <code>t_country_set</code>, where <code>t_country_set</code> is used to distinguish national samples carried out in the same project wave (a very rare situation).</p>
-<p>The first step of working with the SDR data is to check how many projects have variables necessary for a given analysis. Let’s say I’m interested in analyzing determinants of participation in demonstrations, and for an exploratory analysis I want to take a look at all relevant variables<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>:<br />
+<p>The first step of working with the SDR data is to check how many projects have variables necessary for a given analysis. Let’s say I’m interested in analyzing determinants of participation in demonstrations, and for an exploratory analysis I want to take a look at all relevant variables<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>:<br />
 * participation in demonstrations (<code>t_pr_demonst_fact</code>),<br />
 * trust in parliament (<code>t_tr_parli_11</code>),<br />
 * social trust (<code>t_tr_personal</code>),<br />
@@ -522,7 +525,7 @@ mtext(attributes(master_matrix)$dimnames[[2]],
       adj = 0, padj = 0, las=2)
 mtext(attributes(master_matrix)$dimnames[[1]], 
       at=1:nrow(master_matrix), side = 2, las = 1, adj = 1.02)</code></pre>
-<p><img src="/post/sdr-exploration_files/figure-html/sdr%20heatmap-1.png" width="672" /></p>
+<p><img src="/post/sdr-exploration_files/figure-html/sdr-heatmap-1.png" width="672" /></p>
 <p>The chart shows that gender, age, and education (measured either with completed levels or schooling years) are available across projects, with only few exceptions - too few to be visible on the heatmap. The rural residence indicator is present in at least some surveys in all projects.</p>
 <p>The availability of other variables is mixed. Trust in parliament is missing in ISJP (selected waves), PA2, PA8NS, and PPE7N. Social trust is additionally missing in ASES, CDCEE, CNEP, and EB (selected waves). The question about participation in demonstrations is asked in at least some surveys in all projects except for CB, CDCEE, and NBB.</p>
 <p>As the next section shows, this table conceals some important heterogeneity with regard to the participation in demonstration questions.</p>
@@ -587,7 +590,7 @@ mtext(attributes(master_matrix_2)$dimnames[[2]],
       adj = 0, padj = 0, las=2, cex = 1.2)
 mtext(attributes(master_matrix_2)$dimnames[[1]], 
       at=1:nrow(master_matrix_2), side = 2, las = 1, adj = 1.02, cex = 1.2)</code></pre>
-<p><img src="/post/sdr-exploration_files/figure-html/sdr%20vars%20survey%202-1.png" width="672" /></p>
+<p><img src="/post/sdr-exploration_files/figure-html/sdr-vars-survey-2-1.png" width="672" /></p>
 <p>This second heatmap reveals considerable variation in the design of the “participation in demonstrations” questions across survey projects. Although almost all projects contain some variant of this question, in most projects it’s either the “last year” or “ever” variant. Other versions are rare and available in a single project or in only few projects.</p>
 </div>
 <div id="identifying-surveys-containing-selected-variables" class="section level3">
@@ -815,7 +818,7 @@ master_select %&gt;%
         align=c(&quot;c&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;)) %&gt;%
   kable_styling(position = &quot;left&quot;) %&gt;%
   column_spec(1:6, width = &quot;7em&quot;)</code></pre>
-<table class="table" style>
+<table class="table" style="">
 <thead>
 <tr>
 <th style="text-align:center;">
@@ -884,21 +887,15 @@ ggplot(merge, aes(fill=factor(n))) +
   scale_fill_manual(na.value = &quot;transparent&quot;, 
                       values = &quot;deepskyblue4&quot;) +
   theme(legend.position = &quot;none&quot;) </code></pre>
-<div class="figure">
-<img src="subset-map.png" />
-
-</div>
-<div class="figure">
-<img src="tbc.png" />
-
-</div>
+<p><img src="/images/subset-map.png" /></p>
+<p><img src="/images/tbc.png" /></p>
 </div>
 <div class="footnotes">
 <hr />
 <ol>
-<li id="fn1"><p>In order to show only a snippet of the long output I used a custom output hook function with <code>knitr</code> found on <a href="https://stackoverflow.com/questions/23114654/knitr-output-hook-with-an-output-lines-option-that-works-like-echo-26/23147563" target="_blank">StackOverflow</a>.<a href="#fnref1">↩</a></p></li>
-<li id="fn2"><p>Other data files contain variables measured at different levels: <code>SDR_Plug_Country_Year_1_0</code> has country-year-level variables like GDP <em>per capita</em> or measures of democracy; <code>SDR_Plug_Survey_1_0</code> has quality indicators and methodological variables at the level of the national survey; <code>SDR_Plug_Wave_1_0</code> has quality indicators for project waves, and <code>SDR_Plug_Country_1_0</code> has country and continent codes.<a href="#fnref2">↩</a></p></li>
-<li id="fn3"><p>Note that some variables are available in different versions, i.e., one version of trust in state institutions has been rescaled to 0-10, another to 0-1, and the third version records the relative position in the sample distribution. For more information on the different variants of harmonized variables see the <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q" target="_blank">SDR documentation on Dataverse</a>.<a href="#fnref3">↩</a></p></li>
+<li id="fn1"><p>In order to show only a snippet of the long output I used a custom output hook function with <code>knitr</code> found on <a href="https://stackoverflow.com/questions/23114654/knitr-output-hook-with-an-output-lines-option-that-works-like-echo-26/23147563" target="_blank">StackOverflow</a>.<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>Other data files contain variables measured at different levels: <code>SDR_Plug_Country_Year_1_0</code> has country-year-level variables like GDP <em>per capita</em> or measures of democracy; <code>SDR_Plug_Survey_1_0</code> has quality indicators and methodological variables at the level of the national survey; <code>SDR_Plug_Wave_1_0</code> has quality indicators for project waves, and <code>SDR_Plug_Country_1_0</code> has country and continent codes.<a href="#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>Note that some variables are available in different versions, i.e., one version of trust in state institutions has been rescaled to 0-10, another to 0-1, and the third version records the relative position in the sample distribution. For more information on the different variants of harmonized variables see the <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q" target="_blank">SDR documentation on Dataverse</a>.<a href="#fnref3" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 
