@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Tue, 09 Apr 2019 19:41:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 09 Apr 2019 13:41:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,7 +15,7 @@
     <item>
       <title>Do-It-Yourself Harmonization: Exploring trust items in three European survey projects</title>
       <link>/post/harmonization-europe-trust/</link>
-      <pubDate>Tue, 09 Apr 2019 19:41:00 +0000</pubDate>
+      <pubDate>Tue, 09 Apr 2019 13:41:00 +0000</pubDate>
       
       <guid>/post/harmonization-europe-trust/</guid>
       <description>IntroductionIllustration: Trust in institutionsStep 1: Preparation and coding of technical variablesStep 2: Selection of source variables for harmonizationStep 3: Mapping source values to target valuesStep 4: HarmonizationResults: Availability of trust itemsComparability of sample aggregatesAppendices: Code examplesAppendix 1: Data preparationAppendix 2: Codebook from labelled data in RAppendix 3: Values crosswalkAppendix 4: HarmonizationIntroductionEx-post (or retrospective) data harmonization refers to procedures applied to already collected data to improve the comparability and inferential equivalence of measures collected by different studies.</description>
@@ -214,17 +214,6 @@ The SDR project will develop a website for browsing, subsetting, downloading, an
       
       <guid>/post/isa-twitter/</guid>
       <description>Getting data from TwitterTweets over timeText analysisTweets by ISA Resesarch CommitteeThe International Sociological Association 19th World Congress of Sociology in Toronto (15-21 July) has received quite some Twitter coverage. Waiting to board the flight back to Warsaw, I wanted to take a look at these Twitter data and apply the newly acquired skills in text analysis (thanks to the Summer Institute for Computational Social Science, SICSS, Partner Site in Tvärminne and Helsinki, Finland).</description>
-    </item>
-    
-    <item>
-      <title>Late start</title>
-      <link>/post/first-post/</link>
-      <pubDate>Mon, 23 Jul 2018 13:19:58 +0000</pubDate>
-      
-      <guid>/post/first-post/</guid>
-      <description>This blog is going to be mostly about my adventures with R, primarily using survey data, and usually somewhat related to my social science interests; for the fun of it, to share code and hopefully get feedback.
-How it all started General law of academia: The capacity for generating ideas is greater than the capacity of developing ideas into papers.
-So why write a blog and not keep a diary or a plain text file sitting safely on your hard drive, kochanie?</description>
     </item>
     
   </channel>
