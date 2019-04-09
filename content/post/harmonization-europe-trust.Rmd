@@ -20,6 +20,8 @@ Reproducible recoding can be in form of code in some programming language, where
 
 Figure \@ref(fig:schema) presents the data processing schema of the whole harmonization process. At the start (Step 1) there is a survey data file with cases (corresponding to respondents) in rows, and variables (corresponding to respondent characteristics) in columns. The survey data files' metadata describing variables are used to construct the codebook (Step 2a), in which each row corresponds to a variable, and columns contain the original name of the variable in the survey data file as well as variable labels and value frequencies. Selected source variables corresponding to the concepts of interest are tagged with target variable names in a new column (Step 2b). Next, for the selected source variables a crosswalk is created, where for each value of each source variable there is a separate row. Assigning target variable values (Step 3) creates a mapping schema. This mapping schema is used in recoding of source to target variables, where a vector of source values is mapped onto a vector of target variables.
 
+The full code is available [here](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/harmonization-europe=trust.Rmd){target="_blank"}.
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(cache = FALSE)
 # Use chache = TRUE if you want to speed up compilation
