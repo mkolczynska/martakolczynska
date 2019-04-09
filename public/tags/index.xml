@@ -67,6 +67,15 @@
     </item>
     
     <item>
+      <title>Crosswalk</title>
+      <link>/tags/crosswalk/</link>
+      <pubDate>Tue, 09 Apr 2019 19:41:00 +0000</pubDate>
+      
+      <guid>/tags/crosswalk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Data Quality</title>
       <link>/tags/data-quality/</link>
       <pubDate>Sat, 29 Sep 2018 10:06:00 +0000</pubDate>
@@ -99,6 +108,15 @@
       <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
       
       <guid>/tags/democracy-barometer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Diy</title>
+      <link>/tags/diy/</link>
+      <pubDate>Tue, 09 Apr 2019 19:41:00 +0000</pubDate>
+      
+      <guid>/tags/diy/</guid>
       <description></description>
     </item>
     
@@ -366,9 +384,18 @@
     <item>
       <title>R</title>
       <link>/tags/r/</link>
-      <pubDate>Sun, 03 Mar 2019 03:03:00 +0000</pubDate>
+      <pubDate>Tue, 09 Apr 2019 19:41:00 +0000</pubDate>
       
       <guid>/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Reproducibility</title>
+      <link>/tags/reproducibility/</link>
+      <pubDate>Tue, 09 Apr 2019 19:41:00 +0000</pubDate>
+      
+      <guid>/tags/reproducibility/</guid>
       <description></description>
     </item>
     
@@ -411,7 +438,7 @@
     <item>
       <title>Survey Data Harmonization</title>
       <link>/tags/survey-data-harmonization/</link>
-      <pubDate>Sun, 03 Mar 2019 03:03:00 +0000</pubDate>
+      <pubDate>Tue, 09 Apr 2019 19:41:00 +0000</pubDate>
       
       <guid>/tags/survey-data-harmonization/</guid>
       <description></description>
@@ -474,7 +501,7 @@
     <item>
       <title>Tools</title>
       <link>/tags/tools/</link>
-      <pubDate>Sun, 03 Mar 2019 03:03:00 +0000</pubDate>
+      <pubDate>Tue, 09 Apr 2019 19:41:00 +0000</pubDate>
       
       <guid>/tags/tools/</guid>
       <description></description>
