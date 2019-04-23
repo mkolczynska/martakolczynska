@@ -16,7 +16,7 @@ There is no integrated codebook indicating the availability of variables in diff
 
 One way to make life easier is to extract a codebook from the data, browse it, and go on to investigate in more details only the rounds that seem to have the right variables. 
 
-[Here it is](){target="_blank"}.
+[**Here it is**](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/data/issp_codebook_1985_2017.xlsx){target="_blank"}.
 
 The codebook covers ISSP rounds from 1985 *Role of Government I* up to the first release of the 2017 module *Social Relations and Social Networks III*, the most recent file versions as of April 2019.
   
