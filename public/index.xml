@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Tue, 09 Apr 2019 13:41:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 23 Apr 2019 03:03:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Codebook from ISSP waves 1985-2017</title>
+      <link>/post/issp-codebook/</link>
+      <pubDate>Tue, 23 Apr 2019 03:03:00 +0000</pubDate>
+      
+      <guid>/post/issp-codebook/</guid>
+      <description>The International Social Survey Programme offers a wealth of data, with thematic modules repeated around every 10 years, and a solid and relatively stable block of socio-demographics. The data can be downloaded from the GESIS data archive either in separate files per year, or with data bundled by topic (e.g., the Social Inequality dataset contains data from rounds 1987, 1992, 1999, and 2009). With some scripting skills it is possible to automate the download of all ISSP data files.</description>
+    </item>
     
     <item>
       <title>Do-It-Yourself Harmonization: Exploring trust items in three European survey projects</title>
