@@ -9,8 +9,8 @@ output:
     toc: true
     toc_depth: 4
 ---
-  
-The [International Social Survey Programme](http://www.issp.org){target="_blank"} offers a wealth of data, with thematic modules repeated around every 10 years, and a solid and relatively stable block of socio-demographics. The data can be downloaded from the [GESIS data archive](https://www.gesis.org/issp/home/){target="_blank"} either in separate files per year, or with data bundled by topic (e.g., the Social Inequality dataset contains data from rounds 1987, 1992, 1999, and 2009). With some scripting skills it is possible to automate the download of all ISSP data files.
+
+The [International Social Survey Programme](http://www.issp.org){target="_blank"} offers a wealth of data, with thematic modules repeated around every 10 years, and a solid and relatively stable block of socio-demographics. The data can be downloaded from the [GESIS data archive](https://www.gesis.org/issp/home/){target="_blank"} either in separate files per year, or with data bundled by topic (e.g., the Social Inequality dataset contains data from rounds 1987, 1992, 1999, and 2009).
 
 There is no integrated codebook indicating the availability of variables in different rounds, so someone interested in longitudinal analyses would need to download all files, open them and look for the variables of interest. Like almost every long-term multi-wave survey programme, ISSP has gone through different coding and variable naming conventions, which would make the task very time-consuming.
 
@@ -18,7 +18,7 @@ One way to make life easier is to extract a codebook from the data, browse it, a
 
 [**Here it is**](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/data/issp_codebook_1985_2017.xlsx){target="_blank"}.
 
-The codebook covers ISSP rounds from 1985 *Role of Government I* up to the first release of the 2017 module *Social Relations and Social Networks III*, the most recent file versions as of April 2019.
+The codebook covers ISSP rounds from 1985 *Role of Government I* up to the first release of the 2017 module *Social Relations and Social Networks III*, the most recent file versions as of April 2019. The single wave datasets used here were downloaded by Przemek Powałko.
   
 The codebook function is described in more detail [in this post](https://martakolczynska.com/post/codebook-labelled-data/){target="_blank"}.
 
@@ -79,7 +79,7 @@ file_names <- read.csv(paste(path, "/issp-file-names.csv", sep = ""))
 issp_all_codebooks <- lapply(issp_all, create_codebook_issp)
 issp_all_codebooks_df <- do.call(rbind, issp_all_codebooks) %>%
   left_join(file_names) %>%
-  select(file_name, t_table_name, everything())
+  select(file_name, table_name, everything())
 export(issp_all_codebooks_df, "codebook_issp_1985_2017.xlsx")
 ```
 
