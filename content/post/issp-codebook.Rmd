@@ -10,7 +10,7 @@ output:
     toc_depth: 4
 ---
 
-The [International Social Survey Programme](http://www.issp.org){target="_blank"} offers a wealth of data, with thematic modules repeated around every 10 years, and a solid and relatively stable block of socio-demographics. The data can be downloaded from the [GESIS data archive](https://www.gesis.org/issp/home/){target="_blank"} either in separate files per year, or with data bundled by topic (e.g., the Social Inequality dataset contains data from rounds 1987, 1992, 1999, and 2009).
+The [International Social Survey Programme](http://www.issp.org){target="_blank"} offers a wealth of data, with thematic modules repeated around every 10 years, and a solid and relatively stable block of socio-demographics. The data can be downloaded from the [GESIS data archive](https://www.gesis.org/issp/home/){target="_blank"} either in separate files per year or with data bundled by topic (e.g., the Social Inequality dataset contains data from rounds 1987, 1992, 1999, and 2009).
 
 There is no integrated codebook indicating the availability of variables in different rounds, so someone interested in longitudinal analyses would need to download all files, open them and look for the variables of interest. Like almost every long-term multi-wave survey programme, ISSP has gone through different coding and variable naming conventions, which would make the task very time-consuming.
 
@@ -18,7 +18,7 @@ One way to make life easier is to extract a codebook from the data, browse it, a
 
 [**Here it is**](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/data/issp_codebook_1985_2017.xlsx){target="_blank"}.
 
-The codebook covers ISSP rounds from 1985 *Role of Government I* up to the first release of the 2017 module *Social Relations and Social Networks III*, the most recent file versions as of April 2019. The single wave datasets used here were downloaded by Przemek Powałko.
+The codebook covers ISSP rounds from 1985 *Role of Government I* up to the first release of the 2017 module *Social Relations and Social Networks III*, the most recent file versions as of April 2019. The single wave datasets used here were downloaded by Przemek Powałko on January 2018, with the two most recent added in March 2019.
   
 The codebook function is described in more detail [in this post](https://martakolczynska.com/post/codebook-labelled-data/){target="_blank"}.
 
