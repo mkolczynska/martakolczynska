@@ -1,0 +1,198 @@
+---
+title: "Toxicity of comments to votes in Request for Adminship on English Wikipedia"
+subtitle: "Testing the 'peRspective' package"
+author: "Marta Kołczyńska"
+date: 2019-06-17T23:49:00
+categories: ["R"]
+tags: ["R", "toxicity", "Wikipedia", "peRspective", "API", "RfA"]
+output: 
+  blogdown::html_page:
+    toc: true
+    toc_depth: 4
+---
+
+*This post was written during a research visit at the Department of Computer Science at Aalto University, Finland, supported by the Helsinki Institute for Information Technology.*
+
+[Perspective](https://www.perspectiveapi.com/){target="_blank"} is an API that uses machine learning models to predict the impact of a comment on the conversation. One of the models predicts the extent to which the comment might be perceived as toxic. A toxic comment is defined as "a rude, disrespectful, or unreasonable comment that is likely to make you leave a discussion." The documentation of the Perspective API is available [here](https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md){target="_blank"}. The brand new (at the time of writing) [`peRspective` package](https://github.com/favstats/peRspective){target="_blank"} by [Fabio Votta](http://www.favstats.eu/){target="_blank"} makes it easy to access the Perspective API from R.
+
+In this post I use the Perspective API to assess the toxicity of voters' comments that accompany votes in Requests for Adminship (RfA) on English Wikipedia. [According to Wikipedia itself](https://en.wikipedia.org/wiki/Wikipedia:Requests_for_adminship){target="_blank"}, "[R]equests for adminship (RfA) is the process by which the Wikipedia community decides who will become administrators (also known as admins or sysops), who are users with access to additional technical features that aid in maintenance." Voting takes a week and any Wikipedia editor can cast a supporting, neutral, or opposing vote. Votes are accompanied with textual comments, which are the object of this analysis.
+
+The code used in this post is available [here](https://github.com/mkolczynska/martakolczynska/blob/master/content/post/wikipedia-rfa-toxicity-perspective.Rmd){target="_blank"}.
+
+
+```{r setup, warning=FALSE, message=FALSE, echo = FALSE}
+### loading packages
+library(readr) # for reading CSV
+library(peRspective) # for accessing the Perspective API
+library(wesanderson) # colors
+library(tidyverse) # for manipulating data
+library(janitor) # for cleaning variable names
+library(knitr) # for displaying tables
+library(kableExtra) # for formatting tables
+library(lubridate)  # for dealing with dates
+
+# read in data
+data <- read_csv("data/wikipedia-rfa-toxicity.zip")
+```
+
+
+```{r data-code, warning=FALSE, message=FALSE, echo = FALSE, eval = FALSE}
+# Formatting data from SNAP: http://snap.stanford.edu/data/wiki-RfA.html
+
+rfa <- 
+  # read in data file
+  read.delim("wiki-RfA.txt", 
+                  stringsAsFactors = FALSE,
+                  header = FALSE) %>%
+  # separate variable names and values
+  mutate(var = sub("(:*)[:].*", "\\1", V1),
+         value = sub("[A-Z]{3}[:]", "\\1", V1),
+         var = ifelse(var == "TXT:", "TXT", var),
+         group = rep(1:89284, each=7)) %>%
+  select(-V1) %>% 
+  # reshape to wide
+  spread(var, value) %>%
+  # convert selected variables to numeric
+  mutate_at(vars(RES, VOT, YEA), as.numeric) %>%
+  mutate(textid = as.character(row_number())) %>%
+  # split DAT into date and time
+  separate(DAT, c("time", "date"), "\\, ") %>%
+  # format date and date
+  mutate(date = dmy(date)) %>%
+  group_by(TGT, YEA, RES) %>%
+  arrange(TGT, YEA, RES, date, time) %>%
+  # create RfA starting dates (min_date) that serve as RfA IDs
+  mutate(is7 = (date - lag(date)) <= 7,
+         start = is.na(is7),
+         new = is7 == FALSE | start == TRUE,
+         vote_start = ifelse(new == TRUE, date, NA)) %>%
+  fill(vote_start, .direction = "down") %>%
+  ungroup() %>%
+  clean_names()
+
+# Warning: there are about 85k comments that need evaluating by the 
+# Perspective API one by one. The process may take about 24 hours.
+
+toxic <- rfa %>%
+  # filter out empty comments
+  filter(!is.na(txt), txt != "") %>%
+  ungroup() %>%
+  select(textid, txt) %>%
+  mutate(textid = as.character(textid),
+         # clean out markup
+         txt = gsub("<[^>]+>", "",txt),
+         txt = gsub("'''[^''']+'''", "",txt),
+         txt = gsub('\\[\\[.*?\\]\\]', '', txt),
+         txt = gsub('\\{\\{.*?\\}\\}', '', txt)) %>%
+  # feed to Perspective API
+  prsp_stream(text = txt,
+              text_id = textid,
+              score_model = c("TOXICITY", "SEVERE_TOXICITY"),
+              verbose = T,
+              safe_output = T)
+
+```
+
+Data come from the [*Wikipedia Requests for Adminship (with text)* dataset](http://snap.stanford.edu/data/wiki-RfA.html){target="_blank"} available from the [Stanford Network Analysis Project](http://snap.stanford.edu/index.html){target="_blank"}. The dataset includes votes and comments in RfAs between mid-2003 and mid-2013. Below is an extract of the data with the year of the RfA, the source of the vote (the voter) and the target of the vote (the admin candidate), as well as the vote character (-1 for oppose, 1 for support, and 0 for neutral) and the text of the comment.
+
+```{r data-snippet, warning=FALSE, message=FALSE, echo = FALSE}
+data %>%
+  filter(yea > 2003, yea < 2013, nchar(txt) < 100) %>%
+  select(yea, src, tgt, vot, txt) %>%
+  head(5) %>%
+  kable(align = c("c", "c", "c", "c", "l")) %>%
+  column_spec(., 1:4, width = "8em") %>%
+  column_spec(., 5, width = "60em")
+```
+
+In the period covered by the data the number of RfAs has indeed declined substantially, as shown below (the data covers only parts of 2003 and 2013, so they are excluded). Both the number of successfull and unsuccessfull RfAs has been declining, but while in the early years more RfAs concluded with a nomination than rejection, the later trend is reversed, and more RfAs are rejected than approved.
+
+```{r rfa-number-res, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 6, fig.height = 3}
+data %>%
+  filter(yea > 2003, yea < 2013) %>%
+  count(yea, tgt, res, vote_start) %>%
+  count(yea, res) %>%
+  ggplot(., aes(x = yea, y = n, col = factor(res))) +
+  geom_line(size = 1) +
+  scale_x_continuous(breaks = c(2004:2012)) +
+  ylab("Number of Requests for Adminship") +
+  xlab("") +
+  ggtitle("Number of Requests for Adminship, 2004-2012") +
+  expand_limits(y = 0) +
+  scale_color_manual(name = "election result",
+                     values = rev(wes_palette("Royal1")[1:2]),
+                     breaks = c(1, -1),
+                     labels = c("approved", "rejected")) +
+  theme_bw() +
+  theme(panel.grid.minor.x = element_blank())
+```
+
+In the English Wikipedia, RfA results are decided by a bureaucrat who considers all the votes and comments and determines whether there is consensus that adminship should be granted. Wikipedia emphasizes that the RfA process involves discussion and not a simple vote count. In practice, successful RfAs are those that receive a substantial majority of supporting votes of at least 75% of supporting and opposing votes, as shown in the figure below.
+
+
+```{r rfa-prop-positive, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 7, fig.height = 5}
+data %>%
+  filter(vot != 0, yea > 2003, yea < 2013) %>%
+  group_by(tgt, yea, vote_start, res, vot) %>%
+  summarise(countn = n()) %>%
+  group_by(tgt, yea, vote_start, res) %>%
+  mutate(prop = countn / sum(countn)) %>%
+  filter(vot == 1) %>%
+  group_by(res, yea) %>%
+  mutate(median_prop = median(prop)) %>%
+  ggplot(., aes(x = factor(yea), y = prop, col = factor(res))) +
+  geom_jitter(size = 2, alpha = 0.25, width = 0.2) +
+  geom_point(aes(y = median_prop), size = 5) +
+  ggtitle("Proportion of positive votes to Requests for Adminship, 2004-2012 \nEnglish Wikipedia") +
+  labs(caption = "Data source: http://snap.stanford.edu/data/wiki-RfA.html") +
+  ylab("Proportion of positive votes") +
+  xlab("") +
+  scale_color_manual(name = "election result",
+                     values = rev(wes_palette("Royal1")[1:2]),
+                     breaks = c(1, -1),
+                     labels = c("approved", "rejected")) +
+  theme_bw()
+```
+
+Some of the decline in the number of RfAs has been attributed to the increasing unpleasantness of the RfA process, during which candidates often come under attack for any real or perceived wrongdoing in their editing history (cf. [*Common knowledge: An Ethnography of Wikipedia* by Dariusz Jemielniak](https://www.sup.org/books/title/?id=24010){target="_blank"}). 
+
+The chart below shows the distribution of toxicity in comments accompanying votes in RfAs between 2004 and 2012 depending on the result of the RfA. Toxicity estimates provided by the [Perspective API](https://www.perspectiveapi.com/){target="_blank"} range between 0 indicating no tixicity to 1 indicating maximum toxicity. A majority of comments in both successful and unsuccessful RfAs have relatively low levels of toxicity, well below 0.25. Comments in unsuccessful RfAs tend to be a bit more toxic, but the medians in both cases are similar. All distributions are strongly skewed with long positive tails corresponding to rare cases of extremely toxic comments. 
+Overall it looks like toxicity of comments has been stable over time, with no clear differences between the early and late years. 
+
+```{r rfa-toxicity-res, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 7, fig.height = 5}
+data %>% 
+  filter(yea > 2003 & yea < 2013 & !is.na(toxicity)) %>%
+  ggplot(aes(x = factor(yea))) +
+  geom_boxplot(aes(y = toxicity, fill = factor(res)), alpha = 0.4) +
+  ggtitle("Toxicity in comments to votes to Request for Adminships, 2004-2012 \nEnglish Wikipedia") +
+  labs(caption = "Data source: Wikipedia Requests for Adminship, http://snap.stanford.edu/data/wiki-RfA.html; 
+       Perspective API, https://www.perspectiveapi.com/") +
+  ylab("Toxicity level") +
+  xlab("") +
+  scale_fill_manual(name = "election result",
+                     values = rev(wes_palette("Royal1")[1:2]),
+                     breaks = c(1, -1),
+                     labels = c("approved", "rejected")) +
+  theme_bw()
+```
+
+This graph shows the distribution of toxicity in comments accompanying votes in RfAs between 2004 and 2012 depending on the type of the vote, i.e., whether it was supporting or opposing the request, or was neutral. In all years, the median level of tixicity among opposing votes was higher than among supporting votes, with neutral votes in-between.
+
+```{r rfa-toxicity-vot, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 8, fig.height = 5}
+data %>% 
+  filter(yea > 2003 & yea < 2013 & !is.na(toxicity)) %>%
+  ggplot(aes(x = factor(yea))) +
+  geom_boxplot(aes(y = toxicity, fill = factor(vot)), alpha = 0.3) +
+  ggtitle("Toxicity in comments to votes to Request for Adminships, 2004-2014 \nEnglish Wikipedia") +
+  labs(caption = "Data source: Wikipedia Requests for Adminship, http://snap.stanford.edu/data/wiki-RfA.html; 
+       Perspective API, https://www.perspectiveapi.com/") +
+  ylab("Toxicity level") +
+  xlab("") +
+  scale_fill_manual(name = "vote type",
+                     values = c("#C93312", "#FAEFD1", "#899DA4"),
+                     breaks = c(1, 0, -1),
+                     labels = c("support", "neutral", "oppose")) +
+  theme_bw()
+```
+
+The pattern of average tixicity of RfA comments corresponds to the intuition that comments should be more toxic in elections that failed to approve the candidate as admin, and in opposing comments. The differences however are very small, and there is little change over time. If the Perspective API accurately estimates the tone of the comments, toxicity is an unlikely cause of the decline in adminship requests. It is also possible that the API does not appropriately capture the tone of the comments as they are perceived by the admin candidate. 

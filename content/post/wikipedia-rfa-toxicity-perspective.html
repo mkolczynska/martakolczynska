@@ -1,0 +1,140 @@
+---
+title: "Toxicity of comments to votes in Request for Adminship on English Wikipedia"
+subtitle: "Testing the 'peRspective' package"
+author: "Marta Kołczyńska"
+date: 2019-06-17T23:49:00
+categories: ["R"]
+tags: ["R", "toxicity", "Wikipedia", "peRspective", "API", "RfA"]
+output: 
+  blogdown::html_page:
+    toc: true
+    toc_depth: 4
+---
+
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+
+
+<p><em>This post was written during a research visit at the Department of Computer Science at Aalto University, Finland, supported by the Helsinki Institute for Information Technology.</em></p>
+<p><a href="https://www.perspectiveapi.com/" target="_blank">Perspective</a> is an API that uses machine learning models to predict the impact of a comment on the conversation. One of the models predicts the extent to which the comment might be perceived as toxic. A toxic comment is defined as “a rude, disrespectful, or unreasonable comment that is likely to make you leave a discussion.” The documentation of the Perspective API is available <a href="https://github.com/conversationai/perspectiveapi/blob/master/api_reference.md" target="_blank">here</a>. The brand new (at the time of writing) <a href="https://github.com/favstats/peRspective" target="_blank"><code>peRspective</code> package</a> by <a href="http://www.favstats.eu/" target="_blank">Fabio Votta</a> makes it easy to access the Perspective API from R.</p>
+<p>In this post I use the Perspective API to assess the toxicity of voters’ comments that accompany votes in Requests for Adminship (RfA) on English Wikipedia. <a href="https://en.wikipedia.org/wiki/Wikipedia:Requests_for_adminship" target="_blank">According to Wikipedia itself</a>, “[R]equests for adminship (RfA) is the process by which the Wikipedia community decides who will become administrators (also known as admins or sysops), who are users with access to additional technical features that aid in maintenance.” Voting takes a week and any Wikipedia editor can cast a supporting, neutral, or opposing vote. Votes are accompanied with textual comments, which are the object of this analysis.</p>
+<p>The code used in this post is available <a href="https://github.com/mkolczynska/martakolczynska/blob/master/content/post/wikipedia-rfa-toxicity-perspective.Rmd" target="_blank">here</a>.</p>
+<p>Data come from the <a href="http://snap.stanford.edu/data/wiki-RfA.html" target="_blank"><em>Wikipedia Requests for Adminship (with text)</em> dataset</a> available from the <a href="http://snap.stanford.edu/index.html" target="_blank">Stanford Network Analysis Project</a>. The dataset includes votes and comments in RfAs between mid-2003 and mid-2013. Below is an extract of the data with the year of the RfA, the source of the vote (the voter) and the target of the vote (the admin candidate), as well as the vote character (-1 for oppose, 1 for support, and 0 for neutral) and the text of the comment.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center;">
+yea
+</th>
+<th style="text-align:center;">
+src
+</th>
+<th style="text-align:center;">
+tgt
+</th>
+<th style="text-align:center;">
+vot
+</th>
+<th style="text-align:left;">
+txt
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;width: 8em; ">
+2008
+</td>
+<td style="text-align:center;width: 8em; ">
+Acalamari
+</td>
+<td style="text-align:center;width: 8em; ">
+^demon
+</td>
+<td style="text-align:center;width: 8em; ">
+1
+</td>
+<td style="text-align:left;width: 60em; ">
+Was a great admin before, and will be again. Experienced with images.
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 8em; ">
+2008
+</td>
+<td style="text-align:center;width: 8em; ">
+Qst
+</td>
+<td style="text-align:center;width: 8em; ">
+^demon
+</td>
+<td style="text-align:center;width: 8em; ">
+1
+</td>
+<td style="text-align:left;width: 60em; ">
+’‘’Support’’’. What Acalamari said ;).
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 8em; ">
+2008
+</td>
+<td style="text-align:center;width: 8em; ">
+Mr.Z-man
+</td>
+<td style="text-align:center;width: 8em; ">
+^demon
+</td>
+<td style="text-align:center;width: 8em; ">
+1
+</td>
+<td style="text-align:left;width: 60em; ">
+Of course. &lt;font face=Broadway&gt;
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 8em; ">
+2008
+</td>
+<td style="text-align:center;width: 8em; ">
+Rjd0060
+</td>
+<td style="text-align:center;width: 8em; ">
+^demon
+</td>
+<td style="text-align:center;width: 8em; ">
+1
+</td>
+<td style="text-align:left;width: 60em; ">
+Why not give them back? -
+</td>
+</tr>
+<tr>
+<td style="text-align:center;width: 8em; ">
+2008
+</td>
+<td style="text-align:center;width: 8em; ">
+Jj137
+</td>
+<td style="text-align:center;width: 8em; ">
+^demon
+</td>
+<td style="text-align:center;width: 8em; ">
+1
+</td>
+<td style="text-align:left;width: 60em; ">
+’‘’Support’’’ - definitely. &amp;nbsp; ’’’
+</td>
+</tr>
+</tbody>
+</table>
+<p>In the period covered by the data the number of RfAs has indeed declined substantially, as shown below (the data covers only parts of 2003 and 2013, so they are excluded). Both the number of successfull and unsuccessfull RfAs has been declining, but while in the early years more RfAs concluded with a nomination than rejection, the later trend is reversed, and more RfAs are rejected than approved.</p>
+<p><img src="/post/wikipedia-rfa-toxicity-perspective_files/figure-html/rfa-number-res-1.png" width="576" /></p>
+<p>In the English Wikipedia, RfA results are decided by a bureaucrat who considers all the votes and comments and determines whether there is consensus that adminship should be granted. Wikipedia emphasizes that the RfA process involves discussion and not a simple vote count. In practice, successful RfAs are those that receive a substantial majority of supporting votes of at least 75% of supporting and opposing votes, as shown in the figure below.</p>
+<p><img src="/post/wikipedia-rfa-toxicity-perspective_files/figure-html/rfa-prop-positive-1.png" width="672" /></p>
+<p>Some of the decline in the number of RfAs has been attributed to the increasing unpleasantness of the RfA process, during which candidates often come under attack for any real or perceived wrongdoing in their editing history (cf. <a href="https://www.sup.org/books/title/?id=24010" target="_blank"><em>Common knowledge: An Ethnography of Wikipedia</em> by Dariusz Jemielniak</a>).</p>
+<p>The chart below shows the distribution of toxicity in comments accompanying votes in RfAs between 2004 and 2012 depending on the result of the RfA. Toxicity estimates provided by the <a href="https://www.perspectiveapi.com/" target="_blank">Perspective API</a> range between 0 indicating no tixicity to 1 indicating maximum toxicity. A majority of comments in both successful and unsuccessful RfAs have relatively low levels of toxicity, well below 0.25. Comments in unsuccessful RfAs tend to be a bit more toxic, but the medians in both cases are similar. All distributions are strongly skewed with long positive tails corresponding to rare cases of extremely toxic comments.
+Overall it looks like toxicity of comments has been stable over time, with no clear differences between the early and late years.</p>
+<p><img src="/post/wikipedia-rfa-toxicity-perspective_files/figure-html/rfa-toxicity-res-1.png" width="672" /></p>
+<p>This graph shows the distribution of toxicity in comments accompanying votes in RfAs between 2004 and 2012 depending on the type of the vote, i.e., whether it was supporting or opposing the request, or was neutral. In all years, the median level of tixicity among opposing votes was higher than among supporting votes, with neutral votes in-between.</p>
+<p><img src="/post/wikipedia-rfa-toxicity-perspective_files/figure-html/rfa-toxicity-vot-1.png" width="768" /></p>
+<p>The pattern of average tixicity of RfA comments corresponds to the intuition that comments should be more toxic in elections that failed to approve the candidate as admin, and in opposing comments. The differences however are very small, and there is little change over time. If the Perspective API accurately estimates the tone of the comments, toxicity is an unlikely cause of the decline in adminship requests. It is also possible that the API does not appropriately capture the tone of the comments as they are perceived by the admin candidate.</p>

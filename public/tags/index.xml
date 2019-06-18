@@ -31,6 +31,15 @@
     </item>
     
     <item>
+      <title>Api</title>
+      <link>/tags/api/</link>
+      <pubDate>Mon, 17 Jun 2019 23:49:00 +0000</pubDate>
+      
+      <guid>/tags/api/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Barcelona</title>
       <link>/tags/barcelona/</link>
       <pubDate>Tue, 30 Oct 2018 10:00:14 +0000</pubDate>
@@ -319,6 +328,15 @@
     </item>
     
     <item>
+      <title>Perspective</title>
+      <link>/tags/perspective/</link>
+      <pubDate>Mon, 17 Jun 2019 23:49:00 +0000</pubDate>
+      
+      <guid>/tags/perspective/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Plotly</title>
       <link>/tags/plotly/</link>
       <pubDate>Sun, 05 Aug 2018 07:32:00 +0000</pubDate>
@@ -393,7 +411,7 @@
     <item>
       <title>R</title>
       <link>/tags/r/</link>
-      <pubDate>Tue, 23 Apr 2019 03:03:00 +0000</pubDate>
+      <pubDate>Mon, 17 Jun 2019 23:49:00 +0000</pubDate>
       
       <guid>/tags/r/</guid>
       <description></description>
@@ -405,6 +423,15 @@
       <pubDate>Tue, 09 Apr 2019 13:41:00 +0000</pubDate>
       
       <guid>/tags/reproducibility/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rfa</title>
+      <link>/tags/rfa/</link>
+      <pubDate>Mon, 17 Jun 2019 23:49:00 +0000</pubDate>
+      
+      <guid>/tags/rfa/</guid>
       <description></description>
     </item>
     
@@ -517,6 +544,15 @@
     </item>
     
     <item>
+      <title>Toxicity</title>
+      <link>/tags/toxicity/</link>
+      <pubDate>Mon, 17 Jun 2019 23:49:00 +0000</pubDate>
+      
+      <guid>/tags/toxicity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Tutorial</title>
       <link>/tags/tutorial/</link>
       <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
@@ -546,7 +582,7 @@
     <item>
       <title>Wikipedia</title>
       <link>/tags/wikipedia/</link>
-      <pubDate>Tue, 13 Nov 2018 16:41:14 +0000</pubDate>
+      <pubDate>Mon, 17 Jun 2019 23:49:00 +0000</pubDate>
       
       <guid>/tags/wikipedia/</guid>
       <description></description>

@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/wikipedia-rfa-toxicity-perspective/</loc>
+    <lastmod>2019-06-17T23:49:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/issp-codebook/</loc>
     <lastmod>2019-04-23T03:03:00+00:00</lastmod>
   </url>
@@ -146,6 +151,12 @@
   <url>
     <loc>/tags/alluvial-diagrams/</loc>
     <lastmod>2019-01-16T11:32:14+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/api/</loc>
+    <lastmod>2019-06-17T23:49:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -313,7 +324,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-04-23T03:03:00+00:00</lastmod>
+    <lastmod>2019-06-17T23:49:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -344,6 +355,12 @@
   <url>
     <loc>/tags/parlgov/</loc>
     <lastmod>2019-02-13T11:29:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/perspective/</loc>
+    <lastmod>2019-06-17T23:49:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -397,19 +414,25 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2019-04-23T03:03:00+00:00</lastmod>
+    <lastmod>2019-06-17T23:49:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2019-04-23T03:03:00+00:00</lastmod>
+    <lastmod>2019-06-17T23:49:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/reproducibility/</loc>
     <lastmod>2019-04-09T13:41:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/rfa/</loc>
+    <lastmod>2019-06-17T23:49:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -497,6 +520,12 @@
   </url>
   
   <url>
+    <loc>/tags/toxicity/</loc>
+    <lastmod>2019-06-17T23:49:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/tutorial/</loc>
     <lastmod>2019-02-03T15:52:00+00:00</lastmod>
     <priority>0</priority>
@@ -516,7 +545,7 @@
   
   <url>
     <loc>/tags/wikipedia/</loc>
-    <lastmod>2018-11-13T16:41:14+00:00</lastmod>
+    <lastmod>2019-06-17T23:49:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

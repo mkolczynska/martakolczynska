@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Toxicity on Marta Kołczyńska</title>
+    <link>/tags/toxicity/</link>
+    <description>Recent content in Toxicity on Marta Kołczyńska</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
+    <lastBuildDate>Mon, 17 Jun 2019 23:49:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/toxicity/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Toxicity of comments to votes in Request for Adminship on English Wikipedia</title>
+      <link>/post/wikipedia-rfa-toxicity-perspective/</link>
+      <pubDate>Mon, 17 Jun 2019 23:49:00 +0000</pubDate>
+      
+      <guid>/post/wikipedia-rfa-toxicity-perspective/</guid>
+      <description>This post was written during a research visit at the Department of Computer Science at Aalto University, Finland, supported by the Helsinki Institute for Information Technology.
+Perspective is an API that uses machine learning models to predict the impact of a comment on the conversation. One of the models predicts the extent to which the comment might be perceived as toxic. A toxic comment is defined as “a rude, disrespectful, or unreasonable comment that is likely to make you leave a discussion.</description>
+    </item>
+    
+  </channel>
+</rss>
