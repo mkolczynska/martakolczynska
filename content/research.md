@@ -6,9 +6,9 @@ description = "Projects and interests"
 +++
 
 
-#### Political Inequality
+#### Political Trust
 
-I'm currently working as a post-doc in the project [*Political Voice and Economic Inequality across Nations and Time*](https://politicalinequality.org/2017/09/21/new-project-political-voice-and-economic-inequality-across-nations-and-time/) led by dr. Joshua K. Dubrow. In this project I use my knowledge of cross-national surveys and methodology to investigate how economic and educational inequality translates into political marginalization – a topic of renewed relevance in the current turbulent times. I develop country-level measures of political inequality using data from various sources: survey data, administrative records, event data, and others. 
+My current grant deals with the causes and consequences of political trust. The issues I will explore include the effects of economic, institutional, and democratic performance on political trust, their relative importance and differences across countries; and the association between political polarization and political trust. The grant is funded by the Polish National Science Centre (2019/32/C/HS6/00421).
 
 #### Status Inconsistency and Political Values, Attitudes and Behavior
 
@@ -16,7 +16,7 @@ The Institute of Philosophy and Sociology, Polish Academy of Sciences, has award
 
 #### Survey Data Harmonization
 
-As a Ph.D. student I have been working in a project at The Ohio State University and the Polish Academy of Sciences that created an ex-post harmonized database of 1721 national surveys from 22 international survey projects with almost 2.3 million respondents surveyed between 1966 and 2013 ([Survey Data Recycling project, SDR](dataharmonization.org)). We integrated these data with properties of the national surveys and country-level economic and political characteristics; the result is a large, complex multi-level data structure. In a new four-year National Science Foundation grant this database will almost quadruple in size after adding new survey project and waves, and harmonizing additional variables related to social capital and well-being. 
+As a Ph.D. student I was working in a project at The Ohio State University and the Polish Academy of Sciences that created an ex-post harmonized database of 1721 national surveys from 22 international survey projects with almost 2.3 million respondents surveyed between 1966 and 2013 ([Survey Data Recycling project, SDR](dataharmonization.org)). We integrated these data with properties of the national surveys and country-level economic and political characteristics; the result is a large, complex multi-level data structure. In a new four-year National Science Foundation grant this database will almost quadruple in size after adding new survey project and waves, and harmonizing additional variables related to social capital and well-being. 
 
 Beyond the opportunities that the SDR dataset creates for substantive research, I am particularly interested in the comparability of data obtained via *ex post* harmonization of cross-national surveys, including the comparability of survey aggregates (e.g., means, proportions), as well as in developing tools that facilitate management, processing, and analysis of large social science data, such as those created in the SDR project, as well as solutions for data sharing and dissemination.
 

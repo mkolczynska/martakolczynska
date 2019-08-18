@@ -8,7 +8,7 @@ description = "About me"
 <img class="img-circle" style="float: right; margin-left: 10px;"
 src="Kolczynska.jpg" width="150px"/>
 
-I am a post-doctoral researcher at the [Institute of Philosophy and Sociology, Polish Academy of Sciences](http://ifispan.waw.pl/), and a recent Ph.D. graduate from the Department of Sociology, The Ohio State University. My research interests include comparative analyses of political attitudes and behavior across nations and over time, as well as the methodology of comparative research, in particular cross-national surveys.
+I am starting a position as assistant professor at the  post-doctoral researcher at the [Institute of Political Studies of the Polish Academy of Sciences](http://english.isppan.waw.pl/). My research interests include comparative analyses of political attitudes and behavior across nations and over time, as well as the methodology of comparative research, in particular cross-national surveys.
 
 
 [*My full CV*](cv.pdf)
