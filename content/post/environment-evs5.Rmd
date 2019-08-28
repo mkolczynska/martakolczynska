@@ -2,7 +2,7 @@
 title: "Environmental attitudes in Europe"
 description: "European Values Study Wave 5 (2017-2018) and the 'likert' package"
 author: "Marta Kołczyńska"
-date: 2019-08-30T12:06:37
+date: 2019-08-28T12:06:37
 categories: ["R"]
 tags: ["surveys", "EVS", "R", "FridaysForFuture", "environmental attitudes", "environment", "likert"]
 output: 
