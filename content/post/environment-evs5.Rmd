@@ -1,0 +1,60 @@
+---
+title: "Environmental attitudes in Europe"
+description: "European Values Study Wave 5 (2017-2018) and the 'likert' package"
+author: "Marta Kołczyńska"
+date: 2019-08-30T12:06:37
+categories: ["R"]
+tags: ["surveys", "EVS", "R", "FridaysForFuture", "environmental attitudes", "environment", "likert"]
+output: 
+  blogdown::html_page:
+    toc: true
+    toc_depth: 2
+---
+
+The climate protests in March 2019 mobilized over a million of people around the globe. A team of social scientists from universities across Europe organized a survey of the #FridaysForFuture strike events on March 15 in 13 cities in nine countries. The report can be found [here](https://osf.io/xcnzh/){target="_blank"}. A new wave of climate protests (and surveys) is planned for the end of September. 
+
+Naturally, most participants at these protests are acutely aware of the environmental threats and motivated to take action. But what is the situation like among the general population?
+
+Here is a quick summary with data from the [European Values Study](https://europeanvaluesstudy.eu/){target="_blank"} wave 5 (from the 2nd pre-release in July 2019), using the [`likert` package](https://github.com/jbryer/likert){target="_blank"}.
+
+```{r setup, warning=FALSE, message=FALSE, echo = FALSE}
+library(plyr) # for manipularing data (mapvalues)
+library(tidyverse) # for data wrangling
+library(countrycode) # for converting between country codes and names
+library(likert) # for plotting likert-type items
+```
+
+```{r data-prep, warning=FALSE, message=FALSE, echo = FALSE, eval = FALSE}
+evs_5_env <- import("C:/Users/mkolc/Google Drive/Work in progress/R playground/data-for-harm/EVS/ZA7500_v2-0-0.sav.zip", 
+                user_na = TRUE) %>%
+  filter(c_abrv %in% c("AT", "CH", "DE", "IT", "NL", "PL", "SE", "GB"), gweight > 0)
+rio::export(evs_5_env, "environment_evs5.csv")
+```
+
+
+```{r likert-plot-cntry, warning=FALSE, message=FALSE, echo = FALSE, fig.width = 9, fig.height = 12}
+evs_5_env <- read.csv("data/environment_evs5.csv", stringsAsFactors = TRUE)  %>%
+  select(cntry = c_abrv, v199,v200,v201,v202,v203) %>% 
+  mutate_at(vars(v199,v200,v201,v202,v203), funs(ifelse(. < 0, NA, .))) %>%
+  mutate_at(vars(v199,v200,v201,v202,v203), funs(plyr::mapvalues(., c(1,2,3,4,5), c(5,4,3,2,1)))) %>%
+  mutate(country = countrycode(cntry, "iso2c", "country.name")) %>% 
+  mutate_at(vars(v199,v200,v201,v202,v203), funs(ifelse(. < 0, NA, .))) %>%
+  mutate_at(vars(v199,v200,v201,v202,v203), funs(ordered(., levels = c(1,2,3,4,5),
+                                                         labels = c("disagree strongly", 
+                                                                    "disagree", 
+                                                                    "neither agree nor disagree", 
+                                                                    "agree", 
+                                                                    "agree strongly")))) %>%
+  rename('I would give part of my income if I were certain that the money would be used to prevent environmental pollution' = v199,
+         'It is just too difficult for someone like me to do much about the environment' = v200,
+         'There are more important things to do in life than protect the environment' = v201,
+         'There is no point in doing what I can for the environment unless others do the same' = v202,
+         'Many of the claims about environmental threats are exaggerated' = v203)
+  
+
+data_env <- evs_5_env %>% select(-cntry, -country)
+cntry <- select(evs_5_env, country)
+
+data_env_lg <- likert::likert(data_env, grouping = cntry$country)
+plot(data_env_lg) + theme_bw(12)
+```

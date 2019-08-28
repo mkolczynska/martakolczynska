@@ -166,6 +166,24 @@
     </item>
     
     <item>
+      <title>Environment</title>
+      <link>/tags/environment/</link>
+      <pubDate>Fri, 30 Aug 2019 12:06:37 +0000</pubDate>
+      
+      <guid>/tags/environment/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Environmental Attitudes</title>
+      <link>/tags/environmental-attitudes/</link>
+      <pubDate>Fri, 30 Aug 2019 12:06:37 +0000</pubDate>
+      
+      <guid>/tags/environmental-attitudes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Ess</title>
       <link>/tags/ess/</link>
       <pubDate>Wed, 13 Feb 2019 11:29:00 +0000</pubDate>
@@ -184,11 +202,29 @@
     </item>
     
     <item>
+      <title>Evs</title>
+      <link>/tags/evs/</link>
+      <pubDate>Fri, 30 Aug 2019 12:06:37 +0000</pubDate>
+      
+      <guid>/tags/evs/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Freedom House</title>
       <link>/tags/freedom-house/</link>
       <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
       
       <guid>/tags/freedom-house/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Fridaysforfuture</title>
+      <link>/tags/fridaysforfuture/</link>
+      <pubDate>Fri, 30 Aug 2019 12:06:37 +0000</pubDate>
+      
+      <guid>/tags/fridaysforfuture/</guid>
       <description></description>
     </item>
     
@@ -270,6 +306,15 @@
       <pubDate>Thu, 18 Oct 2018 16:13:14 +0000</pubDate>
       
       <guid>/tags/latent-class-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Likert</title>
+      <link>/tags/likert/</link>
+      <pubDate>Fri, 30 Aug 2019 12:06:37 +0000</pubDate>
+      
+      <guid>/tags/likert/</guid>
       <description></description>
     </item>
     
@@ -411,7 +456,7 @@
     <item>
       <title>R</title>
       <link>/tags/r/</link>
-      <pubDate>Mon, 17 Jun 2019 23:49:00 +0000</pubDate>
+      <pubDate>Fri, 30 Aug 2019 12:06:37 +0000</pubDate>
       
       <guid>/tags/r/</guid>
       <description></description>
@@ -483,7 +528,7 @@
     <item>
       <title>Surveys</title>
       <link>/tags/surveys/</link>
-      <pubDate>Wed, 16 Jan 2019 11:32:14 +0000</pubDate>
+      <pubDate>Fri, 30 Aug 2019 12:06:37 +0000</pubDate>
       
       <guid>/tags/surveys/</guid>
       <description></description>

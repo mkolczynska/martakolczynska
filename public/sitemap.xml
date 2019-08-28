@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/environment-evs5/</loc>
+    <lastmod>2019-08-30T12:06:37+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/wikipedia-rfa-toxicity-perspective/</loc>
     <lastmod>2019-06-17T23:49:00+00:00</lastmod>
   </url>
@@ -245,6 +250,18 @@
   </url>
   
   <url>
+    <loc>/tags/environment/</loc>
+    <lastmod>2019-08-30T12:06:37+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/environmental-attitudes/</loc>
+    <lastmod>2019-08-30T12:06:37+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/ess/</loc>
     <lastmod>2019-02-13T11:29:00+00:00</lastmod>
     <priority>0</priority>
@@ -257,8 +274,20 @@
   </url>
   
   <url>
+    <loc>/tags/evs/</loc>
+    <lastmod>2019-08-30T12:06:37+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/freedom-house/</loc>
     <lastmod>2019-02-03T15:52:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/fridaysforfuture/</loc>
+    <lastmod>2019-08-30T12:06:37+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -317,6 +346,12 @@
   </url>
   
   <url>
+    <loc>/tags/likert/</loc>
+    <lastmod>2019-08-30T12:06:37+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/macro-indicators/</loc>
     <lastmod>2019-02-03T15:52:00+00:00</lastmod>
     <priority>0</priority>
@@ -324,7 +359,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-06-17T23:49:00+00:00</lastmod>
+    <lastmod>2019-08-30T12:06:37+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -414,13 +449,13 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2019-06-17T23:49:00+00:00</lastmod>
+    <lastmod>2019-08-30T12:06:37+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2019-06-17T23:49:00+00:00</lastmod>
+    <lastmod>2019-08-30T12:06:37+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -468,7 +503,7 @@
   
   <url>
     <loc>/tags/surveys/</loc>
-    <lastmod>2019-01-16T11:32:14+00:00</lastmod>
+    <lastmod>2019-08-30T12:06:37+00:00</lastmod>
     <priority>0</priority>
   </url>
   

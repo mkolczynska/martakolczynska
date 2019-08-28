@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Evs on Marta Kołczyńska</title>
+    <link>/tags/evs/</link>
+    <description>Recent content in Evs on Marta Kołczyńska</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
+    <lastBuildDate>Fri, 30 Aug 2019 12:06:37 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/evs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Environmental attitudes in Europe</title>
+      <link>/post/environment-evs5/</link>
+      <pubDate>Fri, 30 Aug 2019 12:06:37 +0000</pubDate>
+      
+      <guid>/post/environment-evs5/</guid>
+      <description>The climate protests in March 2019 mobilized over a million of people around the globe. A team of social scientists from universities across Europe organized a survey of the #FridaysForFuture strike events on March 15 in 13 cities in nine countries. The report can be found here. A new wave of climate protests (and surveys) is planned for the end of September.
+Naturally, most participants at these protests are acutely aware of the environmental threats and motivated to take action.</description>
+    </item>
+    
+  </channel>
+</rss>
