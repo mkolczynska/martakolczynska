@@ -68,12 +68,13 @@ fh_clean <- fh %>%
   gather(var, value, 2:136) %>% # convert the whole data set to long format
   mutate(# identify the type of data following (3) above
          var1 = ifelse(substr(var, 1, 3) == "...", "CL/status", "PR"),
-         var1 = ifelse(var1 == "CL/status" & as.numeric(substr(var, 4, 6)) %in% 2 == 0, "Status", "CL"),
-         year = rep(1973:2017, each = 3*206)) %>% # create the year variable following (4) aboce
+         var1 = ifelse(var1 == "CL/status" & 
+                         as.numeric(substr(var, 4, 6)) %in% 2 == 0, "Status", "CL"),
+         year = rep(1973:2017, each = 3*206)) %>% # create the year variable following (4) above
   select(country, year, var = var1, value)
 ```
 
-This is how the data look like at the end:
+Voilà! This is how the data look like at the end:
 
 ```{r clean, warning=FALSE, message=FALSE}
 head(fh_clean, 8)

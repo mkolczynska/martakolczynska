@@ -56,10 +56,11 @@ fh_clean &lt;- fh %&gt;%
   gather(var, value, 2:136) %&gt;% # convert the whole data set to long format
   mutate(# identify the type of data following (3) above
          var1 = ifelse(substr(var, 1, 3) == &quot;...&quot;, &quot;CL/status&quot;, &quot;PR&quot;),
-         var1 = ifelse(var1 == &quot;CL/status&quot; &amp; as.numeric(substr(var, 4, 6)) %in% 2 == 0, &quot;Status&quot;, &quot;CL&quot;),
-         year = rep(1973:2017, each = 3*206)) %&gt;% # create the year variable following (4) aboce
+         var1 = ifelse(var1 == &quot;CL/status&quot; &amp; 
+                         as.numeric(substr(var, 4, 6)) %in% 2 == 0, &quot;Status&quot;, &quot;CL&quot;),
+         year = rep(1973:2017, each = 3*206)) %&gt;% # create the year variable following (4) above
   select(country, year, var = var1, value)</code></pre>
-<p>This is how the data look like at the end:</p>
+<p>Voilà! This is how the data look like at the end:</p>
 <pre class="r"><code>head(fh_clean, 8)</code></pre>
 <pre><code>##               country year var value
 ## 1         Afghanistan 1973  CL     4
