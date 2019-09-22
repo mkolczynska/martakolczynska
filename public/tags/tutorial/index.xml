@@ -7,10 +7,23 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Sun, 03 Feb 2019 15:52:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 21 Sep 2019 22:08:14 +0000</lastBuildDate>
     
 	<atom:link href="/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Cleaning Freedom House indicators</title>
+      <link>/post/cleaning-fh-data/</link>
+      <pubDate>Sat, 21 Sep 2019 22:08:14 +0000</pubDate>
+      
+      <guid>/post/cleaning-fh-data/</guid>
+      <description>How to clean a very untidy data set with Freedom House country ratings, saved in an Excel sheet, which violates many principles of data organization in spreadsheets described in this paper by Karl Broman and Kara Woo, but otherwise is an invaluable source of data on freedom in the world?
+Data source: https://freedomhouse.org/content/freedom-world-data-and-resources
+The full code used in this post is available here.
+I would do this:
+Read in the file,</description>
+    </item>
     
     <item>
       <title>Downloading country-level indicators on participation and economic inequality 2</title>

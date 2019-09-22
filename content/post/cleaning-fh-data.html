@@ -1,0 +1,72 @@
+---
+title: "Cleaning Freedom House indicators"
+author: "Marta Kołczyńska"
+date: 2019-09-21T22:08:14
+categories: ["R"]
+tags: ["R", "tutorial", "macro indicators", "political rights", "democracy", "cross-national research",
+"Freedom House"]
+output:
+  blogdown::html_page:
+    toc: true
+    toc_depth: 4
+---
+
+
+
+<p>How to clean a very untidy data set with Freedom House country ratings, saved in an Excel sheet, which violates many principles of data organization in spreadsheets described in <a href="https://www.tandfonline.com/doi/full/10.1080/00031305.2017.1375989" target="_blank">this paper by Karl Broman and Kara Woo</a>, but otherwise is an invaluable source of data on freedom in the world?</p>
+<p>Data source: <a href="https://freedomhouse.org/content/freedom-world-data-and-resources" class="uri">https://freedomhouse.org/content/freedom-world-data-and-resources</a></p>
+<p>The full code used in this post is available <a href="https://github.com/mkolczynska/martakolczynska/blob/master/content/post/cleaning-fh-data.Rmd" target="_blank">here</a>.</p>
+<p>I would do this:</p>
+<ol style="list-style-type: decimal">
+<li><p>Read in the file,</p></li>
+<li><p>Transform everything into the long format - in R it’s much easier to deal with data with columns than in rows,</p></li>
+<li>Notice how the data read in in step (1) look like:</li>
+</ol>
+<ul>
+<li>column names ‘..odd_number’ contain the Civil Liberties rating (CL),</li>
+<li>‘..even_number’ contain the Status category,</li>
+<li>the remaining columns contain the Political Rights rating (PR).</li>
+</ul>
+<p>Use this observation to identify the type of data and make meaningful labels.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Add a year variable knowing that: (a) there are 3 different quantities (CL, PR, Status), (b) 206 countries, and (c) the range of years is 1973-2018.</li>
+</ol>
+<p>This is how the data look like in the Excel sheet:</p>
+<div class="figure"><span id="fig:fig-xlsx"></span>
+<img src="/images/fh-xlsx.png" alt="Excel sheet with Freedom House data." width="600px" />
+<p class="caption">
+Figure 1: Excel sheet with Freedom House data.
+</p>
+</div>
+<pre class="r"><code>fh &lt;- import(&quot;data/Country and Territory Ratings and Statuses FIW1973-2018.xlsx&quot;, 
+             sheet = 2, # read in data from the second sheet
+             na = &quot;-&quot;) # recode &quot;-&quot; to missing</code></pre>
+<p>This is how the data look like after loading to R:</p>
+<div class="figure"><span id="fig:fig-readxlsx"></span>
+<img src="/images/fh-readxlsx.png" alt="Untidy data frame with Freedom House data." width="600px" />
+<p class="caption">
+Figure 2: Untidy data frame with Freedom House data.
+</p>
+</div>
+<pre class="r"><code>names(fh)[1] &lt;- &quot;country&quot;
+
+fh_clean &lt;- fh %&gt;%
+  filter(country != &quot;Year(s) Under Review&quot;, # filter out the first row of data
+         !is.na(country)) %&gt;% # filter out the second row of data
+  gather(var, value, 2:136) %&gt;% # convert the whole data set to long format
+  mutate(# identify the type of data following (3) above
+         var1 = ifelse(substr(var, 1, 3) == &quot;...&quot;, &quot;CL/status&quot;, &quot;PR&quot;),
+         var1 = ifelse(var1 == &quot;CL/status&quot; &amp; as.numeric(substr(var, 4, 6)) %in% 2 == 0, &quot;Status&quot;, &quot;CL&quot;),
+         year = rep(1973:2017, each = 3*206)) %&gt;% # create the year variable following (4) aboce
+  select(country, year, var = var1, value)</code></pre>
+<p>This is how the data look like at the end:</p>
+<pre class="r"><code>head(fh_clean, 8)</code></pre>
+<pre><code>##               country year var value
+## 1         Afghanistan 1973  CL     4
+## 2             Albania 1973  CL     7
+## 3             Algeria 1973  CL     6
+## 4             Andorra 1973  CL     4
+## 5              Angola 1973  CL  &lt;NA&gt;
+## 6 Antigua and Barbuda 1973  CL  &lt;NA&gt;
+## 7           Argentina 1973  CL     6
+## 8             Armenia 1973  CL  &lt;NA&gt;</code></pre>
