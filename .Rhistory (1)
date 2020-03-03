@@ -1,0 +1,512 @@
+mutate(country = countrycode(Tcountry, "iso2c", "country.name"))) %>%
+filter(counts > 1) %>%
+ggplot(., aes(x = reorder(paste(country, Tyear), desc(paste(country, Tyear))),
+y = me, col = Tproject)) +
+#geom_line(aes(group = paste(country, Tyear))) +
+#geom_point(size = 2) +
+geom_pointrange(aes(ymin = me - 1.96*se,
+ymax = me + 1.96*se),
+size = 0.5, alpha = 0.7) +
+xlab("") + ylab("Aggregate country-year level") +
+coord_flip() +
+theme_minimal() +
+scale_color_manual(name = "Project",
+values = cbPalette[1:3]) +
+ggtitle("Country-year levels of trust in the police by aggregate type") +
+labs(caption = "Data souce: ESS 1-8, EQLS 1-4, EVS 1-5.
+Proportions (second and third facet) multiplied by 10 for comparability.") +
+facet_wrap("type")
+all_data %>%
+filter(!is.na(trust_police)) %>%
+group_by(Tproject, Tcountry, Tyear) %>%
+mutate(prop1 = ifelse(trust_police > 5, 1, 0),
+prop2 = ifelse(trust_police >= 5, 1, 0)) %>%
+summarise(nobs = sum(Tweight),
+me_prop1 = weighted.mean(prop1, w = Tweight, na.rm = TRUE)*10,
+me_prop2 = weighted.mean(prop2, w = Tweight, na.rm = TRUE)*10,
+me_mean = weighted.mean(trust_police, w = Tweight, na.rm = TRUE),
+se_prop1 = sqrt(weighted.mean(prop1, Tweight, na.rm = TRUE) *
+(1 - weighted.mean(prop1, Tweight, na.rm = TRUE))/
+n())*10,
+se_prop2 = sqrt(weighted.mean(prop2, Tweight, na.rm = TRUE) *
+(1 - weighted.mean(prop1, Tweight, na.rm = TRUE))/
+n())*10,
+se_mean = radiant.data::weighted.sd(trust_police, w = Tweight, na.rm = TRUE)/sqrt(nobs)) %>%
+gather(variable, value, 5:10) %>%
+mutate(stat = substr(variable, 1, 2),
+type = substr(variable, 4, 8)) %>%
+select(-variable) %>%
+spread(stat, value) %>%
+filter(!is.na(me)) %>%
+mutate(type = plyr::mapvalues(type, c("prop1", "prop2", "mean"),
+c("Proportion > 5", "Proportion >= 5",
+"Mean (0-10)"))) %>%
+group_by(Tcountry, Tyear, type) %>%
+mutate(counts = n(),
+mutate(country = countrycode(Tcountry, "iso2c", "country.name"))) %>%
+filter(counts > 1) %>%
+ggplot(., aes(x = reorder(paste(country, Tyear), desc(paste(country, Tyear))),
+y = me, col = Tproject)) +
+#geom_line(aes(group = paste(country, Tyear))) +
+#geom_point(size = 2) +
+geom_pointrange(aes(ymin = me - 1.96*se,
+ymax = me + 1.96*se),
+size = 0.5, alpha = 0.7) +
+xlab("") + ylab("Aggregate country-year level") +
+coord_flip() +
+theme_minimal() +
+scale_color_manual(name = "Project",
+values = cbPalette[1:3]) +
+ggtitle("Country-year levels of trust in the police by aggregate type") +
+labs(caption = "Data souce: ESS 1-8, EQLS 1-4, EVS 1-5.
+Proportions (second and third facet) multiplied by 10 for comparability.") +
+facet_wrap("type")
+all_data %>%
+filter(!is.na(trust_police)) %>%
+group_by(Tproject, Tcountry, Tyear) %>%
+mutate(prop1 = ifelse(trust_police > 5, 1, 0),
+prop2 = ifelse(trust_police >= 5, 1, 0)) %>%
+summarise(nobs = sum(Tweight),
+me_prop1 = weighted.mean(prop1, w = Tweight, na.rm = TRUE)*10,
+me_prop2 = weighted.mean(prop2, w = Tweight, na.rm = TRUE)*10,
+me_mean = weighted.mean(trust_police, w = Tweight, na.rm = TRUE),
+se_prop1 = sqrt(weighted.mean(prop1, Tweight, na.rm = TRUE) *
+(1 - weighted.mean(prop1, Tweight, na.rm = TRUE))/
+n())*10,
+se_prop2 = sqrt(weighted.mean(prop2, Tweight, na.rm = TRUE) *
+(1 - weighted.mean(prop1, Tweight, na.rm = TRUE))/
+n())*10,
+se_mean = radiant.data::weighted.sd(trust_police, w = Tweight, na.rm = TRUE)/sqrt(nobs)) %>%
+gather(variable, value, 5:10) %>%
+mutate(stat = substr(variable, 1, 2),
+type = substr(variable, 4, 8)) %>%
+select(-variable) %>%
+spread(stat, value) %>%
+filter(!is.na(me)) %>%
+mutate(type = plyr::mapvalues(type, c("prop1", "prop2", "mean"),
+c("Proportion > 5", "Proportion >= 5",
+"Mean (0-10)"))) %>%
+group_by(Tcountry, Tyear, type) %>%
+mutate(counts = n(),
+country = countrycode(Tcountry, "iso2c", "country.name")) %>%
+filter(counts > 1) %>%
+ggplot(., aes(x = reorder(paste(country, Tyear), desc(paste(country, Tyear))),
+y = me, col = Tproject)) +
+#geom_line(aes(group = paste(country, Tyear))) +
+#geom_point(size = 2) +
+geom_pointrange(aes(ymin = me - 1.96*se,
+ymax = me + 1.96*se),
+size = 0.5, alpha = 0.7) +
+xlab("") + ylab("Aggregate country-year level") +
+coord_flip() +
+theme_minimal() +
+scale_color_manual(name = "Project",
+values = cbPalette[1:3]) +
+ggtitle("Country-year levels of trust in the police by aggregate type") +
+labs(caption = "Data souce: ESS 1-8, EQLS 1-4, EVS 1-5.
+Proportions (second and third facet) multiplied by 10 for comparability.") +
+facet_wrap("type")
+all_data %>%
+filter(!is.na(trust_police)) %>%
+group_by(Tproject, Tcountry, Tyear) %>%
+mutate(prop1 = ifelse(trust_police > 5, 1, 0),
+prop2 = ifelse(trust_police >= 5, 1, 0)) %>%
+summarise(nobs = sum(Tweight),
+me_prop1 = weighted.mean(prop1, w = Tweight, na.rm = TRUE)*10,
+me_prop2 = weighted.mean(prop2, w = Tweight, na.rm = TRUE)*10,
+me_mean = weighted.mean(trust_police, w = Tweight, na.rm = TRUE),
+se_prop1 = sqrt(weighted.mean(prop1, Tweight, na.rm = TRUE) *
+(1 - weighted.mean(prop1, Tweight, na.rm = TRUE))/
+n())*10,
+se_prop2 = sqrt(weighted.mean(prop2, Tweight, na.rm = TRUE) *
+(1 - weighted.mean(prop1, Tweight, na.rm = TRUE))/
+n())*10,
+se_mean = radiant.data::weighted.sd(trust_police, w = Tweight, na.rm = TRUE)/sqrt(nobs)) %>%
+gather(variable, value, 5:10) %>%
+mutate(stat = substr(variable, 1, 2),
+type = substr(variable, 4, 8)) %>%
+select(-variable) %>%
+spread(stat, value) %>%
+filter(!is.na(me)) %>%
+mutate(type = plyr::mapvalues(type, c("prop1", "prop2", "mean"),
+c("Proportion > 5", "Proportion >= 5",
+"Mean (0-10)"))) %>%
+group_by(Tcountry, Tyear, type) %>%
+mutate(counts = n(),
+country = countrycode(Tcountry, "iso2c", "country.name")) %>%
+filter(counts > 1) %>%
+ggplot(., aes(x = reorder(paste(country, Tyear), desc(paste(country, Tyear))),
+y = me, col = Tproject)) +
+#geom_line(aes(group = paste(country, Tyear))) +
+#geom_point(size = 2) +
+geom_pointrange(aes(ymin = me - 1.96*se,
+ymax = me + 1.96*se),
+size = 0.5, alpha = 0.7) +
+xlab("") + ylab("Aggregate country-year level") +
+xlim(0,10) +
+coord_flip() +
+theme_minimal() +
+scale_color_manual(name = "Project",
+values = cbPalette[1:3]) +
+ggtitle("Country-year levels of trust in the police by aggregate type") +
+labs(caption = "Data souce: ESS 1-8, EQLS 1-4, EVS 1-5.
+Proportions (second and third facet) multiplied by 10 for comparability.") +
+facet_wrap("type")
+all_data %>%
+filter(!is.na(trust_police)) %>%
+group_by(Tproject, Tcountry, Tyear) %>%
+mutate(prop1 = ifelse(trust_police > 5, 1, 0),
+prop2 = ifelse(trust_police >= 5, 1, 0)) %>%
+summarise(nobs = sum(Tweight),
+me_prop1 = weighted.mean(prop1, w = Tweight, na.rm = TRUE)*10,
+me_prop2 = weighted.mean(prop2, w = Tweight, na.rm = TRUE)*10,
+me_mean = weighted.mean(trust_police, w = Tweight, na.rm = TRUE),
+se_prop1 = sqrt(weighted.mean(prop1, Tweight, na.rm = TRUE) *
+(1 - weighted.mean(prop1, Tweight, na.rm = TRUE))/
+n())*10,
+se_prop2 = sqrt(weighted.mean(prop2, Tweight, na.rm = TRUE) *
+(1 - weighted.mean(prop1, Tweight, na.rm = TRUE))/
+n())*10,
+se_mean = radiant.data::weighted.sd(trust_police, w = Tweight, na.rm = TRUE)/sqrt(nobs)) %>%
+gather(variable, value, 5:10) %>%
+mutate(stat = substr(variable, 1, 2),
+type = substr(variable, 4, 8)) %>%
+select(-variable) %>%
+spread(stat, value) %>%
+filter(!is.na(me)) %>%
+mutate(type = plyr::mapvalues(type, c("prop1", "prop2", "mean"),
+c("Proportion > 5", "Proportion >= 5",
+"Mean (0-10)"))) %>%
+group_by(Tcountry, Tyear, type) %>%
+mutate(counts = n(),
+country = countrycode(Tcountry, "iso2c", "country.name")) %>%
+filter(counts > 1) %>%
+ggplot(., aes(x = reorder(paste(country, Tyear), desc(paste(country, Tyear))),
+y = me, col = Tproject)) +
+#geom_line(aes(group = paste(country, Tyear))) +
+#geom_point(size = 2) +
+geom_pointrange(aes(ymin = me - 1.96*se,
+ymax = me + 1.96*se),
+size = 0.5, alpha = 0.7) +
+xlab("") + ylab("Aggregate country-year level") +
+ylim(0,10) +
+coord_flip() +
+theme_minimal() +
+scale_color_manual(name = "Project",
+values = cbPalette[1:3]) +
+ggtitle("Country-year levels of trust in the police by aggregate type") +
+labs(caption = "Data souce: ESS 1-8, EQLS 1-4, EVS 1-5.
+Proportions (second and third facet) multiplied by 10 for comparability.") +
+facet_wrap("type")
+all_data %>%
+filter(!is.na(trust_police)) %>%
+group_by(Tproject, Tcountry, Tyear) %>%
+mutate(prop1 = ifelse(trust_police > 5, 1, 0),
+prop2 = ifelse(trust_police >= 5, 1, 0)) %>%
+summarise(nobs = sum(Tweight),
+me_prop1 = weighted.mean(prop1, w = Tweight, na.rm = TRUE)*10,
+me_prop2 = weighted.mean(prop2, w = Tweight, na.rm = TRUE)*10,
+me_mean = weighted.mean(trust_police, w = Tweight, na.rm = TRUE),
+se_prop1 = sqrt(weighted.mean(prop1, Tweight, na.rm = TRUE) *
+(1 - weighted.mean(prop1, Tweight, na.rm = TRUE))/
+n())*10,
+se_prop2 = sqrt(weighted.mean(prop2, Tweight, na.rm = TRUE) *
+(1 - weighted.mean(prop1, Tweight, na.rm = TRUE))/
+n())*10,
+se_mean = sd(trust_police, w = Tweight, na.rm = TRUE)/sqrt(nobs)) %>%
+gather(variable, value, 5:10) %>%
+mutate(stat = substr(variable, 1, 2),
+type = substr(variable, 4, 8)) %>%
+select(-variable) %>%
+spread(stat, value) %>%
+filter(!is.na(me)) %>%
+mutate(type = plyr::mapvalues(type, c("prop1", "prop2", "mean"),
+c("Proportion > 5", "Proportion >= 5",
+"Mean (0-10)"))) %>%
+group_by(Tcountry, Tyear, type) %>%
+mutate(counts = n(),
+country = countrycode(Tcountry, "iso2c", "country.name")) %>%
+filter(counts > 1) %>%
+ggplot(., aes(x = reorder(paste(country, Tyear), desc(paste(country, Tyear))),
+y = me, col = Tproject)) +
+#geom_line(aes(group = paste(country, Tyear))) +
+#geom_point(size = 2) +
+geom_pointrange(aes(ymin = me - 1.96*se,
+ymax = me + 1.96*se),
+size = 0.5, alpha = 0.7) +
+xlab("") + ylab("Aggregate country-year level") +
+ylim(0,10) +
+coord_flip() +
+theme_minimal() +
+scale_color_manual(name = "Project",
+values = cbPalette[1:3]) +
+ggtitle("Country-year levels of trust in the police by aggregate type") +
+labs(caption = "Data souce: ESS 1-8, EQLS 1-4, EVS 1-5.
+Proportions (second and third facet) multiplied by 10 for comparability.") +
+facet_wrap("type")
+all_data %>%
+filter(!is.na(trust_police)) %>%
+group_by(Tproject, Tcountry, Tyear) %>%
+mutate(prop1 = ifelse(trust_police > 5, 1, 0),
+prop2 = ifelse(trust_police >= 5, 1, 0)) %>%
+summarise(nobs = sum(Tweight),
+me_prop1 = weighted.mean(prop1, w = Tweight, na.rm = TRUE)*10,
+me_prop2 = weighted.mean(prop2, w = Tweight, na.rm = TRUE)*10,
+me_mean = weighted.mean(trust_police, w = Tweight, na.rm = TRUE),
+se_prop1 = sqrt(weighted.mean(prop1, Tweight, na.rm = TRUE) *
+(1 - weighted.mean(prop1, Tweight, na.rm = TRUE))/
+n())*10,
+se_prop2 = sqrt(weighted.mean(prop2, Tweight, na.rm = TRUE) *
+(1 - weighted.mean(prop1, Tweight, na.rm = TRUE))/
+n())*10,
+se_mean = sd(trust_police, na.rm = TRUE)/sqrt(nobs)) %>%
+gather(variable, value, 5:10) %>%
+mutate(stat = substr(variable, 1, 2),
+type = substr(variable, 4, 8)) %>%
+select(-variable) %>%
+spread(stat, value) %>%
+filter(!is.na(me)) %>%
+mutate(type = plyr::mapvalues(type, c("prop1", "prop2", "mean"),
+c("Proportion > 5", "Proportion >= 5",
+"Mean (0-10)"))) %>%
+group_by(Tcountry, Tyear, type) %>%
+mutate(counts = n(),
+country = countrycode(Tcountry, "iso2c", "country.name")) %>%
+filter(counts > 1) %>%
+ggplot(., aes(x = reorder(paste(country, Tyear), desc(paste(country, Tyear))),
+y = me, col = Tproject)) +
+#geom_line(aes(group = paste(country, Tyear))) +
+#geom_point(size = 2) +
+geom_pointrange(aes(ymin = me - 1.96*se,
+ymax = me + 1.96*se),
+size = 0.5, alpha = 0.7) +
+xlab("") + ylab("Aggregate country-year level") +
+ylim(0,10) +
+coord_flip() +
+theme_minimal() +
+scale_color_manual(name = "Project",
+values = cbPalette[1:3]) +
+ggtitle("Country-year levels of trust in the police by aggregate type") +
+labs(caption = "Data souce: ESS 1-8, EQLS 1-4, EVS 1-5.
+Proportions (second and third facet) multiplied by 10 for comparability.") +
+facet_wrap("type")
+all_data %>%
+filter(!is.na(trust_police)) %>%
+group_by(Tproject, Tcountry, Tyear) %>%
+mutate(prop1 = ifelse(trust_police > 5, 1, 0),
+prop2 = ifelse(trust_police >= 5, 1, 0)) %>%
+summarise(nobs = sum(Tweight),
+me_prop1 = weighted.mean(prop1, w = Tweight, na.rm = TRUE)*10,
+me_prop2 = weighted.mean(prop2, w = Tweight, na.rm = TRUE)*10,
+me_mean = weighted.mean(trust_police, w = Tweight, na.rm = TRUE),
+se_prop1 = sqrt(weighted.mean(prop1, Tweight, na.rm = TRUE) *
+(1 - weighted.mean(prop1, Tweight, na.rm = TRUE))/
+n())*10,
+se_prop2 = sqrt(weighted.mean(prop2, Tweight, na.rm = TRUE) *
+(1 - weighted.mean(prop1, Tweight, na.rm = TRUE))/
+n())*10,
+se_mean = radiant.data::weighted.sd(trust_police, w = Tweight, na.rm = TRUE)/sqrt(nobs)) %>%
+gather(variable, value, 5:10)
+all_data %>%
+filter(!is.na(trust_police)) %>%
+group_by(Tproject, Tcountry, Tyear) %>%
+mutate(prop1 = ifelse(trust_police > 5, 1, 0),
+prop2 = ifelse(trust_police >= 5, 1, 0)) %>%
+summarise(nobs = sum(Tweight),
+me_prop1 = weighted.mean(prop1, w = Tweight, na.rm = TRUE)*10,
+me_prop2 = weighted.mean(prop2, w = Tweight, na.rm = TRUE)*10,
+me_mean = weighted.mean(trust_police, w = Tweight, na.rm = TRUE),
+se_prop1 = sqrt(weighted.mean(prop1, Tweight, na.rm = TRUE) *
+(1 - weighted.mean(prop1, Tweight, na.rm = TRUE))/
+n())*10,
+se_prop2 = sqrt(weighted.mean(prop2, Tweight, na.rm = TRUE) *
+(1 - weighted.mean(prop1, Tweight, na.rm = TRUE))/
+n())*10,
+se_mean = radiant.data::weighted.sd(trust_police, w = Tweight, na.rm = TRUE)/sqrt(nobs)) %>%
+gather(variable, value, 5:10) %>%
+mutate(stat = substr(variable, 1, 2),
+type = substr(variable, 4, 8)) %>%
+select(-variable) %>%
+spread(stat, value) %>%
+filter(!is.na(me))
+table(all_data$trust_police, exclude = "none")
+country_year_police <- all_data %>%
+group_by(t_country, t_year, t_project) %>%
+summarise(trust_police = mean(t_trust_police, na.rm = TRUE)) %>%
+filter(!is.na(trust_police)) %>%
+spread(t_project, trust_police) %>%
+mutate(EQLS = ifelse(!is.na(EQLS), "EQLS", ""),
+ESS = ifelse(!is.na(ESS), "ESS", ""),
+EVS = ifelse(!is.na(EVS), "EVS", ""),
+av = trimws(paste(EQLS, ESS, EVS), "left")) %>%
+select(t_country, t_year, av) %>%
+spread(t_year, av)
+country_year_police <- all_data %>%
+group_by(Tcountry, Tyear, Tproject) %>%
+summarise(trust_police = mean(trust_police, na.rm = TRUE)) %>%
+filter(!is.na(trust_police)) %>%
+spread(Tproject, trust_police) %>%
+mutate(EQLS = ifelse(!is.na(EQLS), "EQLS", ""),
+ESS = ifelse(!is.na(ESS), "ESS", ""),
+EVS = ifelse(!is.na(EVS), "EVS", ""),
+av = trimws(paste(EQLS, ESS, EVS), "left")) %>%
+select(Tcountry, Tyear, av) %>%
+spread(Tyear, av)
+View(country_year_police)
+install.packages("flexdashboard")
+all_data %>%
+filter(!is.na(trust_police)) %>%
+group_by(Tproject, Tcountry, Tyear) %>%
+mutate(prop1 = ifelse(trust_police > 5, 1, 0),
+prop2 = ifelse(trust_police >= 5, 1, 0)) %>%
+summarise(nobs = sum(Tweight),
+me_prop1 = weighted.mean(prop1, w = Tweight, na.rm = TRUE)*10,
+me_prop2 = weighted.mean(prop2, w = Tweight, na.rm = TRUE)*10,
+me_mean = weighted.mean(trust_police, w = Tweight, na.rm = TRUE),
+se_prop1 = sqrt(weighted.mean(prop1, Tweight, na.rm = TRUE) *
+(1 - weighted.mean(prop1, Tweight, na.rm = TRUE))/
+n())*10,
+se_prop2 = sqrt(weighted.mean(prop2, Tweight, na.rm = TRUE) *
+(1 - weighted.mean(prop1, Tweight, na.rm = TRUE))/
+n())*10,
+se_mean = radiant.data::weighted.sd(trust_police, w = Tweight, na.rm = TRUE)/sqrt(nobs)) %>%
+gather(variable, value, 5:10) %>%
+mutate(stat = substr(variable, 1, 2),
+type = substr(variable, 4, 8)) %>%
+select(-variable) %>%
+spread(stat, value) %>%
+filter(!is.na(me))
+View(country_year_police)
+all_data %>%
+group_by(Tcountry, Tyear, Tproject) %>%
+summarise(trust_police = mean(trust_police, na.rm = TRUE)) %>%
+filter(!is.na(trust_police))
+a <- all_data %>%
+group_by(Tcountry, Tyear, Tproject) %>%
+summarise(trust_police = mean(trust_police, na.rm = TRUE)) %>%
+filter(!is.na(trust_police))
+View(a)
+install.packages("splitstackshape")
+blogdown::serve_site
+blogdown::serve_site()
+blogdown::serve_site()
+blogdown::serve_site()
+servr::daemon_stop(1)
+blogdown::serve_site()
+blogdown::serve_site()
+blogdown::serve_site()
+servr::daemon_stop(1)
+blogdown::serve_site()
+blogdown::serve_site()
+servr::daemon_stop(1)
+blogdown::serve_site()
+data <- read.csv("C:/Users/mkolc/Google Drive/Work in progress/Aalto visit/data/wikipedia/wikipedia-rfa-toxicity.csv",
+stringsAsFactors = FALSE)
+data %>%
+filter(yea > 2003, yea < 2013, nchar(txt) < 100) %>%
+select(yea, src, tgt, vot, txt) %>%
+head(5) %>%
+kable(align = c("c", "c", "c", "c", "l")) %>%
+column_spec(., 1:4, width = "8em") %>%
+column_spec(., 5, width = "60em")
+library(peRspective) # for accessing the Perspective API
+library(wesanderson) # colors
+library(tidyverse) # for manipulating data
+library(janitor) # for cleaning variable names
+library(knitr) # for displaying tables
+library(kableExtra) # for formatting tables
+library(tidytext) # for tokenizing
+library(lubridate)  # for dealing with dates
+data %>%
+filter(yea > 2003, yea < 2013, nchar(txt) < 100) %>%
+select(yea, src, tgt, vot, txt) %>%
+head(5) %>%
+kable(align = c("c", "c", "c", "c", "l")) %>%
+column_spec(., 1:4, width = "8em") %>%
+column_spec(., 5, width = "60em")
+data %>%
+filter(yea > 2003, yea < 2013) %>%
+count(yea, tgt, res, vote_start) %>%
+count(yea) %>%
+ggplot(., aes(x = yea, y = n)) +
+geom_line(size = 1, col = "gray50") +
+scale_x_continuous(breaks = c(2004:2012)) +
+ylab("Number of Requests for Adminship") +
+xlab("") +
+ggtitle("Number of Requests for Adminship, 2004-2012") +
+expand_limits(y = 0) +
+theme_bw() +
+theme(panel.grid.minor.x = element_blank())
+View(data)
+rfa <-
+# read in data file
+read.delim("http://snap.stanford.edu/data/wiki-RfA.txt.gz",
+stringsAsFactors = FALSE,
+header = FALSE)
+View(rfa)
+rfa <-
+# read in data file
+read.delim("C:/Users/mkolc/Google Drive/Work in progress/Aalto visit/data/wikipedia/wiki-RfA.txt",
+stringsAsFactors = FALSE,
+header = FALSE) %>%
+# separate variable names and values
+mutate(var = sub("(:*)[:].*", "\\1", V1),
+value = sub("[A-Z]{3}[:]", "\\1", V1),
+var = ifelse(var == "TXT:", "TXT", var),
+group = rep(1:89284, each=7)) %>%
+select(-V1) %>%
+# reshape to wide
+spread(var, value) %>%
+# convert selected variables to numeric
+mutate_at(vars(RES, VOT, YEA), as.numeric) %>%
+mutate(textid = as.character(row_number())) %>%
+# split DAT into date and time
+separate(DAT, c("time", "date"), "\\, ") %>%
+# format date and date
+mutate(date = dmy(date)) %>%
+group_by(TGT, YEA, RES) %>%
+arrange(TGT, YEA, RES, date, time) %>%
+# create RfA starting dates (min_date) that serve as RfA IDs
+mutate(is7 = (date - lag(date)) <= 7,
+start = is.na(is7),
+new = is7 == FALSE | start == TRUE,
+vote_start = ifelse(new == TRUE, date, NA)) %>%
+fill(vote_start, .direction = "down") %>%
+ungroup() %>%
+clean_names()
+rfa %>%
+filter(yea > 2003, yea < 2013) %>%
+count(yea, tgt, res, vote_start) %>%
+count(yea) %>%
+ggplot(., aes(x = yea, y = n)) +
+geom_line(size = 1, col = "gray50") +
+scale_x_continuous(breaks = c(2004:2012)) +
+ylab("Number of Requests for Adminship") +
+xlab("") +
+ggtitle("Number of Requests for Adminship, 2004-2012") +
+expand_limits(y = 0) +
+theme_bw() +
+theme(panel.grid.minor.x = element_blank())
+blogdown::serve_site()
+blogdown::serve_site()
+library(readr)
+data <- read_csv("C:/Users/mkolc/Google Drive/Work in progress/Aalto visit/data/wikipedia/wikipedia-rfa-toxicity.zip",
+stringsAsFactors = FALSE)
+data <- read_csv("C:/Users/mkolc/Google Drive/Work in progress/Aalto visit/data/wikipedia/wikipedia-rfa-toxicity.zip")
+data %>%
+filter(yea > 2003, yea < 2013) %>%
+count(yea, tgt, res, vote_start) %>%
+count(yea) %>%
+ggplot(., aes(x = yea, y = n)) +
+geom_line(size = 1, col = "gray50") +
+scale_x_continuous(breaks = c(2004:2012)) +
+ylab("Number of Requests for Adminship") +
+xlab("") +
+ggtitle("Number of Requests for Adminship, 2004-2012") +
+expand_limits(y = 0) +
+theme_bw() +
+theme(panel.grid.minor.x = element_blank())
+blogdown::serve_site()
+blogdown::serve_site()
+blogdown::serve_site()
+servr::daemon_stop(1)

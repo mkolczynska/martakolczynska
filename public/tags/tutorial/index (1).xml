@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tutorial on Marta Kołczyńska</title>
+    <link>/tags/tutorial/</link>
+    <description>Recent content in Tutorial on Marta Kołczyńska</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
+    <lastBuildDate>Sun, 03 Feb 2019 15:52:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/tutorial/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Downloading country-level indicators on participation and economic inequality 2</title>
+      <link>/post/participation-inequality-indices-2/</link>
+      <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
+      
+      <guid>/post/participation-inequality-indices-2/</guid>
+      <description>DataPackagesVarieties of Democracy (V-Dem): Dedicated packagePolyarchy: Semicolon delimited CSV file -&amp;gt; rioFreedom House: Excel file with by-year sheetsPolity IV: SPSS file -&amp;gt; rioDemocracy Barometer: Excel file with header in top rows -&amp;gt; rioThe Standardized World Income Inequality Database (SWIID): Plain CSV file -&amp;gt; rioWorld Bank’s World Development Indicators: Dedicated packageMerging all datasetsWriting to fileShortly after writing this post on importing datasets in different formats (CSV, XLS, XLSX, SAV) to R, I got the following comment:</description>
+    </item>
+    
+    <item>
+      <title>Downloading country-level indicators on participation and economic inequality</title>
+      <link>/post/participation-inequality-indices/</link>
+      <pubDate>Sat, 02 Feb 2019 13:28:00 +0000</pubDate>
+      
+      <guid>/post/participation-inequality-indices/</guid>
+      <description>DataPackagesVarieties of Democracy (V-Dem): Dedicated packagePolyarchy: Semicolon delimited CSV fileFreedom House: Excel file with by-year sheetsPolity IV: SPSS fileDemocracy Barometer: Excel file with header in top rowsThe Standardized World Income Inequality Database (SWIID): Plain CSV fileWorld Bank’s World Development Indicators: Dedicated packageMerging all datasetsCountry graphsVariable graphsWriting to filewith Viktoriia Muliavka
+Social and political scientists often need to put together datasets of country-level political, economic, and demographic variables with data from different sources.</description>
+    </item>
+    
+    <item>
+      <title>Shiny app for exploring harmonized cross-national survey data (SDR v.1.0)</title>
+      <link>/post/sdr-exploration-shiny/</link>
+      <pubDate>Sun, 05 Aug 2018 07:32:00 +0000</pubDate>
+      
+      <guid>/post/sdr-exploration-shiny/</guid>
+      <description>InstructionsReferences In the previous post I wrote about downloading and exploring the Survey Data Recycling (SDR), version 1 dataset, which consists of selected harmonized variables from 22 survey projects, 1966-2013.
+The SDR project will develop a website for browsing, subsetting, downloading, and visualizing data from the SDR project. This website is currently under construction. Meanwhile, I made a Shiny app with basic functionalities of the future on-line browsing and subsetting tool (also serves as its mock-up): https://mkolczynska.</description>
+    </item>
+    
+    <item>
+      <title>Exploring the dataset of survey datasets: Survey Data Recycling version 1</title>
+      <link>/post/sdr-exploration/</link>
+      <pubDate>Thu, 02 Aug 2018 15:41:00 +0000</pubDate>
+      
+      <guid>/post/sdr-exploration/</guid>
+      <description>IntroductionDownloading the SDR dataExploring SDR: availability of variables by projectExploring SDR: availability of variables with different formulationsIdentifying surveys containing selected variablesSubsetting the Master FileCountry coverage plotCombining data from different survey projects creates new opportunities for research, alas, at the cost of increased volume (obviously) and complexity of the data. The Survey Data Recycling project created a dataset with data from 22 international survey projects.</description>
+    </item>
+    
+  </channel>
+</rss>

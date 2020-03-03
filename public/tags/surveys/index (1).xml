@@ -1,56 +1,42 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Cross National Research on Marta Kołczyńska</title>
-    <link>/tags/cross-national-research/</link>
-    <description>Recent content in Cross National Research on Marta Kołczyńska</description>
+    <title>Surveys on Marta Kołczyńska</title>
+    <link>/tags/surveys/</link>
+    <description>Recent content in Surveys on Marta Kołczyńska</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Sat, 21 Sep 2019 22:08:14 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 16 Jan 2019 11:32:14 +0000</lastBuildDate>
     
-	<atom:link href="/tags/cross-national-research/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/surveys/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Cleaning Freedom House indicators</title>
-      <link>/post/cleaning-fh-data/</link>
-      <pubDate>Sat, 21 Sep 2019 22:08:14 +0000</pubDate>
+      <title>Voter shifts in parliamentary elections in Poland, 2007-2015</title>
+      <link>/post/polpan-voting-alluvial-plots/</link>
+      <pubDate>Wed, 16 Jan 2019 11:32:14 +0000</pubDate>
       
-      <guid>/post/cleaning-fh-data/</guid>
-      <description>How to clean a very untidy data set with Freedom House country ratings, saved in an Excel sheet, which violates many principles of data organization in spreadsheets described in this paper by Karl Broman and Kara Woo, but otherwise is an invaluable source of data on freedom in the world?
-Data source: https://freedomhouse.org/content/freedom-world-data-and-resources
-The full code used in this post is available here.
-I would do this:
-Read in the file,</description>
+      <guid>/post/polpan-voting-alluvial-plots/</guid>
+      <description>How 2015 voters voted in 2007 and 2011How 2007 voters voted in 2011 and 2015About POLPANWhere did the current governing party get their votes from? Did supporters of the previous ruling party switch preferences or did they abstain from voting altogether? Cross-sectional datasets, such as one-off election polls, do not typically provide data to answer these questions. Panel studies, such as the Polish Panel Survey (POLPAN), do.</description>
     </item>
     
     <item>
-      <title>Political trust among electoral winners and losers in Europe</title>
-      <link>/post/ess-trust-institutions-electoral-winners-losers/</link>
-      <pubDate>Wed, 13 Feb 2019 11:29:00 +0000</pubDate>
+      <title>Measuring meritocracy with survey data</title>
+      <link>/post/issp-meritocracy-edu-income/</link>
+      <pubDate>Tue, 08 Jan 2019 15:10:00 +0000</pubDate>
       
-      <guid>/post/ess-trust-institutions-electoral-winners-losers/</guid>
-      <description>Winner-loser trust gap across countriesWinner-loser trust gap in PolandTrust differences across parties in PolandVoting for a party that ends up losing the election is known to be associated with lower satisfaction with democracy and trust in the parliament (cf. Martini and Quaranta 2019). How does Poland compare to other European countries? How has the winner-loser trust gap changed in Poland over time, and how have trust levels among supporters of current and former ruling parties changed in periods when they were not in government?</description>
+      <guid>/post/issp-meritocracy-edu-income/</guid>
+      <description>Determining meritocratic allocationCalculating the distance to meritocracyDistance to meritocracy by countryMeritocracy is a principle according to which rewards are based on merit, as well as an ideal situation resulting from the operation of this principle. In their 1985 Social Foces paper titled “How Far to Meritocracy? Empirical Tests of a Controversial Thesis”, Tadeusz Krauze and Kazimierz M. Słomczyński proposed an algorithm to construct a theoretical joint distribution of education and income, given their marginal distributions, that would satisfy the conditions of meritocratic allocation.</description>
     </item>
     
     <item>
-      <title>Downloading country-level indicators on participation and economic inequality 2</title>
-      <link>/post/participation-inequality-indices-2/</link>
-      <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
+      <title>Political participation patterns in Poland</title>
+      <link>/post/ess-lca-participation/</link>
+      <pubDate>Thu, 18 Oct 2018 16:13:14 +0000</pubDate>
       
-      <guid>/post/participation-inequality-indices-2/</guid>
-      <description>DataPackagesVarieties of Democracy (V-Dem): Dedicated packagePolyarchy: Semicolon delimited CSV file -&amp;gt; rioFreedom House: Excel file with by-year sheetsPolity IV: SPSS file -&amp;gt; rioDemocracy Barometer: Excel file with header in top rows -&amp;gt; rioThe Standardized World Income Inequality Database (SWIID): Plain CSV file -&amp;gt; rioWorld Bank’s World Development Indicators: Dedicated packageMerging all datasetsWriting to fileShortly after writing this post on importing datasets in different formats (CSV, XLS, XLSX, SAV) to R, I got the following comment:</description>
-    </item>
-    
-    <item>
-      <title>Downloading country-level indicators on participation and economic inequality</title>
-      <link>/post/participation-inequality-indices/</link>
-      <pubDate>Sat, 02 Feb 2019 13:28:00 +0000</pubDate>
-      
-      <guid>/post/participation-inequality-indices/</guid>
-      <description>DataPackagesVarieties of Democracy (V-Dem): Dedicated packagePolyarchy: Semicolon delimited CSV fileFreedom House: Excel file with by-year sheetsPolity IV: SPSS fileDemocracy Barometer: Excel file with header in top rowsThe Standardized World Income Inequality Database (SWIID): Plain CSV fileWorld Bank’s World Development Indicators: Dedicated packageMerging all datasetsCountry graphsVariable graphsWriting to filewith Viktoriia Muliavka
-Social and political scientists often need to put together datasets of country-level political, economic, and demographic variables with data from different sources.</description>
+      <guid>/post/ess-lca-participation/</guid>
+      <description>Political participation in PolandLatent class analysisThree types of participants: the Disengaged, Activists, and ProtestersRegion mapsI recently came across Jennifer Oser’s 2017 article in Social Indicators Research about “political tool kits”, i.e. profiles (or patterns) of participation in different political activities. Her general argument is that research on citizen participation would benefit from analyses of such participation patterns instead of (or at least in addition to) just looking at determinants of participation in single activities.</description>
     </item>
     
     <item>
@@ -98,6 +84,16 @@ Like in a couple of previous posts (here, here and here) I use data from the Sur
       
       <guid>/post/sdr-demonstrations-multiplets/</guid>
       <description>DataDifferences within country-yearsDifferences by groupsGenderAgeUrban/rural residenceEducationSampling schemeThe growth in cross-national survey projects in the last decades leads to situations when two or more surveys are carried out in the same country and the same year but in different projects, and contain overlapping sets of survey questions. Assuming that the surveys are based on representative samples - a claim that major cross-national survey projects typically make - it could be expected that estimates from surveys carried out in the same country and year are reasonably close.</description>
+    </item>
+    
+    <item>
+      <title>Validating survey data: Educational attainment in SDR and the OECD</title>
+      <link>/post/education-sdr-oecd/</link>
+      <pubDate>Mon, 13 Aug 2018 05:13:14 +0000</pubDate>
+      
+      <guid>/post/education-sdr-oecd/</guid>
+      <description>Educational attainment dataOECD dataSDR dataCleaning and merging SDR and OECD dataResultsThe curious case of ISSP SwitzerlandConclusionAppendixwith Przemek Powałko
+General population surveys with representative samples should have a similar education structure as shown by data from administrative sources, especially if survey weights are used. In this post we compare sample aggregates from 15 cross-national survey projects (including the European Social Survey, the World Values Survey and the European Values Study, and others) from the Survey Data Recycling database with educational attainment statistics from the OECD.</description>
     </item>
     
     <item>

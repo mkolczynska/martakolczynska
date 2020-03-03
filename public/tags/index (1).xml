@@ -1,0 +1,601 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Marta Kołczyńska</title>
+    <link>/tags/</link>
+    <description>Recent content in Tags on Marta Kołczyńska</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
+    <lastBuildDate>Sun, 02 Sep 2018 10:09:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Age</title>
+      <link>/tags/age/</link>
+      <pubDate>Sun, 02 Sep 2018 10:09:00 +0000</pubDate>
+      
+      <guid>/tags/age/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Alluvial Diagrams</title>
+      <link>/tags/alluvial-diagrams/</link>
+      <pubDate>Wed, 16 Jan 2019 11:32:14 +0000</pubDate>
+      
+      <guid>/tags/alluvial-diagrams/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Api</title>
+      <link>/tags/api/</link>
+      <pubDate>Mon, 17 Jun 2019 23:49:00 +0000</pubDate>
+      
+      <guid>/tags/api/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Barcelona</title>
+      <link>/tags/barcelona/</link>
+      <pubDate>Tue, 30 Oct 2018 10:00:14 +0000</pubDate>
+      
+      <guid>/tags/barcelona/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Big Data</title>
+      <link>/tags/big-data/</link>
+      <pubDate>Tue, 30 Oct 2018 10:00:14 +0000</pubDate>
+      
+      <guid>/tags/big-data/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Biking</title>
+      <link>/tags/biking/</link>
+      <pubDate>Tue, 30 Oct 2018 10:00:14 +0000</pubDate>
+      
+      <guid>/tags/biking/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Codebook</title>
+      <link>/tags/codebook/</link>
+      <pubDate>Tue, 23 Apr 2019 03:03:00 +0000</pubDate>
+      
+      <guid>/tags/codebook/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cross National Research</title>
+      <link>/tags/cross-national-research/</link>
+      <pubDate>Wed, 13 Feb 2019 11:29:00 +0000</pubDate>
+      
+      <guid>/tags/cross-national-research/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Crosswalk</title>
+      <link>/tags/crosswalk/</link>
+      <pubDate>Tue, 09 Apr 2019 13:41:00 +0000</pubDate>
+      
+      <guid>/tags/crosswalk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Quality</title>
+      <link>/tags/data-quality/</link>
+      <pubDate>Sat, 29 Sep 2018 10:06:00 +0000</pubDate>
+      
+      <guid>/tags/data-quality/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Visualization</title>
+      <link>/tags/data-visualization/</link>
+      <pubDate>Wed, 16 Jan 2019 11:32:14 +0000</pubDate>
+      
+      <guid>/tags/data-visualization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Delab Uw</title>
+      <link>/tags/delab-uw/</link>
+      <pubDate>Tue, 13 Nov 2018 16:41:14 +0000</pubDate>
+      
+      <guid>/tags/delab-uw/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Democracy Barometer</title>
+      <link>/tags/democracy-barometer/</link>
+      <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
+      
+      <guid>/tags/democracy-barometer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Diy</title>
+      <link>/tags/diy/</link>
+      <pubDate>Tue, 09 Apr 2019 13:41:00 +0000</pubDate>
+      
+      <guid>/tags/diy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Dot Plot</title>
+      <link>/tags/dot-plot/</link>
+      <pubDate>Tue, 07 Aug 2018 12:46:00 +0000</pubDate>
+      
+      <guid>/tags/dot-plot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Economic Inequality</title>
+      <link>/tags/economic-inequality/</link>
+      <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
+      
+      <guid>/tags/economic-inequality/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Education</title>
+      <link>/tags/education/</link>
+      <pubDate>Mon, 13 Aug 2018 05:13:14 +0000</pubDate>
+      
+      <guid>/tags/education/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ess</title>
+      <link>/tags/ess/</link>
+      <pubDate>Wed, 13 Feb 2019 11:29:00 +0000</pubDate>
+      
+      <guid>/tags/ess/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>European Social Survey</title>
+      <link>/tags/european-social-survey/</link>
+      <pubDate>Tue, 07 Aug 2018 12:46:00 +0000</pubDate>
+      
+      <guid>/tags/european-social-survey/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Freedom House</title>
+      <link>/tags/freedom-house/</link>
+      <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
+      
+      <guid>/tags/freedom-house/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ggplot</title>
+      <link>/tags/ggplot/</link>
+      <pubDate>Mon, 13 Aug 2018 05:13:14 +0000</pubDate>
+      
+      <guid>/tags/ggplot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Glenn Gould</title>
+      <link>/tags/glenn-gould/</link>
+      <pubDate>Wed, 20 Feb 2019 23:29:00 +0000</pubDate>
+      
+      <guid>/tags/glenn-gould/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Google Trends</title>
+      <link>/tags/google-trends/</link>
+      <pubDate>Tue, 13 Nov 2018 16:41:14 +0000</pubDate>
+      
+      <guid>/tags/google-trends/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hackathon</title>
+      <link>/tags/hackathon/</link>
+      <pubDate>Tue, 13 Nov 2018 16:41:14 +0000</pubDate>
+      
+      <guid>/tags/hackathon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Inequality</title>
+      <link>/tags/inequality/</link>
+      <pubDate>Tue, 08 Jan 2019 15:10:00 +0000</pubDate>
+      
+      <guid>/tags/inequality/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Interdisciplinarity</title>
+      <link>/tags/interdisciplinarity/</link>
+      <pubDate>Wed, 20 Feb 2019 23:29:00 +0000</pubDate>
+      
+      <guid>/tags/interdisciplinarity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Isa</title>
+      <link>/tags/isa/</link>
+      <pubDate>Mon, 23 Jul 2018 15:24:00 +0000</pubDate>
+      
+      <guid>/tags/isa/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Issp</title>
+      <link>/tags/issp/</link>
+      <pubDate>Tue, 23 Apr 2019 03:03:00 +0000</pubDate>
+      
+      <guid>/tags/issp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Latent Class Analysis</title>
+      <link>/tags/latent-class-analysis/</link>
+      <pubDate>Thu, 18 Oct 2018 16:13:14 +0000</pubDate>
+      
+      <guid>/tags/latent-class-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Macro Indicators</title>
+      <link>/tags/macro-indicators/</link>
+      <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
+      
+      <guid>/tags/macro-indicators/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Meritocracy</title>
+      <link>/tags/meritocracy/</link>
+      <pubDate>Tue, 08 Jan 2019 15:10:00 +0000</pubDate>
+      
+      <guid>/tags/meritocracy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Next Generation Internet Data Sprint</title>
+      <link>/tags/next-generation-internet-data-sprint/</link>
+      <pubDate>Tue, 13 Nov 2018 16:41:14 +0000</pubDate>
+      
+      <guid>/tags/next-generation-internet-data-sprint/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ngi</title>
+      <link>/tags/ngi/</link>
+      <pubDate>Tue, 13 Nov 2018 16:41:14 +0000</pubDate>
+      
+      <guid>/tags/ngi/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Oecd</title>
+      <link>/tags/oecd/</link>
+      <pubDate>Mon, 13 Aug 2018 05:13:14 +0000</pubDate>
+      
+      <guid>/tags/oecd/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Parlgov</title>
+      <link>/tags/parlgov/</link>
+      <pubDate>Wed, 13 Feb 2019 11:29:00 +0000</pubDate>
+      
+      <guid>/tags/parlgov/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Perspective</title>
+      <link>/tags/perspective/</link>
+      <pubDate>Mon, 17 Jun 2019 23:49:00 +0000</pubDate>
+      
+      <guid>/tags/perspective/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Plotly</title>
+      <link>/tags/plotly/</link>
+      <pubDate>Sun, 05 Aug 2018 07:32:00 +0000</pubDate>
+      
+      <guid>/tags/plotly/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Poland</title>
+      <link>/tags/poland/</link>
+      <pubDate>Wed, 16 Jan 2019 11:32:14 +0000</pubDate>
+      
+      <guid>/tags/poland/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Political Inequality</title>
+      <link>/tags/political-inequality/</link>
+      <pubDate>Wed, 13 Feb 2019 11:29:00 +0000</pubDate>
+      
+      <guid>/tags/political-inequality/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Political Participation</title>
+      <link>/tags/political-participation/</link>
+      <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
+      
+      <guid>/tags/political-participation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Political Trust</title>
+      <link>/tags/political-trust/</link>
+      <pubDate>Wed, 13 Feb 2019 11:29:00 +0000</pubDate>
+      
+      <guid>/tags/political-trust/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Polity Iv</title>
+      <link>/tags/polity-iv/</link>
+      <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
+      
+      <guid>/tags/polity-iv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Polpan</title>
+      <link>/tags/polpan/</link>
+      <pubDate>Wed, 16 Jan 2019 11:32:14 +0000</pubDate>
+      
+      <guid>/tags/polpan/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Polyarchy</title>
+      <link>/tags/polyarchy/</link>
+      <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
+      
+      <guid>/tags/polyarchy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R</title>
+      <link>/tags/r/</link>
+      <pubDate>Mon, 17 Jun 2019 23:49:00 +0000</pubDate>
+      
+      <guid>/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Reproducibility</title>
+      <link>/tags/reproducibility/</link>
+      <pubDate>Tue, 09 Apr 2019 13:41:00 +0000</pubDate>
+      
+      <guid>/tags/reproducibility/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rfa</title>
+      <link>/tags/rfa/</link>
+      <pubDate>Mon, 17 Jun 2019 23:49:00 +0000</pubDate>
+      
+      <guid>/tags/rfa/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rio</title>
+      <link>/tags/rio/</link>
+      <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
+      
+      <guid>/tags/rio/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sdr</title>
+      <link>/tags/sdr/</link>
+      <pubDate>Sat, 29 Sep 2018 10:06:00 +0000</pubDate>
+      
+      <guid>/tags/sdr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Shiny</title>
+      <link>/tags/shiny/</link>
+      <pubDate>Sun, 02 Sep 2018 10:09:00 +0000</pubDate>
+      
+      <guid>/tags/shiny/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Sicss</title>
+      <link>/tags/sicss/</link>
+      <pubDate>Wed, 22 Aug 2018 09:34:00 +0000</pubDate>
+      
+      <guid>/tags/sicss/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Survey Data Harmonization</title>
+      <link>/tags/survey-data-harmonization/</link>
+      <pubDate>Tue, 23 Apr 2019 03:03:00 +0000</pubDate>
+      
+      <guid>/tags/survey-data-harmonization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Surveys</title>
+      <link>/tags/surveys/</link>
+      <pubDate>Wed, 16 Jan 2019 11:32:14 +0000</pubDate>
+      
+      <guid>/tags/surveys/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Swdchallenge</title>
+      <link>/tags/swdchallenge/</link>
+      <pubDate>Tue, 07 Aug 2018 12:46:00 +0000</pubDate>
+      
+      <guid>/tags/swdchallenge/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Swiid</title>
+      <link>/tags/swiid/</link>
+      <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
+      
+      <guid>/tags/swiid/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ted Talks</title>
+      <link>/tags/ted-talks/</link>
+      <pubDate>Wed, 22 Aug 2018 09:34:00 +0000</pubDate>
+      
+      <guid>/tags/ted-talks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Text Analysis</title>
+      <link>/tags/text-analysis/</link>
+      <pubDate>Wed, 22 Aug 2018 09:34:00 +0000</pubDate>
+      
+      <guid>/tags/text-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tidytext</title>
+      <link>/tags/tidytext/</link>
+      <pubDate>Wed, 22 Aug 2018 09:34:00 +0000</pubDate>
+      
+      <guid>/tags/tidytext/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tools</title>
+      <link>/tags/tools/</link>
+      <pubDate>Tue, 23 Apr 2019 03:03:00 +0000</pubDate>
+      
+      <guid>/tags/tools/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Toxicity</title>
+      <link>/tags/toxicity/</link>
+      <pubDate>Mon, 17 Jun 2019 23:49:00 +0000</pubDate>
+      
+      <guid>/tags/toxicity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tutorial</title>
+      <link>/tags/tutorial/</link>
+      <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
+      
+      <guid>/tags/tutorial/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Twitter</title>
+      <link>/tags/twitter/</link>
+      <pubDate>Mon, 23 Jul 2018 15:24:00 +0000</pubDate>
+      
+      <guid>/tags/twitter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>V Dem</title>
+      <link>/tags/v-dem/</link>
+      <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
+      
+      <guid>/tags/v-dem/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Wikipedia</title>
+      <link>/tags/wikipedia/</link>
+      <pubDate>Mon, 17 Jun 2019 23:49:00 +0000</pubDate>
+      
+      <guid>/tags/wikipedia/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>World Bank</title>
+      <link>/tags/world-bank/</link>
+      <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
+      
+      <guid>/tags/world-bank/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
