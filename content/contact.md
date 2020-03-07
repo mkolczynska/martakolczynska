@@ -2,11 +2,11 @@
 title = "Contact"
 date = "2018-07-07"
 sidemenu = "true"
-description = "How to contact me"
+description = " "
 +++
 
 e-mail: 
 
-mkolczynska(at)ifispan.waw.pl
-
 kolczynska.1(at)osu.edu
+
+mkolczynska(at)isppan.waw.pl
