@@ -1,0 +1,266 @@
+---
+title: "(In-)Consistency between international corruption indicators"
+author: "Marta Kołczyńska"
+date: 2020-07-21T21:29:01
+categories: ["R"]
+tags: ["R", "corruption", "macro indicators", "cross-national research", "V-Dem", "Quality of Government", "Worldwide Governance Indicators"]
+output:
+  blogdown::html_page:
+    toc: true
+    toc_depth: 4
+---
+
+### Overview
+
+Measuring corruption is hard, especially if one is interested in having corruption indicators that are comparable across countries and over time. Arguably the most famous corruption ranking is the [Corruption Perceptions Index](https://www.transparency.org/en/cpi) published annually by Transparency International, but it can't be used for over-time comparisons (cf. [Transparency International 2020, p. 26](https://www.transparency.org/files/content/pages/2019_CPI_Report_EN.pdf)).
+
+Other corruption indicators include:
+
+1. [Bayesian Corruption Indicator (BCI)](https://www.sciencedirect.com/science/article/pii/S0147596714000584) published in the [Quality of Government Dataset, QOG](https://qog.pol.gu.se/data)  
+
+2. Political Corruption Index by [Varieties of Democracy, V-Dem](https://www.v-dem.net/en/data/data-version-10/)
+
+3. Control of Corruption in the World Bank's [Worldwide Governance Indicators, WGI](https://info.worldbank.org/governance/wgi/)
+
+If these indicators measure the same concept, they should be correlated and change similarly over time, even if they are based on slightly different conceptualizations and definitions, rely on different source data, or use different calibration methods.
+
+
+There exist reports that compare corruption indicators, but they describe the different methodologies and data sources, and at most calculate overall correlations, which are always very strong:
+
+World Bank's Policy Resesarch Paper [*Can We Measure the Power of the Grabbing Hand? A Comparative Analysis of Different Indicators of Corruption*](http://documents1.worldbank.org/curated/en/113281515516828746/pdf/WPS8299.pdf) by Alexander Hamilton and Craig Hammer.
+
+[*Measuring Corruption: A Comparison Between the Transparency International’s Corruption Perceptions Index and the World Bank’s Worldwide Governance Indicators*](https://www.ifo.de/DocDL/dicereport309-rr2.pdf) by Anja Rohwer.
+
+Our World in Data has a report on [Corruption by Esteban Ortiz-Ospina and Max Roser](https://ourworldindata.org/corruption).
+
+Only [Standaert (2015)](https://www.sciencedirect.com/science/article/pii/S0147596714000584) notes the correlation between within-country changes in corruption as measured by the Bayesian Corruption Indicator he proposes, as well as the Corruption Perceptions Index and the Worldwide Governance Indicators. While overall correlations exceed 0.9, correlations between deviations from country averages range between 0.2 and 0.35, which means they are rather weak.
+
+Let's see how the three indicators compare.
+
+
+```{r eval = F, echo = F}
+### V-dem -----------
+vdem <- readRDS("C:/Users/mkolc/Google Drive/Work in progress/2018-2020/EVS trust governance/V-Dem-CY-Core-v10.rds") %>%
+  filter(year >= 1990) %>%
+  mutate(iso2 = countrycode(country_text_id, "iso3c", "iso2c"),
+         year = as.numeric(year)) %>%
+  select(iso2, year, v2x_corr) %>%
+  drop_na(iso2)
+
+### Quality of Government (QoG) -----------
+qog <- import("https://www.qogdata.pol.gu.se/data/qog_bas_ts_jan20.csv") %>%
+  filter(year >= 1990) %>%
+  drop_na(bci_bci) %>%
+  mutate(iso2 = countrycode::countrycode(ccode, "iso3n", "iso2c")) %>%
+  select(iso2, year, bci_bci) %>%
+  drop_na(iso2)
+
+### Worldwide Governance Indicators
+wgi <- import("C:/Users/mkolc/Google Drive/Work in progress/2018-2020/EVS trust governance/WGI.xlsx") %>%
+  mutate(iso2 = countrycode::countrycode(`Country Code`, "iso3c", "iso2c")) %>%
+  mutate_at(vars(ends_with("se") | ends_with("est")), as.numeric) %>%
+  mutate(cc_rev = (-cc_est + 2.5) / 5) %>%
+  select(iso2, year = Time, cc_rev) %>%
+  drop_na(iso2)
+
+### Join and calculate country means and deviations from the means
+corrupt <- inner_join(vdem, qog) %>%
+  left_join(wgi) %>%
+  mutate(continent = countrycode(iso2, "iso2c", "continent"))
+
+rio::export(corrupt, "data/corruption_indicators.csv")
+```
+
+
+
+```{r setup, echo = F, warning = F, message = F}
+library(rio)
+library(countrycode)
+library(viridis)
+library(knitr)
+library(kableExtra)
+library(tidyverse)
+
+corrupt <- import("data/corruption_indicators.csv") %>%
+  arrange(iso2, year) %>%
+  rename(qog_bci = bci_bci, wgi_cc = cc_rev, vdem_corr = v2x_corr) %>%
+  group_by(iso2) %>%
+  mutate(qog_bci_mean = mean(qog_bci, na.rm = TRUE),
+         vdem_corr_mean = mean(vdem_corr, na.rm = TRUE),
+         wgi_cc_mean = mean(wgi_cc, na.rm = TRUE),
+         qog_bci_diff = qog_bci - qog_bci_mean,
+         vdem_corr_diff = vdem_corr - vdem_corr_mean,
+         wgi_cc_diff = wgi_cc - wgi_cc_mean,
+         country = countrycode(iso2, "iso2c", "country.name")) %>%
+  ungroup()
+```
+
+### Scatter plots
+
+The correlation between the Bayesian Corruption Indicator (QOG) and Control of Corruption (WGI) is the strongest, because they rely on the same data but different estimation / scaling techniques (cf. [Standaert 2015](https://www.sciencedirect.com/science/article/pii/S0147596714000584)).
+
+```{r cor-qog-wgi, fig.height=5, fig.width=6.5, warning = F, echo = F}
+corrupt %>%
+  ggplot(., aes(x = qog_bci, y = wgi_cc, col = continent)) +
+  geom_point(size = 1.5, alpha = 0.5) +
+  xlab("QOG: Bayesian Corruption Indicator") +
+  ylab("WGI: Control of Corruption (reversed, rescaled)") +
+  scale_color_viridis_d("Continent") +
+  theme_minimal()
+```
+
+
+The association between the Political Corruption Index (V-Dem) and the Control of Corruption indicator (WGI) seems strong as well, but not necessarily linear and less consistent in the lower ranges of corruption.
+
+```{r cor-vdem-wgi, fig.height=5, fig.width=6.5, warning = F, echo = F}
+corrupt %>%
+  ggplot(., aes(x = vdem_corr, y = wgi_cc, col = continent)) +
+  geom_point(size = 1.5, alpha = 0.5) +
+  xlab("V-Dem: Political Corruption Index") +
+  ylab("WGI: Control of Corruption (reversed, rescaled)") +
+  scale_color_viridis_d("Continent") +
+  theme_minimal()
+```
+
+The association between the Political Corruption Index (V-Dem) and the Bayesian Corruption Indicator (QOG) is surprisingly weak. For medium levels of corruption according to BCI, i.e. around 0.5, the V-Dem indicator ranges between around 0.12 to almost 1, i.e. over almost its entire range.
+
+```{r cor-vdem-qog, fig.height=5, fig.width=6.5, warning = F, echo = F}
+corrupt %>%
+  ggplot(., aes(x = vdem_corr, y = qog_bci, col = continent)) +
+  geom_point(size = 1.5, alpha = 0.5) +
+  xlab("V-Dem: Political Corruption Index") +
+  ylab("QOG: Bayesian Corruption Indicator") +
+  scale_color_viridis_d("Continent") +
+  theme_minimal()
+```
+
+### Correlations
+
+Let's look at pairwise correlations to get the numbers.
+
+First, correlations between levels of the three indicators for all country-years (some 4500 observations):
+
+```{r echo = F}
+cor(corrupt[ , c("qog_bci", "wgi_cc", "vdem_corr")], 
+    use = "pairwise.complete.obs") %>%
+  round(., 3) %>%
+  kable %>%
+  kable_styling(bootstrap_options =
+                c("striped", "hover", "condensed"),
+                fixed_thead = T,
+                font_size = 10,
+                position = "left") %>%
+  column_spec(1:4, width = "8em")
+```
+
+Next, pairwise correlations between country means for 173 countries:
+
+```{r echo = F}
+corrupt_cntry <- corrupt %>% distinct(iso2, qog_bci_mean, vdem_corr_mean, wgi_cc_mean)
+
+cor(corrupt_cntry[ , c("qog_bci_mean", "wgi_cc_mean", "vdem_corr_mean")], 
+    use = "pairwise.complete.obs") %>%
+  round(., 3) %>%
+  kable %>%
+  kable_styling(bootstrap_options =
+                c("striped", "hover", "condensed"),
+                fixed_thead = T,
+                font_size = 10,
+                position = "left") %>%
+  column_spec(1:4, width = "8em")
+
+```
+
+Now, pairwise correlations between within-country deviations from the means:
+
+```{r echo = F}
+cor(corrupt[ , c("qog_bci_diff", "wgi_cc_diff", "vdem_corr_diff")], 
+    use = "pairwise.complete.obs") %>%
+  round(., 3) %>%
+  kable %>%
+  kable_styling(bootstrap_options =
+                c("striped", "hover", "condensed"),
+                fixed_thead = T,
+                font_size = 10,
+                position = "left") %>%
+  column_spec(1:4, width = "8em")
+```
+
+These last correlarions are very weak. As shown in the scatterplot, there is little consistency between the de-meaned V-Dem Political Corruption Index and the Bayesian Corruption Indicator.
+
+```{r cor-diffs, fig.height=5, fig.width=6.5, warning = F, echo = F}
+corrupt %>%
+  ggplot(., aes(x = vdem_corr_diff, y = qog_bci_diff)) +
+  geom_point(size = 1.5, alpha = 0.3, col = "#B63679FF") +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "black") +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "black") +
+  xlab("V-Dem: Political corruption index - \ndeviation from country mean") +
+  ylab("QOG: Bayesian Corruption Indicator - \ndeviation from country mean") +
+  theme_minimal() +
+  annotate(geom = "curve", x = 0.35, y = 10, xend = 0.48, yend = 5.5, 
+           curvature = .1, arrow = arrow(length = unit(2, "mm"))) +
+  annotate(geom = "text", x = 0.35, y = 10.5, label = "Georgia (1996-2003)", hjust = "center", size = 4) +
+  annotate(geom = "curve", x = -0.32, y = 10.3, xend = -0.45, yend = 9, 
+           curvature = -.1, arrow = arrow(length = unit(2, "mm"))) +
+  annotate(geom = "text", x = -0.25, y = 10.5, label = "Tunisia", hjust = "center", size = 4) +
+  annotate(geom = "curve", x = 0.35, y = -5, xend = 0.26, yend = -6.7, 
+           curvature = -.1, arrow = arrow(length = unit(2, "mm"))) +
+  annotate(geom = "text", x = 0.37, y = -4.4, label = "Turkey", hjust = "center", size = 4) +
+  annotate(geom = "curve", x = -0.43, y = -5.2, xend = -0.3, yend = -7.5, 
+           curvature = -.1, arrow = arrow(length = unit(2, "mm"))) +
+  annotate(geom = "text", x = -0.5, y = -5.5, label = "Georgia \n(2012-2016)", hjust = "center", size = 4)
+```
+
+
+Looking at continents separately, correlations between the Bayesian Corruption Indicator and the V-Dem Corruption Index are negligible in Africa, the Americas, and Europe, and small in Asia and Oceania. In Europe, the correlation is actually negative.
+
+```{r echo = F}
+corrupt %>%
+  group_by(continent) %>%
+  summarise(n_country_years = n(),
+            n_countries = n_distinct(iso2),
+            cor_qog_vdem = round(cor(qog_bci_diff, vdem_corr_diff, use = "pairwise.complete.obs"), 3),
+            cor_qog_wgi = round(cor(qog_bci_diff, wgi_cc_diff, use = "pairwise.complete.obs"), 3),
+            cor_vdem_wgi = round(cor(vdem_corr_diff, wgi_cc_diff, use = "pairwise.complete.obs"), 3)) %>%
+  kable(., col.names = c("Continent", "N country-years", "N countries", 
+                         "QOG - V-Dem", "WOG - WGI", "V-Dem - WGI")) %>%
+  kable_styling(bootstrap_options =
+                c("striped", "hover", "condensed"),
+                font_size = 10,
+                position = "left") %>%
+  column_spec(1:6, width = "8em") %>%
+  add_header_above(c(" " = 3, "Pairwise correlations" = 3))
+```
+
+### Trends in corruption indicators in Europe, 1990-2019
+
+How does this weak correlation look like when looking at corruption trajectories? As shown below, the V-Dem index has little to do with the remaining two indicators. The V-Dem index is much more volatile, but only in countries where it changes at all. In most Western European countries the V-Dem index barely moves, while the QOG and WGI indicator constantly change, even if only a little.
+
+There are also situations where the indicators move in opposite directions. In Macedonia, for example, in the late 2000s, the V-Dem index improved, while the other two dropped. In the recent years in Italy, the V-Dem index declined and the other two increased.
+
+All in all, it looks like the choice of the corruption indicator can have huge consequences for results of longitudinal analyses (but probably not of cross-national models) which is of course disturbing.
+
+Perhaps the truth lies in the middle.
+
+```{r europe-trends, fig.height=10, fig.width=8, warnings = F, echo = F, warning = F}
+corrupt %>%
+  filter(continent == "Europe") %>%
+  group_by(country) %>%
+  fill(wgi_cc) %>%
+  mutate(bci_100 = qog_bci / 100) %>%
+  select(country, continent, year, bci_100, vdem_corr, wgi_cc) %>%
+  gather(indicator, value, 4:6) %>%
+  ggplot(., aes(x = year, y = value, col = indicator)) +
+  geom_line(size = 1, alpha = 0.7) +
+  scale_color_viridis_d("Indicator",
+                        breaks =  c("bci_100", "wgi_cc", "vdem_corr"),
+                        labels = c("QOG", "WGI", "V-Dem"),
+                        option = "plasma") +
+  theme_minimal() +
+  xlab("") +
+  facet_wrap("country", ncol = 5)
+```
+
+
+
+

@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="generator" content="Hugo 0.42.2" />
+
+  <title>(In-)Consistency between international corruption indicators &middot; Marta Kołczyńska</title>
+
+  
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/pure-min.css">
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-old-ie-min.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pure/1.0.0/grids-responsive-min.css">
+  <!--<![endif]-->
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="/css/side-menu-old-ie.css">
+  <![endif]-->
+  <!--[if gt IE 8]><!-->
+  <link rel="stylesheet" href="/css/side-menu.css">
+  <!--<![endif]-->
+
+  <link rel="stylesheet" href="/css/blackburn.css">
+
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+  <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet" type="text/css">
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+ 
+  
+
+  
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/foundation.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  
+  <script>hljs.initHighlightingOnLoad();</script>
+  
+
+  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+
+  
+    
+        <link rel="stylesheet" href="/css/circle.css">
+    
+  
+  
+
+</head>
+
+
+<body>
+<div id="layout">
+
+  
+<a href="#menu" id="menuLink" class="menu-link">
+  
+  <span></span>
+</a>
+<div id="menu">
+
+  
+  <a class="pure-menu-heading brand" href="/"><img src="/images/puzzleblacksmall.png" alt="logo" /></a>
+
+
+
+  <div class="pure-menu">
+    <ul class="pure-menu-list">
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/"><i class='fa fa-home fa-fw'></i>Home</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/about/"><i class='fa fa-user fa-fw'></i>About</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/research/"><i class='fa fa-bar-chart fa-fw'></i>Research</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+      
+        </li>
+      
+      
+        <li class="pure-menu-item">
+          <a class="pure-menu-link" href="/contact/"><i class='fa fa-envelope fa-fw'></i>Contact</a>
+      
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="pure-menu social">
+  <ul class="pure-menu-list">
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://twitter.com/MartaKolcz" target="_blank"><i class="fa fa-twitter-square fa-fw"></i>Twitter</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <li class="pure-menu-item">
+      <a class="pure-menu-link" href="https://github.com/mkolczynska" target="_blank"><i class="fa fa-github-square fa-fw"></i>GitHub</a>
+    </li>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+  </ul>
+</div>
+
+
+  <div>
+  <div class="small-print">
+    <small>&copy; 2018. Marta Kołczyńska</small>
+  </div>
+  <div class="small-print">
+    <small>Built with&nbsp;<a href="https://gohugo.io/" target="_blank">Hugo</a></small>
+    <small>Theme&nbsp;<a href="https://github.com/yoshiharuyamashita/blackburn" target="_blank">Blackburn</a></small>
+  </div>
+</div>
+
+</div>
+
+
+  <div id="main">
+
+
+<div class="header">
+  <h1>(In-)Consistency between international corruption indicators</h1>
+  <h2></h2>
+</div>
+<div class="content">
+
+  <div class="post-meta">
+
+  <div>
+    <i class="fa fa-calendar fa-fw"></i>
+    <time>21 Jul 2020, 21:29</time>
+  </div>
+
+  
+
+  
+
+  
+  
+  
+  <div>
+    <i class="fa fa-tags fa-fw"></i>
+    
+      <a class="post-taxonomy-tag" href="/tags/r">R</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/corruption">corruption</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/macro-indicators">macro indicators</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/cross-national-research">cross-national research</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/v-dem">V-Dem</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/quality-of-government">Quality of Government</a>&nbsp;&#47;
+    
+      <a class="post-taxonomy-tag" href="/tags/worldwide-governance-indicators">Worldwide Governance Indicators</a>
+    
+  </div>
+  
+  
+
+</div>
+
+  <script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+
+<div id="TOC">
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#scatter-plots">Scatter plots</a></li>
+<li><a href="#correlations">Correlations</a></li>
+<li><a href="#trends-in-corruption-indicators-in-europe-1990-2019">Trends in corruption indicators in Europe, 1990-2019</a></li>
+</ul>
+</div>
+
+<div id="overview" class="section level3">
+<h3>Overview</h3>
+<p>Measuring corruption is hard, especially if one is interested in having corruption indicators that are comparable across countries and over time. Arguably the most famous corruption ranking is the <a href="https://www.transparency.org/en/cpi">Corruption Perceptions Index</a> published annually by Transparency International, but it can’t be used for over-time comparisons (cf. <a href="https://www.transparency.org/files/content/pages/2019_CPI_Report_EN.pdf">Transparency International 2020, p. 26</a>).</p>
+<p>Other corruption indicators include:</p>
+<ol style="list-style-type: decimal">
+<li><p><a href="https://www.sciencedirect.com/science/article/pii/S0147596714000584">Bayesian Corruption Indicator (BCI)</a> published in the <a href="https://qog.pol.gu.se/data">Quality of Government Dataset, QOG</a></p></li>
+<li><p>Political Corruption Index by <a href="https://www.v-dem.net/en/data/data-version-10/">Varieties of Democracy, V-Dem</a></p></li>
+<li><p>Control of Corruption in the World Bank’s <a href="https://info.worldbank.org/governance/wgi/">Worldwide Governance Indicators, WGI</a></p></li>
+</ol>
+<p>If these indicators measure the same concept, they should be correlated and change similarly over time, even if they are based on slightly different conceptualizations and definitions, rely on different source data, or use different calibration methods.</p>
+<p>There exist reports that compare corruption indicators, but they describe the different methodologies and data sources, and at most calculate overall correlations, which are always very strong:</p>
+<p>World Bank’s Policy Resesarch Paper <a href="http://documents1.worldbank.org/curated/en/113281515516828746/pdf/WPS8299.pdf"><em>Can We Measure the Power of the Grabbing Hand? A Comparative Analysis of Different Indicators of Corruption</em></a> by Alexander Hamilton and Craig Hammer.</p>
+<p><a href="https://www.ifo.de/DocDL/dicereport309-rr2.pdf"><em>Measuring Corruption: A Comparison Between the Transparency International’s Corruption Perceptions Index and the World Bank’s Worldwide Governance Indicators</em></a> by Anja Rohwer.</p>
+<p>Our World in Data has a report on <a href="https://ourworldindata.org/corruption">Corruption by Esteban Ortiz-Ospina and Max Roser</a>.</p>
+<p>Only <a href="https://www.sciencedirect.com/science/article/pii/S0147596714000584">Standaert (2015)</a> notes the correlation between within-country changes in corruption as measured by the Bayesian Corruption Indicator he proposes, as well as the Corruption Perceptions Index and the Worldwide Governance Indicators. While overall correlations exceed 0.9, correlations between deviations from country averages range between 0.2 and 0.35, which means they are rather weak.</p>
+<p>Let’s see how the three indicators compare.</p>
+</div>
+<div id="scatter-plots" class="section level3">
+<h3>Scatter plots</h3>
+<p>The correlation between the Bayesian Corruption Indicator (QOG) and Control of Corruption (WGI) is the strongest, because they rely on the same data but different estimation / scaling techniques (cf. <a href="https://www.sciencedirect.com/science/article/pii/S0147596714000584">Standaert 2015</a>).</p>
+<p><img src="/post/corruption-indicators_files/figure-html/cor-qog-wgi-1.png" width="624" /></p>
+<p>The association between the Political Corruption Index (V-Dem) and the Control of Corruption indicator (WGI) seems strong as well, but not necessarily linear and less consistent in the lower ranges of corruption.</p>
+<p><img src="/post/corruption-indicators_files/figure-html/cor-vdem-wgi-1.png" width="624" /></p>
+<p>The association between the Political Corruption Index (V-Dem) and the Bayesian Corruption Indicator (QOG) is surprisingly weak. For medium levels of corruption according to BCI, i.e. around 0.5, the V-Dem indicator ranges between around 0.12 to almost 1, i.e. over almost its entire range.</p>
+<p><img src="/post/corruption-indicators_files/figure-html/cor-vdem-qog-1.png" width="624" /></p>
+</div>
+<div id="correlations" class="section level3">
+<h3>Correlations</h3>
+<p>Let’s look at pairwise correlations to get the numbers.</p>
+<p>First, correlations between levels of the three indicators for all country-years (some 4500 observations):</p>
+<table class="table table-striped table-hover table-condensed" style="font-size: 10px; ">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+qog_bci
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+wgi_cc
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+vdem_corr
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 8em; ">
+qog_bci
+</td>
+<td style="text-align:right;width: 8em; ">
+1.000
+</td>
+<td style="text-align:right;width: 8em; ">
+0.91
+</td>
+<td style="text-align:right;width: 8em; ">
+0.816
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 8em; ">
+wgi_cc
+</td>
+<td style="text-align:right;width: 8em; ">
+0.910
+</td>
+<td style="text-align:right;width: 8em; ">
+1.00
+</td>
+<td style="text-align:right;width: 8em; ">
+0.900
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 8em; ">
+vdem_corr
+</td>
+<td style="text-align:right;width: 8em; ">
+0.816
+</td>
+<td style="text-align:right;width: 8em; ">
+0.90
+</td>
+<td style="text-align:right;width: 8em; ">
+1.000
+</td>
+</tr>
+</tbody>
+</table>
+<p>Next, pairwise correlations between country means for 173 countries:</p>
+<table class="table table-striped table-hover table-condensed" style="font-size: 10px; ">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+qog_bci_mean
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+wgi_cc_mean
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+vdem_corr_mean
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 8em; ">
+qog_bci_mean
+</td>
+<td style="text-align:right;width: 8em; ">
+1.000
+</td>
+<td style="text-align:right;width: 8em; ">
+0.925
+</td>
+<td style="text-align:right;width: 8em; ">
+0.833
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 8em; ">
+wgi_cc_mean
+</td>
+<td style="text-align:right;width: 8em; ">
+0.925
+</td>
+<td style="text-align:right;width: 8em; ">
+1.000
+</td>
+<td style="text-align:right;width: 8em; ">
+0.921
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 8em; ">
+vdem_corr_mean
+</td>
+<td style="text-align:right;width: 8em; ">
+0.833
+</td>
+<td style="text-align:right;width: 8em; ">
+0.921
+</td>
+<td style="text-align:right;width: 8em; ">
+1.000
+</td>
+</tr>
+</tbody>
+</table>
+<p>Now, pairwise correlations between within-country deviations from the means:</p>
+<table class="table table-striped table-hover table-condensed" style="font-size: 10px; ">
+<thead>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+qog_bci_diff
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+wgi_cc_diff
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+vdem_corr_diff
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 8em; ">
+qog_bci_diff
+</td>
+<td style="text-align:right;width: 8em; ">
+1.000
+</td>
+<td style="text-align:right;width: 8em; ">
+0.341
+</td>
+<td style="text-align:right;width: 8em; ">
+0.088
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 8em; ">
+wgi_cc_diff
+</td>
+<td style="text-align:right;width: 8em; ">
+0.341
+</td>
+<td style="text-align:right;width: 8em; ">
+1.000
+</td>
+<td style="text-align:right;width: 8em; ">
+0.303
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 8em; ">
+vdem_corr_diff
+</td>
+<td style="text-align:right;width: 8em; ">
+0.088
+</td>
+<td style="text-align:right;width: 8em; ">
+0.303
+</td>
+<td style="text-align:right;width: 8em; ">
+1.000
+</td>
+</tr>
+</tbody>
+</table>
+<p>These last correlarions are very weak. As shown in the scatterplot, there is little consistency between the de-meaned V-Dem Political Corruption Index and the Bayesian Corruption Indicator.</p>
+<p><img src="/post/corruption-indicators_files/figure-html/cor-diffs-1.png" width="624" /></p>
+<p>Looking at continents separately, correlations between the Bayesian Corruption Indicator and the V-Dem Corruption Index are negligible in Africa, the Americas, and Europe, and small in Asia and Oceania. In Europe, the correlation is actually negative.</p>
+<table class="table table-striped table-hover table-condensed" style="font-size: 10px; ">
+<thead>
+<tr>
+<th style="border-bottom:hidden" colspan="3">
+</th>
+<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Pairwise correlations
+</div>
+</th>
+</tr>
+<tr>
+<th style="text-align:left;">
+Continent
+</th>
+<th style="text-align:right;">
+N country-years
+</th>
+<th style="text-align:right;">
+N countries
+</th>
+<th style="text-align:right;">
+QOG - V-Dem
+</th>
+<th style="text-align:right;">
+WOG - WGI
+</th>
+<th style="text-align:right;">
+V-Dem - WGI
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 8em; ">
+Africa
+</td>
+<td style="text-align:right;width: 8em; ">
+1370
+</td>
+<td style="text-align:right;width: 8em; ">
+54
+</td>
+<td style="text-align:right;width: 8em; ">
+0.037
+</td>
+<td style="text-align:right;width: 8em; ">
+0.300
+</td>
+<td style="text-align:right;width: 8em; ">
+0.293
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 8em; ">
+Americas
+</td>
+<td style="text-align:right;width: 8em; ">
+750
+</td>
+<td style="text-align:right;width: 8em; ">
+27
+</td>
+<td style="text-align:right;width: 8em; ">
+0.034
+</td>
+<td style="text-align:right;width: 8em; ">
+0.232
+</td>
+<td style="text-align:right;width: 8em; ">
+0.220
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 8em; ">
+Asia
+</td>
+<td style="text-align:right;width: 8em; ">
+1220
+</td>
+<td style="text-align:right;width: 8em; ">
+47
+</td>
+<td style="text-align:right;width: 8em; ">
+0.214
+</td>
+<td style="text-align:right;width: 8em; ">
+0.372
+</td>
+<td style="text-align:right;width: 8em; ">
+0.433
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 8em; ">
+Europe
+</td>
+<td style="text-align:right;width: 8em; ">
+991
+</td>
+<td style="text-align:right;width: 8em; ">
+39
+</td>
+<td style="text-align:right;width: 8em; ">
+-0.023
+</td>
+<td style="text-align:right;width: 8em; ">
+0.480
+</td>
+<td style="text-align:right;width: 8em; ">
+0.135
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 8em; ">
+Oceania
+</td>
+<td style="text-align:right;width: 8em; ">
+150
+</td>
+<td style="text-align:right;width: 8em; ">
+6
+</td>
+<td style="text-align:right;width: 8em; ">
+0.234
+</td>
+<td style="text-align:right;width: 8em; ">
+-0.053
+</td>
+<td style="text-align:right;width: 8em; ">
+-0.053
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="trends-in-corruption-indicators-in-europe-1990-2019" class="section level3">
+<h3>Trends in corruption indicators in Europe, 1990-2019</h3>
+<p>How does this weak correlation look like when looking at corruption trajectories? As shown below, the V-Dem index has little to do with the remaining two indicators. The V-Dem index is much more volatile, but only in countries where it changes at all. In most Western European countries the V-Dem index barely moves, while the QOG and WGI indicator constantly change, even if only a little.</p>
+<p>There are also situations where the indicators move in opposite directions. In Macedonia, for example, in the late 2000s, the V-Dem index improved, while the other two dropped. In the recent years in Italy, the V-Dem index declined and the other two increased.</p>
+<p>All in all, it looks like the choice of the corruption indicator can have huge consequences for results of longitudinal analyses (but probably not of cross-national models) which is of course disturbing.</p>
+<p>Perhaps the truth lies in the middle.</p>
+<p><img src="/post/corruption-indicators_files/figure-html/europe-trends-1.png" width="768" /></p>
+</div>
+
+
+  
+<div class="prev-next-post pure-g">
+  <div class="pure-u-1-24" style="text-align: left;">
+    
+    <a href="/post/cleaning-fh-data/"><i class="fa fa-chevron-left"></i></a>
+    
+  </div>
+  <div class="pure-u-10-24">
+    
+    <nav class="prev">
+      <a href="/post/cleaning-fh-data/">Cleaning Freedom House indicators</a>
+    </nav>
+    
+  </div>
+  <div class="pure-u-2-24">
+    &nbsp;
+  </div>
+  <div class="pure-u-10-24">
+    
+  </div>
+  <div class="pure-u-1-24" style="text-align: right;">
+    
+  </div>
+</div>
+
+
+
+  
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+
+(function() {
+    
+    
+    if (window.location.hostname == "localhost")
+        return;
+
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    var disqus_shortname = 'https-martakolczynska-netlify-com';
+    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+</div>
+
+</div>
+</div>
+<script src="/js/ui.js"></script>
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-123060748-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+
+
+
+
+</body>
+</html>
+

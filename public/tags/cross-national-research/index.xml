@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Sat, 21 Sep 2019 22:08:14 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 21 Jul 2020 21:29:01 +0000</lastBuildDate>
     
 	<atom:link href="/tags/cross-national-research/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>(In-)Consistency between international corruption indicators</title>
+      <link>/post/corruption-indicators/</link>
+      <pubDate>Tue, 21 Jul 2020 21:29:01 +0000</pubDate>
+      
+      <guid>/post/corruption-indicators/</guid>
+      <description>OverviewScatter plotsCorrelationsTrends in corruption indicators in Europe, 1990-2019OverviewMeasuring corruption is hard, especially if one is interested in having corruption indicators that are comparable across countries and over time. Arguably the most famous corruption ranking is the Corruption Perceptions Index published annually by Transparency International, but it can’t be used for over-time comparisons (cf. Transparency International 2020, p. 26).
+Other corruption indicators include:</description>
+    </item>
     
     <item>
       <title>Cleaning Freedom House indicators</title>

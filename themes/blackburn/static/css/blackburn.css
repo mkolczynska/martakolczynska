@@ -19,6 +19,10 @@ a:visited {
   margin: 0.6em;
 }
 
+pre, code {
+  font-size: 9pt;
+}
+
 .post-meta {
   font-size: 90%;
 }

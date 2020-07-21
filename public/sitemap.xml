@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/corruption-indicators/</loc>
+    <lastmod>2020-07-21T21:29:01+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/cleaning-fh-data/</loc>
     <lastmod>2019-09-21T22:08:14+00:00</lastmod>
   </url>
@@ -195,8 +200,14 @@
   </url>
   
   <url>
+    <loc>/tags/corruption/</loc>
+    <lastmod>2020-07-21T21:29:01+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/cross-national-research/</loc>
-    <lastmod>2019-09-21T22:08:14+00:00</lastmod>
+    <lastmod>2020-07-21T21:29:01+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -364,13 +375,13 @@
   
   <url>
     <loc>/tags/macro-indicators/</loc>
-    <lastmod>2019-09-21T22:08:14+00:00</lastmod>
+    <lastmod>2020-07-21T21:29:01+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-09-21T22:08:14+00:00</lastmod>
+    <lastmod>2020-07-21T21:29:01+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -466,13 +477,19 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2019-09-21T22:08:14+00:00</lastmod>
+    <lastmod>2020-07-21T21:29:01+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/quality-of-government/</loc>
+    <lastmod>2020-07-21T21:29:01+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/r/</loc>
-    <lastmod>2019-09-21T22:08:14+00:00</lastmod>
+    <lastmod>2020-07-21T21:29:01+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -591,7 +608,7 @@
   
   <url>
     <loc>/tags/v-dem/</loc>
-    <lastmod>2019-02-03T15:52:00+00:00</lastmod>
+    <lastmod>2020-07-21T21:29:01+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -604,6 +621,12 @@
   <url>
     <loc>/tags/world-bank/</loc>
     <lastmod>2019-02-03T15:52:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/worldwide-governance-indicators/</loc>
+    <lastmod>2020-07-21T21:29:01+00:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -1,4 +1,9 @@
 /* Whole document: */
 code.r{ /* Code block */
-    font-size: 8px;
+    font-size: 7px;
+}
+
+pre, code {
+  font-family: Meiriyo;
+  font-size: 9pt;
 }
