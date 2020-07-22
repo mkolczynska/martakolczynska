@@ -150,7 +150,7 @@ cor(corrupt[ , c("qog_bci", "wgi_cc", "vdem_corr")],
                 fixed_thead = T,
                 font_size = 10,
                 position = "left") %>%
-  column_spec(1:4, width = "8em")
+  column_spec(1:4, width = "9em")
 ```
 
 Next, pairwise correlations between country means for 173 countries:
@@ -167,7 +167,7 @@ cor(corrupt_cntry[ , c("qog_bci_mean", "wgi_cc_mean", "vdem_corr_mean")],
                 fixed_thead = T,
                 font_size = 10,
                 position = "left") %>%
-  column_spec(1:4, width = "8em")
+  column_spec(1:4, width = "9em")
 
 ```
 
@@ -183,7 +183,7 @@ cor(corrupt[ , c("qog_bci_diff", "wgi_cc_diff", "vdem_corr_diff")],
                 fixed_thead = T,
                 font_size = 10,
                 position = "left") %>%
-  column_spec(1:4, width = "8em")
+  column_spec(1:4, width = "9em")
 ```
 
 These last correlarions are very weak. As shown in the scatterplot, there is little consistency between the de-meaned V-Dem Political Corruption Index and the Bayesian Corruption Indicator.
