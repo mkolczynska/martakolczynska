@@ -1,5 +1,5 @@
 ---
-title: "(In-)Consistency between international corruption indicators"
+title: "(In)Consistency between international corruption indicators"
 author: "Marta Kołczyńska"
 date: 2020-07-21T21:29:01
 categories: ["R"]
@@ -40,7 +40,7 @@ Let's see how the three indicators compare.
 
 ```{r eval = F, echo = F}
 ### V-dem -----------
-vdem <- readRDS("C:/Users/mkolc/Google Drive/Work in progress/2018-2020/EVS trust governance/V-Dem-CY-Core-v10.rds") %>%
+vdem <- readRDS("V-Dem-CY-Core-v10.rds") %>%
   filter(year >= 1990) %>%
   mutate(iso2 = countrycode(country_text_id, "iso3c", "iso2c"),
          year = as.numeric(year)) %>%
@@ -56,7 +56,7 @@ qog <- import("https://www.qogdata.pol.gu.se/data/qog_bas_ts_jan20.csv") %>%
   drop_na(iso2)
 
 ### Worldwide Governance Indicators
-wgi <- import("C:/Users/mkolc/Google Drive/Work in progress/2018-2020/EVS trust governance/WGI.xlsx") %>%
+wgi <- import("GI.xlsx") %>%
   mutate(iso2 = countrycode::countrycode(`Country Code`, "iso3c", "iso2c")) %>%
   mutate_at(vars(ends_with("se") | ends_with("est")), as.numeric) %>%
   mutate(cc_rev = (-cc_est + 2.5) / 5) %>%
