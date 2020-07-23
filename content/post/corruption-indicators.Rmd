@@ -254,7 +254,8 @@ corrupt %>%
   scale_color_viridis_d("Indicator",
                         breaks =  c("bci_100", "wgi_cc", "vdem_corr"),
                         labels = c("QOG", "WGI", "V-Dem"),
-                        option = "plasma") +
+                        option = "plasma",
+                        end = 0.7) +
   theme_minimal() +
   xlab("") +
   facet_wrap("country", ncol = 5)
