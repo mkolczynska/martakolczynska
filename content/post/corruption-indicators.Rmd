@@ -20,7 +20,7 @@ Other corruption indicators include:
 
 2. Political Corruption Index by [Varieties of Democracy, V-Dem](https://www.v-dem.net/en/data/data-version-10/)
 
-3. Control of Corruption in the World Bank's [Worldwide Governance Indicators, WGI](https://info.worldbank.org/governance/wgi/)
+3. Control of Corruption (CC) in the World Bank's [Worldwide Governance Indicators, WGI](https://info.worldbank.org/governance/wgi/)
 
 If these indicators measure the same concept, they should be correlated and change similarly over time, even if they are based on slightly different conceptualizations and definitions, rely on different source data, or use different calibration methods.
 
@@ -240,7 +240,6 @@ There are also situations where the indicators move in opposite directions. In M
 
 All in all, it looks like the choice of the corruption indicator can have huge consequences for results of longitudinal analyses (but probably not of cross-national models) which is of course disturbing.
 
-Perhaps the truth lies in the middle.
 
 ```{r europe-trends, fig.height=10, fig.width=8, warnings = F, echo = F, warning = F}
 corrupt %>%
