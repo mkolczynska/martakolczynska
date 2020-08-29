@@ -11,7 +11,7 @@ src="Kolczynska.jpg" width="150px"/>
 I am an assistant professor at the [Institute of Political Studies of the Polish Academy of Sciences](http://english.isppan.waw.pl/) and a visiting researcher in the [Probabilistic Machine Learning Group](https://research.cs.aalto.fi/pml/), Department of Computer Science, Aalto University. My research interests include comparative analyses of political attitudes and behavior across nations and over time, as well as the methodology of comparative research, in particular cross-national surveys.
 
 
-[*My full CV*](cv.pdf)
+[*Full CV*](cv.pdf)
 
 
 #### Research interests
