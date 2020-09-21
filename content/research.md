@@ -10,4 +10,4 @@ My current research deals with the causes and consequences of political trust. T
 
 Methodologically, I am particularly interested in model-based approaches to *ex post* harmonization of cross-national surveys, and ways of incorporating cross-surveys in measurement and sample representativeness in the models rather than by recoding or other *ad hoc* adjustments. 
 
-I'm also working on tools that facilitate ex-post harmonzation of survey data by providing a workflow and tools that, among others, document the properties of the original data and all applied transformations. See R packages [retroharmonize](https://retroharmonize.satellitereport.com/index.html) and [eurobarometer](http://eurobarometer.danielantal.eu/index.html).
+I'm also working on tools that facilitate [ex-post harmonzation of survey data](https://github.com/mkolczynska/harmonization-toolbox).
