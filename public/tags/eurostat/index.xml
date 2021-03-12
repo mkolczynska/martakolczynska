@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Eurostat on Marta Kołczyńska</title>
+    <link>/tags/eurostat/</link>
+    <description>Recent content in Eurostat on Marta Kołczyńska</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
+    <lastBuildDate>Thu, 11 Mar 2021 22:07:01 +0000</lastBuildDate><atom:link href="/tags/eurostat/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Trends in educational attainment in Europe</title>
+      <link>/post/eurostat-age-gender-education/</link>
+      <pubDate>Thu, 11 Mar 2021 22:07:01 +0000</pubDate>
+      
+      <guid>/post/eurostat-age-gender-education/</guid>
+      <description>Note: This part of data processing was used to construct poststratification tables used to create country-year estimates of political trust in Europe. The full paper titled “Modeling public opinion over time and space: Trust in state institutions in Europe, 1989-2019” is availabe on SocArXiv: https://osf.io/preprints/socarxiv/3v5g7/. This research was supported by the Bekker Programme of the Polish National Agency for Academic Mobility under award number PPN/BEK/2019/1/00133.
+The Eurostat provides a host of useful data, including socio-demographic statistics on educational attainment, which enable tracking the changes in educational composition of European societies over the last several years.</description>
+    </item>
+    
+  </channel>
+</rss>
