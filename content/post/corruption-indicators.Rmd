@@ -10,6 +10,9 @@ output:
     toc_depth: 4
 ---
 
+
+*Note: Results from this post are presented more systematically in the paper "Marketplace of indicators: Inconsistencies between country trends of measures of governance" co-authored with Paul Bürkner and available on SocArXiv: https://osf.io/preprints/socarxiv/u8gsc/.*
+
 ### Overview
 
 Measuring corruption is hard, especially if one is interested in having corruption indicators that are comparable across countries and over time. Arguably the most famous corruption ranking is the [Corruption Perceptions Index](https://www.transparency.org/en/cpi) published annually by Transparency International, but it can't be used for over-time comparisons (cf. [Transparency International 2020, p. 26](https://www.transparency.org/files/content/pages/2019_CPI_Report_EN.pdf)).
