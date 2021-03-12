@@ -1,0 +1,134 @@
+---
+title: "Trends in educational attainment in Europe"
+subtitle: "based on data from the Eurostat"
+author: "Marta Kołczyńska"
+date: 2021-03-11T22:07:01
+categories: ["R"]
+tags: ["R", "education", "macro indicators", "cross-national research", "Eurostat", "European Labor Force Survey"]
+output:
+  blogdown::html_page:
+    toc: true
+    toc_depth: 4
+---
+
+
+
+<p><em>Note: This part of data processing was used to construct poststratification tables used to create country-year estimates of political trust in Europe. The full paper titled “Modeling public opinion over time and space: Trust in state institutions in Europe, 1989-2019” is availabe on SocArXiv: <a href="https://osf.io/preprints/socarxiv/3v5g7/" class="uri">https://osf.io/preprints/socarxiv/3v5g7/</a>. This research was supported by the Bekker Programme of the <a href="https://nawa.gov.pl/en/nawa">Polish National Agency for Academic Mobility</a> under award number PPN/BEK/2019/1/00133.</em></p>
+<p>The <a href="https://ec.europa.eu/eurostat">Eurostat</a> provides a host of useful data, including socio-demographic statistics on educational attainment, which enable tracking the changes in educational composition of European societies over the last several years.</p>
+<p>Eurostat’s <code>lfsa_pgaed</code> time series titled <a href="https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=lfsa_pgaed">“Population by sex, age and educational attainment level (1 000)”</a> provides population counts by education level (ISCED 0-2, 3-4, 5-8), gender (male and female) and age group (several different groupings). The data are aggregated from the <a href="https://ec.europa.eu/eurostat/statistics-explained/index.php/EU_labour_force_survey">European Labor Force Surveys, EU-LFS</a>. EU-LFS micro-data require <a href="https://ec.europa.eu/eurostat/web/microdata/european-union-labour-force-survey">special permissions</a>, but the aggregated tables provided by the Eurostat can be used freely as far as one is happy with the groupings and other limitations.</p>
+<p>Like all publicly available data from the Eurostat, the education time series can be downloaded using the <a href="https://cran.r-project.org/web/packages/eurostat/index.html"><code>eurostat</code> package</a>.</p>
+<p>The excerpt below show the first few rows of the table: The <code>unit</code> is thousand people, <code>sex</code> is coded as F for female and M for male, <code>age</code> is coded as “Y” and then the age range, education as “ED” and <a href="https://en.wikipedia.org/wiki/International_Standard_Classification_of_Education">ISCED 2011 levels</a>, <code>geo</code> indicates the country, <code>time</code> indicates the year, and <code>values</code> provide the population counts (in thousands).</p>
+<pre class="r"><code>library(eurostat) # for getting data from the Eurostat
+library(sjlabelled) # for dealing with variable and value labels
+library(countrycode) # for switching between country code types
+library(tidyverse) # for manipulating data
+library(viridis) # for color palettes
+
+edu_raw &lt;- get_eurostat(&quot;lfsa_pgaed&quot;, 
+                        time_format = &quot;num&quot;, 
+                        stringsAsFactors = FALSE)
+
+head(edu_raw)</code></pre>
+<pre><code>## # A tibble: 6 x 7
+##   unit  sex   age    isced11 geo    time values
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 THS   F     Y15-19 ED0-2   AT     2019  150. 
+## 2 THS   F     Y15-19 ED0-2   BE     2019  243. 
+## 3 THS   F     Y15-19 ED0-2   BG     2019  124. 
+## 4 THS   F     Y15-19 ED0-2   CH     2019  166. 
+## 5 THS   F     Y15-19 ED0-2   CY     2019   17.5
+## 6 THS   F     Y15-19 ED0-2   CZ     2019  202.</code></pre>
+<p>The data are provided starting from 1983 for 10 countries and reach 35 EU and candidate countries countries in 2010-2019.</p>
+<p>The table would be ready to be used as is, but for unclear reasons data for some categories are missing, even though in other categories and total are available. For example, for Estonia in 2004, for the age group 20-24 and the education category ED0-2, information is provided about the number of men and the total number of people, but information for women is not provided. There are several other cases with regard to gender, as well as education and age groups that should be corrected in order to make the data more complete.</p>
+<pre class="r"><code>edu &lt;- edu_raw %&gt;%
+  spread(isced11, values) %&gt;%
+  # filter out the youngest age group
+  filter(age != &quot;Y15-19&quot;,
+         # keep year since 1990
+         time &gt;= 1990) %&gt;%
+  rename(`ED3-4` = `ED3_4`) %&gt;%
+  # calculate ED5-8 from total and ED0-2 and ED3-4 if missing
+  mutate(`ED5-8` = ifelse(is.na(`ED5-8`), 
+                          TOTAL - NRP - `ED0-2` - `ED3-4`, 
+                          `ED5-8`)) %&gt;%
+  # reshape to long
+  gather(isced11, values, 6:10) %&gt;%
+  # keep only the categories of interest
+  filter(isced11 %in% c(&quot;ED0-2&quot;, &quot;ED3-4&quot;, &quot;ED5-8&quot;)) %&gt;%
+  # select columsn to keep
+  select(geo, time, age, sex, isced11, nobs_cat = values) %&gt;%
+  spread(sex, nobs_cat) %&gt;%
+  # fill in M or F, if missing, by using the total and non-missing category
+  mutate(M = ifelse(is.na(M), T - F, M),
+         F = ifelse(is.na(F), T - M, F)) %&gt;%
+  gather(sex, nobs_cat, 5:7) %&gt;%
+  filter(sex != &quot;T&quot;) %&gt;%
+  spread(age, nobs_cat) %&gt;%
+  # fill in age groups, if missing, with info from other categories
+  mutate(`Y35-39` = ifelse(is.na(`Y35-39`), `Y25-39` - `Y25-29` - `Y30-34`, `Y35-39`),
+         `Y40-44` = ifelse(is.na(`Y40-44`), `Y40-59` - `Y45-49` - `Y50-59`, `Y40-44`),
+         `Y70-74` = `Y50-74`-(`Y50-54`+`Y55-64`+`Y65-69`),
+         `Y20-34` = `Y20-24`+`Y25-29`+`Y30-34`,
+         `Y35-54` = `Y35-39`+`Y40-44`+`Y45-49`+`Y50-54`,
+         `Y55-74` = `Y55-64`+`Y65-69` + `Y70-74`) %&gt;%
+  select(geo, time, sex, isced11, `Y20-34`, `Y35-54`, `Y55-74`) %&gt;%
+  gather(age_cat, nobs_cat, 5:7) %&gt;%
+  group_by(geo, time, sex, age_cat) %&gt;%
+  mutate(prop_cat = nobs_cat / sum(nobs_cat)) %&gt;%
+  ungroup() %&gt;%
+  select(geo, time, age_cat, sex, isced11, prop_cat) %&gt;%
+  arrange(geo, time, age_cat, sex, isced11)
+
+edu %&gt;%
+  filter(geo == &quot;PL&quot;) %&gt;%
+  head(6)</code></pre>
+<pre><code>## # A tibble: 6 x 6
+##   geo    time age_cat sex   isced11 prop_cat
+##   &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;      &lt;dbl&gt;
+## 1 PL     1997 Y20-34  F     ED0-2     0.115 
+## 2 PL     1997 Y20-34  F     ED3-4     0.750 
+## 3 PL     1997 Y20-34  F     ED5-8     0.135 
+## 4 PL     1997 Y20-34  M     ED0-2     0.139 
+## 5 PL     1997 Y20-34  M     ED3-4     0.791 
+## 6 PL     1997 Y20-34  M     ED5-8     0.0701</code></pre>
+<p>I’m interested in the proportion of people in each of the three education categories by age group and gender. In the snippet above, in Poland in 1997, among women in the age group 20-34, 11% had below secondary education, 75% had completed secondary or post-secondary non-tertiary education, and just below 14% had tertiary education. Among men in the same age group, a larger share had primary and secondary education, respectively, and a smaller share had tertiary education.</p>
+<p>To track changes, the graph below plots separate facets for all gender and age group combinations, and within each facet the colored lines show changes in the proportions of each education category. The graphs shows a general decline in the proportion of people with below secondary education (especially in the oldest age group) and a parallel increase of the tertiary education category (particularly pronounced in the youngest age group).</p>
+<pre class="r"><code>edu %&gt;%
+  filter(geo == &quot;PL&quot;) %&gt;%
+  ggplot(., aes(x = time, y = prop_cat, col = isced11)) +
+  geom_line() +
+  geom_point() +
+  expand_limits(y = 0) +
+  scale_color_viridis_d() +
+  xlab(&quot;&quot;) +
+  ylab(&quot;Proportion&quot;) +
+  ggtitle(&quot;Educational attainment in Poland&quot;) +
+  theme_minimal() +
+  facet_grid(sex ~ age_cat)</code></pre>
+<p><img src="/post/eurostat-age-gender-education_files/figure-html/pl-1.png" width="672" /></p>
+<p>Since within each age and gender combination the proportions in education groups sum to one, it may be better to plot them as a stacked area chart.</p>
+<pre class="r"><code>edu %&gt;%
+  filter(geo == &quot;PL&quot;) %&gt;%
+  ggplot(., aes(x = time, y = prop_cat, fill = isced11)) +
+  geom_area() +
+  expand_limits(y = 0) +
+  scale_fill_viridis_d() +
+  xlab(&quot;&quot;) +
+  ylab(&quot;Proportion&quot;) +
+  ggtitle(&quot;Educational attainment in Poland&quot;) +
+  theme_minimal() +
+  facet_grid(sex ~ age_cat)</code></pre>
+<p><img src="/post/eurostat-age-gender-education_files/figure-html/pl2-1.png" width="672" /></p>
+<p>Each country has its own unique pattern, and an overall picture for the EU-27 is shown in the last plot below.</p>
+<pre class="r"><code>edu %&gt;%
+  filter(geo == &quot;EU27_2020&quot;) %&gt;%
+  ggplot(., aes(x = time, y = prop_cat, fill = isced11)) +
+  geom_area() +
+  expand_limits(y = 0) +
+  scale_fill_viridis_d() +
+  xlab(&quot;&quot;) +
+  ylab(&quot;Proportion&quot;) +
+  ggtitle(&quot;Educational attainment in the EU-27&quot;) +
+  theme_minimal() +
+  facet_grid(sex ~ age_cat)</code></pre>
+<p><img src="/post/eurostat-age-gender-education_files/figure-html/eu-27-1.png" width="672" /></p>
