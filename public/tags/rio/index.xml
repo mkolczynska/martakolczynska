@@ -1,17 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Rio on Marta Kołczyńska</title>
+    <title>rio on Marta Kołczyńska</title>
     <link>/tags/rio/</link>
-    <description>Recent content in Rio on Marta Kołczyńska</description>
+    <description>Recent content in rio on Marta Kołczyńska</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Sun, 03 Feb 2019 15:52:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/rio/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 03 Feb 2019 15:52:00 +0000</lastBuildDate><atom:link href="/tags/rio/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Downloading country-level indicators on participation and economic inequality 2</title>
       <link>/post/participation-inequality-indices-2/</link>

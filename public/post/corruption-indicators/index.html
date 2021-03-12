@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="generator" content="Hugo 0.42.2" />
+  <meta name="generator" content="Hugo 0.81.0" />
 
   <title>(In)Consistency between international corruption indicators &middot; Marta Kołczyńska</title>
 
@@ -75,7 +75,7 @@
 <div id="menu">
 
   
-  <a class="pure-menu-heading brand" href="/"><img src="/images/puzzleblacksmall.png" alt="logo" /></a>
+  <a class="pure-menu-heading brand" href="/"><img src="/images/puzzleblacksmall.png" alt="logo"></a>
 
 
 
@@ -263,7 +263,9 @@
 
 </div>
 
-  <script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+  
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<link href="/rmarkdown-libs/lightable/lightable.css" rel="stylesheet" />
 
 <div id="TOC">
 <ul>
@@ -274,6 +276,7 @@
 </ul>
 </div>
 
+<p><em>Note: Results from this post are presented more systematically in the paper “Marketplace of indicators: Inconsistencies between country trends of measures of governance” co-authored with Paul Bürkner and available on SocArXiv: <a href="https://osf.io/preprints/socarxiv/u8gsc/" class="uri">https://osf.io/preprints/socarxiv/u8gsc/</a>.</em></p>
 <div id="overview" class="section level3">
 <h3>Overview</h3>
 <p>Measuring corruption is hard, especially if one is interested in having corruption indicators that are comparable across countries and over time. Arguably the most famous corruption ranking is the <a href="https://www.transparency.org/en/cpi">Corruption Perceptions Index</a> published annually by Transparency International, but it can’t be used for over-time comparisons (cf. <a href="https://www.transparency.org/files/content/pages/2019_CPI_Report_EN.pdf">Transparency International 2020, p. 26</a>).</p>
@@ -492,12 +495,13 @@ vdem_corr_diff
 <p>These last correlarions are very weak. As shown in the scatterplot, there is little consistency between the de-meaned V-Dem Political Corruption Index and the Bayesian Corruption Indicator.</p>
 <p><img src="/post/corruption-indicators_files/figure-html/cor-diffs-1.png" width="624" /></p>
 <p>Looking at continents separately, correlations between the Bayesian Corruption Indicator and the V-Dem Corruption Index are negligible in Africa, the Americas, and Europe, and small in Asia and Oceania. In Europe, the correlation is actually negative.</p>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
 <table class="table table-striped table-hover table-condensed" style="font-size: 10px; ">
 <thead>
 <tr>
-<th style="border-bottom:hidden" colspan="3">
+<th style="empty-cells: hide;border-bottom:hidden;" colspan="3">
 </th>
-<th style="border-bottom:hidden; padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
+<th style="border-bottom:hidden;padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="3">
 <div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
 Pairwise correlations
 </div>
@@ -656,8 +660,14 @@ Oceania
   </div>
   <div class="pure-u-10-24">
     
+    <nav class="next">
+      <a href="/post/eurostat-age-gender-education/">Trends in educational attainment in Europe</a>
+    </nav>
+    
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
+    
+    <a href="/post/eurostat-age-gender-education/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>

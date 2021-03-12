@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>European Social Survey on Marta Kołczyńska</title>
@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Tue, 07 Aug 2018 12:46:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/european-social-survey/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 07 Aug 2018 12:46:00 +0000</lastBuildDate><atom:link href="/tags/european-social-survey/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Dot plot challenge: Voting gender gaps in Europe</title>
       <link>/post/dot-plot-voting-ess/</link>

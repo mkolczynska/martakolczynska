@@ -1,17 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Survey Data Harmonization on Marta Kołczyńska</title>
+    <title>survey data harmonization on Marta Kołczyńska</title>
     <link>/tags/survey-data-harmonization/</link>
-    <description>Recent content in Survey Data Harmonization on Marta Kołczyńska</description>
+    <description>Recent content in survey data harmonization on Marta Kołczyńska</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Tue, 23 Apr 2019 03:03:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/survey-data-harmonization/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 23 Apr 2019 03:03:00 +0000</lastBuildDate><atom:link href="/tags/survey-data-harmonization/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Codebook from ISSP waves 1985-2017</title>
       <link>/post/issp-codebook/</link>
@@ -53,8 +49,7 @@ You’ve got the nerve to write a fugue
 So go ahead and write a fugue that we can sing
 Pay no heed to what we’ve told you
 Give no mind to what we’ve told you
-Just forget all that we’ve told you
-And the theory that you’ve read</description>
+Just forget all that we’ve told you</description>
     </item>
     
     <item>

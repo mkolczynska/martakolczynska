@@ -1,17 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Inequality on Marta Kołczyńska</title>
+    <title>inequality on Marta Kołczyńska</title>
     <link>/tags/inequality/</link>
-    <description>Recent content in Inequality on Marta Kołczyńska</description>
+    <description>Recent content in inequality on Marta Kołczyńska</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Tue, 08 Jan 2019 15:10:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/inequality/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 08 Jan 2019 15:10:00 +0000</lastBuildDate><atom:link href="/tags/inequality/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Measuring meritocracy with survey data</title>
       <link>/post/issp-meritocracy-edu-income/</link>

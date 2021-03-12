@@ -1,17 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Isa on Marta Kołczyńska</title>
+    <title>ISA on Marta Kołczyńska</title>
     <link>/tags/isa/</link>
-    <description>Recent content in Isa on Marta Kołczyńska</description>
+    <description>Recent content in ISA on Marta Kołczyńska</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Mon, 23 Jul 2018 15:24:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/isa/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 23 Jul 2018 15:24:00 +0000</lastBuildDate><atom:link href="/tags/isa/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ISA World Congress 2018: Analysis of tweets</title>
       <link>/post/isa-twitter/</link>

@@ -5,7 +5,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="generator" content="Hugo 0.42.2" />
+  <meta name="generator" content="Hugo 0.81.0" />
 
   <title>Age distributions in samples from cross-national survey projects &middot; Marta Kołczyńska</title>
 
@@ -75,7 +75,7 @@
 <div id="menu">
 
   
-  <a class="pure-menu-heading brand" href="/"><img src="/images/puzzleblacksmall.png" alt="logo" /></a>
+  <a class="pure-menu-heading brand" href="/"><img src="/images/puzzleblacksmall.png" alt="logo"></a>
 
 
 
@@ -265,7 +265,10 @@
 
 </div>
 
-  <p>Cross-national survey projects conduct surveys on representative samples of adult populations.
+  
+
+
+<p>Cross-national survey projects conduct surveys on representative samples of adult populations.
 How do the distributions of respondents’ age vary across surveys carried out in the same country in different years and different projects?</p>
 <p>Like in a couple of previous posts (<a href="https://martakolczynska.com/post/sdr-exploration/" target="_blank">here</a>, <a href="https://martakolczynska.com/post/education-sdr-oecd/">here</a> and <a href="https://martakolczynska.com/post/sdr-demonstrations-multiplets/">here</a>) I use data from the <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/VWGF5Q" target="_blank">Survey Data Recycling dataset (SDR) version 1</a>, which includes selected harmonized variables from 22 cross-national survey projects. SDR only includes surveys that claim to have samples representative for adult populations. The code for manipulating the data and plotting can be found <a href="https://github.com/mkolczynska/martakolczynska/blob/master/content/post/sdr-age-distributions.Rmd" target="_blank">here</a> on GitHub.</p>
 <p>The ridgeline plot (thanks to the <a href="https://github.com/clauswilke/ggridges" target="_blank"><code>ggridges</code> package</a>) presents the distributions of age in all 32 samples from Poland from the SDR v.1 dataset, arranged from the oldest surveys at the bottom to the most recent surveys at the top. Colors identify age quartiles, and differences in the hight of graphs between surveys reflect differences in the sample sizes. Distributions are weighted with the case weights provided with the original data. In the SDR dataset values higher than 96 were recoded to missing, because many surveys has surprisingly high numbers of respondents aged 97-99 (likely because these are common missing value codes).</p>

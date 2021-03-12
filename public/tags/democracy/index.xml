@@ -1,17 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Democracy on Marta Kołczyńska</title>
+    <title>democracy on Marta Kołczyńska</title>
     <link>/tags/democracy/</link>
-    <description>Recent content in Democracy on Marta Kołczyńska</description>
+    <description>Recent content in democracy on Marta Kołczyńska</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Sat, 21 Sep 2019 22:08:14 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/democracy/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 21 Sep 2019 22:08:14 +0000</lastBuildDate><atom:link href="/tags/democracy/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Cleaning Freedom House indicators</title>
       <link>/post/cleaning-fh-data/</link>

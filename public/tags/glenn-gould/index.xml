@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Glenn Gould on Marta Kołczyńska</title>
@@ -7,11 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Wed, 20 Feb 2019 23:29:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/glenn-gould/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 20 Feb 2019 23:29:00 +0000</lastBuildDate><atom:link href="/tags/glenn-gould/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>So you want to harmonize data?</title>
       <link>/post/harmonization-versus-fugue/</link>
@@ -25,8 +21,7 @@ You’ve got the nerve to write a fugue
 So go ahead and write a fugue that we can sing
 Pay no heed to what we’ve told you
 Give no mind to what we’ve told you
-Just forget all that we’ve told you
-And the theory that you’ve read</description>
+Just forget all that we’ve told you</description>
     </item>
     
   </channel>

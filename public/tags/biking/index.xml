@@ -1,17 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Biking on Marta Kołczyńska</title>
+    <title>biking on Marta Kołczyńska</title>
     <link>/tags/biking/</link>
-    <description>Recent content in Biking on Marta Kołczyńska</description>
+    <description>Recent content in biking on Marta Kołczyńska</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Tue, 30 Oct 2018 10:00:14 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/biking/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 30 Oct 2018 10:00:14 +0000</lastBuildDate><atom:link href="/tags/biking/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Biking in Barcelona: Green City Hackathon</title>
       <link>/post/bigsurv18-hackathon/</link>

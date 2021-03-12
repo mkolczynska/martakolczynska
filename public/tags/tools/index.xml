@@ -1,17 +1,13 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tools on Marta Kołczyńska</title>
+    <title>tools on Marta Kołczyńska</title>
     <link>/tags/tools/</link>
-    <description>Recent content in Tools on Marta Kołczyńska</description>
+    <description>Recent content in tools on Marta Kołczyńska</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Tue, 23 Apr 2019 03:03:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/tools/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 23 Apr 2019 03:03:00 +0000</lastBuildDate><atom:link href="/tags/tools/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Codebook from ISSP waves 1985-2017</title>
       <link>/post/issp-codebook/</link>

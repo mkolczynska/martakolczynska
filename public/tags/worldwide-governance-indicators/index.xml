@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Worldwide Governance Indicators on Marta Kołczyńska</title>
@@ -7,19 +7,15 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Tue, 21 Jul 2020 21:29:01 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/worldwide-governance-indicators/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Tue, 21 Jul 2020 21:29:01 +0000</lastBuildDate><atom:link href="/tags/worldwide-governance-indicators/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>(In)Consistency between international corruption indicators</title>
       <link>/post/corruption-indicators/</link>
       <pubDate>Tue, 21 Jul 2020 21:29:01 +0000</pubDate>
       
       <guid>/post/corruption-indicators/</guid>
-      <description>OverviewScatter plotsCorrelationsTrends in corruption indicators in Europe, 1990-2019OverviewMeasuring corruption is hard, especially if one is interested in having corruption indicators that are comparable across countries and over time. Arguably the most famous corruption ranking is the Corruption Perceptions Index published annually by Transparency International, but it can’t be used for over-time comparisons (cf. Transparency International 2020, p. 26).
-Other corruption indicators include:</description>
+      <description>OverviewScatter plotsCorrelationsTrends in corruption indicators in Europe, 1990-2019Note: Results from this post are presented more systematically in the paper “Marketplace of indicators: Inconsistencies between country trends of measures of governance” co-authored with Paul Bürkner and available on SocArXiv: https://osf.io/preprints/socarxiv/u8gsc/.
+OverviewMeasuring corruption is hard, especially if one is interested in having corruption indicators that are comparable across countries and over time. Arguably the most famous corruption ranking is the Corruption Perceptions Index published annually by Transparency International, but it can’t be used for over-time comparisons (cf.</description>
     </item>
     
   </channel>
