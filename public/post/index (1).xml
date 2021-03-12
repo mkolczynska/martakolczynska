@@ -1,260 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Posts on Marta Kołczyńska</title>
-    <link>/post/</link>
-    <description>Recent content in Posts on Marta Kołczyńska</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Mon, 17 Jun 2019 23:49:00 +0000</lastBuildDate>
-    
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Toxicity of comments to votes in Request for Adminship on English Wikipedia</title>
-      <link>/post/wikipedia-rfa-toxicity-perspective/</link>
-      <pubDate>Mon, 17 Jun 2019 23:49:00 +0000</pubDate>
-      
-      <guid>/post/wikipedia-rfa-toxicity-perspective/</guid>
-      <description>This post was written during a research visit at the Department of Computer Science at Aalto University, Finland, supported by the Helsinki Institute for Information Technology.
-Perspective is an API that uses machine learning models to predict the impact of a comment on the conversation. One of the models predicts the extent to which the comment might be perceived as toxic. A toxic comment is defined as “a rude, disrespectful, or unreasonable comment that is likely to make you leave a discussion.</description>
-    </item>
-    
-    <item>
-      <title>Codebook from ISSP waves 1985-2017</title>
-      <link>/post/issp-codebook/</link>
-      <pubDate>Tue, 23 Apr 2019 03:03:00 +0000</pubDate>
-      
-      <guid>/post/issp-codebook/</guid>
-      <description>The International Social Survey Programme offers a wealth of data, with thematic modules repeated around every 10 years, and a solid and relatively stable block of socio-demographics. The data can be downloaded from the GESIS data archive either in separate files per year or with data bundled by topic (e.g., the Social Inequality dataset contains data from rounds 1987, 1992, 1999, and 2009).
-There is no integrated codebook indicating the availability of variables in different rounds, so someone interested in longitudinal analyses would need to download all files, open them and look for the variables of interest.</description>
-    </item>
-    
-    <item>
-      <title>Do-It-Yourself Harmonization: Exploring trust items in three European survey projects</title>
-      <link>/post/harmonization-europe-trust/</link>
-      <pubDate>Tue, 09 Apr 2019 13:41:00 +0000</pubDate>
-      
-      <guid>/post/harmonization-europe-trust/</guid>
-      <description>IntroductionIllustration: Trust in institutionsStep 1: Preparation and coding of technical variablesStep 2: Selection of source variables for harmonizationStep 3: Mapping source values to target valuesStep 4: HarmonizationResults: Availability of trust itemsComparability of sample aggregatesAppendices: Code examplesAppendix 1: Data preparationAppendix 2: Codebook from labelled data in RAppendix 3: Values crosswalkAppendix 4: HarmonizationIntroductionEx-post (or retrospective) data harmonization refers to procedures applied to already collected data to improve the comparability and inferential equivalence of measures collected by different studies.</description>
-    </item>
-    
-    <item>
-      <title>Searchable codebook from labelled data in R</title>
-      <link>/post/codebook-labelled-data/</link>
-      <pubDate>Sun, 03 Mar 2019 03:03:00 +0000</pubDate>
-      
-      <guid>/post/codebook-labelled-data/</guid>
-      <description>Working with categorical data, such as from surveys, requires a codebook. After spending some time unsuccessfully looking for a function that would create a nice, searchable codebook from labelled data in R, I decided to write my own.What I want to achieve is a simple table with variable names, labels, and frequencies of labelled values like the one below, to search for specific keywords in the value labels and to see distributions of various variables.</description>
-    </item>
-    
-    <item>
-      <title>So you want to harmonize data?</title>
-      <link>/post/harmonization-versus-fugue/</link>
-      <pubDate>Wed, 20 Feb 2019 23:29:00 +0000</pubDate>
-      
-      <guid>/post/harmonization-versus-fugue/</guid>
-      <description>So You Want to Write a Fugue?
-Glenn GouldSo you want to write a fugue?
-You’ve got the urge to write a fugue
-You’ve got the nerve to write a fugue
-So go ahead and write a fugue that we can sing
-Pay no heed to what we’ve told you
-Give no mind to what we’ve told you
-Just forget all that we’ve told you
-And the theory that you’ve read</description>
-    </item>
-    
-    <item>
-      <title>Political trust among electoral winners and losers in Europe</title>
-      <link>/post/ess-trust-institutions-electoral-winners-losers/</link>
-      <pubDate>Wed, 13 Feb 2019 11:29:00 +0000</pubDate>
-      
-      <guid>/post/ess-trust-institutions-electoral-winners-losers/</guid>
-      <description>Winner-loser trust gap across countriesWinner-loser trust gap in PolandTrust differences across parties in PolandVoting for a party that ends up losing the election is known to be associated with lower satisfaction with democracy and trust in the parliament (cf. Martini and Quaranta 2019). How does Poland compare to other European countries? How has the winner-loser trust gap changed in Poland over time, and how have trust levels among supporters of current and former ruling parties changed in periods when they were not in government?</description>
-    </item>
-    
-    <item>
-      <title>Downloading country-level indicators on participation and economic inequality 2</title>
-      <link>/post/participation-inequality-indices-2/</link>
-      <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
-      
-      <guid>/post/participation-inequality-indices-2/</guid>
-      <description>DataPackagesVarieties of Democracy (V-Dem): Dedicated packagePolyarchy: Semicolon delimited CSV file -&amp;gt; rioFreedom House: Excel file with by-year sheetsPolity IV: SPSS file -&amp;gt; rioDemocracy Barometer: Excel file with header in top rows -&amp;gt; rioThe Standardized World Income Inequality Database (SWIID): Plain CSV file -&amp;gt; rioWorld Bank’s World Development Indicators: Dedicated packageMerging all datasetsWriting to fileShortly after writing this post on importing datasets in different formats (CSV, XLS, XLSX, SAV) to R, I got the following comment:</description>
-    </item>
-    
-    <item>
-      <title>Downloading country-level indicators on participation and economic inequality</title>
-      <link>/post/participation-inequality-indices/</link>
-      <pubDate>Sat, 02 Feb 2019 13:28:00 +0000</pubDate>
-      
-      <guid>/post/participation-inequality-indices/</guid>
-      <description>DataPackagesVarieties of Democracy (V-Dem): Dedicated packagePolyarchy: Semicolon delimited CSV fileFreedom House: Excel file with by-year sheetsPolity IV: SPSS fileDemocracy Barometer: Excel file with header in top rowsThe Standardized World Income Inequality Database (SWIID): Plain CSV fileWorld Bank’s World Development Indicators: Dedicated packageMerging all datasetsCountry graphsVariable graphsWriting to filewith Viktoriia Muliavka
-Social and political scientists often need to put together datasets of country-level political, economic, and demographic variables with data from different sources.</description>
-    </item>
-    
-    <item>
-      <title>Voter shifts in parliamentary elections in Poland, 2007-2015</title>
-      <link>/post/polpan-voting-alluvial-plots/</link>
-      <pubDate>Wed, 16 Jan 2019 11:32:14 +0000</pubDate>
-      
-      <guid>/post/polpan-voting-alluvial-plots/</guid>
-      <description>How 2015 voters voted in 2007 and 2011How 2007 voters voted in 2011 and 2015About POLPANWhere did the current governing party get their votes from? Did supporters of the previous ruling party switch preferences or did they abstain from voting altogether? Cross-sectional datasets, such as one-off election polls, do not typically provide data to answer these questions. Panel studies, such as the Polish Panel Survey (POLPAN), do.</description>
-    </item>
-    
-    <item>
-      <title>Measuring meritocracy with survey data</title>
-      <link>/post/issp-meritocracy-edu-income/</link>
-      <pubDate>Tue, 08 Jan 2019 15:10:00 +0000</pubDate>
-      
-      <guid>/post/issp-meritocracy-edu-income/</guid>
-      <description>Determining meritocratic allocationCalculating the distance to meritocracyDistance to meritocracy by countryMeritocracy is a principle according to which rewards are based on merit, as well as an ideal situation resulting from the operation of this principle. In their 1985 Social Foces paper titled “How Far to Meritocracy? Empirical Tests of a Controversial Thesis”, Tadeusz Krauze and Kazimierz M. Słomczyński proposed an algorithm to construct a theoretical joint distribution of education and income, given their marginal distributions, that would satisfy the conditions of meritocratic allocation.</description>
-    </item>
-    
-    <item>
-      <title>What comes first: Exploring public interest in tech-related topics</title>
-      <link>/post/delabuw-hackathon-what-comes-first/</link>
-      <pubDate>Tue, 13 Nov 2018 16:41:14 +0000</pubDate>
-      
-      <guid>/post/delabuw-hackathon-what-comes-first/</guid>
-      <description>What comes first?Wikipedia, Google, NewsInterest in technologyCross-correlationsNews coverage versus Wikipedia page viewswith Maria Khachatryan, Filip Kowalski, Jakub Siwiec, and Paweł Zawadzki
-The Hackathon Next Generation Internet Data Sprint was organized by the Digital Economy Lab of the University of Warsaw on November 9 and 10, 2018. The goal of the hackathon was to explore datasets on Wikipedia page views and edits, Reddit posts, media mentions, and others, to generate insights about the use of the internet and new technologies.</description>
-    </item>
-    
-    <item>
-      <title>Biking in Barcelona: Green City Hackathon</title>
-      <link>/post/bigsurv18-hackathon/</link>
-      <pubDate>Tue, 30 Oct 2018 10:00:14 +0000</pubDate>
-      
-      <guid>/post/bigsurv18-hackathon/</guid>
-      <description>BigSurv18 and the Green City HackathonTeam number 5DataBike useAltitude of Bicing stationsLocation of mechanical and electric bike stationsEmpty stations by station altitudeNext stepswith Saleha Habibullah, Sakinat Folorunso, and Vera Paul
-BigSurv18 and the Green City HackathonOne of accompanying events of the BigSurv18: Big Data Meets Survey Science conference in Barcelona last week was the Green City Hackathon.</description>
-    </item>
-    
-    <item>
-      <title>Political participation patterns in Poland</title>
-      <link>/post/ess-lca-participation/</link>
-      <pubDate>Thu, 18 Oct 2018 16:13:14 +0000</pubDate>
-      
-      <guid>/post/ess-lca-participation/</guid>
-      <description>Political participation in PolandLatent class analysisThree types of participants: the Disengaged, Activists, and ProtestersRegion mapsI recently came across Jennifer Oser’s 2017 article in Social Indicators Research about “political tool kits”, i.e. profiles (or patterns) of participation in different political activities. Her general argument is that research on citizen participation would benefit from analyses of such participation patterns instead of (or at least in addition to) just looking at determinants of participation in single activities.</description>
-    </item>
-    
-    <item>
-      <title>Personal vs. household income in cross-national surveys</title>
-      <link>/post/sdr-income-hh-personal-cor/</link>
-      <pubDate>Sat, 29 Sep 2018 10:06:00 +0000</pubDate>
-      
-      <guid>/post/sdr-income-hh-personal-cor/</guid>
-      <description>Sample correlationsSample correlations by genderSample correlations by ageSample correlations by educationContrastConclusionOne of the reasons for the harmonization of personal income in addition to household income was to check if the two correlate highly enough to use household income as a substitute for personal income in analyses where economic status is a control variable. This would be great, because household income variables are available in 1177 surveys out of 1721 analyzed in the Survey Data Recycling dataset (SDR) version 1, while personal income only in 453 surveys.</description>
-    </item>
-    
-    <item>
-      <title>Harmonizing measures of income in cross-national surveys</title>
-      <link>/post/sdr-income-hh-personal/</link>
-      <pubDate>Thu, 27 Sep 2018 17:29:00 +0000</pubDate>
-      
-      <guid>/post/sdr-income-hh-personal/</guid>
-      <description>DataNumber of response optionsItem non-responseDistributionsHarmonized target variablesNext stepswith Przemek Powałko
-Individual economic status is a necessary element of almost all sociological analyses, including studies of political attitudes and behavior. To supplement the already harmonized variables in the Survey Data Recycling dataset (SDR) version 1 and for the purposes of my resesarch of the effects of education on political engagement, Przemek and I harmonized two additional variables: personal income and household income1.</description>
-    </item>
-    
-    <item>
-      <title>Measuring the level and inequality of political participation with survey data</title>
-      <link>/post/participation-inequality-ess/</link>
-      <pubDate>Tue, 11 Sep 2018 03:41:00 +0000</pubDate>
-      
-      <guid>/post/participation-inequality-ess/</guid>
-      <description>Political participation in the ESSCountry levels of political participationInequality of political participationDemocracy indicatorsEconomic inequalityMatrix scatter plotsHow to measure political inequality? The Variaties of Democracy project (V-Dem) has a set of political equality indicators that capture the extent to which political power is distributed according to wealth and income, membership in a particular social group, gender or sexual orientation (cf. V-Dem Codebook v.</description>
-    </item>
-    
-    <item>
-      <title>Age distributions in samples from cross-national survey projects</title>
-      <link>/post/sdr-age-distributions/</link>
-      <pubDate>Sun, 02 Sep 2018 10:09:00 +0000</pubDate>
-      
-      <guid>/post/sdr-age-distributions/</guid>
-      <description>Cross-national survey projects conduct surveys on representative samples of adult populations.How do the distributions of respondents’ age vary across surveys carried out in the same country in different years and different projects?
-Like in a couple of previous posts (here, here and here) I use data from the Survey Data Recycling dataset (SDR) version 1, which includes selected harmonized variables from 22 cross-national survey projects. SDR only includes surveys that claim to have samples representative for adult populations.</description>
-    </item>
-    
-    <item>
-      <title>Reliability of survey estimates: Participation in demonstrations</title>
-      <link>/post/sdr-demonstrations-multiplets/</link>
-      <pubDate>Sun, 26 Aug 2018 17:32:00 +0000</pubDate>
-      
-      <guid>/post/sdr-demonstrations-multiplets/</guid>
-      <description>DataDifferences within country-yearsDifferences by groupsGenderAgeUrban/rural residenceEducationSampling schemeThe growth in cross-national survey projects in the last decades leads to situations when two or more surveys are carried out in the same country and the same year but in different projects, and contain overlapping sets of survey questions. Assuming that the surveys are based on representative samples - a claim that major cross-national survey projects typically make - it could be expected that estimates from surveys carried out in the same country and year are reasonably close.</description>
-    </item>
-    
-    <item>
-      <title>tidytext analysis of TED talks</title>
-      <link>/post/ted-talks/</link>
-      <pubDate>Wed, 22 Aug 2018 09:34:00 +0000</pubDate>
-      
-      <guid>/post/ted-talks/</guid>
-      <description>Setuptidy TED talksApplause, LOLSentimentThis year I spent two weeks of the summer attending the Summer Institute for Computational Social Science Parter Site (SICSS) in Tvärminne and Helsinki, Finland, organized by Matti Nelimarkka from Aalto University and the University of Helsinki, assisted by two TAs: Juho Pääkkönen and Pihla Toivanen from the University of Helsinki. I highly recommend it to anyone with background in the social sciences and interested in computer and data sciences, or the other way around!</description>
-    </item>
-    
-    <item>
-      <title>Validating survey data: Educational attainment in SDR and the OECD</title>
-      <link>/post/education-sdr-oecd/</link>
-      <pubDate>Mon, 13 Aug 2018 05:13:14 +0000</pubDate>
-      
-      <guid>/post/education-sdr-oecd/</guid>
-      <description>Educational attainment dataOECD dataSDR dataCleaning and merging SDR and OECD dataResultsThe curious case of ISSP SwitzerlandConclusionAppendixwith Przemek Powałko
-General population surveys with representative samples should have a similar education structure as shown by data from administrative sources, especially if survey weights are used. In this post we compare sample aggregates from 15 cross-national survey projects (including the European Social Survey, the World Values Survey and the European Values Study, and others) from the Survey Data Recycling database with educational attainment statistics from the OECD.</description>
-    </item>
-    
-    <item>
-      <title>Dot plot challenge: Voting gender gaps in Europe</title>
-      <link>/post/dot-plot-voting-ess/</link>
-      <pubDate>Tue, 07 Aug 2018 12:46:00 +0000</pubDate>
-      
-      <guid>/post/dot-plot-voting-ess/</guid>
-      <description>Getting and reshaping the dataThe Dot PlotThe August edition of the Storytelling with Data challenge #SWDchallenge stars the dot plot. Here is a simple plot of the gender gap in voting in national elections using the most recent 8th Round of the European Social Survey, ESS.
-Getting and reshaping the datalibrary(essurvey) # getting European Social Survey datalibrary(tidyverse) # data cleaning and reshapinglibrary(countrycode) # converting country codes to nameslibrary(ggplot2) # plotsWith the essurvey package the ESS data can be downloaded directly to R.</description>
-    </item>
-    
-    <item>
-      <title>Shiny app for exploring harmonized cross-national survey data (SDR v.1.0)</title>
-      <link>/post/sdr-exploration-shiny/</link>
-      <pubDate>Sun, 05 Aug 2018 07:32:00 +0000</pubDate>
-      
-      <guid>/post/sdr-exploration-shiny/</guid>
-      <description>InstructionsReferences In the previous post I wrote about downloading and exploring the Survey Data Recycling (SDR), version 1 dataset, which consists of selected harmonized variables from 22 survey projects, 1966-2013.
-The SDR project will develop a website for browsing, subsetting, downloading, and visualizing data from the SDR project. This website is currently under construction. Meanwhile, I made a Shiny app with basic functionalities of the future on-line browsing and subsetting tool (also serves as its mock-up): https://mkolczynska.</description>
-    </item>
-    
-    <item>
-      <title>Exploring the dataset of survey datasets: Survey Data Recycling version 1</title>
-      <link>/post/sdr-exploration/</link>
-      <pubDate>Thu, 02 Aug 2018 15:41:00 +0000</pubDate>
-      
-      <guid>/post/sdr-exploration/</guid>
-      <description>IntroductionDownloading the SDR dataExploring SDR: availability of variables by projectExploring SDR: availability of variables with different formulationsIdentifying surveys containing selected variablesSubsetting the Master FileCountry coverage plotCombining data from different survey projects creates new opportunities for research, alas, at the cost of increased volume (obviously) and complexity of the data. The Survey Data Recycling project created a dataset with data from 22 international survey projects.</description>
-    </item>
-    
-    <item>
-      <title>ISA World Congress 2018: Analysis of tweets</title>
-      <link>/post/isa-twitter/</link>
-      <pubDate>Mon, 23 Jul 2018 15:24:00 +0000</pubDate>
-      
-      <guid>/post/isa-twitter/</guid>
-      <description>Getting data from TwitterTweets over timeText analysisTweets by ISA Resesarch CommitteeThe International Sociological Association 19th World Congress of Sociology in Toronto (15-21 July) has received quite some Twitter coverage. Waiting to board the flight back to Warsaw, I wanted to take a look at these Twitter data and apply the newly acquired skills in text analysis (thanks to the Summer Institute for Computational Social Science, SICSS, Partner Site in Tvärminne and Helsinki, Finland).</description>
-    </item>
-    
-    <item>
-      <title>Late start</title>
-      <link>/post/first-post/</link>
-      <pubDate>Mon, 23 Jul 2018 13:19:58 +0000</pubDate>
-      
-      <guid>/post/first-post/</guid>
-      <description>How it all startedStep 1. RStep 2. On-line resourcesStep 3. Done is better than perfectReferencesThis blog is going to be mostly about my adventures with R, primarily using survey data, and usually somewhat related to my social science interests; for the fun of it, to share code and hopefully get feedback.
-How it all startedGeneral law of academia: The capacity for generating ideas is greater than the capacity of developing ideas into papers.</description>
-    </item>
-    
-  </channel>
-</rss>
