@@ -8,7 +8,9 @@ description = ""
 <img class="img-circle" style="float: right; margin-left: 10px;"
 src="Kolczynska.jpg" width="150px"/>
 
-I am an assistant professor at the [Institute of Political Studies of the Polish Academy of Sciences](http://english.isppan.waw.pl/), and until February 2021 a visiting researcher in the [Probabilistic Machine Learning Group](https://research.cs.aalto.fi/pml/), Department of Computer Science, Aalto University. 
+I am an assistant professor at the [Institute of Political Studies of the Polish Academy of Sciences](http://english.isppan.waw.pl/), and until March 2022 a visiting researcher at the [Research and Expertise Centre for Survey Methodology](https://www.upf.edu/web/survey) at Universitat Pompeu Fabra in Barcelona where I work on issues related to my project on the polarization of political trust (funded by Poland's National Science Centre, 2019/32/C/HS6/00421). 
+
+I was also a visiting researcher at the [Probabilistic Machine Learning Group](https://research.cs.aalto.fi/pml/), Department of Computer Science, Aalto University (2020-2021) and at the [Chair for Central and Eastern European Studies](https://www.tu-chemnitz.de/phil/iesg/professuren/klome/index.php.en), Technical University of Chemnitz (2019-2020). 
 
 My research interests include comparative analyses of political attitudes and behavior across nations and over time, as well as the methodology of comparative research, in particular cross-national surveys.
 
