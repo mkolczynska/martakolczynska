@@ -6,7 +6,7 @@ description = ""
 +++
 
 <img class="img-circle" style="float: right; margin-left: 10px;"
-src="Kolczynska.jpg" width="150px"/>
+src="MartaKolczynska.jpg" width="150px"/>
 
 I am an assistant professor at the [Institute of Political Studies of the Polish Academy of Sciences](http://english.isppan.waw.pl/) and PI of a project on the polarization of political trust (funded by Poland's National Science Centre, 2019/32/C/HS6/00421). 
 
@@ -33,13 +33,13 @@ My research interests include comparative analyses of political attitudes and be
 
 <i class='fa fa fa-book fa-fw'></i> Assistant Professor, Institute of Political Studies of the Polish Academy of Sciences, 2019-
 
-<i class='fa fa fa-book fa-fw'></i> Visiting Researcher at the Research and Expertise Centre for Survey Methodology, Universitat Pompeu Fabra, 2021-2022
+<i class='fa fa fa-book fa-fw'></i> Visiting Researcher, Research and Expertise Centre for Survey Methodology, Universitat Pompeu Fabra, 2021-2022
 
-<i class='fa fa fa-book fa-fw'></i> Visiting Researcher at the Department of Computer Science, Aalto University, 2020-2021
+<i class='fa fa fa-book fa-fw'></i> Visiting Researcher, Department of Computer Science, Aalto University, 2020-2021
 
-<i class='fa fa fa-book fa-fw'></i> Visiting Scholar at the Chair for Central and Eastern European Studies at the Chemnitz University of Technology, 2019-2020
+<i class='fa fa fa-book fa-fw'></i> Visiting Scholar, Chair for Central and Eastern European Studies at the Chemnitz University of Technology, 2019-2020
 
-<i class='fa fa fa-book fa-fw'></i> Visiting Researcher at the Department of Computer Science, Aalto University, 2019
+<i class='fa fa fa-book fa-fw'></i> Visiting Researcher, Department of Computer Science, Aalto University, 2019
 
 <i class='fa fa fa-book fa-fw'></i> Post-doctoral Researcher, Institute of Philosophy and Sociology of the Polish Academy of Sciences, 2018-2019
 
