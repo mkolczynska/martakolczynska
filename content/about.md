@@ -8,7 +8,7 @@ description = ""
 <img class="img-circle" style="float: right; margin-left: 10px;"
 src="MartaKolczynska.jpg" width="150px"/>
 
-I am an assistant professor at the [Institute of Political Studies of the Polish Academy of Sciences](http://english.isppan.waw.pl/) and PI of a project on the polarization of political trust (funded by Poland's National Science Centre, 2019/32/C/HS6/00421).
+I am an assistant professor at the [Institute of Political Studies of the Polish Academy of Sciences](http://english.isppan.waw.pl/) and PI of a project on the polarization of political trust (funded by Poland's National Science Centre, 2019/32/C/HS6/00421, [project website](https://polarization-political-trust.netlify.app/)) and on political polarization and participation (2022/04/Y/HS6/00024, [project website](https://popapol.ff.um.si/)).
 
 In the recent years I was a visiting researcher at the [Research and Expertise Centre for Survey Methodology](https://www.upf.edu/web/survey) at Universitat Pompeu Fabra in Barcelona (2021-2022), the [Probabilistic Machine Learning Group](https://research.cs.aalto.fi/pml/), Department of Computer Science, Aalto University (2020-2021) and at the [Chair for Central and Eastern European Studies](https://www.tu-chemnitz.de/phil/iesg/professuren/klome/index.php.en), Technical University of Chemnitz (2019-2020). 
 
