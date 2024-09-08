@@ -41,17 +41,13 @@ too is measured at the country-year level.</p>
 </div>
 <div id="data-inspection" class="section level2">
 <h2>Data inspection</h2>
-<p>I have not attempted to reproduce the measures of polarization, as this would require
-downloading the numerous survey data files, digging through the documentation, and
-generally a lot of work. As a side note: including variables constructed by
-aggregating survey data as predictors in regression models requires accounting for the
-measurement uncertainty of these aggregates and omitting them, as Griffin et al. did,
-leads to biased results
-(see <a href="https://doi.org/10.1017/S0003055422000429">Tai, Hu, and Solt 2022</a>).</p>
+<p>I should note that I have not attempted to reproduce the measure of polarization, nor
+have I paid much attention to how the control variables were constructed. I just focus
+on the protest measure, i.e. the dependent variable of the study.</p>
 <p>The file <code>Conflict data sample</code> in the <a href="https://doi.org/10.7910/DVN/SVXE7L">replication materials</a>
 contains the protest data used in the article to construct the dependent variable.
 Here is a snippet for Poland 1981-1990.
-The variable ‘protest’ is the one created by the authors and used in the analysis.
+The variable <code>protest</code> is the one created by the authors and used in the analysis.
 In the article, it is described as the
 sum of strikes (<code>strike</code>) and anti-government demonstrations (<code>demons</code>).
 It is enough to eyeball the data to see that the variable ‘protest’ is not a sum of
@@ -102,8 +98,11 @@ from the replication materials to R.</p>
   # merge all datasets by country and year
   full_join(conflict, by = c(&quot;ccode&quot;, &quot;Year&quot;)) %&gt;%
   full_join(qog, by = c(&quot;ccode&quot;, &quot;Year&quot;)) %&gt;%
-  mutate(demons_strike = demons + strike,
+  mutate(# correct measure of anti-gov demonstrations + strikes
+         demons_strike = demons + strike,
+         # riots + strikes
          riot_strike = riot + strike,
+         # other transformations as in the original data cleaning script
          polar = polar*100,
          disat = disat*100,
          GDPcap = log(pwt_rgdpch),
