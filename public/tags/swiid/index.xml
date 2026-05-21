@@ -2,30 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>SWIID on Marta Kołczyńska</title>
-    <link>/tags/swiid/</link>
+    <link>https://martakolczynska.com/tags/swiid/</link>
     <description>Recent content in SWIID on Marta Kołczyńska</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Sun, 03 Feb 2019 15:52:00 +0000</lastBuildDate><atom:link href="/tags/swiid/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 03 Feb 2019 15:52:00 +0000</lastBuildDate>
+    <atom:link href="https://martakolczynska.com/tags/swiid/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Downloading country-level indicators on participation and economic inequality 2</title>
-      <link>/post/participation-inequality-indices-2/</link>
+      <link>https://martakolczynska.com/post/participation-inequality-indices-2/</link>
       <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
-      
-      <guid>/post/participation-inequality-indices-2/</guid>
-      <description>DataPackagesVarieties of Democracy (V-Dem): Dedicated packagePolyarchy: Semicolon delimited CSV file -&amp;gt; rioFreedom House: Excel file with by-year sheetsPolity IV: SPSS file -&amp;gt; rioDemocracy Barometer: Excel file with header in top rows -&amp;gt; rioThe Standardized World Income Inequality Database (SWIID): Plain CSV file -&amp;gt; rioWorld Bank’s World Development Indicators: Dedicated packageMerging all datasetsWriting to fileShortly after writing this post on importing datasets in different formats (CSV, XLS, XLSX, SAV) to R, I got the following comment:</description>
+      <guid>https://martakolczynska.com/post/participation-inequality-indices-2/</guid>
+      <description>Data&#xD;Packages&#xD;Varieties of Democracy (V-Dem): Dedicated package&#xD;Polyarchy: Semicolon delimited CSV file -&amp;gt; rio&#xD;Freedom House: Excel file with by-year sheets&#xD;Polity IV: SPSS file -&amp;gt; rio&#xD;Democracy Barometer: Excel file with header in top rows -&amp;gt; rio&#xD;The Standardized World Income Inequality Database (SWIID): Plain CSV file -&amp;gt; rio&#xD;World Bank’s World Development Indicators: Dedicated package&#xD;Merging all datasets&#xD;Writing to file&#xD;Shortly after writing this post on importing datasets in different formats (CSV, XLS, XLSX, SAV) to R, I got the following comment:</description>
     </item>
-    
     <item>
       <title>Downloading country-level indicators on participation and economic inequality</title>
-      <link>/post/participation-inequality-indices/</link>
+      <link>https://martakolczynska.com/post/participation-inequality-indices/</link>
       <pubDate>Sat, 02 Feb 2019 13:28:00 +0000</pubDate>
-      
-      <guid>/post/participation-inequality-indices/</guid>
-      <description>DataPackagesVarieties of Democracy (V-Dem): Dedicated packagePolyarchy: Semicolon delimited CSV fileFreedom House: Excel file with by-year sheetsPolity IV: SPSS fileDemocracy Barometer: Excel file with header in top rowsThe Standardized World Income Inequality Database (SWIID): Plain CSV fileWorld Bank’s World Development Indicators: Dedicated packageMerging all datasetsCountry graphsVariable graphsWriting to filewith Viktoriia Muliavka
-Social and political scientists often need to put together datasets of country-level political, economic, and demographic variables with data from different sources.</description>
+      <guid>https://martakolczynska.com/post/participation-inequality-indices/</guid>
+      <description>Data&#xD;Packages&#xD;Varieties of Democracy (V-Dem): Dedicated package&#xD;Polyarchy: Semicolon delimited CSV file&#xD;Freedom House: Excel file with by-year sheets&#xD;Polity IV: SPSS file&#xD;Democracy Barometer: Excel file with header in top rows&#xD;The Standardized World Income Inequality Database (SWIID): Plain CSV file&#xD;World Bank’s World Development Indicators: Dedicated package&#xD;Merging all datasets&#xD;Country graphs&#xD;Variable graphs&#xD;Writing to file&#xD;with Viktoriia Muliavka&#xA;Social and political scientists often need to put together datasets of country-level political, economic, and demographic variables with data from different sources.</description>
     </item>
-    
   </channel>
 </rss>

@@ -5,7 +5,6 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="generator" content="Hugo 0.81.0" />
 
   <title>tidytext analysis of TED talks &middot; Marta Kołczyńska</title>
 
@@ -21,13 +20,13 @@
   <!--<![endif]-->
 
   <!--[if lte IE 8]>
-  <link rel="stylesheet" href="/css/side-menu-old-ie.css">
+  <link rel="stylesheet" href="https://martakolczynska.com/css/side-menu-old-ie.css">
   <![endif]-->
   <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="/css/side-menu.css">
+  <link rel="stylesheet" href="https://martakolczynska.com/css/side-menu.css">
   <!--<![endif]-->
 
-  <link rel="stylesheet" href="/css/blackburn.css">
+  <link rel="stylesheet" href="https://martakolczynska.com/css/blackburn.css">
 
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -52,11 +51,11 @@
   <script>hljs.initHighlightingOnLoad();</script>
   
 
-  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="https://martakolczynska.com/img/favicon.ico" type="image/x-icon" />
 
   
     
-        <link rel="stylesheet" href="/css/circle.css">
+        <link rel="stylesheet" href="https://martakolczynska.com/css/circle.css">
     
   
   
@@ -75,7 +74,7 @@
 <div id="menu">
 
   
-  <a class="pure-menu-heading brand" href="/"><img src="/images/puzzleblacksmall.png" alt="logo"></a>
+  <a class="pure-menu-heading brand" href="https://martakolczynska.com/"><img src="https://martakolczynska.com/images/puzzleblacksmall.png" alt="logo"></a>
 
 
 
@@ -84,31 +83,31 @@
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="/"><i class='fa fa-home fa-fw'></i>Home</a>
+          <a class="pure-menu-link" href="https://martakolczynska.com/"><i class='fa fa-home fa-fw'></i>Home</a>
       
         </li>
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="/about/"><i class='fa fa-user fa-fw'></i>About</a>
+          <a class="pure-menu-link" href="https://martakolczynska.com/about/"><i class='fa fa-user fa-fw'></i>About</a>
       
         </li>
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="/research/"><i class='fa fa-bar-chart fa-fw'></i>Research</a>
+          <a class="pure-menu-link" href="https://martakolczynska.com/research/"><i class='fa fa-bar-chart fa-fw'></i>Research</a>
       
         </li>
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+          <a class="pure-menu-link" href="https://martakolczynska.com/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
       
         </li>
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="/contact/"><i class='fa fa-envelope fa-fw'></i>Contact</a>
+          <a class="pure-menu-link" href="https://martakolczynska.com/contact/"><i class='fa fa-envelope fa-fw'></i>Contact</a>
       
         </li>
       
@@ -117,8 +116,6 @@
 
   <div class="pure-menu social">
   <ul class="pure-menu-list">
-
-    
 
     
 
@@ -243,15 +240,15 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="/tags/text-analysis">text analysis</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://martakolczynska.com/tags/text-analysis">text analysis</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/ted-talks">TED talks</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://martakolczynska.com/tags/ted-talks">TED talks</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/r">R</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://martakolczynska.com/tags/r">R</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/sicss">SICSS</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://martakolczynska.com/tags/sicss">SICSS</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/tidytext">tidytext</a>
+      <a class="post-taxonomy-tag" href="https://martakolczynska.com/tags/tidytext">tidytext</a>
     
   </div>
   
@@ -289,7 +286,7 @@ ted$date &lt;- as.POSIXct(ted$film_date,  origin=&quot;1970-01-01&quot;)
 
 ggplot(ted, aes(year(date))) + geom_histogram(col=&quot;darkgoldenrod1&quot;, 
                                               fill=&quot;darkgoldenrod2&quot;, alpha = .3, binwidth = 1)</code></pre>
-<p><img src="/post/ted-talks_files/figure-html/packages-1.png" width="672" /></p>
+<p><img src="https://martakolczynska.com/post/ted-talks_files/figure-html/packages-1.png" width="672" /></p>
 <pre class="r"><code>ted &lt;- filter(ted, date &gt; as.Date(&quot;2009-01-01&quot;))</code></pre>
 </div>
 <div id="tidy-ted-talks" class="section level3">
@@ -332,7 +329,7 @@ print(c(nrow(ted), nrow(ted_words)))</code></pre>
 
 ggMarginal(plot, type=&quot;histogram&quot;, fill = &quot;darkgoldenrod2&quot;,
            xparams = list(bins=50), yparams = list(bins=50))</code></pre>
-<p><img src="/post/ted-talks_files/figure-html/tokenize4-1.png" width="576" /></p>
+<p><img src="https://martakolczynska.com/post/ted-talks_files/figure-html/tokenize4-1.png" width="576" /></p>
 <p>To see what were the most frequently used words, it’s necessary to do some more cleaning otherwise the top 5 will consist of “the”, “and”, “to”, “of”, and “a”. After excluding stop words and all strings with digits (like “100th”), the 20 most popular words are more meaningful. Interestingly, there are only nouns and verbs on this list.</p>
 <pre class="r"><code>ted_words %&gt;%
   anti_join(stop_words) %&gt;% # eliminate stop words  # remove stop words
@@ -380,7 +377,7 @@ Laughter can happen any time, but is a little more likely at the beginning of th
     geom_freqpoly(size = 1.5) + xlim(0, 1) +
     labs(title=&quot;Relative position of applause and laughter&quot;, 
        x=&quot;Position&quot;, y=&quot;Count&quot;) </code></pre>
-<p><img src="/post/ted-talks_files/figure-html/applause-laughter-graph-1.png" width="672" /></p>
+<p><img src="https://martakolczynska.com/post/ted-talks_files/figure-html/applause-laughter-graph-1.png" width="672" /></p>
 </div>
 <div id="sentiment" class="section level3">
 <h3>Sentiment</h3>
@@ -399,7 +396,7 @@ Laughter can happen any time, but is a little more likely at the beginning of th
     expand_limits(y = 0) +
     labs(x = &quot;Position&quot;,
        y = &quot;Mean AFINN sentiment score&quot;)</code></pre>
-<p><img src="/post/ted-talks_files/figure-html/sentiment-1.png" width="576" /></p>
+<p><img src="https://martakolczynska.com/post/ted-talks_files/figure-html/sentiment-1.png" width="576" /></p>
 <p>The TED talk dataset on Kaggle contains more information that would be interesting to analyze, including tags (key words), ratings, the number of comments, but that’s material for another post, perhaps.</p>
 </div>
 
@@ -408,13 +405,13 @@ Laughter can happen any time, but is a little more likely at the beginning of th
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="/post/education-sdr-oecd/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://martakolczynska.com/post/education-sdr-oecd/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="/post/education-sdr-oecd/">Validating survey data: Educational attainment in SDR and the OECD</a>
+      <a href="https://martakolczynska.com/post/education-sdr-oecd/">Validating survey data: Educational attainment in SDR and the OECD</a>
     </nav>
     
   </div>
@@ -424,13 +421,13 @@ Laughter can happen any time, but is a little more likely at the beginning of th
   <div class="pure-u-10-24">
     
     <nav class="next">
-      <a href="/post/sdr-demonstrations-multiplets/">Reliability of survey estimates: Participation in demonstrations</a>
+      <a href="https://martakolczynska.com/post/sdr-demonstrations-multiplets/">Reliability of survey estimates: Participation in demonstrations</a>
     </nav>
     
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
     
-    <a href="/post/sdr-demonstrations-multiplets/"><i class="fa fa-chevron-right"></i></a>
+    <a href="https://martakolczynska.com/post/sdr-demonstrations-multiplets/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>
@@ -461,7 +458,7 @@ Laughter can happen any time, but is a little more likely at the beginning of th
 
 </div>
 </div>
-<script src="/js/ui.js"></script>
+<script src="https://martakolczynska.com/js/ui.js"></script>
 
 
 <script>

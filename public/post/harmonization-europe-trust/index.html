@@ -5,7 +5,6 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="generator" content="Hugo 0.81.0" />
 
   <title>Do-It-Yourself Harmonization: Exploring trust items in three European survey projects &middot; Marta Kołczyńska</title>
 
@@ -21,13 +20,13 @@
   <!--<![endif]-->
 
   <!--[if lte IE 8]>
-  <link rel="stylesheet" href="/css/side-menu-old-ie.css">
+  <link rel="stylesheet" href="https://martakolczynska.com/css/side-menu-old-ie.css">
   <![endif]-->
   <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="/css/side-menu.css">
+  <link rel="stylesheet" href="https://martakolczynska.com/css/side-menu.css">
   <!--<![endif]-->
 
-  <link rel="stylesheet" href="/css/blackburn.css">
+  <link rel="stylesheet" href="https://martakolczynska.com/css/blackburn.css">
 
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -52,11 +51,11 @@
   <script>hljs.initHighlightingOnLoad();</script>
   
 
-  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="https://martakolczynska.com/img/favicon.ico" type="image/x-icon" />
 
   
     
-        <link rel="stylesheet" href="/css/circle.css">
+        <link rel="stylesheet" href="https://martakolczynska.com/css/circle.css">
     
   
   
@@ -75,7 +74,7 @@
 <div id="menu">
 
   
-  <a class="pure-menu-heading brand" href="/"><img src="/images/puzzleblacksmall.png" alt="logo"></a>
+  <a class="pure-menu-heading brand" href="https://martakolczynska.com/"><img src="https://martakolczynska.com/images/puzzleblacksmall.png" alt="logo"></a>
 
 
 
@@ -84,31 +83,31 @@
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="/"><i class='fa fa-home fa-fw'></i>Home</a>
+          <a class="pure-menu-link" href="https://martakolczynska.com/"><i class='fa fa-home fa-fw'></i>Home</a>
       
         </li>
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="/about/"><i class='fa fa-user fa-fw'></i>About</a>
+          <a class="pure-menu-link" href="https://martakolczynska.com/about/"><i class='fa fa-user fa-fw'></i>About</a>
       
         </li>
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="/research/"><i class='fa fa-bar-chart fa-fw'></i>Research</a>
+          <a class="pure-menu-link" href="https://martakolczynska.com/research/"><i class='fa fa-bar-chart fa-fw'></i>Research</a>
       
         </li>
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+          <a class="pure-menu-link" href="https://martakolczynska.com/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
       
         </li>
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="/contact/"><i class='fa fa-envelope fa-fw'></i>Contact</a>
+          <a class="pure-menu-link" href="https://martakolczynska.com/contact/"><i class='fa fa-envelope fa-fw'></i>Contact</a>
       
         </li>
       
@@ -117,8 +116,6 @@
 
   <div class="pure-menu social">
   <ul class="pure-menu-list">
-
-    
 
     
 
@@ -243,17 +240,17 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="/tags/r">R</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://martakolczynska.com/tags/r">R</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/survey-data-harmonization">survey data harmonization</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://martakolczynska.com/tags/survey-data-harmonization">survey data harmonization</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/tools">tools</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://martakolczynska.com/tags/tools">tools</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/crosswalk">crosswalk</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://martakolczynska.com/tags/crosswalk">crosswalk</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/diy">DIY</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://martakolczynska.com/tags/diy">DIY</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/reproducibility">reproducibility</a>
+      <a class="post-taxonomy-tag" href="https://martakolczynska.com/tags/reproducibility">reproducibility</a>
     
   </div>
   
@@ -262,7 +259,7 @@
 </div>
 
   
-<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<script src="https://martakolczynska.com/rmarkdown-libs/kePrint/kePrint.js"></script>
 
 <div id="TOC">
 <ul>
@@ -291,7 +288,7 @@
 <p>Figure <a href="#fig:schema">1</a> presents the data processing schema of the whole harmonization process. At the start (Step 1) there is a survey data file with cases (corresponding to respondents) in rows, and variables (corresponding to respondent characteristics) in columns. The survey data files’ metadata describing variables are used to construct the codebook (Step 2a), in which each row corresponds to a variable, and columns contain the original name of the variable in the survey data file as well as variable labels and value frequencies. Selected source variables corresponding to the concepts of interest are tagged with target variable names in a new column (Step 2b). Next, for the selected source variables a crosswalk is created, where for each value of each source variable there is a separate row. Assigning target variable values (Step 3) creates a mapping schema. This mapping schema is used in recoding of source to target variables, where a vector of source values is mapped onto a vector of target variables.</p>
 <p>The full code is available <a href="https://github.com/mkolczynska/martakolczynska/blob/master/content/post/harmonization-europe-trust.Rmd" target="_blank">here</a>.</p>
 <div class="figure"><span id="fig:schema"></span>
-<img src="/images/schema.png" alt="Harmonization: Data flow schema." width="800px" />
+<img src="https://martakolczynska.com/images/schema.png" alt="Harmonization: Data flow schema." width="800px" />
 <p class="caption">
 Figure 1: Harmonization: Data flow schema.
 </p>
@@ -401,7 +398,7 @@ European Values Study (EVS)
 <p>In R, a codebook can be created from labelled data, such as those in SPSS format, with the package <a href="https://cran.r-project.org/web/packages/labelled/index.html" target="_blank"><code>labelled</code></a>. The R code for creating the codebook is presented in <a href="#appendix2">Appendix 2</a>. The codebook is then exported into a spreadsheet program (e.g., with the <a href="https://cran.r-project.org/web/packages/rio/index.html" target="_blank"><code>rio</code> package</a>), where source variable labels can be browsed and filtered to select the variables of interest, and assign appropriate target variable names. The target variable names will be <code>trust_*</code>, where <code>*</code> is the short version of the institution name. If necessary, notes or comments on particular decisions can be written in a separate column of the spreadsheet. Notes may document decisions to treat questions about slightly different wording as corresponding to the same target variable (e.g., trust in the justice system vs. trust in the legal system), or add information from other sources, such as the original documentation of the source data.</p>
 <p>Figure <a href="#fig:codebook">2</a> shows a snippet of the codebook created for ESS. The first column (<code>table_name</code>) corresponds to the name of the source table – one each for ESS and EQLS, and two separate tables for EVS/5 and EVS/1-4. The column <code>varname</code> contains the names of source variables, <code>varlabel</code> contains the source variable labels, and <code>valfreqs</code> contains frequencies of all values with value labels provided. The column <code>target_var</code> is to be filled with names of target variables to which the selected source variables correspond. In the example shown in Figure <a href="#fig:codebook">2</a>, the label <code>trust_parl</code> has been assigned to the variable on trust in parliament, the label <code>trust_leg</code> to the variable on trust in the legal system, and so on. Filtering available in spreadsheet programs enables sorting through variables with keywords or other conditions.</p>
 <div class="figure"><span id="fig:codebook"></span>
-<img src="/images/codebook_full.png" alt="Codebook represented in a spreadsheet program." width="600px" />
+<img src="https://martakolczynska.com/images/codebook_full.png" alt="Codebook represented in a spreadsheet program." width="600px" />
 <p class="caption">
 Figure 2: Codebook represented in a spreadsheet program.
 </p>
@@ -414,7 +411,7 @@ Figure 2: Codebook represented in a spreadsheet program.
 <p>The second goal is a careful inspection of labels of the source values, one by one, while consulting the textual survey documentation wherever necessary. The need to assign each target value a corresponding source value protects from possible mistakes of automation, and is particularly useful in the case of categorical variables with limited standardization across waves and projects, such as education or size of town of residence.</p>
 <p>The snippet in Figure <a href="#fig:cwt">3</a> shows a fragment of the crosswalk for trust in parliament in ESS, for which the source variable is called <code>trstprl</code>. Values include <code>77</code>, <code>88</code>, and <code>99</code> for different types of missing data, while values from 0 to 10 correspond to substantive answers. Corresponding target values are added in the <code>target_value</code> column.</p>
 <div class="figure"><span id="fig:cwt"></span>
-<img src="/images/cwt_full.png" alt="Crosswalk represented in a spreadsheet program." width="600px" />
+<img src="https://martakolczynska.com/images/cwt_full.png" alt="Crosswalk represented in a spreadsheet program." width="600px" />
 <p class="caption">
 Figure 3: Crosswalk represented in a spreadsheet program.
 </p>
@@ -430,7 +427,7 @@ Figure 3: Crosswalk represented in a spreadsheet program.
 <p>Altogether, in the three analyzed datasets, I identified trust items in 27 different institutions. The most common items are on trust in the legal system and in the police, available in 433 national surveys out of 461 surveys in total. The next item with regard to its availability in surveys is about trust in the national parliament (430 surveys), followed by trust in the United Nations (290) and trust in political parties (266). It is worth noting that I treated the European Union (118 surveys) and the European Parliament (195 surveys) as separate institutions. A different decision - combining both items into one target variable - would make it the fourth most popular turst item.</p>
 <p>The availability of trust items across the three survey projects is presented in Figure <a href="#fig:trust-availability">4</a>. The three most common items – trust in the police, the legal system, and the national parliament – are available in all three projects: in all national surveys in ESS and EVS, and in rounds 2-4 of EQLS. The trust in parliament item is additionally missing from three surveys in EVS/2 (Estonia, Latvia, and Lithuania surveyed in 1990). Other items occur only in selected projects or project waves. For example, the item on trust in the social media was only added in EVS/5.</p>
 <div class="figure"><span id="fig:trust-availability"></span>
-<img src="/post/harmonization-europe-trust_files/figure-html/trust-availability-1.png" alt="Availability of trust in institutions items in the European Social Survey Rounds 1-8, European Values Study 1-5, and the European Quality of Life Survey 1-4." width="720" />
+<img src="https://martakolczynska.com/post/harmonization-europe-trust_files/figure-html/trust-availability-1.png" alt="Availability of trust in institutions items in the European Social Survey Rounds 1-8, European Values Study 1-5, and the European Quality of Life Survey 1-4." width="720" />
 <p class="caption">
 Figure 4: Availability of trust in institutions items in the European Social Survey Rounds 1-8, European Values Study 1-5, and the European Quality of Life Survey 1-4.
 </p>
@@ -684,13 +681,13 @@ rio::export(all_data, &quot;harmonization-europe-trust.csv.gz&quot;)  </code></p
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="/post/codebook-labelled-data/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://martakolczynska.com/post/codebook-labelled-data/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="/post/codebook-labelled-data/">Searchable codebook from labelled data in R</a>
+      <a href="https://martakolczynska.com/post/codebook-labelled-data/">Searchable codebook from labelled data in R</a>
     </nav>
     
   </div>
@@ -700,13 +697,13 @@ rio::export(all_data, &quot;harmonization-europe-trust.csv.gz&quot;)  </code></p
   <div class="pure-u-10-24">
     
     <nav class="next">
-      <a href="/post/issp-codebook/">Codebook from ISSP waves 1985-2017</a>
+      <a href="https://martakolczynska.com/post/issp-codebook/">Codebook from ISSP waves 1985-2017</a>
     </nav>
     
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
     
-    <a href="/post/issp-codebook/"><i class="fa fa-chevron-right"></i></a>
+    <a href="https://martakolczynska.com/post/issp-codebook/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>
@@ -737,7 +734,7 @@ rio::export(all_data, &quot;harmonization-europe-trust.csv.gz&quot;)  </code></p
 
 </div>
 </div>
-<script src="/js/ui.js"></script>
+<script src="https://martakolczynska.com/js/ui.js"></script>
 
 
 <script>

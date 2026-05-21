@@ -1,64 +1,48 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>macro indicators on Marta Kołczyńska</title>
-    <link>/tags/macro-indicators/</link>
-    <description>Recent content in macro indicators on Marta Kołczyńska</description>
+    <title>Macro Indicators on Marta Kołczyńska</title>
+    <link>https://martakolczynska.com/tags/macro-indicators/</link>
+    <description>Recent content in Macro Indicators on Marta Kołczyńska</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Thu, 11 Mar 2021 22:07:01 +0000</lastBuildDate><atom:link href="/tags/macro-indicators/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 11 Mar 2021 22:07:01 +0000</lastBuildDate>
+    <atom:link href="https://martakolczynska.com/tags/macro-indicators/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Trends in educational attainment in Europe</title>
-      <link>/post/eurostat-age-gender-education/</link>
+      <link>https://martakolczynska.com/post/eurostat-age-gender-education/</link>
       <pubDate>Thu, 11 Mar 2021 22:07:01 +0000</pubDate>
-      
-      <guid>/post/eurostat-age-gender-education/</guid>
-      <description>Note: This part of data processing was used to construct poststratification tables used to create country-year estimates of political trust in Europe. The full paper titled “Modeling public opinion over time and space: Trust in state institutions in Europe, 1989-2019” is availabe on SocArXiv: https://osf.io/preprints/socarxiv/3v5g7/. This research was supported by the Bekker Programme of the Polish National Agency for Academic Mobility under award number PPN/BEK/2019/1/00133.
-The Eurostat provides a host of useful data, including socio-demographic statistics on educational attainment, which enable tracking the changes in educational composition of European societies over the last several years.</description>
+      <guid>https://martakolczynska.com/post/eurostat-age-gender-education/</guid>
+      <description>Note: This part of data processing was used to construct poststratification tables used to create country-year estimates of political trust in Europe. The full paper titled “Modeling public opinion over time and space: Trust in state institutions in Europe, 1989-2019” is availabe on SocArXiv: https://osf.io/preprints/socarxiv/3v5g7/. This research was supported by the Bekker Programme of the Polish National Agency for Academic Mobility under award number PPN/BEK/2019/1/00133.&#xA;The Eurostat provides a host of useful data, including socio-demographic statistics on educational attainment, which enable tracking the changes in educational composition of European societies over the last several years.</description>
     </item>
-    
     <item>
       <title>(In)Consistency between international corruption indicators</title>
-      <link>/post/corruption-indicators/</link>
+      <link>https://martakolczynska.com/post/corruption-indicators/</link>
       <pubDate>Tue, 21 Jul 2020 21:29:01 +0000</pubDate>
-      
-      <guid>/post/corruption-indicators/</guid>
-      <description>OverviewScatter plotsCorrelationsTrends in corruption indicators in Europe, 1990-2019Note: Results from this post are presented more systematically in the paper “Marketplace of indicators: Inconsistencies between country trends of measures of governance” co-authored with Paul Bürkner and available on SocArXiv: https://osf.io/preprints/socarxiv/u8gsc/.
-OverviewMeasuring corruption is hard, especially if one is interested in having corruption indicators that are comparable across countries and over time. Arguably the most famous corruption ranking is the Corruption Perceptions Index published annually by Transparency International, but it can’t be used for over-time comparisons (cf.</description>
+      <guid>https://martakolczynska.com/post/corruption-indicators/</guid>
+      <description>Overview&#xD;Scatter plots&#xD;Correlations&#xD;Trends in corruption indicators in Europe, 1990-2019&#xD;Note: Results from this post are presented more systematically in the paper “Marketplace of indicators: Inconsistencies between country trends of measures of governance” co-authored with Paul Bürkner and available on SocArXiv: https://osf.io/preprints/socarxiv/u8gsc/.&#xA;Overview&#xD;Measuring corruption is hard, especially if one is interested in having corruption indicators that are comparable across countries and over time. Arguably the most famous corruption ranking is the Corruption Perceptions Index published annually by Transparency International, but it can’t be used for over-time comparisons (cf.</description>
     </item>
-    
     <item>
       <title>Cleaning Freedom House indicators</title>
-      <link>/post/cleaning-fh-data/</link>
+      <link>https://martakolczynska.com/post/cleaning-fh-data/</link>
       <pubDate>Sat, 21 Sep 2019 22:08:14 +0000</pubDate>
-      
-      <guid>/post/cleaning-fh-data/</guid>
-      <description>How to clean a very untidy data set with Freedom House country ratings, saved in an Excel sheet, which violates many principles of data organization in spreadsheets described in this paper by Karl Broman and Kara Woo, but otherwise is an invaluable source of data on freedom in the world?
-Data source: https://freedomhouse.org/content/freedom-world-data-and-resources
-The full code used in this post is available here.
-I would do this:
-Read in the file,</description>
+      <guid>https://martakolczynska.com/post/cleaning-fh-data/</guid>
+      <description>How to clean a very untidy data set with Freedom House country ratings, saved in an Excel sheet, which violates many principles of data organization in spreadsheets described in this paper by Karl Broman and Kara Woo, but otherwise is an invaluable source of data on freedom in the world?&#xA;Data source: https://freedomhouse.org/content/freedom-world-data-and-resources&#xA;The full code used in this post is available here.&#xA;I would do this:&#xA;Read in the file,</description>
     </item>
-    
     <item>
       <title>Downloading country-level indicators on participation and economic inequality 2</title>
-      <link>/post/participation-inequality-indices-2/</link>
+      <link>https://martakolczynska.com/post/participation-inequality-indices-2/</link>
       <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
-      
-      <guid>/post/participation-inequality-indices-2/</guid>
-      <description>DataPackagesVarieties of Democracy (V-Dem): Dedicated packagePolyarchy: Semicolon delimited CSV file -&amp;gt; rioFreedom House: Excel file with by-year sheetsPolity IV: SPSS file -&amp;gt; rioDemocracy Barometer: Excel file with header in top rows -&amp;gt; rioThe Standardized World Income Inequality Database (SWIID): Plain CSV file -&amp;gt; rioWorld Bank’s World Development Indicators: Dedicated packageMerging all datasetsWriting to fileShortly after writing this post on importing datasets in different formats (CSV, XLS, XLSX, SAV) to R, I got the following comment:</description>
+      <guid>https://martakolczynska.com/post/participation-inequality-indices-2/</guid>
+      <description>Data&#xD;Packages&#xD;Varieties of Democracy (V-Dem): Dedicated package&#xD;Polyarchy: Semicolon delimited CSV file -&amp;gt; rio&#xD;Freedom House: Excel file with by-year sheets&#xD;Polity IV: SPSS file -&amp;gt; rio&#xD;Democracy Barometer: Excel file with header in top rows -&amp;gt; rio&#xD;The Standardized World Income Inequality Database (SWIID): Plain CSV file -&amp;gt; rio&#xD;World Bank’s World Development Indicators: Dedicated package&#xD;Merging all datasets&#xD;Writing to file&#xD;Shortly after writing this post on importing datasets in different formats (CSV, XLS, XLSX, SAV) to R, I got the following comment:</description>
     </item>
-    
     <item>
       <title>Downloading country-level indicators on participation and economic inequality</title>
-      <link>/post/participation-inequality-indices/</link>
+      <link>https://martakolczynska.com/post/participation-inequality-indices/</link>
       <pubDate>Sat, 02 Feb 2019 13:28:00 +0000</pubDate>
-      
-      <guid>/post/participation-inequality-indices/</guid>
-      <description>DataPackagesVarieties of Democracy (V-Dem): Dedicated packagePolyarchy: Semicolon delimited CSV fileFreedom House: Excel file with by-year sheetsPolity IV: SPSS fileDemocracy Barometer: Excel file with header in top rowsThe Standardized World Income Inequality Database (SWIID): Plain CSV fileWorld Bank’s World Development Indicators: Dedicated packageMerging all datasetsCountry graphsVariable graphsWriting to filewith Viktoriia Muliavka
-Social and political scientists often need to put together datasets of country-level political, economic, and demographic variables with data from different sources.</description>
+      <guid>https://martakolczynska.com/post/participation-inequality-indices/</guid>
+      <description>Data&#xD;Packages&#xD;Varieties of Democracy (V-Dem): Dedicated package&#xD;Polyarchy: Semicolon delimited CSV file&#xD;Freedom House: Excel file with by-year sheets&#xD;Polity IV: SPSS file&#xD;Democracy Barometer: Excel file with header in top rows&#xD;The Standardized World Income Inequality Database (SWIID): Plain CSV file&#xD;World Bank’s World Development Indicators: Dedicated package&#xD;Merging all datasets&#xD;Country graphs&#xD;Variable graphs&#xD;Writing to file&#xD;with Viktoriia Muliavka&#xA;Social and political scientists often need to put together datasets of country-level political, economic, and demographic variables with data from different sources.</description>
     </item>
-    
   </channel>
 </rss>

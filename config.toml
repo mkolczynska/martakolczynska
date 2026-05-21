@@ -5,11 +5,13 @@ theme = "blackburn"
 author = "Marta Kołczyńska"
 copyright = "&copy; 2018. Marta Kołczyńska"
 canonifyurls = true
-paginate = 10
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 #[permalinks]
 #    post = "/:year/:month/:day/:slug/"
+
+[pagination]
+pagerSize = 10
 
 [indexes]
   tag = "tags"

@@ -2,20 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>DIY on Marta Kołczyńska</title>
-    <link>/tags/diy/</link>
+    <link>https://martakolczynska.com/tags/diy/</link>
     <description>Recent content in DIY on Marta Kołczyńska</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Tue, 09 Apr 2019 13:41:00 +0000</lastBuildDate><atom:link href="/tags/diy/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 09 Apr 2019 13:41:00 +0000</lastBuildDate>
+    <atom:link href="https://martakolczynska.com/tags/diy/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Do-It-Yourself Harmonization: Exploring trust items in three European survey projects</title>
-      <link>/post/harmonization-europe-trust/</link>
+      <link>https://martakolczynska.com/post/harmonization-europe-trust/</link>
       <pubDate>Tue, 09 Apr 2019 13:41:00 +0000</pubDate>
-      
-      <guid>/post/harmonization-europe-trust/</guid>
-      <description>IntroductionIllustration: Trust in institutionsStep 1: Preparation and coding of technical variablesStep 2: Selection of source variables for harmonizationStep 3: Mapping source values to target valuesStep 4: HarmonizationResults: Availability of trust itemsComparability of sample aggregatesAppendices: Code examplesAppendix 1: Data preparationAppendix 2: Codebook from labelled data in RAppendix 3: Values crosswalkAppendix 4: HarmonizationIntroductionEx-post (or retrospective) data harmonization refers to procedures applied to already collected data to improve the comparability and inferential equivalence of measures collected by different studies.</description>
+      <guid>https://martakolczynska.com/post/harmonization-europe-trust/</guid>
+      <description>Introduction&#xD;Illustration: Trust in institutions&#xD;Step 1: Preparation and coding of technical variables&#xD;Step 2: Selection of source variables for harmonization&#xD;Step 3: Mapping source values to target values&#xD;Step 4: Harmonization&#xD;Results: Availability of trust items&#xD;Comparability of sample aggregates&#xD;Appendices: Code examples&#xD;Appendix 1: Data preparation&#xD;Appendix 2: Codebook from labelled data in R&#xD;Appendix 3: Values crosswalk&#xD;Appendix 4: Harmonization&#xD;Introduction&#xD;Ex-post (or retrospective) data harmonization refers to procedures applied to already collected data to improve the comparability and inferential equivalence of measures collected by different studies.</description>
     </item>
-    
   </channel>
 </rss>

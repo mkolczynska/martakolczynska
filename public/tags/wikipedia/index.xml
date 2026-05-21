@@ -2,31 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Wikipedia on Marta Kołczyńska</title>
-    <link>/tags/wikipedia/</link>
+    <link>https://martakolczynska.com/tags/wikipedia/</link>
     <description>Recent content in Wikipedia on Marta Kołczyńska</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Mon, 17 Jun 2019 23:49:00 +0000</lastBuildDate><atom:link href="/tags/wikipedia/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 17 Jun 2019 23:49:00 +0000</lastBuildDate>
+    <atom:link href="https://martakolczynska.com/tags/wikipedia/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Toxicity of comments to votes in Request for Adminship on English Wikipedia</title>
-      <link>/post/wikipedia-rfa-toxicity-perspective/</link>
+      <link>https://martakolczynska.com/post/wikipedia-rfa-toxicity-perspective/</link>
       <pubDate>Mon, 17 Jun 2019 23:49:00 +0000</pubDate>
-      
-      <guid>/post/wikipedia-rfa-toxicity-perspective/</guid>
-      <description>This post was written during a research visit at the Department of Computer Science at Aalto University, Finland, supported by the Helsinki Institute for Information Technology.
-Perspective is an API that uses machine learning models to predict the impact of a comment on the conversation. One of the models predicts the extent to which the comment might be perceived as toxic. A toxic comment is defined as “a rude, disrespectful, or unreasonable comment that is likely to make you leave a discussion.</description>
+      <guid>https://martakolczynska.com/post/wikipedia-rfa-toxicity-perspective/</guid>
+      <description>This post was written during a research visit at the Department of Computer Science at Aalto University, Finland, supported by the Helsinki Institute for Information Technology.&#xA;Perspective is an API that uses machine learning models to predict the impact of a comment on the conversation. One of the models predicts the extent to which the comment might be perceived as toxic. A toxic comment is defined as “a rude, disrespectful, or unreasonable comment that is likely to make you leave a discussion.</description>
     </item>
-    
     <item>
       <title>What comes first: Exploring public interest in tech-related topics</title>
-      <link>/post/delabuw-hackathon-what-comes-first/</link>
+      <link>https://martakolczynska.com/post/delabuw-hackathon-what-comes-first/</link>
       <pubDate>Tue, 13 Nov 2018 16:41:14 +0000</pubDate>
-      
-      <guid>/post/delabuw-hackathon-what-comes-first/</guid>
-      <description>What comes first?Wikipedia, Google, NewsInterest in technologyCross-correlationsNews coverage versus Wikipedia page viewswith Maria Khachatryan, Filip Kowalski, Jakub Siwiec, and Paweł Zawadzki
-The Hackathon Next Generation Internet Data Sprint was organized by the Digital Economy Lab of the University of Warsaw on November 9 and 10, 2018. The goal of the hackathon was to explore datasets on Wikipedia page views and edits, Reddit posts, media mentions, and others, to generate insights about the use of the internet and new technologies.</description>
+      <guid>https://martakolczynska.com/post/delabuw-hackathon-what-comes-first/</guid>
+      <description>What comes first?&#xD;Wikipedia, Google, News&#xD;Interest in technology&#xD;Cross-correlations&#xD;News coverage versus Wikipedia page views&#xD;with Maria Khachatryan, Filip Kowalski, Jakub Siwiec, and Paweł Zawadzki&#xA;The Hackathon Next Generation Internet Data Sprint was organized by the Digital Economy Lab of the University of Warsaw on November 9 and 10, 2018. The goal of the hackathon was to explore datasets on Wikipedia page views and edits, Reddit posts, media mentions, and others, to generate insights about the use of the internet and new technologies.</description>
     </item>
-    
   </channel>
 </rss>

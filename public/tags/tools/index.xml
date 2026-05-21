@@ -1,40 +1,34 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>tools on Marta Kołczyńska</title>
-    <link>/tags/tools/</link>
-    <description>Recent content in tools on Marta Kołczyńska</description>
+    <title>Tools on Marta Kołczyńska</title>
+    <link>https://martakolczynska.com/tags/tools/</link>
+    <description>Recent content in Tools on Marta Kołczyńska</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Tue, 23 Apr 2019 03:03:00 +0000</lastBuildDate><atom:link href="/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 23 Apr 2019 03:03:00 +0000</lastBuildDate>
+    <atom:link href="https://martakolczynska.com/tags/tools/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Codebook from ISSP waves 1985-2017</title>
-      <link>/post/issp-codebook/</link>
+      <link>https://martakolczynska.com/post/issp-codebook/</link>
       <pubDate>Tue, 23 Apr 2019 03:03:00 +0000</pubDate>
-      
-      <guid>/post/issp-codebook/</guid>
-      <description>The International Social Survey Programme offers a wealth of data, with thematic modules repeated around every 10 years, and a solid and relatively stable block of socio-demographics. The data can be downloaded from the GESIS data archive either in separate files per year or with data bundled by topic (e.g., the Social Inequality dataset contains data from rounds 1987, 1992, 1999, and 2009).
-There is no integrated codebook indicating the availability of variables in different rounds, so someone interested in longitudinal analyses would need to download all files, open them and look for the variables of interest.</description>
+      <guid>https://martakolczynska.com/post/issp-codebook/</guid>
+      <description>The International Social Survey Programme offers a wealth of data, with thematic modules repeated around every 10 years, and a solid and relatively stable block of socio-demographics. The data can be downloaded from the GESIS data archive either in separate files per year or with data bundled by topic (e.g., the Social Inequality dataset contains data from rounds 1987, 1992, 1999, and 2009).&#xA;There is no integrated codebook indicating the availability of variables in different rounds, so someone interested in longitudinal analyses would need to download all files, open them and look for the variables of interest.</description>
     </item>
-    
     <item>
       <title>Do-It-Yourself Harmonization: Exploring trust items in three European survey projects</title>
-      <link>/post/harmonization-europe-trust/</link>
+      <link>https://martakolczynska.com/post/harmonization-europe-trust/</link>
       <pubDate>Tue, 09 Apr 2019 13:41:00 +0000</pubDate>
-      
-      <guid>/post/harmonization-europe-trust/</guid>
-      <description>IntroductionIllustration: Trust in institutionsStep 1: Preparation and coding of technical variablesStep 2: Selection of source variables for harmonizationStep 3: Mapping source values to target valuesStep 4: HarmonizationResults: Availability of trust itemsComparability of sample aggregatesAppendices: Code examplesAppendix 1: Data preparationAppendix 2: Codebook from labelled data in RAppendix 3: Values crosswalkAppendix 4: HarmonizationIntroductionEx-post (or retrospective) data harmonization refers to procedures applied to already collected data to improve the comparability and inferential equivalence of measures collected by different studies.</description>
+      <guid>https://martakolczynska.com/post/harmonization-europe-trust/</guid>
+      <description>Introduction&#xD;Illustration: Trust in institutions&#xD;Step 1: Preparation and coding of technical variables&#xD;Step 2: Selection of source variables for harmonization&#xD;Step 3: Mapping source values to target values&#xD;Step 4: Harmonization&#xD;Results: Availability of trust items&#xD;Comparability of sample aggregates&#xD;Appendices: Code examples&#xD;Appendix 1: Data preparation&#xD;Appendix 2: Codebook from labelled data in R&#xD;Appendix 3: Values crosswalk&#xD;Appendix 4: Harmonization&#xD;Introduction&#xD;Ex-post (or retrospective) data harmonization refers to procedures applied to already collected data to improve the comparability and inferential equivalence of measures collected by different studies.</description>
     </item>
-    
     <item>
       <title>Searchable codebook from labelled data in R</title>
-      <link>/post/codebook-labelled-data/</link>
+      <link>https://martakolczynska.com/post/codebook-labelled-data/</link>
       <pubDate>Sun, 03 Mar 2019 03:03:00 +0000</pubDate>
-      
-      <guid>/post/codebook-labelled-data/</guid>
-      <description>Working with categorical data, such as from surveys, requires a codebook. After spending some time unsuccessfully looking for a function that would create a nice, searchable codebook from labelled data in R, I decided to write my own.What I want to achieve is a simple table with variable names, labels, and frequencies of labelled values like the one below, to search for specific keywords in the value labels and to see distributions of various variables.</description>
+      <guid>https://martakolczynska.com/post/codebook-labelled-data/</guid>
+      <description>Working with categorical data, such as from surveys, requires a codebook. After spending some time unsuccessfully looking for a function that would create a nice, searchable codebook from labelled data in R, I decided to write my own.&#xD;What I want to achieve is a simple table with variable names, labels, and frequencies of labelled values like the one below, to search for specific keywords in the value labels and to see distributions of various variables.</description>
     </item>
-    
   </channel>
 </rss>

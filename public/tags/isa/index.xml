@@ -2,20 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ISA on Marta Kołczyńska</title>
-    <link>/tags/isa/</link>
+    <link>https://martakolczynska.com/tags/isa/</link>
     <description>Recent content in ISA on Marta Kołczyńska</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Mon, 23 Jul 2018 15:24:00 +0000</lastBuildDate><atom:link href="/tags/isa/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 23 Jul 2018 15:24:00 +0000</lastBuildDate>
+    <atom:link href="https://martakolczynska.com/tags/isa/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ISA World Congress 2018: Analysis of tweets</title>
-      <link>/post/isa-twitter/</link>
+      <link>https://martakolczynska.com/post/isa-twitter/</link>
       <pubDate>Mon, 23 Jul 2018 15:24:00 +0000</pubDate>
-      
-      <guid>/post/isa-twitter/</guid>
-      <description>Getting data from TwitterTweets over timeText analysisTweets by ISA Resesarch CommitteeThe International Sociological Association 19th World Congress of Sociology in Toronto (15-21 July) has received quite some Twitter coverage. Waiting to board the flight back to Warsaw, I wanted to take a look at these Twitter data and apply the newly acquired skills in text analysis (thanks to the Summer Institute for Computational Social Science, SICSS, Partner Site in Tvärminne and Helsinki, Finland).</description>
+      <guid>https://martakolczynska.com/post/isa-twitter/</guid>
+      <description>Getting data from Twitter&#xD;Tweets over time&#xD;Text analysis&#xD;Tweets by ISA Resesarch Committee&#xD;The International Sociological Association 19th World Congress of Sociology in Toronto (15-21 July) has received quite some Twitter coverage. Waiting to board the flight back to Warsaw, I wanted to take a look at these Twitter data and apply the newly acquired skills in text analysis (thanks to the Summer Institute for Computational Social Science, SICSS, Partner Site in Tvärminne and Helsinki, Finland).</description>
     </item>
-    
   </channel>
 </rss>

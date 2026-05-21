@@ -2,30 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ISSP on Marta Kołczyńska</title>
-    <link>/tags/issp/</link>
+    <link>https://martakolczynska.com/tags/issp/</link>
     <description>Recent content in ISSP on Marta Kołczyńska</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Tue, 23 Apr 2019 03:03:00 +0000</lastBuildDate><atom:link href="/tags/issp/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 23 Apr 2019 03:03:00 +0000</lastBuildDate>
+    <atom:link href="https://martakolczynska.com/tags/issp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Codebook from ISSP waves 1985-2017</title>
-      <link>/post/issp-codebook/</link>
+      <link>https://martakolczynska.com/post/issp-codebook/</link>
       <pubDate>Tue, 23 Apr 2019 03:03:00 +0000</pubDate>
-      
-      <guid>/post/issp-codebook/</guid>
-      <description>The International Social Survey Programme offers a wealth of data, with thematic modules repeated around every 10 years, and a solid and relatively stable block of socio-demographics. The data can be downloaded from the GESIS data archive either in separate files per year or with data bundled by topic (e.g., the Social Inequality dataset contains data from rounds 1987, 1992, 1999, and 2009).
-There is no integrated codebook indicating the availability of variables in different rounds, so someone interested in longitudinal analyses would need to download all files, open them and look for the variables of interest.</description>
+      <guid>https://martakolczynska.com/post/issp-codebook/</guid>
+      <description>The International Social Survey Programme offers a wealth of data, with thematic modules repeated around every 10 years, and a solid and relatively stable block of socio-demographics. The data can be downloaded from the GESIS data archive either in separate files per year or with data bundled by topic (e.g., the Social Inequality dataset contains data from rounds 1987, 1992, 1999, and 2009).&#xA;There is no integrated codebook indicating the availability of variables in different rounds, so someone interested in longitudinal analyses would need to download all files, open them and look for the variables of interest.</description>
     </item>
-    
     <item>
       <title>Measuring meritocracy with survey data</title>
-      <link>/post/issp-meritocracy-edu-income/</link>
+      <link>https://martakolczynska.com/post/issp-meritocracy-edu-income/</link>
       <pubDate>Tue, 08 Jan 2019 15:10:00 +0000</pubDate>
-      
-      <guid>/post/issp-meritocracy-edu-income/</guid>
-      <description>Determining meritocratic allocationCalculating the distance to meritocracyDistance to meritocracy by countryMeritocracy is a principle according to which rewards are based on merit, as well as an ideal situation resulting from the operation of this principle. In their 1985 Social Foces paper titled “How Far to Meritocracy? Empirical Tests of a Controversial Thesis”, Tadeusz Krauze and Kazimierz M. Słomczyński proposed an algorithm to construct a theoretical joint distribution of education and income, given their marginal distributions, that would satisfy the conditions of meritocratic allocation.</description>
+      <guid>https://martakolczynska.com/post/issp-meritocracy-edu-income/</guid>
+      <description>Determining meritocratic allocation&#xD;Calculating the distance to meritocracy&#xD;Distance to meritocracy by country&#xD;Meritocracy is a principle according to which rewards are based on merit, as well as an ideal situation resulting from the operation of this principle. In their 1985 Social Foces paper titled “How Far to Meritocracy? Empirical Tests of a Controversial Thesis”, Tadeusz Krauze and Kazimierz M. Słomczyński proposed an algorithm to construct a theoretical joint distribution of education and income, given their marginal distributions, that would satisfy the conditions of meritocratic allocation.</description>
     </item>
-    
   </channel>
 </rss>

@@ -2,21 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Barcelona on Marta Kołczyńska</title>
-    <link>/tags/barcelona/</link>
+    <link>https://martakolczynska.com/tags/barcelona/</link>
     <description>Recent content in Barcelona on Marta Kołczyńska</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Tue, 30 Oct 2018 10:00:14 +0000</lastBuildDate><atom:link href="/tags/barcelona/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 30 Oct 2018 10:00:14 +0000</lastBuildDate>
+    <atom:link href="https://martakolczynska.com/tags/barcelona/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Biking in Barcelona: Green City Hackathon</title>
-      <link>/post/bigsurv18-hackathon/</link>
+      <link>https://martakolczynska.com/post/bigsurv18-hackathon/</link>
       <pubDate>Tue, 30 Oct 2018 10:00:14 +0000</pubDate>
-      
-      <guid>/post/bigsurv18-hackathon/</guid>
-      <description>BigSurv18 and the Green City HackathonTeam number 5DataBike useAltitude of Bicing stationsLocation of mechanical and electric bike stationsEmpty stations by station altitudeNext stepswith Saleha Habibullah, Sakinat Folorunso, and Vera Paul
-BigSurv18 and the Green City HackathonOne of accompanying events of the BigSurv18: Big Data Meets Survey Science conference in Barcelona last week was the Green City Hackathon.</description>
+      <guid>https://martakolczynska.com/post/bigsurv18-hackathon/</guid>
+      <description>BigSurv18 and the Green City Hackathon&#xD;Team number 5&#xD;Data&#xD;Bike use&#xD;Altitude of Bicing stations&#xD;Location of mechanical and electric bike stations&#xD;Empty stations by station altitude&#xD;Next steps&#xD;with Saleha Habibullah, Sakinat Folorunso, and Vera Paul&#xA;BigSurv18 and the Green City Hackathon&#xD;One of accompanying events of the BigSurv18: Big Data Meets Survey Science conference in Barcelona last week was the Green City Hackathon. The challenge was as follows: The city of Barcelona wants to reduce car traffic, in particular by promoting use of bicycles.</description>
     </item>
-    
   </channel>
 </rss>

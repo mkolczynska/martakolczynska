@@ -5,7 +5,6 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="generator" content="Hugo 0.81.0" />
 
   <title>Codebook from ISSP waves 1985-2017 &middot; Marta Kołczyńska</title>
 
@@ -21,13 +20,13 @@
   <!--<![endif]-->
 
   <!--[if lte IE 8]>
-  <link rel="stylesheet" href="/css/side-menu-old-ie.css">
+  <link rel="stylesheet" href="https://martakolczynska.com/css/side-menu-old-ie.css">
   <![endif]-->
   <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="/css/side-menu.css">
+  <link rel="stylesheet" href="https://martakolczynska.com/css/side-menu.css">
   <!--<![endif]-->
 
-  <link rel="stylesheet" href="/css/blackburn.css">
+  <link rel="stylesheet" href="https://martakolczynska.com/css/blackburn.css">
 
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -52,11 +51,11 @@
   <script>hljs.initHighlightingOnLoad();</script>
   
 
-  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="https://martakolczynska.com/img/favicon.ico" type="image/x-icon" />
 
   
     
-        <link rel="stylesheet" href="/css/circle.css">
+        <link rel="stylesheet" href="https://martakolczynska.com/css/circle.css">
     
   
   
@@ -75,7 +74,7 @@
 <div id="menu">
 
   
-  <a class="pure-menu-heading brand" href="/"><img src="/images/puzzleblacksmall.png" alt="logo"></a>
+  <a class="pure-menu-heading brand" href="https://martakolczynska.com/"><img src="https://martakolczynska.com/images/puzzleblacksmall.png" alt="logo"></a>
 
 
 
@@ -84,31 +83,31 @@
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="/"><i class='fa fa-home fa-fw'></i>Home</a>
+          <a class="pure-menu-link" href="https://martakolczynska.com/"><i class='fa fa-home fa-fw'></i>Home</a>
       
         </li>
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="/about/"><i class='fa fa-user fa-fw'></i>About</a>
+          <a class="pure-menu-link" href="https://martakolczynska.com/about/"><i class='fa fa-user fa-fw'></i>About</a>
       
         </li>
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="/research/"><i class='fa fa-bar-chart fa-fw'></i>Research</a>
+          <a class="pure-menu-link" href="https://martakolczynska.com/research/"><i class='fa fa-bar-chart fa-fw'></i>Research</a>
       
         </li>
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+          <a class="pure-menu-link" href="https://martakolczynska.com/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
       
         </li>
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="/contact/"><i class='fa fa-envelope fa-fw'></i>Contact</a>
+          <a class="pure-menu-link" href="https://martakolczynska.com/contact/"><i class='fa fa-envelope fa-fw'></i>Contact</a>
       
         </li>
       
@@ -117,8 +116,6 @@
 
   <div class="pure-menu social">
   <ul class="pure-menu-list">
-
-    
 
     
 
@@ -243,15 +240,15 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="/tags/r">R</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://martakolczynska.com/tags/r">R</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/survey-data-harmonization">survey data harmonization</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://martakolczynska.com/tags/survey-data-harmonization">survey data harmonization</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/codebook">codebook</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://martakolczynska.com/tags/codebook">codebook</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/tools">tools</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://martakolczynska.com/tags/tools">tools</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/issp">ISSP</a>
+      <a class="post-taxonomy-tag" href="https://martakolczynska.com/tags/issp">ISSP</a>
     
   </div>
   
@@ -269,7 +266,7 @@
 <p>The codebook covers ISSP rounds from 1985 <em>Role of Government I</em> up to the first release of the 2017 module <em>Social Relations and Social Networks III</em>, the most recent file versions as of April 2019. The single wave datasets used here were downloaded by Przemek Powałko on January 2018, with the two most recent added in March 2019.</p>
 <p>The codebook function is described in more detail <a href="https://martakolczynska.com/post/codebook-labelled-data/" target="_blank">in this post</a>.</p>
 <p>The resulting XLSX file looks like this:</p>
-<p><img src="/images/issp_all_codebook.png" width="600" /></p>
+<p><img src="https://martakolczynska.com/images/issp_all_codebook.png" width="600" /></p>
 <p>Creating the codebook using the code below took several hours on a laptop with a quad-core Intel i7 processor with 8 GB RAM, so it’s best to run overnight.</p>
 <pre class="r"><code>### loading packages
 library(tidyverse) # for manipulating data
@@ -329,13 +326,13 @@ export(issp_all_codebooks_df, &quot;codebook_issp_1985_2017.xlsx&quot;)</code></
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="/post/harmonization-europe-trust/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://martakolczynska.com/post/harmonization-europe-trust/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="/post/harmonization-europe-trust/">Do-It-Yourself Harmonization: Exploring trust items in three European survey projects</a>
+      <a href="https://martakolczynska.com/post/harmonization-europe-trust/">Do-It-Yourself Harmonization: Exploring trust items in three European survey projects</a>
     </nav>
     
   </div>
@@ -345,13 +342,13 @@ export(issp_all_codebooks_df, &quot;codebook_issp_1985_2017.xlsx&quot;)</code></
   <div class="pure-u-10-24">
     
     <nav class="next">
-      <a href="/post/wikipedia-rfa-toxicity-perspective/">Toxicity of comments to votes in Request for Adminship on English Wikipedia</a>
+      <a href="https://martakolczynska.com/post/wikipedia-rfa-toxicity-perspective/">Toxicity of comments to votes in Request for Adminship on English Wikipedia</a>
     </nav>
     
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
     
-    <a href="/post/wikipedia-rfa-toxicity-perspective/"><i class="fa fa-chevron-right"></i></a>
+    <a href="https://martakolczynska.com/post/wikipedia-rfa-toxicity-perspective/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>
@@ -382,7 +379,7 @@ export(issp_all_codebooks_df, &quot;codebook_issp_1985_2017.xlsx&quot;)</code></
 
 </div>
 </div>
-<script src="/js/ui.js"></script>
+<script src="https://martakolczynska.com/js/ui.js"></script>
 
 
 <script>

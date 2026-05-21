@@ -5,7 +5,6 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="">
-  <meta name="generator" content="Hugo 0.81.0" />
 
   <title>ISA World Congress 2018: Analysis of tweets &middot; Marta Kołczyńska</title>
 
@@ -21,13 +20,13 @@
   <!--<![endif]-->
 
   <!--[if lte IE 8]>
-  <link rel="stylesheet" href="/css/side-menu-old-ie.css">
+  <link rel="stylesheet" href="https://martakolczynska.com/css/side-menu-old-ie.css">
   <![endif]-->
   <!--[if gt IE 8]><!-->
-  <link rel="stylesheet" href="/css/side-menu.css">
+  <link rel="stylesheet" href="https://martakolczynska.com/css/side-menu.css">
   <!--<![endif]-->
 
-  <link rel="stylesheet" href="/css/blackburn.css">
+  <link rel="stylesheet" href="https://martakolczynska.com/css/blackburn.css">
 
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -52,11 +51,11 @@
   <script>hljs.initHighlightingOnLoad();</script>
   
 
-  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="https://martakolczynska.com/img/favicon.ico" type="image/x-icon" />
 
   
     
-        <link rel="stylesheet" href="/css/circle.css">
+        <link rel="stylesheet" href="https://martakolczynska.com/css/circle.css">
     
   
   
@@ -75,7 +74,7 @@
 <div id="menu">
 
   
-  <a class="pure-menu-heading brand" href="/"><img src="/images/puzzleblacksmall.png" alt="logo"></a>
+  <a class="pure-menu-heading brand" href="https://martakolczynska.com/"><img src="https://martakolczynska.com/images/puzzleblacksmall.png" alt="logo"></a>
 
 
 
@@ -84,31 +83,31 @@
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="/"><i class='fa fa-home fa-fw'></i>Home</a>
+          <a class="pure-menu-link" href="https://martakolczynska.com/"><i class='fa fa-home fa-fw'></i>Home</a>
       
         </li>
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="/about/"><i class='fa fa-user fa-fw'></i>About</a>
+          <a class="pure-menu-link" href="https://martakolczynska.com/about/"><i class='fa fa-user fa-fw'></i>About</a>
       
         </li>
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="/research/"><i class='fa fa-bar-chart fa-fw'></i>Research</a>
+          <a class="pure-menu-link" href="https://martakolczynska.com/research/"><i class='fa fa-bar-chart fa-fw'></i>Research</a>
       
         </li>
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
+          <a class="pure-menu-link" href="https://martakolczynska.com/post/"><i class='fa fa-list fa-fw'></i>Posts</a>
       
         </li>
       
       
         <li class="pure-menu-item">
-          <a class="pure-menu-link" href="/contact/"><i class='fa fa-envelope fa-fw'></i>Contact</a>
+          <a class="pure-menu-link" href="https://martakolczynska.com/contact/"><i class='fa fa-envelope fa-fw'></i>Contact</a>
       
         </li>
       
@@ -117,8 +116,6 @@
 
   <div class="pure-menu social">
   <ul class="pure-menu-list">
-
-    
 
     
 
@@ -243,17 +240,17 @@
   <div>
     <i class="fa fa-tags fa-fw"></i>
     
-      <a class="post-taxonomy-tag" href="/tags/r">R</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://martakolczynska.com/tags/r">R</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/twitter">twitter</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://martakolczynska.com/tags/twitter">twitter</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/text-analysis">text analysis</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://martakolczynska.com/tags/text-analysis">text analysis</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/isa">ISA</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://martakolczynska.com/tags/isa">ISA</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/sicss">SICSS</a>&nbsp;&#47;
+      <a class="post-taxonomy-tag" href="https://martakolczynska.com/tags/sicss">SICSS</a>&nbsp;&#47;
     
-      <a class="post-taxonomy-tag" href="/tags/tidytext">tidytext</a>
+      <a class="post-taxonomy-tag" href="https://martakolczynska.com/tags/tidytext">tidytext</a>
     
   </div>
   
@@ -329,14 +326,14 @@ isa$created_at &lt;-  with_tz(isa$created_at, &#39;America/New_York&#39;) # set 
     title = &quot;Frequency of #isa2018wcs OR #isa18wcs tweets since July 12, 2018&quot;,
     subtitle = &quot;Twitter counts by hour&quot;,
     caption = &quot;Source: Data collected from Twitter&#39;s API via rtweet&quot;)</code></pre>
-<p><img src="/post/isa-twitter_files/figure-html/time%20plots-1.png" width="672" /></p>
+<p><img src="https://martakolczynska.com/post/isa-twitter_files/figure-html/time%20plots-1.png" width="672" /></p>
 <pre class="r"><code>isa %&gt;% filter(as.Date(created_at) &gt;= &quot;2018-07-18&quot; &amp; as.Date(created_at) &lt; &quot;2018-07-19&quot;) %&gt;%
   ts_plot(., &quot;5 minutes&quot;) + 
     labs(x = NULL, y = NULL,
        title = &quot;Frequency of #isa2018wcs OR #isa18wcs tweets on July 18, 2018&quot;,
        subtitle = &quot;Twitter counts by 5 minutes&quot;,
        caption = &quot;Source: Data collected from Twitter&#39;s API via rtweet&quot;)</code></pre>
-<p><img src="/post/isa-twitter_files/figure-html/time%20plots-2.png" width="672" /></p>
+<p><img src="https://martakolczynska.com/post/isa-twitter_files/figure-html/time%20plots-2.png" width="672" /></p>
 <p>Overall it looks like the presentations around noon (11.30am - 1.20pm) and in the afternoon (3.30-5.20pm) were most tweet-provoking. Time stamps include hours, minutes and seconds, so it’s possible to link tweets to concrete sessions, if one is interested.</p>
 </div>
 <div id="text-analysis" class="section level3">
@@ -392,14 +389,14 @@ head(isa_rc, 10)</code></pre>
 <pre class="r"><code>isa_rc &lt;- isa_rc %&gt;% group_by(status_id, created_at, rc) %&gt;% summarise(count = n())</code></pre>
 <p>A simple word cloud reveals the unanimous winner in the RC tweet competition: RC34 Sociology of Youth.</p>
 <pre class="r"><code>wordcloud(isa_rc$rc, min.freq=1, random.color = TRUE, colors= palette(rainbow(20)))</code></pre>
-<p><img src="/post/isa-twitter_files/figure-html/rc%203-1.png" width="672" /></p>
+<p><img src="https://martakolczynska.com/post/isa-twitter_files/figure-html/rc%203-1.png" width="672" /></p>
 <pre class="r"><code>ggplot(isa_rc, aes(rc, fill = rc)) + geom_bar() +
   theme(axis.text.x = element_text(angle = 90, hjust = 2, vjust = 0.5), legend.position=&quot;none&quot;) + 
   ylab(&quot;Number of tweets by Research Committee&quot;) + 
   xlab(&quot;&quot;) + 
   ggtitle(&quot;Tweets by Research Committee&quot;) +
   labs(caption = &quot;Source: Data collected from Twitter&#39;s API via rtweet&quot;)</code></pre>
-<p><img src="/post/isa-twitter_files/figure-html/rc%204-1.png" width="672" /></p>
+<p><img src="https://martakolczynska.com/post/isa-twitter_files/figure-html/rc%204-1.png" width="672" /></p>
 <p>The bar plot confirms this result: RC34 is mentioned in the highest number of tweets and there is quite some variation in the number of tweets across RCs. If there is variation, maybe it can be explained. Some candidates: number of members, age of members, something about the leadership, area of specialization, quality of sessions, number of electrical outlets in the room?</p>
 </div>
 <div class="footnotes">
@@ -414,13 +411,13 @@ head(isa_rc, 10)</code></pre>
 <div class="prev-next-post pure-g">
   <div class="pure-u-1-24" style="text-align: left;">
     
-    <a href="/post/first-post/"><i class="fa fa-chevron-left"></i></a>
+    <a href="https://martakolczynska.com/post/first-post/"><i class="fa fa-chevron-left"></i></a>
     
   </div>
   <div class="pure-u-10-24">
     
     <nav class="prev">
-      <a href="/post/first-post/">Late start</a>
+      <a href="https://martakolczynska.com/post/first-post/">Late start</a>
     </nav>
     
   </div>
@@ -430,13 +427,13 @@ head(isa_rc, 10)</code></pre>
   <div class="pure-u-10-24">
     
     <nav class="next">
-      <a href="/post/sdr-exploration/">Exploring the dataset of survey datasets: Survey Data Recycling version 1</a>
+      <a href="https://martakolczynska.com/post/sdr-exploration/">Exploring the dataset of survey datasets: Survey Data Recycling version 1</a>
     </nav>
     
   </div>
   <div class="pure-u-1-24" style="text-align: right;">
     
-    <a href="/post/sdr-exploration/"><i class="fa fa-chevron-right"></i></a>
+    <a href="https://martakolczynska.com/post/sdr-exploration/"><i class="fa fa-chevron-right"></i></a>
     
   </div>
 </div>
@@ -467,7 +464,7 @@ head(isa_rc, 10)</code></pre>
 
 </div>
 </div>
-<script src="/js/ui.js"></script>
+<script src="https://martakolczynska.com/js/ui.js"></script>
 
 
 <script>

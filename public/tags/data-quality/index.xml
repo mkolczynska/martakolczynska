@@ -1,60 +1,48 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>data quality on Marta Kołczyńska</title>
-    <link>/tags/data-quality/</link>
-    <description>Recent content in data quality on Marta Kołczyńska</description>
+    <title>Data Quality on Marta Kołczyńska</title>
+    <link>https://martakolczynska.com/tags/data-quality/</link>
+    <description>Recent content in Data Quality on Marta Kołczyńska</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Sat, 29 Sep 2018 10:06:00 +0000</lastBuildDate><atom:link href="/tags/data-quality/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 29 Sep 2018 10:06:00 +0000</lastBuildDate>
+    <atom:link href="https://martakolczynska.com/tags/data-quality/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Personal vs. household income in cross-national surveys</title>
-      <link>/post/sdr-income-hh-personal-cor/</link>
+      <link>https://martakolczynska.com/post/sdr-income-hh-personal-cor/</link>
       <pubDate>Sat, 29 Sep 2018 10:06:00 +0000</pubDate>
-      
-      <guid>/post/sdr-income-hh-personal-cor/</guid>
-      <description>Sample correlationsSample correlations by genderSample correlations by ageSample correlations by educationContrastConclusionOne of the reasons for the harmonization of personal income in addition to household income was to check if the two correlate highly enough to use household income as a substitute for personal income in analyses where economic status is a control variable. This would be great, because household income variables are available in 1177 surveys out of 1721 analyzed in the Survey Data Recycling dataset (SDR) version 1, while personal income only in 453 surveys.</description>
+      <guid>https://martakolczynska.com/post/sdr-income-hh-personal-cor/</guid>
+      <description>Sample correlations&#xD;Sample correlations by gender&#xD;Sample correlations by age&#xD;Sample correlations by education&#xD;Contrast&#xD;Conclusion&#xD;One of the reasons for the harmonization of personal income in addition to household income was to check if the two correlate highly enough to use household income as a substitute for personal income in analyses where economic status is a control variable. This would be great, because household income variables are available in 1177 surveys out of 1721 analyzed in the Survey Data Recycling dataset (SDR) version 1, while personal income only in 453 surveys.</description>
     </item>
-    
     <item>
       <title>Harmonizing measures of income in cross-national surveys</title>
-      <link>/post/sdr-income-hh-personal/</link>
+      <link>https://martakolczynska.com/post/sdr-income-hh-personal/</link>
       <pubDate>Thu, 27 Sep 2018 17:29:00 +0000</pubDate>
-      
-      <guid>/post/sdr-income-hh-personal/</guid>
-      <description>DataNumber of response optionsItem non-responseDistributionsHarmonized target variablesNext stepswith Przemek Powałko
-Individual economic status is a necessary element of almost all sociological analyses, including studies of political attitudes and behavior. To supplement the already harmonized variables in the Survey Data Recycling dataset (SDR) version 1 and for the purposes of my resesarch of the effects of education on political engagement, Przemek and I harmonized two additional variables: personal income and household income1.</description>
+      <guid>https://martakolczynska.com/post/sdr-income-hh-personal/</guid>
+      <description>Data&#xD;Number of response options&#xD;Item non-response&#xD;Distributions&#xD;Harmonized target variables&#xD;Next steps&#xD;with Przemek Powałko&#xA;Individual economic status is a necessary element of almost all sociological analyses, including studies of political attitudes and behavior. To supplement the already harmonized variables in the Survey Data Recycling dataset (SDR) version 1 and for the purposes of my resesarch of the effects of education on political engagement, Przemek and I harmonized two additional variables: personal income and household income1.</description>
     </item>
-    
     <item>
       <title>Age distributions in samples from cross-national survey projects</title>
-      <link>/post/sdr-age-distributions/</link>
+      <link>https://martakolczynska.com/post/sdr-age-distributions/</link>
       <pubDate>Sun, 02 Sep 2018 10:09:00 +0000</pubDate>
-      
-      <guid>/post/sdr-age-distributions/</guid>
-      <description>Cross-national survey projects conduct surveys on representative samples of adult populations.How do the distributions of respondents’ age vary across surveys carried out in the same country in different years and different projects?
-Like in a couple of previous posts (here, here and here) I use data from the Survey Data Recycling dataset (SDR) version 1, which includes selected harmonized variables from 22 cross-national survey projects. SDR only includes surveys that claim to have samples representative for adult populations.</description>
+      <guid>https://martakolczynska.com/post/sdr-age-distributions/</guid>
+      <description>Cross-national survey projects conduct surveys on representative samples of adult populations.&#xD;How do the distributions of respondents’ age vary across surveys carried out in the same country in different years and different projects?&#xA;Like in a couple of previous posts (here, here and here) I use data from the Survey Data Recycling dataset (SDR) version 1, which includes selected harmonized variables from 22 cross-national survey projects. SDR only includes surveys that claim to have samples representative for adult populations.</description>
     </item>
-    
     <item>
       <title>Reliability of survey estimates: Participation in demonstrations</title>
-      <link>/post/sdr-demonstrations-multiplets/</link>
+      <link>https://martakolczynska.com/post/sdr-demonstrations-multiplets/</link>
       <pubDate>Sun, 26 Aug 2018 17:32:00 +0000</pubDate>
-      
-      <guid>/post/sdr-demonstrations-multiplets/</guid>
-      <description>DataDifferences within country-yearsDifferences by groupsGenderAgeUrban/rural residenceEducationSampling schemeThe growth in cross-national survey projects in the last decades leads to situations when two or more surveys are carried out in the same country and the same year but in different projects, and contain overlapping sets of survey questions. Assuming that the surveys are based on representative samples - a claim that major cross-national survey projects typically make - it could be expected that estimates from surveys carried out in the same country and year are reasonably close.</description>
+      <guid>https://martakolczynska.com/post/sdr-demonstrations-multiplets/</guid>
+      <description>Data&#xD;Differences within country-years&#xD;Differences by groups&#xD;Gender&#xD;Age&#xD;Urban/rural residence&#xD;Education&#xD;Sampling scheme&#xD;The growth in cross-national survey projects in the last decades leads to situations when two or more surveys are carried out in the same country and the same year but in different projects, and contain overlapping sets of survey questions. Assuming that the surveys are based on representative samples - a claim that major cross-national survey projects typically make - it could be expected that estimates from surveys carried out in the same country and year are reasonably close.</description>
     </item>
-    
     <item>
       <title>Validating survey data: Educational attainment in SDR and the OECD</title>
-      <link>/post/education-sdr-oecd/</link>
+      <link>https://martakolczynska.com/post/education-sdr-oecd/</link>
       <pubDate>Mon, 13 Aug 2018 05:13:14 +0000</pubDate>
-      
-      <guid>/post/education-sdr-oecd/</guid>
-      <description>Educational attainment dataOECD dataSDR dataCleaning and merging SDR and OECD dataResultsThe curious case of ISSP SwitzerlandConclusionAppendixwith Przemek Powałko
-General population surveys with representative samples should have a similar education structure as shown by data from administrative sources, especially if survey weights are used. In this post we compare sample aggregates from 15 cross-national survey projects (including the European Social Survey, the World Values Survey and the European Values Study, and others) from the Survey Data Recycling database with educational attainment statistics from the OECD.</description>
+      <guid>https://martakolczynska.com/post/education-sdr-oecd/</guid>
+      <description>Educational attainment data&#xD;OECD data&#xD;SDR data&#xD;Cleaning and merging SDR and OECD data&#xD;Results&#xD;The curious case of ISSP Switzerland&#xD;Conclusion&#xD;Appendix&#xD;with Przemek Powałko&#xA;General population surveys with representative samples should have a similar education structure as shown by data from administrative sources, especially if survey weights are used. In this post we compare sample aggregates from 15 cross-national survey projects (including the European Social Survey, the World Values Survey and the European Values Study, and others) from the Survey Data Recycling database with educational attainment statistics from the OECD.</description>
     </item>
-    
   </channel>
 </rss>

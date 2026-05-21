@@ -2,21 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>OECD on Marta Kołczyńska</title>
-    <link>/tags/oecd/</link>
+    <link>https://martakolczynska.com/tags/oecd/</link>
     <description>Recent content in OECD on Marta Kołczyńska</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Mon, 13 Aug 2018 05:13:14 +0000</lastBuildDate><atom:link href="/tags/oecd/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 13 Aug 2018 05:13:14 +0000</lastBuildDate>
+    <atom:link href="https://martakolczynska.com/tags/oecd/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Validating survey data: Educational attainment in SDR and the OECD</title>
-      <link>/post/education-sdr-oecd/</link>
+      <link>https://martakolczynska.com/post/education-sdr-oecd/</link>
       <pubDate>Mon, 13 Aug 2018 05:13:14 +0000</pubDate>
-      
-      <guid>/post/education-sdr-oecd/</guid>
-      <description>Educational attainment dataOECD dataSDR dataCleaning and merging SDR and OECD dataResultsThe curious case of ISSP SwitzerlandConclusionAppendixwith Przemek Powałko
-General population surveys with representative samples should have a similar education structure as shown by data from administrative sources, especially if survey weights are used. In this post we compare sample aggregates from 15 cross-national survey projects (including the European Social Survey, the World Values Survey and the European Values Study, and others) from the Survey Data Recycling database with educational attainment statistics from the OECD.</description>
+      <guid>https://martakolczynska.com/post/education-sdr-oecd/</guid>
+      <description>Educational attainment data&#xD;OECD data&#xD;SDR data&#xD;Cleaning and merging SDR and OECD data&#xD;Results&#xD;The curious case of ISSP Switzerland&#xD;Conclusion&#xD;Appendix&#xD;with Przemek Powałko&#xA;General population surveys with representative samples should have a similar education structure as shown by data from administrative sources, especially if survey weights are used. In this post we compare sample aggregates from 15 cross-national survey projects (including the European Social Survey, the World Values Survey and the European Values Study, and others) from the Survey Data Recycling database with educational attainment statistics from the OECD.</description>
     </item>
-    
   </channel>
 </rss>

@@ -2,704 +2,551 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Marta Kołczyńska</title>
-    <link>/tags/</link>
+    <link>https://martakolczynska.com/tags/</link>
     <description>Recent content in Tags on Marta Kołczyńska</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Thu, 11 Mar 2021 22:07:01 +0000</lastBuildDate><atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 11 Mar 2021 22:07:01 +0000</lastBuildDate>
+    <atom:link href="https://martakolczynska.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>cross-national research</title>
-      <link>/tags/cross-national-research/</link>
+      <title>Cross-National Research</title>
+      <link>https://martakolczynska.com/tags/cross-national-research/</link>
       <pubDate>Thu, 11 Mar 2021 22:07:01 +0000</pubDate>
-      
-      <guid>/tags/cross-national-research/</guid>
+      <guid>https://martakolczynska.com/tags/cross-national-research/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>education</title>
-      <link>/tags/education/</link>
+      <title>Education</title>
+      <link>https://martakolczynska.com/tags/education/</link>
       <pubDate>Thu, 11 Mar 2021 22:07:01 +0000</pubDate>
-      
-      <guid>/tags/education/</guid>
+      <guid>https://martakolczynska.com/tags/education/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>European Labor Force Survey</title>
-      <link>/tags/european-labor-force-survey/</link>
+      <link>https://martakolczynska.com/tags/european-labor-force-survey/</link>
       <pubDate>Thu, 11 Mar 2021 22:07:01 +0000</pubDate>
-      
-      <guid>/tags/european-labor-force-survey/</guid>
+      <guid>https://martakolczynska.com/tags/european-labor-force-survey/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Eurostat</title>
-      <link>/tags/eurostat/</link>
+      <link>https://martakolczynska.com/tags/eurostat/</link>
       <pubDate>Thu, 11 Mar 2021 22:07:01 +0000</pubDate>
-      
-      <guid>/tags/eurostat/</guid>
+      <guid>https://martakolczynska.com/tags/eurostat/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>macro indicators</title>
-      <link>/tags/macro-indicators/</link>
+      <title>Macro Indicators</title>
+      <link>https://martakolczynska.com/tags/macro-indicators/</link>
       <pubDate>Thu, 11 Mar 2021 22:07:01 +0000</pubDate>
-      
-      <guid>/tags/macro-indicators/</guid>
+      <guid>https://martakolczynska.com/tags/macro-indicators/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>R</title>
-      <link>/tags/r/</link>
+      <link>https://martakolczynska.com/tags/r/</link>
       <pubDate>Thu, 11 Mar 2021 22:07:01 +0000</pubDate>
-      
-      <guid>/tags/r/</guid>
+      <guid>https://martakolczynska.com/tags/r/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>corruption</title>
-      <link>/tags/corruption/</link>
+      <title>Corruption</title>
+      <link>https://martakolczynska.com/tags/corruption/</link>
       <pubDate>Tue, 21 Jul 2020 21:29:01 +0000</pubDate>
-      
-      <guid>/tags/corruption/</guid>
+      <guid>https://martakolczynska.com/tags/corruption/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Quality of Government</title>
-      <link>/tags/quality-of-government/</link>
+      <link>https://martakolczynska.com/tags/quality-of-government/</link>
       <pubDate>Tue, 21 Jul 2020 21:29:01 +0000</pubDate>
-      
-      <guid>/tags/quality-of-government/</guid>
+      <guid>https://martakolczynska.com/tags/quality-of-government/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>V-Dem</title>
-      <link>/tags/v-dem/</link>
+      <link>https://martakolczynska.com/tags/v-dem/</link>
       <pubDate>Tue, 21 Jul 2020 21:29:01 +0000</pubDate>
-      
-      <guid>/tags/v-dem/</guid>
+      <guid>https://martakolczynska.com/tags/v-dem/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Worldwide Governance Indicators</title>
-      <link>/tags/worldwide-governance-indicators/</link>
+      <link>https://martakolczynska.com/tags/worldwide-governance-indicators/</link>
       <pubDate>Tue, 21 Jul 2020 21:29:01 +0000</pubDate>
-      
-      <guid>/tags/worldwide-governance-indicators/</guid>
+      <guid>https://martakolczynska.com/tags/worldwide-governance-indicators/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>democracy</title>
-      <link>/tags/democracy/</link>
+      <title>Democracy</title>
+      <link>https://martakolczynska.com/tags/democracy/</link>
       <pubDate>Sat, 21 Sep 2019 22:08:14 +0000</pubDate>
-      
-      <guid>/tags/democracy/</guid>
+      <guid>https://martakolczynska.com/tags/democracy/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Freedom House</title>
-      <link>/tags/freedom-house/</link>
+      <link>https://martakolczynska.com/tags/freedom-house/</link>
       <pubDate>Sat, 21 Sep 2019 22:08:14 +0000</pubDate>
-      
-      <guid>/tags/freedom-house/</guid>
+      <guid>https://martakolczynska.com/tags/freedom-house/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>political rights</title>
-      <link>/tags/political-rights/</link>
+      <title>Political Rights</title>
+      <link>https://martakolczynska.com/tags/political-rights/</link>
       <pubDate>Sat, 21 Sep 2019 22:08:14 +0000</pubDate>
-      
-      <guid>/tags/political-rights/</guid>
+      <guid>https://martakolczynska.com/tags/political-rights/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>tutorial</title>
-      <link>/tags/tutorial/</link>
+      <title>Tutorial</title>
+      <link>https://martakolczynska.com/tags/tutorial/</link>
       <pubDate>Sat, 21 Sep 2019 22:08:14 +0000</pubDate>
-      
-      <guid>/tags/tutorial/</guid>
+      <guid>https://martakolczynska.com/tags/tutorial/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>environment</title>
-      <link>/tags/environment/</link>
+      <title>Environment</title>
+      <link>https://martakolczynska.com/tags/environment/</link>
       <pubDate>Wed, 28 Aug 2019 12:06:37 +0000</pubDate>
-      
-      <guid>/tags/environment/</guid>
+      <guid>https://martakolczynska.com/tags/environment/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>environmental attitudes</title>
-      <link>/tags/environmental-attitudes/</link>
+      <title>Environmental Attitudes</title>
+      <link>https://martakolczynska.com/tags/environmental-attitudes/</link>
       <pubDate>Wed, 28 Aug 2019 12:06:37 +0000</pubDate>
-      
-      <guid>/tags/environmental-attitudes/</guid>
+      <guid>https://martakolczynska.com/tags/environmental-attitudes/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>EVS</title>
-      <link>/tags/evs/</link>
+      <link>https://martakolczynska.com/tags/evs/</link>
       <pubDate>Wed, 28 Aug 2019 12:06:37 +0000</pubDate>
-      
-      <guid>/tags/evs/</guid>
+      <guid>https://martakolczynska.com/tags/evs/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>FridaysForFuture</title>
-      <link>/tags/fridaysforfuture/</link>
+      <link>https://martakolczynska.com/tags/fridaysforfuture/</link>
       <pubDate>Wed, 28 Aug 2019 12:06:37 +0000</pubDate>
-      
-      <guid>/tags/fridaysforfuture/</guid>
+      <guid>https://martakolczynska.com/tags/fridaysforfuture/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>likert</title>
-      <link>/tags/likert/</link>
+      <title>Likert</title>
+      <link>https://martakolczynska.com/tags/likert/</link>
       <pubDate>Wed, 28 Aug 2019 12:06:37 +0000</pubDate>
-      
-      <guid>/tags/likert/</guid>
+      <guid>https://martakolczynska.com/tags/likert/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>surveys</title>
-      <link>/tags/surveys/</link>
+      <title>Surveys</title>
+      <link>https://martakolczynska.com/tags/surveys/</link>
       <pubDate>Wed, 28 Aug 2019 12:06:37 +0000</pubDate>
-      
-      <guid>/tags/surveys/</guid>
+      <guid>https://martakolczynska.com/tags/surveys/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>API</title>
-      <link>/tags/api/</link>
+      <link>https://martakolczynska.com/tags/api/</link>
       <pubDate>Mon, 17 Jun 2019 23:49:00 +0000</pubDate>
-      
-      <guid>/tags/api/</guid>
+      <guid>https://martakolczynska.com/tags/api/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>peRspective</title>
-      <link>/tags/perspective/</link>
+      <title>PeRspective</title>
+      <link>https://martakolczynska.com/tags/perspective/</link>
       <pubDate>Mon, 17 Jun 2019 23:49:00 +0000</pubDate>
-      
-      <guid>/tags/perspective/</guid>
+      <guid>https://martakolczynska.com/tags/perspective/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>RfA</title>
-      <link>/tags/rfa/</link>
+      <link>https://martakolczynska.com/tags/rfa/</link>
       <pubDate>Mon, 17 Jun 2019 23:49:00 +0000</pubDate>
-      
-      <guid>/tags/rfa/</guid>
+      <guid>https://martakolczynska.com/tags/rfa/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>toxicity</title>
-      <link>/tags/toxicity/</link>
+      <title>Toxicity</title>
+      <link>https://martakolczynska.com/tags/toxicity/</link>
       <pubDate>Mon, 17 Jun 2019 23:49:00 +0000</pubDate>
-      
-      <guid>/tags/toxicity/</guid>
+      <guid>https://martakolczynska.com/tags/toxicity/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Wikipedia</title>
-      <link>/tags/wikipedia/</link>
+      <link>https://martakolczynska.com/tags/wikipedia/</link>
       <pubDate>Mon, 17 Jun 2019 23:49:00 +0000</pubDate>
-      
-      <guid>/tags/wikipedia/</guid>
+      <guid>https://martakolczynska.com/tags/wikipedia/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>codebook</title>
-      <link>/tags/codebook/</link>
+      <title>Codebook</title>
+      <link>https://martakolczynska.com/tags/codebook/</link>
       <pubDate>Tue, 23 Apr 2019 03:03:00 +0000</pubDate>
-      
-      <guid>/tags/codebook/</guid>
+      <guid>https://martakolczynska.com/tags/codebook/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>ISSP</title>
-      <link>/tags/issp/</link>
+      <link>https://martakolczynska.com/tags/issp/</link>
       <pubDate>Tue, 23 Apr 2019 03:03:00 +0000</pubDate>
-      
-      <guid>/tags/issp/</guid>
+      <guid>https://martakolczynska.com/tags/issp/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>survey data harmonization</title>
-      <link>/tags/survey-data-harmonization/</link>
+      <title>Survey Data Harmonization</title>
+      <link>https://martakolczynska.com/tags/survey-data-harmonization/</link>
       <pubDate>Tue, 23 Apr 2019 03:03:00 +0000</pubDate>
-      
-      <guid>/tags/survey-data-harmonization/</guid>
+      <guid>https://martakolczynska.com/tags/survey-data-harmonization/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>tools</title>
-      <link>/tags/tools/</link>
+      <title>Tools</title>
+      <link>https://martakolczynska.com/tags/tools/</link>
       <pubDate>Tue, 23 Apr 2019 03:03:00 +0000</pubDate>
-      
-      <guid>/tags/tools/</guid>
+      <guid>https://martakolczynska.com/tags/tools/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>crosswalk</title>
-      <link>/tags/crosswalk/</link>
+      <title>Crosswalk</title>
+      <link>https://martakolczynska.com/tags/crosswalk/</link>
       <pubDate>Tue, 09 Apr 2019 13:41:00 +0000</pubDate>
-      
-      <guid>/tags/crosswalk/</guid>
+      <guid>https://martakolczynska.com/tags/crosswalk/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>DIY</title>
-      <link>/tags/diy/</link>
+      <link>https://martakolczynska.com/tags/diy/</link>
       <pubDate>Tue, 09 Apr 2019 13:41:00 +0000</pubDate>
-      
-      <guid>/tags/diy/</guid>
+      <guid>https://martakolczynska.com/tags/diy/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>reproducibility</title>
-      <link>/tags/reproducibility/</link>
+      <title>Reproducibility</title>
+      <link>https://martakolczynska.com/tags/reproducibility/</link>
       <pubDate>Tue, 09 Apr 2019 13:41:00 +0000</pubDate>
-      
-      <guid>/tags/reproducibility/</guid>
+      <guid>https://martakolczynska.com/tags/reproducibility/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Glenn Gould</title>
-      <link>/tags/glenn-gould/</link>
+      <link>https://martakolczynska.com/tags/glenn-gould/</link>
       <pubDate>Wed, 20 Feb 2019 23:29:00 +0000</pubDate>
-      
-      <guid>/tags/glenn-gould/</guid>
+      <guid>https://martakolczynska.com/tags/glenn-gould/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>interdisciplinarity</title>
-      <link>/tags/interdisciplinarity/</link>
+      <title>Interdisciplinarity</title>
+      <link>https://martakolczynska.com/tags/interdisciplinarity/</link>
       <pubDate>Wed, 20 Feb 2019 23:29:00 +0000</pubDate>
-      
-      <guid>/tags/interdisciplinarity/</guid>
+      <guid>https://martakolczynska.com/tags/interdisciplinarity/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>ESS</title>
-      <link>/tags/ess/</link>
+      <link>https://martakolczynska.com/tags/ess/</link>
       <pubDate>Wed, 13 Feb 2019 11:29:00 +0000</pubDate>
-      
-      <guid>/tags/ess/</guid>
+      <guid>https://martakolczynska.com/tags/ess/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>ParlGov</title>
-      <link>/tags/parlgov/</link>
+      <link>https://martakolczynska.com/tags/parlgov/</link>
       <pubDate>Wed, 13 Feb 2019 11:29:00 +0000</pubDate>
-      
-      <guid>/tags/parlgov/</guid>
+      <guid>https://martakolczynska.com/tags/parlgov/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>political inequality</title>
-      <link>/tags/political-inequality/</link>
+      <title>Political Inequality</title>
+      <link>https://martakolczynska.com/tags/political-inequality/</link>
       <pubDate>Wed, 13 Feb 2019 11:29:00 +0000</pubDate>
-      
-      <guid>/tags/political-inequality/</guid>
+      <guid>https://martakolczynska.com/tags/political-inequality/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>political trust</title>
-      <link>/tags/political-trust/</link>
+      <title>Political Trust</title>
+      <link>https://martakolczynska.com/tags/political-trust/</link>
       <pubDate>Wed, 13 Feb 2019 11:29:00 +0000</pubDate>
-      
-      <guid>/tags/political-trust/</guid>
+      <guid>https://martakolczynska.com/tags/political-trust/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Democracy Barometer</title>
-      <link>/tags/democracy-barometer/</link>
+      <link>https://martakolczynska.com/tags/democracy-barometer/</link>
       <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
-      
-      <guid>/tags/democracy-barometer/</guid>
+      <guid>https://martakolczynska.com/tags/democracy-barometer/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>economic inequality</title>
-      <link>/tags/economic-inequality/</link>
+      <title>Economic Inequality</title>
+      <link>https://martakolczynska.com/tags/economic-inequality/</link>
       <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
-      
-      <guid>/tags/economic-inequality/</guid>
+      <guid>https://martakolczynska.com/tags/economic-inequality/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>political participation</title>
-      <link>/tags/political-participation/</link>
+      <title>Political Participation</title>
+      <link>https://martakolczynska.com/tags/political-participation/</link>
       <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
-      
-      <guid>/tags/political-participation/</guid>
+      <guid>https://martakolczynska.com/tags/political-participation/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Polity IV</title>
-      <link>/tags/polity-iv/</link>
+      <link>https://martakolczynska.com/tags/polity-iv/</link>
       <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
-      
-      <guid>/tags/polity-iv/</guid>
+      <guid>https://martakolczynska.com/tags/polity-iv/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Polyarchy</title>
-      <link>/tags/polyarchy/</link>
+      <link>https://martakolczynska.com/tags/polyarchy/</link>
       <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
-      
-      <guid>/tags/polyarchy/</guid>
+      <guid>https://martakolczynska.com/tags/polyarchy/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>rio</title>
-      <link>/tags/rio/</link>
+      <title>Rio</title>
+      <link>https://martakolczynska.com/tags/rio/</link>
       <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
-      
-      <guid>/tags/rio/</guid>
+      <guid>https://martakolczynska.com/tags/rio/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>SWIID</title>
-      <link>/tags/swiid/</link>
+      <link>https://martakolczynska.com/tags/swiid/</link>
       <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
-      
-      <guid>/tags/swiid/</guid>
+      <guid>https://martakolczynska.com/tags/swiid/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>World Bank</title>
-      <link>/tags/world-bank/</link>
+      <link>https://martakolczynska.com/tags/world-bank/</link>
       <pubDate>Sun, 03 Feb 2019 15:52:00 +0000</pubDate>
-      
-      <guid>/tags/world-bank/</guid>
+      <guid>https://martakolczynska.com/tags/world-bank/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>alluvial diagrams</title>
-      <link>/tags/alluvial-diagrams/</link>
+      <title>Alluvial Diagrams</title>
+      <link>https://martakolczynska.com/tags/alluvial-diagrams/</link>
       <pubDate>Wed, 16 Jan 2019 11:32:14 +0000</pubDate>
-      
-      <guid>/tags/alluvial-diagrams/</guid>
+      <guid>https://martakolczynska.com/tags/alluvial-diagrams/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>data visualization</title>
-      <link>/tags/data-visualization/</link>
+      <title>Data Visualization</title>
+      <link>https://martakolczynska.com/tags/data-visualization/</link>
       <pubDate>Wed, 16 Jan 2019 11:32:14 +0000</pubDate>
-      
-      <guid>/tags/data-visualization/</guid>
+      <guid>https://martakolczynska.com/tags/data-visualization/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Poland</title>
-      <link>/tags/poland/</link>
+      <link>https://martakolczynska.com/tags/poland/</link>
       <pubDate>Wed, 16 Jan 2019 11:32:14 +0000</pubDate>
-      
-      <guid>/tags/poland/</guid>
+      <guid>https://martakolczynska.com/tags/poland/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>POLPAN</title>
-      <link>/tags/polpan/</link>
+      <link>https://martakolczynska.com/tags/polpan/</link>
       <pubDate>Wed, 16 Jan 2019 11:32:14 +0000</pubDate>
-      
-      <guid>/tags/polpan/</guid>
+      <guid>https://martakolczynska.com/tags/polpan/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>inequality</title>
-      <link>/tags/inequality/</link>
+      <title>Inequality</title>
+      <link>https://martakolczynska.com/tags/inequality/</link>
       <pubDate>Tue, 08 Jan 2019 15:10:00 +0000</pubDate>
-      
-      <guid>/tags/inequality/</guid>
+      <guid>https://martakolczynska.com/tags/inequality/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>meritocracy</title>
-      <link>/tags/meritocracy/</link>
+      <title>Meritocracy</title>
+      <link>https://martakolczynska.com/tags/meritocracy/</link>
       <pubDate>Tue, 08 Jan 2019 15:10:00 +0000</pubDate>
-      
-      <guid>/tags/meritocracy/</guid>
+      <guid>https://martakolczynska.com/tags/meritocracy/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>DELab UW</title>
-      <link>/tags/delab-uw/</link>
+      <link>https://martakolczynska.com/tags/delab-uw/</link>
       <pubDate>Tue, 13 Nov 2018 16:41:14 +0000</pubDate>
-      
-      <guid>/tags/delab-uw/</guid>
+      <guid>https://martakolczynska.com/tags/delab-uw/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>Google trends</title>
-      <link>/tags/google-trends/</link>
+      <title>Google Trends</title>
+      <link>https://martakolczynska.com/tags/google-trends/</link>
       <pubDate>Tue, 13 Nov 2018 16:41:14 +0000</pubDate>
-      
-      <guid>/tags/google-trends/</guid>
+      <guid>https://martakolczynska.com/tags/google-trends/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>hackathon</title>
-      <link>/tags/hackathon/</link>
+      <title>Hackathon</title>
+      <link>https://martakolczynska.com/tags/hackathon/</link>
       <pubDate>Tue, 13 Nov 2018 16:41:14 +0000</pubDate>
-      
-      <guid>/tags/hackathon/</guid>
+      <guid>https://martakolczynska.com/tags/hackathon/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Next Generation Internet Data Sprint</title>
-      <link>/tags/next-generation-internet-data-sprint/</link>
+      <link>https://martakolczynska.com/tags/next-generation-internet-data-sprint/</link>
       <pubDate>Tue, 13 Nov 2018 16:41:14 +0000</pubDate>
-      
-      <guid>/tags/next-generation-internet-data-sprint/</guid>
+      <guid>https://martakolczynska.com/tags/next-generation-internet-data-sprint/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>NGI</title>
-      <link>/tags/ngi/</link>
+      <link>https://martakolczynska.com/tags/ngi/</link>
       <pubDate>Tue, 13 Nov 2018 16:41:14 +0000</pubDate>
-      
-      <guid>/tags/ngi/</guid>
+      <guid>https://martakolczynska.com/tags/ngi/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Barcelona</title>
-      <link>/tags/barcelona/</link>
+      <link>https://martakolczynska.com/tags/barcelona/</link>
       <pubDate>Tue, 30 Oct 2018 10:00:14 +0000</pubDate>
-      
-      <guid>/tags/barcelona/</guid>
+      <guid>https://martakolczynska.com/tags/barcelona/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>big data</title>
-      <link>/tags/big-data/</link>
+      <title>Big Data</title>
+      <link>https://martakolczynska.com/tags/big-data/</link>
       <pubDate>Tue, 30 Oct 2018 10:00:14 +0000</pubDate>
-      
-      <guid>/tags/big-data/</guid>
+      <guid>https://martakolczynska.com/tags/big-data/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>biking</title>
-      <link>/tags/biking/</link>
+      <title>Biking</title>
+      <link>https://martakolczynska.com/tags/biking/</link>
       <pubDate>Tue, 30 Oct 2018 10:00:14 +0000</pubDate>
-      
-      <guid>/tags/biking/</guid>
+      <guid>https://martakolczynska.com/tags/biking/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>latent class analysis</title>
-      <link>/tags/latent-class-analysis/</link>
+      <title>Latent Class Analysis</title>
+      <link>https://martakolczynska.com/tags/latent-class-analysis/</link>
       <pubDate>Thu, 18 Oct 2018 16:13:14 +0000</pubDate>
-      
-      <guid>/tags/latent-class-analysis/</guid>
+      <guid>https://martakolczynska.com/tags/latent-class-analysis/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>data quality</title>
-      <link>/tags/data-quality/</link>
+      <title>Data Quality</title>
+      <link>https://martakolczynska.com/tags/data-quality/</link>
       <pubDate>Sat, 29 Sep 2018 10:06:00 +0000</pubDate>
-      
-      <guid>/tags/data-quality/</guid>
+      <guid>https://martakolczynska.com/tags/data-quality/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>SDR</title>
-      <link>/tags/sdr/</link>
+      <link>https://martakolczynska.com/tags/sdr/</link>
       <pubDate>Sat, 29 Sep 2018 10:06:00 +0000</pubDate>
-      
-      <guid>/tags/sdr/</guid>
+      <guid>https://martakolczynska.com/tags/sdr/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>age</title>
-      <link>/tags/age/</link>
+      <title>Age</title>
+      <link>https://martakolczynska.com/tags/age/</link>
       <pubDate>Sun, 02 Sep 2018 10:09:00 +0000</pubDate>
-      
-      <guid>/tags/age/</guid>
+      <guid>https://martakolczynska.com/tags/age/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>shiny</title>
-      <link>/tags/shiny/</link>
+      <title>Shiny</title>
+      <link>https://martakolczynska.com/tags/shiny/</link>
       <pubDate>Sun, 02 Sep 2018 10:09:00 +0000</pubDate>
-      
-      <guid>/tags/shiny/</guid>
+      <guid>https://martakolczynska.com/tags/shiny/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>SICSS</title>
-      <link>/tags/sicss/</link>
+      <link>https://martakolczynska.com/tags/sicss/</link>
       <pubDate>Wed, 22 Aug 2018 09:34:00 +0000</pubDate>
-      
-      <guid>/tags/sicss/</guid>
+      <guid>https://martakolczynska.com/tags/sicss/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>TED talks</title>
-      <link>/tags/ted-talks/</link>
+      <title>TED Talks</title>
+      <link>https://martakolczynska.com/tags/ted-talks/</link>
       <pubDate>Wed, 22 Aug 2018 09:34:00 +0000</pubDate>
-      
-      <guid>/tags/ted-talks/</guid>
+      <guid>https://martakolczynska.com/tags/ted-talks/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>text analysis</title>
-      <link>/tags/text-analysis/</link>
+      <title>Text Analysis</title>
+      <link>https://martakolczynska.com/tags/text-analysis/</link>
       <pubDate>Wed, 22 Aug 2018 09:34:00 +0000</pubDate>
-      
-      <guid>/tags/text-analysis/</guid>
+      <guid>https://martakolczynska.com/tags/text-analysis/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>tidytext</title>
-      <link>/tags/tidytext/</link>
+      <title>Tidytext</title>
+      <link>https://martakolczynska.com/tags/tidytext/</link>
       <pubDate>Wed, 22 Aug 2018 09:34:00 +0000</pubDate>
-      
-      <guid>/tags/tidytext/</guid>
+      <guid>https://martakolczynska.com/tags/tidytext/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>ggplot</title>
-      <link>/tags/ggplot/</link>
+      <title>Ggplot</title>
+      <link>https://martakolczynska.com/tags/ggplot/</link>
       <pubDate>Mon, 13 Aug 2018 05:13:14 +0000</pubDate>
-      
-      <guid>/tags/ggplot/</guid>
+      <guid>https://martakolczynska.com/tags/ggplot/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>OECD</title>
-      <link>/tags/oecd/</link>
+      <link>https://martakolczynska.com/tags/oecd/</link>
       <pubDate>Mon, 13 Aug 2018 05:13:14 +0000</pubDate>
-      
-      <guid>/tags/oecd/</guid>
+      <guid>https://martakolczynska.com/tags/oecd/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>dot plot</title>
-      <link>/tags/dot-plot/</link>
+      <title>Dot Plot</title>
+      <link>https://martakolczynska.com/tags/dot-plot/</link>
       <pubDate>Tue, 07 Aug 2018 12:46:00 +0000</pubDate>
-      
-      <guid>/tags/dot-plot/</guid>
+      <guid>https://martakolczynska.com/tags/dot-plot/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>European Social Survey</title>
-      <link>/tags/european-social-survey/</link>
+      <link>https://martakolczynska.com/tags/european-social-survey/</link>
       <pubDate>Tue, 07 Aug 2018 12:46:00 +0000</pubDate>
-      
-      <guid>/tags/european-social-survey/</guid>
+      <guid>https://martakolczynska.com/tags/european-social-survey/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>SWDchallenge</title>
-      <link>/tags/swdchallenge/</link>
+      <link>https://martakolczynska.com/tags/swdchallenge/</link>
       <pubDate>Tue, 07 Aug 2018 12:46:00 +0000</pubDate>
-      
-      <guid>/tags/swdchallenge/</guid>
+      <guid>https://martakolczynska.com/tags/swdchallenge/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>plotly</title>
-      <link>/tags/plotly/</link>
+      <title>Plotly</title>
+      <link>https://martakolczynska.com/tags/plotly/</link>
       <pubDate>Sun, 05 Aug 2018 07:32:00 +0000</pubDate>
-      
-      <guid>/tags/plotly/</guid>
+      <guid>https://martakolczynska.com/tags/plotly/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>ISA</title>
-      <link>/tags/isa/</link>
+      <link>https://martakolczynska.com/tags/isa/</link>
       <pubDate>Mon, 23 Jul 2018 15:24:00 +0000</pubDate>
-      
-      <guid>/tags/isa/</guid>
+      <guid>https://martakolczynska.com/tags/isa/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>twitter</title>
-      <link>/tags/twitter/</link>
+      <title>Twitter</title>
+      <link>https://martakolczynska.com/tags/twitter/</link>
       <pubDate>Mon, 23 Jul 2018 15:24:00 +0000</pubDate>
-      
-      <guid>/tags/twitter/</guid>
+      <guid>https://martakolczynska.com/tags/twitter/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

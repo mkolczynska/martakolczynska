@@ -2,21 +2,19 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>European Social Survey on Marta Kołczyńska</title>
-    <link>/tags/european-social-survey/</link>
+    <link>https://martakolczynska.com/tags/european-social-survey/</link>
     <description>Recent content in European Social Survey on Marta Kołczyńska</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>&amp;copy; 2018. Marta Kołczyńska</copyright>
-    <lastBuildDate>Tue, 07 Aug 2018 12:46:00 +0000</lastBuildDate><atom:link href="/tags/european-social-survey/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 07 Aug 2018 12:46:00 +0000</lastBuildDate>
+    <atom:link href="https://martakolczynska.com/tags/european-social-survey/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Dot plot challenge: Voting gender gaps in Europe</title>
-      <link>/post/dot-plot-voting-ess/</link>
+      <link>https://martakolczynska.com/post/dot-plot-voting-ess/</link>
       <pubDate>Tue, 07 Aug 2018 12:46:00 +0000</pubDate>
-      
-      <guid>/post/dot-plot-voting-ess/</guid>
-      <description>Getting and reshaping the dataThe Dot PlotThe August edition of the Storytelling with Data challenge #SWDchallenge stars the dot plot. Here is a simple plot of the gender gap in voting in national elections using the most recent 8th Round of the European Social Survey, ESS.
-Getting and reshaping the datalibrary(essurvey) # getting European Social Survey datalibrary(tidyverse) # data cleaning and reshapinglibrary(countrycode) # converting country codes to nameslibrary(ggplot2) # plotsWith the essurvey package the ESS data can be downloaded directly to R.</description>
+      <guid>https://martakolczynska.com/post/dot-plot-voting-ess/</guid>
+      <description>Getting and reshaping the data&#xD;The Dot Plot&#xD;The August edition of the Storytelling with Data challenge #SWDchallenge stars the dot plot. Here is a simple plot of the gender gap in voting in national elections using the most recent 8th Round of the European Social Survey, ESS.&#xA;Getting and reshaping the data&#xD;library(essurvey) # getting European Social Survey data&#xD;library(tidyverse) # data cleaning and reshaping&#xD;library(countrycode) # converting country codes to names&#xD;library(ggplot2) # plots&#xD;With the essurvey package the ESS data can be downloaded directly to R.</description>
     </item>
-    
   </channel>
 </rss>
