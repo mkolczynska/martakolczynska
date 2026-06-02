@@ -7,4 +7,4 @@ description = " "
 
 e-mail: 
 
-mkolczynska(at)isppan.waw.pl
+mkolczynska(at)gmail.com
